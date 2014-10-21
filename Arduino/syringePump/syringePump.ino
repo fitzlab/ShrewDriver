@@ -13,6 +13,8 @@
 #define STEPS_PER_REVOLUTION 200.0
 #define MICROSTEPS_PER_STEP 16.0
 
+#define SPEED_MICROSECONDS_DELAY 500 //longer delay = lower speed
+
 long ustepsPerMM = MICROSTEPS_PER_STEP * STEPS_PER_REVOLUTION / THREADED_ROD_PITCH;
 long ustepsPerML = (MICROSTEPS_PER_STEP * STEPS_PER_REVOLUTION * SYRINGE_BARREL_LENGTH_MM) / (SYRINGE_VOLUME_ML * THREADED_ROD_PITCH );
 
@@ -182,8 +184,7 @@ void bolus(int direction){
 		}
 	}	
 
-      float speed = 1.0;
-      float usDelay = (1/speed) * 30; //can go down to 20 or 30
+      float usDelay = SPEED_MICROSECONDS_DELAY; //can go down to 20 or 30
     
       for(int i=0; i < steps; i++){ 
         digitalWrite(motorStepPin, HIGH); 
