@@ -13,7 +13,7 @@
 #define STEPS_PER_REVOLUTION 200.0
 #define MICROSTEPS_PER_STEP 16.0
 
-#define SPEED_MICROSECONDS_DELAY 500 //longer delay = lower speed
+#define SPEED_MICROSECONDS_DELAY 100 //longer delay = lower speed
 
 long ustepsPerMM = MICROSTEPS_PER_STEP * STEPS_PER_REVOLUTION / THREADED_ROD_PITCH;
 long ustepsPerML = (MICROSTEPS_PER_STEP * STEPS_PER_REVOLUTION * SYRINGE_BARREL_LENGTH_MM) / (SYRINGE_VOLUME_ML * THREADED_ROD_PITCH );
@@ -22,8 +22,8 @@ long ustepsPerML = (MICROSTEPS_PER_STEP * STEPS_PER_REVOLUTION * SYRINGE_BARREL_
 int motorDirPin = 2;
 int motorStepPin = 3;
 
-int bigTriggerPin = A4;
 int triggerPin = A3;
+int bigTriggerPin = A4;
 
 /* -- Keypad states -- */
 int  adc_key_val[5] ={30, 150, 360, 535, 760 };
@@ -44,8 +44,8 @@ float mLBolusSteps[9] = {0.001, 0.005, 0.010, 0.050, 0.100, 0.500, 1.000, 5.000,
 int motorSpeed = 15000; //maximum steps per second
 int motorAccel = 150000; //steps/second/second to accelerate
 
-float mLBolus = 0.040; //default bolus size
-float mLBigBolus = 0.120; //default large bolus size
+float mLBolus = 0.030; //default bolus size
+float mLBigBolus = 0.250; //default large bolus size
 float mLUsed = 0.0;
 int mLBolusStepIdx = 3; //0.05 mL increments at first
 float mLBolusStep = mLBolusSteps[mLBolusStepIdx];

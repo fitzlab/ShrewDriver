@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.WindowManager;
 
 public class StimbotActivity extends ActionBarActivity {
 	static View rootView;
@@ -18,6 +19,7 @@ public class StimbotActivity extends ActionBarActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         mView = new GLSurfaceView(this);
         mRenderer = new MyRenderer(this);
         mView.setRenderer(mRenderer);
