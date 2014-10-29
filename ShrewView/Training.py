@@ -33,6 +33,10 @@ class Training():
         self.ser = SerialPort(self.shrewView.serialPortName)
         self.ser.startReadThread()
         
+        #init syringe pump connection
+        self.syringeSerial = SerialPort(self.shrewView.serialPortName)
+        self.syringeSerial.startReadThread()
+
         #behavior inits
         self.state = States.WAITLICK
         self.stateDuration = 1
@@ -42,28 +46,68 @@ class Training():
         self.lastLickAt = 0
         self.stateStartTime = 0
         self.stateEndTime = 0
-        
-        #behavior variables
-        self.sPlusOrientation = 0
-        self.sMinusOrientations = [90] #Next step: add 112.5 and 67.5
-        self.sMinusPresentations = [0, 1]
-        self.sMinusOrientation = random.choice(self.sMinusOrientations)
+
+        #Animal-relevant settings -- These should be broken out into subclasses really.
+        #Will wait and see if this project keeps going first.
+        if self.shrewView.animalName == 'Chico':
+            print "Using settings for Chico!"
+            self.sPlusOrientations = [0]
+            self.sMinusOrientations = [90]
+            self.sMinusPresentations = [0, 1] #how many times to display the SMINUS
+            
+            self.timeoutFail = 10
+            self.timeoutAbort = 10
+            self.timeoutSuccess = 3
+            self.timeoutNoResponse = 5
+
+            self.waitLickTime = 1
+
+            self.variableDelayMin = 0.5 #Should be at least 0.5 seconds, see Tucker & Fitzpatrick 2006.
+            self.variableDelayMax = 1.25
+            
+            self.gratingDuration = 0.5
+            self.grayDuration = 1
+            self.rewardPeriod = self.grayDuration #needs to be no longer than gray duration!
+            
+            self.hintChance = 0.5 #chance of sending a low reward at the start of the reward period
+            
+            self.hintBolus = 0.03 #0.03 is a good amount; just enough that the shrew will notice it but not enough to be worth working for on its own.
+            self.rewardBolus = 0.10 
+            self.rewardBolusDistractor = 0.20 
+            
+        elif self.shrewView.animalName == 'Mercury':
+            print "Using settings for Mercury!"
+            self.sPlusOrientations = [0]
+            self.sMinusOrientations = [90]
+            self.sMinusPresentations = [0, 1] #how many times to display the SMINUS
+            
+            self.timeoutFail = 10
+            self.timeoutAbort = 10
+            self.timeoutSuccess = 3
+            self.timeoutNoResponse = 5
+            
+            self.waitLickTime = 1
+            
+            self.variableDelayMin = 0.5 #Should be at least 0.5 seconds, see Tucker & Fitzpatrick 2006.
+            self.variableDelayMax = 1.25
+            
+            self.gratingDuration = 0.5
+            self.grayDuration = 1
+            self.rewardPeriod = self.grayDuration #needs to be no longer than gray duration!
+            
+            self.hintChance = 0.5 #chance of sending a low reward at the start of the reward period
+            
+            self.hintBolus = 0.03 #0.03 is a good amount; just enough that the shrew will notice it but not enough to be worth working for on its own.
+            self.rewardBolus = 0.15 
+            self.rewardBolusDistractor = 0.25 
+            
+        else:
+            raise Exception("ANIMAL NOT RECOGNIZED")
+            
+        #Random choices for the first trial
+        self.chooseOrientations()
         self.sMinusDisplaysLeft = random.choice(self.sMinusPresentations)
-        
-        self.timeoutFail = 10
-        self.timeoutSuccess = 3
-        self.timeoutNoResponse = 5
-
-        self.waitLickTime = 1
-
-        self.variableDelayMin = 0.5
-        self.variableDelayMax = 1.25
-        
-        self.gratingDuration = 0.5
-        self.grayDuration = 1
-        self.rewardPeriod = self.grayDuration #needs to be no longer than gray duration!
-        
-        self.hintRewardChance = 0.5 #chance of sending a low reward at the start of the reward period
+        self.trialContainsDistractor = self.sMinusDisplaysLeft > 0
         
         #start file logging
         self.logFilePath = self.shrewView.experimentPath + self.shrewView.sessionFileName + "_log.txt" 
@@ -76,7 +120,28 @@ class Training():
         thisAsString = objectToString.objectToString(self)
         self.settingsFile.write(thisAsString)
         self.settingsFile.close()
+    
+    
+    def chooseOrientations(self):
+        # Randomly choose an S+ and an S- from the lists
+        # Make sure they are different
         
+        #Handle special case: If there's only one sMinus, make sure it's not in sPlus.
+        if len(self.sMinusOrientations) == 1:
+            if self.sMinusOrientations[0] in self.sPlusOrientations:
+                idx = self.sPlusOrientations.index(self.sMinusOrientations[0])
+                self.sPlusOrientations.pop(idx)
+        
+        #pick an sPlus, then pick an sMinus that's different from it.
+        self.sPlusOrientation = random.choice(self.sPlusOrientations)
+        if self.sPlusOrientation in self.sMinusOrientations:
+            idx = self.sMinusOrientations.index(self.sPlusOrientation)
+            poppedOri = self.sMinusOrientations.pop(idx)
+            self.sMinusOrientation = random.choice(self.sMinusOrientations)
+            self.sMinusOrientations.append(poppedOri)
+        else:
+            self.sMinusOrientation = random.choice(self.sMinusOrientations)
+
     def mainLoop(self):
         while not self.stopFlag:
             #check serial
@@ -85,6 +150,11 @@ class Training():
                 self.processUpdates(update)
             #update state
             self.checkStateProgression()
+            
+            #get results from syringe pump thread
+            #Probably unnecessary but keeps the serial buffer clear just in case.
+            bunchaCrap = self.syringeSerial.getUpdates()
+            #Don't do anything with that information because it's crap
             
     def processUpdates(self, inputStr):
         updateTokens = str.split(inputStr)
@@ -128,8 +198,7 @@ class Training():
         
         if self.state == States.DELAY:
             #-- fail conditions --#
-            if self.checkFail():
-                self.fail()
+            self.checkFailOrAbort()
                 
             #-- progression condition --#
             if now > self.stateEndTime:
@@ -137,8 +206,7 @@ class Training():
             
         if self.state == States.SMINUS:
             #-- fail conditions --#
-            if self.checkFail():
-                self.fail()
+            self.checkFailOrAbort()
                 
             #-- progression condition --#
             if now > self.stateEndTime:
@@ -147,8 +215,7 @@ class Training():
                 
         if self.state == States.GRAY:
             #-- fail conditions --#
-            if self.checkFail():
-                self.fail()
+            self.checkFailOrAbort()
                 
             #-- progression condition --#
             if now > self.stateEndTime:
@@ -156,13 +223,12 @@ class Training():
             
         if self.state == States.SPLUS:
             #-- fail conditions --#
-            if self.checkFail():
-                self.fail()
+            self.checkFailOrAbort()
                 
             #-- progression condition --#
             if now > self.stateEndTime:
                 # Possibly dispense a small reward as a hint.
-                if random.uniform(0,1) < self.hintRewardChance:
+                if random.uniform(0,1) < self.hintChance:
                     self.dispenseHint()
                 # go to reward state 
                 self.stateDuration = self.rewardPeriod
@@ -171,7 +237,7 @@ class Training():
         if self.state == States.REWARD:
             #-- fail condition --#
             if not self.shrewPresent:
-                self.fail()
+                self.abort()
             
             #-- success condition --#
             if self.lastLickAt > self.stateStartTime:
@@ -200,9 +266,6 @@ class Training():
             self.sMinusDisplaysLeft -= 1
         else:
             #finished all SMINUS displays
-            #reset SMINUS counter and orientation for next time
-            self.sMinusDisplaysLeft = random.choice(self.sMinusPresentations)
-            self.sMinusOrientation = random.choice(self.sMinusOrientations)
             #continue to SPLUS
             self.stateDuration = self.gratingDuration
             self.changeState(States.SPLUS)
@@ -212,6 +275,12 @@ class Training():
         #be sure to update self.stateDuration BEFORE calling this
         self.state = newState
         self.stateStartTime = time.time()
+        
+        #if changed to timeout, reset trial params for the new trial
+        if (newState == States.TIMEOUT):
+            self.sMinusDisplaysLeft = random.choice(self.sMinusPresentations)
+            self.trialContainsDistractor = self.sMinusDisplaysLeft > 0
+            self.chooseOrientations()
         
         #update screen
         if (newState == States.DELAY) or \
@@ -236,21 +305,33 @@ class Training():
         print 'state changed to ' + str(States.whatis(newState))
     
     def dispenseHint(self):
-        self.ser.write('RL\n')
+        self.syringeSerial.write(str(self.rewardBolusDistractor))
+#        self.ser.write('RL\n')
         self.logAndPlot("RL", time.time())
     
     def dispenseReward(self):
-        self.ser.write('RH\n')
+        if self.trialContainsDistractor:
+            self.syringeSerial.write(str(int(self.rewardBolusDistractor*1000)) + "\n")
+        else:
+            self.syringeSerial.write(str(int(self.rewardBolus*1000)) + "\n")
+#        self.ser.write('RH\n')
         self.logAndPlot("RH", time.time())
             
-    def checkFail(self):
-        #fail in most states happens when:
+    def checkFailOrAbort(self):
+        #Checks for when:
         #(1) Shrew licks when it shouldn't, or
         #(2) Shrew leaves the annex
-        return self.isLicking or self.lastLickAt > self.stateStartTime or not self.shrewPresent
+        if self.isLicking or self.lastLickAt > self.stateStartTime:
+            self.fail()
+        if not self.shrewPresent:
+            self.abort()
     
     def fail(self):
         self.stateDuration = self.timeoutFail
+        self.changeState(States.TIMEOUT)
+
+    def abort(self):
+        self.stateDuration = self.timeoutAbort
         self.changeState(States.TIMEOUT)
     
     def grayScreen(self):
@@ -289,4 +370,4 @@ class Training():
         thread.start()
 
 if __name__ == '__main__':
-    pass
+    print "run ShrewView.py instead!"

@@ -45,7 +45,7 @@ int motorSpeed = 15000; //maximum steps per second
 int motorAccel = 150000; //steps/second/second to accelerate
 
 float mLBolus = 0.030; //default bolus size
-float mLBigBolus = 0.250; //default large bolus size
+float mLBigBolus = 0.150; //default large bolus size
 float mLUsed = 0.0;
 int mLBolusStepIdx = 3; //0.05 mL increments at first
 float mLBolusStep = mLBolusSteps[mLBolusStepIdx];
@@ -91,7 +91,7 @@ void setup(){
   //Note that serial commands must be terminated with a newline
   //to be processed. Check this setting in your serial monitor if 
   //serial commands aren't doing anything.
-  Serial.begin(9600);
+  Serial.begin(57600); //Note that your serial connection must be set to 57600 to work!
 }
 
 void loop(){
@@ -147,6 +147,13 @@ void readSerial(){
 
 void processSerial(){
 	//process serial commands as they are read in
+        int uLbolus = serialStr.toInt();
+        mLBolus = (float)uLbolus / 1000.0;
+	bolus(PUSH);
+        serialStrReady = false;
+	serialStr = "";
+        
+        /*
 	if(serialStr.equals("+")){
 		bolus(PUSH);
 		updateScreen();
@@ -164,9 +171,12 @@ void processSerial(){
         }
         serialStrReady = false;
 	serialStr = "";
+      */
 }
 
 void bolus(int direction){
+        //Move stepper. Will not return until stepper is done moving.        
+  
 	//change units to steps
 	long steps = (mLBolus * ustepsPerML);
 	if(direction == PUSH){

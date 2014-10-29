@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+<TrainingParameters>
+
+	<!-- Reward Amounts -->
+	<rewards>
+		<!-- Size of reward in mL. 
+		reward0 is given in a trial with 0 distractor gratings, 
+		reward1 is for 1 distractor grating, and so on. -->
+		<reward0>0.25</reward0>
+		<reward1>0.25</reward1>
+		<reward2>0.25</reward2>
+		<reward3>0.25</reward3>
+		<reward4>0.25</reward4>
+		<reward5>0.25</reward5>
+		
+		<!-- Chance of giving a hint -->
+		<hintChance>0.5</hintChance>
+		
+		<!-- 0.03 is a good hint. 
+		Just enough that the shrew will notice it,
+		but not enough to be worth working for on its own. -->
+		<hintBolus>0.03</hintBolus> 
+	</rewards>
+
+	<!-- Grating orientations -->
+	<gratings>
+		<!-- Add more <sPlus> entries to have it randomly choose.
+		Right now only orientation is specified, but we might
+		add spatial frequency, temporal frequency, etc.-->
+		<sPlus>
+			<orientation>0</orientation>
+		</sPlus>
+		<sMinus>
+			<orientation>90</orientation>
+		</sMinus>
+	</gratings>
+
+	<!-- Timeouts -->
+	<timeouts>
+		<fail>10</fail>
+		<abort>10</abort>
+		<noResponse>5</noResponse>
+
+		<!-- Going quickly into another trial after a success can help keep momentum going. -->
+		<success>3</success>
+	</timeouts>
+
+	<!-- State Durations -->
+	<stateDurations>
+		<!-- Shrew must not have licked in this many seconds for trial to begin.
+		1 or 2 seconds is fine. -->
+		<waitLickTime>1</waitLickTime>
+
+		<!-- How long the initial gray period lasts. 
+		Min should be at least 0.5 seconds, see Tucker & Fitzpatrick 2006. 
+		Max should be long enough to prohibit the shrew from trying to get rewards through timing.-->
+		<variableDelayMin>0.5</variableDelayMin>
+		<variableDelayMax>1.25</variableDelayMax>
+
+		<!-- 0.5 seconds is a good imaging period for gratings in tree shrews. -->
+		<gratingDuration>0.5</gratingDuration>
+
+		<!-- Duration of gray period following SMINUS. -->
+		<grayDuration>1</grayDuration>
+
+		<!-- Reward period. Must be no longer than grayDuration, otherwise the shrew could
+		win by looking for a long-duration gray screen. -->
+		<rewardPeriod>1</rewardPeriod>
+		
+	</stateDurations>
+	
+</TrainingParameters>

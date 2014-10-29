@@ -4,7 +4,7 @@ from Training import Training
 from LivePlot import LivePlot
 from PyQt4 import QtCore, QtGui, uic
 import _winreg as winreg
-import itertools, sys, glob, time, datetime, os
+import itertools, sys, glob, time, datetime, os, shutil
 
 #load the .ui files
 ShrewView_class = uic.loadUiType("mainwindow.ui")[0]
@@ -47,15 +47,17 @@ class ShrewView (QtGui.QMainWindow, ShrewView_class):
         self.cbCameraID.currentIndexChanged.connect(self.setCameraID)
         self.cbAnimalName.currentIndexChanged.connect(self.setAnimal)
         self.cbSerialPort.currentIndexChanged.connect(self.setSerialPort)
+        self.cbSyringePort.currentIndexChanged.connect(self.setSyringePort)
         
-    
+
     #-- Init Functions --# 
     def getAnimalDirs(self):
         self.animalDirs = glob.glob(self.baseDataPath + '*')
         for animalDir in self.animalDirs:
-            namePos = animalDir.rfind("\\")+1
-            animalName = animalDir[namePos:]
-            self.cbAnimalName.addItem(animalName)
+            if os.path.isdir(animalDir):
+                namePos = animalDir.rfind("\\")+1
+                animalName = animalDir[namePos:]
+                self.cbAnimalName.addItem(animalName)
         
     def getAvailableSerialPorts(self):
         #Uses the Win32 registry to return a iterator of serial 
@@ -98,6 +100,7 @@ class ShrewView (QtGui.QMainWindow, ShrewView_class):
     def startRecording(self):
         self.setAnimal()
         self.setSerialPort()
+        self.setSyringePort()
         self.setCameraID()
         
         if not self.isRecording:
@@ -140,9 +143,18 @@ class ShrewView (QtGui.QMainWindow, ShrewView_class):
     #-- Dropdown Actions --# 
     def setAnimal(self):
         self.animalName = str(self.cbAnimalName.currentText())
+        #set path to the XML file containing instructions for this animal. 
+        #Generate file from defaults if needed.
+        self.xmlPath = self.baseDataPath + self.animalName + '/' + self.animalName + '.xml'
+        if not os.path.isfile(self.xmlPath):
+            shutil.copyfile('./default.xml', self.xmlPath)
+
 
     def setSerialPort(self):
         self.serialPortName = str(self.cbSerialPort.currentText())
+
+    def setSyringePort(self):
+        self.syringePortName = str(self.cbSyringePort.currentText())
 
     def setCameraID(self):
         self.cameraID = int(self.cbCameraID.currentText())

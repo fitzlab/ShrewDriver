@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>311</width>
-    <height>374</height>
+    <height>429</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -15,10 +15,10 @@
   </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QGridLayout" name="gridLayout">
-    <item row="5" column="1">
+    <item row="6" column="1">
      <widget class="QComboBox" name="cbCameraID"/>
     </item>
-    <item row="5" column="0">
+    <item row="6" column="0">
      <widget class="QLabel" name="label_2">
       <property name="text">
        <string>Camera ID:</string>
@@ -28,7 +28,7 @@
     <item row="4" column="1">
      <widget class="QComboBox" name="cbSerialPort"/>
     </item>
-    <item row="6" column="0">
+    <item row="7" column="0">
      <widget class="QLabel" name="label_4">
       <property name="text">
        <string>Notes:</string>
@@ -52,15 +52,25 @@
     <item row="2" column="1">
      <widget class="QComboBox" name="cbAnimalName"/>
     </item>
-    <item row="9" column="0" colspan="2">
+    <item row="10" column="0" colspan="2">
      <widget class="QPushButton" name="btnStartRecording">
       <property name="text">
        <string>Start Recording</string>
       </property>
      </widget>
     </item>
-    <item row="8" column="0" colspan="2">
+    <item row="9" column="0" colspan="2">
      <widget class="QTextEdit" name="textEdit"/>
+    </item>
+    <item row="5" column="0">
+     <widget class="QLabel" name="label_5">
+      <property name="text">
+       <string>Syringe COM Port:</string>
+      </property>
+     </widget>
+    </item>
+    <item row="5" column="1">
+     <widget class="QComboBox" name="cbSyringePort"/>
     </item>
    </layout>
   </widget>
