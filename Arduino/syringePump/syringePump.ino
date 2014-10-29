@@ -3,6 +3,7 @@
 
 #include <LiquidCrystal.h>
 #include <LCDKeypad.h>
+#include <AccelStepper.h>
 
 /* -- Constants -- */
 #define SYRINGE_VOLUME_ML 30.0
@@ -70,6 +71,7 @@ String serialStr = "";
 boolean serialStrReady = false;
 
 /* -- Initialize libraries -- */
+AccelStepper stepper(1, motorStepPin, motorDirPin); //the "1" tells it we are using a driver
 LiquidCrystal lcd(8, 13, 9, 4, 5, 6, 7);
 
 void setup(){
