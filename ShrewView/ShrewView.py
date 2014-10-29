@@ -77,6 +77,7 @@ class ShrewView (QtGui.QMainWindow, ShrewView_class):
         
         for serialPort in self.serialPorts:
             self.cbSerialPort.addItem(serialPort)
+            self.cbSyringePort.addItem(serialPort)
     
     def getAvailableCameras(self):
         cameraPath = 'HARDWARE\\DEVICEMAP\\VIDEO'
