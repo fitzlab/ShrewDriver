@@ -305,7 +305,7 @@ class Training():
         print 'state changed to ' + str(States.whatis(newState))
     
     def dispenseHint(self):
-        self.syringeSerial.write(str(self.rewardBolusDistractor))
+        self.syringeSerial.write(str(int(self.hintBolus*1000)) + "\n")
 #        self.ser.write('RL\n')
         self.logAndPlot("RL", time.time())
     
