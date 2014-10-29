@@ -144,12 +144,6 @@ class ShrewView (QtGui.QMainWindow, ShrewView_class):
     #-- Dropdown Actions --# 
     def setAnimal(self):
         self.animalName = str(self.cbAnimalName.currentText())
-        #set path to the XML file containing instructions for this animal. 
-        #Generate file from defaults if needed.
-        self.xmlPath = self.baseDataPath + self.animalName + '/' + self.animalName + '.xml'
-        if not os.path.isfile(self.xmlPath):
-            shutil.copyfile('./default.xml', self.xmlPath)
-
 
     def setSerialPort(self):
         self.serialPortName = str(self.cbSerialPort.currentText())

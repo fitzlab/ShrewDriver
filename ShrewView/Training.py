@@ -34,7 +34,7 @@ class Training():
         self.ser.startReadThread()
         
         #init syringe pump connection
-        self.syringeSerial = SerialPort(self.shrewView.serialPortName)
+        self.syringeSerial = SerialPort(self.shrewView.syringePortName)
         self.syringeSerial.startReadThread()
 
         #behavior inits
