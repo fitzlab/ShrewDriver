@@ -152,7 +152,7 @@ void processSerial(){
 	bolus(PUSH);
         serialStrReady = false;
 	serialStr = "";
-        
+        updateScreen();
         /*
 	if(serialStr.equals("+")){
 		bolus(PUSH);

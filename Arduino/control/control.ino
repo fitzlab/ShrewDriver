@@ -52,7 +52,8 @@ void setup() {
 	//SPI setup
 	digitalWrite(SS, HIGH);
 	SPI.begin();
-	SPI.setClockDivider(SPI_CLOCK_DIV8);
+        //Clock divider 16 is OK, at 8 it loses bits sometimes.
+	SPI.setClockDivider(SPI_CLOCK_DIV16); 
 
 	//pin setup
   pinMode(PIN_IR_SENSOR, INPUT);
