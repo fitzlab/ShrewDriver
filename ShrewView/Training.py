@@ -51,9 +51,9 @@ class Training():
         #Will wait and see if this project keeps going first.
         if self.shrewView.animalName == 'Chico':
             print "Using settings for Chico!"
-            self.sPlusOrientations = [0]
-            self.sMinusOrientations = [90]
-            self.sMinusPresentations = [0, 1] #how many times to display the SMINUS
+            self.sPlusOrientations = [45,135]
+            self.sMinusOrientations = [45,135]
+            self.sMinusPresentations = [1, 2] #how many times to display the SMINUS
             
             self.timeoutFail = 10
             self.timeoutAbort = 10
@@ -72,8 +72,8 @@ class Training():
             self.hintChance = 0.5 #chance of sending a low reward at the start of the reward period
             
             self.hintBolus = 0.03 #0.03 is a good amount; just enough that the shrew will notice it but not enough to be worth working for on its own.
-            self.rewardBolus = 0.10 
-            self.rewardBolusDistractor = 0.20 
+            self.rewardBolus = 0.15 
+            self.rewardBolusHardTrial = 0.25 
             
         elif self.shrewView.animalName == 'Mercury':
             print "Using settings for Mercury!"
@@ -99,7 +99,7 @@ class Training():
             
             self.hintBolus = 0.03 #0.03 is a good amount; just enough that the shrew will notice it but not enough to be worth working for on its own.
             self.rewardBolus = 0.15 
-            self.rewardBolusDistractor = 0.25 
+            self.rewardBolusHardTrial = 0.25 
             
         else:
             raise Exception("ANIMAL NOT RECOGNIZED")
@@ -107,7 +107,7 @@ class Training():
         #Random choices for the first trial
         self.chooseOrientations()
         self.sMinusDisplaysLeft = random.choice(self.sMinusPresentations)
-        self.trialContainsDistractor = self.sMinusDisplaysLeft > 0
+        self.isHighRewardTrial = self.sMinusDisplaysLeft > min(self.sMinusPresentations)
         
         #start file logging
         self.logFilePath = self.shrewView.experimentPath + self.shrewView.sessionFileName + "_log.txt" 
@@ -279,7 +279,7 @@ class Training():
         #if changed to timeout, reset trial params for the new trial
         if (newState == States.TIMEOUT):
             self.sMinusDisplaysLeft = random.choice(self.sMinusPresentations)
-            self.trialContainsDistractor = self.sMinusDisplaysLeft > 0
+            self.isHighRewardTrial = self.sMinusDisplaysLeft > min(self.sMinusPresentations)
             self.chooseOrientations()
         
         #update screen
@@ -305,17 +305,20 @@ class Training():
         print 'state changed to ' + str(States.whatis(newState))
     
     def dispenseHint(self):
+        timestamp = time.time()
         self.syringeSerial.write(str(int(self.hintBolus*1000)) + "\n")
-#        self.ser.write('RL\n')
         self.logAndPlot("RL", time.time())
+        self.logFile.write("hint:" + str(self.hintBolus) + " " + str(timestamp) + "\n")
     
     def dispenseReward(self):
-        if self.trialContainsDistractor:
-            self.syringeSerial.write(str(int(self.rewardBolusDistractor*1000)) + "\n")
+        timestamp = time.time()
+        if self.isHighRewardTrial:
+            self.syringeSerial.write(str(int(self.rewardBolusHardTrial*1000)) + "\n")
+            self.logFile.write("bolus:" + str(self.rewardBolusHardTrial) + " " + str(timestamp) + "\n")
         else:
             self.syringeSerial.write(str(int(self.rewardBolus*1000)) + "\n")
-#        self.ser.write('RH\n')
-        self.logAndPlot("RH", time.time())
+            self.logFile.write("bolus:" + str(self.rewardBolus) + " " + str(timestamp) + "\n")
+        self.logAndPlot("RH", timestamp)
             
     def checkFailOrAbort(self):
         #Checks for when:
@@ -339,9 +342,11 @@ class Training():
         
     def blackScreen(self):
         self.ser.write('b\n')
+        self.logFile.flush() #update log file after each trial ends
         
     def grating(self, orientation):
         self.ser.write('o' + str(orientation) + "\n")
+        self.logFile.write("ori" + str(orientation) + " " + str(time.time()) + "\n")
     
     def stop(self):
         #end logfile
