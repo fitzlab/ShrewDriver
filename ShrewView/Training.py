@@ -79,7 +79,7 @@ class Training():
             print "Using settings for Mercury!"
             self.sPlusOrientations = [0]
             self.sMinusOrientations = [90]
-            self.sMinusPresentations = [0, 1] #how many times to display the SMINUS
+            self.sMinusPresentations = [0, 0, 0, 0, 1] #how many times to display the SMINUS
             
             self.timeoutFail = 10
             self.timeoutAbort = 10

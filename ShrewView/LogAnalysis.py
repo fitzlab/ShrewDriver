@@ -1,7 +1,7 @@
 from __future__ import division
 import fileinput, re
 
-dirPath = "C:/Users/theo/Desktop/analysis/"
+dirPath = "C:/Users/fitzlab1/Desktop/analysis/"
 
 filePath = dirPath + "Chico_2014-10-21_1_log.txt"
 filePath = dirPath + "Chico_2014-10-22_3_log.txt"
@@ -9,13 +9,15 @@ filePath = dirPath + "Chico_2014-10-23_1_log.txt"
 filePath = dirPath + "Chico_2014-10-24_1_log.txt"
 filePath = dirPath + "Chico_2014-10-27_1_log.txt"
 filePath = dirPath + "Chico_2014-10-28_1_log.txt"
+filePath = dirPath + "Chico_2014-11-04_3_log.txt"
 
 #filePath = dirPath + "Mercury_2014-10-21_1_log.txt"
 #filePath = dirPath + "Mercury_2014-10-22_1_log.txt"
 #filePath = dirPath + "Mercury_2014-10-23_1_log.txt"
 #filePath = dirPath + "Mercury_2014-10-24_1_log.txt"
-#filePath = dirPath + "Mercury_2014-10-27_1_log.txt"
-#filePath = dirPath + "Mercury_2014-10-28_1_log.txt"
+#filePath = dirPath + "Mercury_2014-10-29_2_log.txt"
+#filePath = dirPath + "Mercury_2014-10-31_1_log.txt"
+#filePath = dirPath + "Mercury_2014-11-04_1_log.txt"
 
 def concatType(type1, type2):
     return type1 + ' + ' + type2
@@ -45,7 +47,7 @@ def makeStateHistograms(stateLickTimes, grayScreenTypes):
 
 # These are the different things that can happen in a successful trial
 hintTypes = ['Hint','No Hint']
-distractorTypes = ['No Distractors', 'One Distractor']
+distractorTypes = ['No Distractors', 'One Distractor', 'Two Distractors']
 
 # set up results data structure 
 successCounts = {}
