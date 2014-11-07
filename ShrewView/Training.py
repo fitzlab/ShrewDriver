@@ -79,7 +79,7 @@ class Training():
             print "Using settings for Mercury!"
             self.sPlusOrientations = [0]
             self.sMinusOrientations = [90]
-            self.sMinusPresentations = [0, 0, 0, 0, 1] #how many times to display the SMINUS
+            self.sMinusPresentations = [0, 1] #how many times to display the SMINUS
             
             self.timeoutFail = 10
             self.timeoutAbort = 10
@@ -338,13 +338,21 @@ class Training():
         self.changeState(States.TIMEOUT)
     
     def grayScreen(self):
+        #This is a bit terrible, but there's like a 1 in 5000 chance of a message not 
+        #getting through. Cannot find root cause - electrical noise? Gremlins? 
+        #So, we just send every message twice, making it less than one in a million that 
+        #a command gets missed... good enough for training, and makes me lean towards using
+        #a real computer screen for the actual experiment.
+        self.ser.write('g\n')
         self.ser.write('g\n')
         
     def blackScreen(self):
         self.ser.write('b\n')
+        self.ser.write('b\n')
         self.logFile.flush() #update log file after each trial ends
         
     def grating(self, orientation):
+        self.ser.write('o' + str(orientation) + "\n")
         self.ser.write('o' + str(orientation) + "\n")
         self.logFile.write("ori" + str(orientation) + " " + str(time.time()) + "\n")
     
