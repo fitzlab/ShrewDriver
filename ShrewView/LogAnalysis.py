@@ -9,19 +9,30 @@ filePath = dirPath + "Chico_2014-10-23_1_log.txt"
 filePath = dirPath + "Chico_2014-10-24_1_log.txt"
 filePath = dirPath + "Chico_2014-10-27_1_log.txt"
 filePath = dirPath + "Chico_2014-10-28_1_log.txt"
+filePath = dirPath + "Chico_2014-10-29_9_log.txt"
+filePath = dirPath + "Chico_2014-10-30_4_log.txt"
+filePath = dirPath + "Chico_2014-10-31_1_log.txt"
 filePath = dirPath + "Chico_2014-11-04_3_log.txt"
 filePath = dirPath + "Chico_2014-11-05_1_log.txt"
 filePath = dirPath + "Chico_2014-11-06_2_log.txt"
+filePath = dirPath + "Chico_2014-11-07_2_log.txt"
+filePath = dirPath + "Chico_2014-11-10_1_log.txt"
+filePath = dirPath + "Chico_2014-11-11_1_log.txt"
 
 #filePath = dirPath + "Mercury_2014-10-21_1_log.txt"
 #filePath = dirPath + "Mercury_2014-10-22_1_log.txt"
 #filePath = dirPath + "Mercury_2014-10-23_1_log.txt"
 #filePath = dirPath + "Mercury_2014-10-24_1_log.txt"
+#filePath = dirPath + "Mercury_2014-10-27_1_log.txt"
+#filePath = dirPath + "Mercury_2014-10-28_1_log.txt"
 #filePath = dirPath + "Mercury_2014-10-29_2_log.txt"
 #filePath = dirPath + "Mercury_2014-10-31_1_log.txt"
 #filePath = dirPath + "Mercury_2014-11-04_1_log.txt"
-filePath = dirPath + "Mercury_2014-11-05_1_log.txt"
-filePath = dirPath + "Mercury_2014-11-06_1_log.txt"
+#filePath = dirPath + "Mercury_2014-11-05_1_log.txt"
+#filePath = dirPath + "Mercury_2014-11-06_1_log.txt"
+#filePath = dirPath + "Mercury_2014-11-07_1_log.txt"
+#filePath = dirPath + "Mercury_2014-11-10_1_log.txt"
+#filePath = dirPath + "Mercury_2014-11-11_1_log.txt"
 
 def concatType(type1, type2):
     return type1 + ' + ' + type2
@@ -85,6 +96,7 @@ numDistractors = 0
 trialStartTime = 0
 stateStartTime = 0
 
+totalReward = 0 #in mL
 
 #Run through log file 
 p = re.compile('\d+')
@@ -138,21 +150,21 @@ for line in fileinput.input(filePath):
         if prevState == "GRAY":# and not hint:
             m = p.findall(line)
             tTimeout = float(m[0] + "." + m[1])
-            print str(tTimeout-stateStartTime)
-            
+    
+    if re.search('bolus', line):
+        m = p.findall(line)
+        bolusSize = float(m[0] + "." + m[1])
+        totalReward += bolusSize
 
 completedTrials = 0
 
-#each success type
-numSuccesses = 0
-print "===="
-print "SUCCESSES:"
-for key in successCounts.keys():
-    print key + ' ' + str(successCounts[key])
-    numSuccesses += successCounts[key]
-print "Total Successes: " + str(numSuccesses)
 
-#each failure type
+#other
+print "===="
+print 'Abort: ' + str(abortCount)
+print 'No Response: ' + str(noResponseCount)
+
+#failure breakdown
 numFailures = 0
 print "===="
 print "FAILURES:"
@@ -161,13 +173,21 @@ for key in stateSet:
     numFailures += failCounts[key]
 print "Total Failures: " + str(numFailures)
 
-#completedTrials
+#success breakdown
+numSuccesses = 0
 print "===="
-print "Total Trials With Responses: " + str(numFailures + numSuccesses)
-print "Success rate: " + str(numSuccesses / (numFailures + numSuccesses) * 100) + "%"
+print "SUCCESSES:"
+for key in successCounts.keys():
+    if successCounts[key] > 0:
+        print key + ' ' + str(successCounts[key])
+        numSuccesses += successCounts[key]
+print "Total Successes: " + str(numSuccesses)
 
-
-#other types
+#summary
 print "===="
-print 'Abort: ' + str(abortCount)
-print 'No Response: ' + str(noResponseCount)
+numTrials = numFailures + numSuccesses
+successPercent = numSuccesses / (numFailures + numSuccesses) * 100
+print "Success rate: " + str(round(successPercent,1)) + "% (" + str(numSuccesses) + "/" + str(numTrials) + ")" 
+print 'Total Reward: ' + str(totalReward) + " mL"
+print filePath
+
