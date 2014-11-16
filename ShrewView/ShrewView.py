@@ -4,7 +4,7 @@ from Training import Training
 from LivePlot import LivePlot
 from PyQt4 import QtCore, QtGui, uic
 import _winreg as winreg
-import itertools, sys, glob, time, datetime, os, shutil
+import itertools, sys, glob, time, datetime, os, shutil, fileinput
 
 #load the .ui files
 ShrewView_class = uic.loadUiType("mainwindow.ui")[0]
@@ -29,7 +29,9 @@ class ShrewView (QtGui.QMainWindow, ShrewView_class):
         self.cameraIDs = []
         
         self.animalName = ""
-        self.serialPortName = ""
+        self.arduinoPortName = ""
+        self.syringePortName = ""
+        self.stimPortName = ""
         self.cameraID = 0
         
         #init dropdown choices
@@ -46,8 +48,9 @@ class ShrewView (QtGui.QMainWindow, ShrewView_class):
         #dropdown actions
         self.cbCameraID.currentIndexChanged.connect(self.setCameraID)
         self.cbAnimalName.currentIndexChanged.connect(self.setAnimal)
-        self.cbSerialPort.currentIndexChanged.connect(self.setSerialPort)
+        self.cbArduinoPort.currentIndexChanged.connect(self.setArduinoPort)
         self.cbSyringePort.currentIndexChanged.connect(self.setSyringePort)
+        self.cbStimPort.currentIndexChanged.connect(self.setStimPort)
         
 
     #-- Init Functions --# 
@@ -70,14 +73,14 @@ class ShrewView (QtGui.QMainWindow, ShrewView_class):
         for i in itertools.count():
             try:
                 val = winreg.EnumValue(key, i)
-                #print str(val[1]) + ' ' + str(val[0])
                 self.serialPorts.append(val[1])
             except EnvironmentError:
                 break
         
         for serialPort in self.serialPorts:
-            self.cbSerialPort.addItem(serialPort)
+            self.cbArduinoPort.addItem(serialPort)
             self.cbSyringePort.addItem(serialPort)
+            self.cbStimPort.addItem(serialPort)
     
     def getAvailableCameras(self):
         cameraPath = 'HARDWARE\\DEVICEMAP\\VIDEO'
@@ -88,7 +91,6 @@ class ShrewView (QtGui.QMainWindow, ShrewView_class):
         for i in itertools.count():
             try:
                 val = winreg.EnumValue(key, i)
-                #print str(val[1]) + ' ' + str(val[0])
                 self.cameraIDs.append(val[0])
             except EnvironmentError:
                 break
@@ -99,14 +101,11 @@ class ShrewView (QtGui.QMainWindow, ShrewView_class):
     
     #-- Button Actions --# 
     def startRecording(self):
-        self.setAnimal()
-        self.setSerialPort()
-        self.setSyringePort()
-        self.setCameraID()
-        
         if not self.isRecording:
             self.isRecording = True
             self.btnStartRecording.setText("Stop Recording")
+            
+            self.saveAnimalSettings()
             
             #start a new recording session by making a dir to put the data in
             self.makeSession()
@@ -121,6 +120,40 @@ class ShrewView (QtGui.QMainWindow, ShrewView_class):
             self.training.stop()
             self.isRecording = False
             self.btnStartRecording.setText("Start Recording")
+    
+    def saveAnimalSettings(self):
+        self.devicesPath = self.baseDataPath + self.animalName + "/devices.txt" 
+        self.devicesFile = open(self.devicesPath, 'w')
+        self.devicesFile.write('arduino ' + self.arduinoPortName + "\n")
+        self.devicesFile.write('syringe ' + self.syringePortName + "\n")
+        self.devicesFile.write('stim ' + self.stimPortName + "\n")
+        self.devicesFile.write('camera ' + str(self.cameraID) + "\n")
+        self.devicesFile.close()
+        
+    def loadAnimalSettings(self):
+        self.devicesPath = self.baseDataPath + self.animalName + "/devices.txt"
+        print 'Loading settings from ' + self.devicesPath
+        if os.path.isfile(self.devicesPath):
+            for line in fileinput.input(self.devicesPath):
+                line = line.rstrip()
+                toks = line.split(' ')
+                if toks[0].lower() == 'arduino':
+                    self.arduinoPortName = toks[1]
+                    self.setComboBox(self.cbArduinoPort, toks[1])
+                if toks[0].lower() == 'syringe':
+                    self.syringePortName = toks[1]
+                    self.setComboBox(self.cbSyringePort, toks[1])
+                if toks[0].lower() == 'stim':
+                    self.stimPortName = toks[1]
+                    self.setComboBox(self.cbStimPort, toks[1])
+                if toks[0].lower() == 'camera':
+                    self.cameraID = int(toks[1])
+                    self.setComboBox(self.cbCameraID, toks[1])
+    
+    def setComboBox(self, cbx, value):
+        #print "found value " + str(value) + " at index " + str(index)
+        index = cbx.findText(str(value))
+        cbx.setCurrentIndex(index)
     
     def makeSession(self):
         #make the dirs for a new recording session
@@ -144,12 +177,16 @@ class ShrewView (QtGui.QMainWindow, ShrewView_class):
     #-- Dropdown Actions --# 
     def setAnimal(self):
         self.animalName = str(self.cbAnimalName.currentText())
+        self.loadAnimalSettings()
 
-    def setSerialPort(self):
-        self.serialPortName = str(self.cbSerialPort.currentText())
+    def setArduinoPort(self):
+        self.arduinoPortName = str(self.cbArduinoPort.currentText())
 
     def setSyringePort(self):
         self.syringePortName = str(self.cbSyringePort.currentText())
+
+    def setStimPort(self):
+        self.stimPortName = str(self.cbStimPort.currentText())
 
     def setCameraID(self):
         self.cameraID = int(self.cbCameraID.currentText())

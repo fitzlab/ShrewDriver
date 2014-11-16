@@ -29,13 +29,17 @@ class Training():
         #start live plotting
         self.livePlot = LivePlot()
         
-        #start serial
-        self.ser = SerialPort(self.shrewView.serialPortName)
-        self.ser.startReadThread()
+        #start sensor serial
+        self.arduinoSerial = SerialPort(self.shrewView.serialPortName)
+        self.arduinoSerial.startReadThread()
         
-        #init syringe pump connection
+        #start syringe pump serial
         self.syringeSerial = SerialPort(self.shrewView.syringePortName)
         self.syringeSerial.startReadThread()
+
+        #start stim serial
+        self.stimSerial = SerialPort(self.shrewView.stimPortName)
+        self.stimSerial.startReadThread()
 
         #behavior inits
         self.state = States.WAITLICK
@@ -145,15 +149,16 @@ class Training():
     def mainLoop(self):
         while not self.stopFlag:
             #check serial
-            updates = self.ser.getUpdates()
+            updates = self.arduinoSerial.getUpdates()
             for update in updates:
                 self.processUpdates(update)
             #update state
             self.checkStateProgression()
             
-            #get results from syringe pump thread
-            #Probably unnecessary but keeps the serial buffer clear just in case.
+            #get results from other serial threads
+            #Prevents potential serial buffer overflow bugs
             bunchaCrap = self.syringeSerial.getUpdates()
+            bunchaCrap = self.stimSerial.getUpdates()
             #Don't do anything with that information because it's crap
             
     def processUpdates(self, inputStr):
@@ -338,22 +343,14 @@ class Training():
         self.changeState(States.TIMEOUT)
     
     def grayScreen(self):
-        #This is a bit terrible, but there's like a 1 in 5000 chance of a message not 
-        #getting through. Cannot find root cause - electrical noise? Gremlins? 
-        #So, we just send every message twice, making it less than one in a million that 
-        #a command gets missed... good enough for training, and makes me lean towards using
-        #a real computer screen for the actual experiment.
-        self.ser.write('g\n')
-        self.ser.write('g\n')
+        self.stimSerial.write('g\n')
         
     def blackScreen(self):
-        self.ser.write('b\n')
-        self.ser.write('b\n')
+        self.stimSerial.write('b\n')
         self.logFile.flush() #update log file after each trial ends
         
     def grating(self, orientation):
-        self.ser.write('o' + str(orientation) + "\n")
-        self.ser.write('o' + str(orientation) + "\n")
+        self.stimSerial.write('o' + str(orientation) + "\n")
         self.logFile.write("ori" + str(orientation) + " " + str(time.time()) + "\n")
     
     def stop(self):
