@@ -31,9 +31,6 @@ void setup() {
   pinMode(PIN_IR_SENSOR, INPUT);
   pinMode(PIN_LICK_SENSOR, INPUT_PULLUP);
 	
-  pinMode(PIN_REWARD_SMALL, OUTPUT);
-  pinMode(PIN_REWARD_BIG, OUTPUT);
-
 	//init IR
 	getBaselineIR();
 
@@ -41,14 +38,9 @@ void setup() {
 
 // the loop routine runs over and over again forever:
 void loop() {
-
-	//Check for serial input from PC	
-	checkSerial();
-
 	//Check sensors
 	checkIR();
 	checkLick();
-
 }
 
 void checkIR(){

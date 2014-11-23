@@ -97,6 +97,7 @@ class ShrewDriver(QtGui.QMainWindow, ShrewDriver_class):
                 self.serialPorts.append(val[1])
             except EnvironmentError:
                 break
+        self.serialPorts = sorted(self.serialPorts)
         
         for serialPort in self.serialPorts:
             self.cbArduinoPort.addItem(serialPort)

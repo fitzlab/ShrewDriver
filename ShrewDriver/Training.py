@@ -101,7 +101,7 @@ class Training():
             self.hintBolus = 0.03 #0.03 is a good amount; just enough that the shrew will notice it but not enough to be worth working for on its own.
             self.rewardBolus = 0.1 
             self.rewardBolusHardTrial = 0.2 
-            
+        
         else:
             raise Exception("ANIMAL NOT RECOGNIZED")
         
