@@ -1,8 +1,6 @@
 from __future__ import division
 import sys
 
-from TrialSequence import *
-
 
 # Contains all the info relevant to a trial, including results
 # Used during running by log analysis

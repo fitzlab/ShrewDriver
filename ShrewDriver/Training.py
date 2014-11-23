@@ -11,8 +11,12 @@ import objectToString
 sys.path.append("./global")
 from Constants import *
 
+sys.path.append("./sequencer")
+from Sequencer import *
+
 from LivePlot import *
 from ShrewDriver import *
+from Trial import *
 
 class Training():
     
@@ -137,7 +141,7 @@ class Training():
     def makeTrialSet(self):
         self.trialSet = []
         for sMinusPresentation in self.sMinusPresentations:
-            for sPlusOrientation in self.sMinusOrientations:
+            for sPlusOrientation in self.sPlusOrientations:
                 for sMinusOrientation in self.sMinusOrientations:
                     if sMinusOrientation == sPlusOrientation:
                         #make sure SPLUS and SMINUS are different
@@ -148,6 +152,8 @@ class Training():
                     t.sMinusOrientation = sMinusOrientation
                     
                     self.trialSet.append(t)
+        
+        print str(len(self.trialSet)) + " different trial conditions."
         
         self.sequencer = Sequencer(self.trialSet, self.sequenceType)
         
@@ -311,10 +317,10 @@ class Training():
             self.blackScreen()
         
         if (newState == States.SPLUS):
-            self.grating(self.sPlusOrientation)
+            self.grating(self.currentTrial.sPlusOrientation)
             
         if (newState == States.SMINUS):
-            self.grating(self.sMinusOrientation)
+            self.grating(self.currentTrial.sMinusOrientation)
         
         self.stateEndTime = self.stateStartTime + self.stateDuration
         
