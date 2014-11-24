@@ -61,8 +61,8 @@ class Training():
             
             self.timeoutFail = 10
             self.timeoutAbort = 10
-            self.timeoutSuccess = 4
-            self.timeoutNoResponse = 6
+            self.timeoutSuccess = 3
+            self.timeoutNoResponse = 5
 
             self.waitLickTime = 1
 
@@ -88,8 +88,8 @@ class Training():
             
             self.timeoutFail = 10
             self.timeoutAbort = 10
-            self.timeoutSuccess = 4
-            self.timeoutNoResponse = 6
+            self.timeoutSuccess = 3
+            self.timeoutNoResponse = 5
             
             self.waitLickTime = 1
             

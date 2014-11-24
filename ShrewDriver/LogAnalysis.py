@@ -35,6 +35,7 @@ filePath = dirPath + "Chico_2014-11-12_1_log.txt"
 #filePath = dirPath + "Mercury_2014-11-10_1_log.txt"
 #filePath = dirPath + "Mercury_2014-11-11_1_log.txt"
 filePath = dirPath + "Mercury_2014-11-12_1_log.txt"
+filePath = dirPath + "Mercury_2014-11-24_2_log.txt"
 
 def concatType(type1, type2):
     return type1 + ' + ' + type2
