@@ -18,7 +18,19 @@ filePath = dirPath + "Chico_2014-11-06_2_log.txt"
 filePath = dirPath + "Chico_2014-11-07_2_log.txt"
 filePath = dirPath + "Chico_2014-11-10_1_log.txt"
 filePath = dirPath + "Chico_2014-11-11_1_log.txt"
+<<<<<<< HEAD
 filePath = dirPath + "Chico_2014-12-01_1_log.txt"
+=======
+filePath = dirPath + "Chico_2014-11-12_1_log.txt"
+filePath = dirPath + "Chico_2014-11-24_1_log.txt"
+filePath = dirPath + "Chico_2014-11-24_3_log.txt"
+#filePath = dirPath + "Chico_2014-11-25_1_log.txt"
+#filePath = dirPath + "Chico_2014-11-25_2_log.txt"
+#filePath = dirPath + "Chico_2014-11-25_3_log.txt"
+#filePath = dirPath + "Chico_2014-11-25_4_log.txt"
+filePath = dirPath + "Chico_2014-11-26_1_log.txt"
+filePath = dirPath + "Chico_2014-11-26_2_log.txt"
+>>>>>>> bc2dd5e4df83c004e2db1eef8807030c1f7ec8ce
 
 #filePath = dirPath + "Mercury_2014-10-21_1_log.txt"
 #filePath = dirPath + "Mercury_2014-10-22_1_log.txt"
@@ -35,7 +47,21 @@ filePath = dirPath + "Chico_2014-12-01_1_log.txt"
 #filePath = dirPath + "Mercury_2014-11-10_1_log.txt"
 #filePath = dirPath + "Mercury_2014-11-11_1_log.txt"
 #filePath = dirPath + "Mercury_2014-11-12_1_log.txt"
+<<<<<<< HEAD
 #filePath = dirPath + "Mercury_2014-11-24_2_log.txt"
+=======
+#filePath = dirPath + "Mercury_2014-11-24_1_log.txt"
+#filePath = dirPath + "Mercury_2014-11-24_2_log.txt"
+#filePath = dirPath + "Mercury_2014-11-25_2_log.txt"
+#filePath = dirPath + "Mercury_2014-11-25_3_log.txt"
+#filePath = dirPath + "Mercury_2014-11-25_4_log.txt"
+#filePath = dirPath + "Mercury_2014-11-26_1_log.txt"
+#filePath = dirPath + "Mercury_2014-11-26_2_log.txt"
+filePath = dirPath + "Chico_2014-11-30_1_log.txt"
+filePath = dirPath + "Chico_2014-11-28_3_log.txt"
+filePath = dirPath + "Chico_2014-12-01_1_log.txt"
+
+>>>>>>> bc2dd5e4df83c004e2db1eef8807030c1f7ec8ce
 
 def concatType(type1, type2):
     return type1 + ' + ' + type2
