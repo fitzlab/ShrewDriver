@@ -63,9 +63,9 @@ class Training():
             self.timeoutAbort = 10
             self.timeoutSuccess = 3
             self.timeoutNoResponse = 5
-
+            
             self.waitLickTime = 1
-
+            
             self.variableDelayMin = 0.5 #Should be at least 0.5 seconds, see Tucker & Fitzpatrick 2006.
             self.variableDelayMax = 1.25
             
