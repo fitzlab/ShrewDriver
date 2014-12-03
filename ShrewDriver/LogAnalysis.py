@@ -1,7 +1,7 @@
 from __future__ import division
 import fileinput, re
 
-dirPath = "C:/Users/fitzlab1/Desktop/analysis/"
+dirPath = "C:/Users/theo/Desktop/ShrewDriver/analysis/"
 
 filePath = dirPath + "Chico_2014-10-21_1_log.txt"
 filePath = dirPath + "Chico_2014-10-22_3_log.txt"
@@ -18,7 +18,7 @@ filePath = dirPath + "Chico_2014-11-06_2_log.txt"
 filePath = dirPath + "Chico_2014-11-07_2_log.txt"
 filePath = dirPath + "Chico_2014-11-10_1_log.txt"
 filePath = dirPath + "Chico_2014-11-11_1_log.txt"
-filePath = dirPath + "Chico_2014-11-12_1_log.txt"
+filePath = dirPath + "Chico_2014-12-01_1_log.txt"
 
 #filePath = dirPath + "Mercury_2014-10-21_1_log.txt"
 #filePath = dirPath + "Mercury_2014-10-22_1_log.txt"
@@ -34,8 +34,8 @@ filePath = dirPath + "Chico_2014-11-12_1_log.txt"
 #filePath = dirPath + "Mercury_2014-11-07_1_log.txt"
 #filePath = dirPath + "Mercury_2014-11-10_1_log.txt"
 #filePath = dirPath + "Mercury_2014-11-11_1_log.txt"
-filePath = dirPath + "Mercury_2014-11-12_1_log.txt"
-filePath = dirPath + "Mercury_2014-11-24_2_log.txt"
+#filePath = dirPath + "Mercury_2014-11-12_1_log.txt"
+#filePath = dirPath + "Mercury_2014-11-24_2_log.txt"
 
 def concatType(type1, type2):
     return type1 + ' + ' + type2
@@ -102,6 +102,7 @@ stateStartTime = 0
 totalReward = 0 #in mL
 
 #Run through log file 
+trialNum = 1 
 p = re.compile('\d+')
 for line in fileinput.input(filePath):
     if re.search('State', line):
@@ -114,17 +115,21 @@ for line in fileinput.input(filePath):
                 if prevAction == 'lick':
                     #failure
                     failCounts[prevState] += 1
+                    print str(trialNum)  + " FAIL"
                 elif prevAction == 'leave':
                     #aborts
                     abortCount += 1
+                    print str(trialNum)  + " ABORT"
                 else:
                     #no response
                     noResponseCount += 1
-                    
+            else: 
+                print str(trialNum)  + " SUCCESS " + str(m[1])
             #new trial, so reset variables
             hint = False
             numDistractors = 0
             wasSuccess = False
+            trialNum += 1
             
         if stateSet[int(m[0])] == "SMINUS":
             numDistractors += 1
