@@ -8,6 +8,7 @@
 
 #define PIN_IR_SENSOR A0
 #define PIN_LICK_SENSOR 2
+#define PIN_IR_LED 4
 
 #define IR_BROKEN HIGH
 #define IR_SOLID LOW
@@ -16,12 +17,16 @@
 #define LICK_ON LOW
 
 int irBaseline;
-int irThresholdLow;
-int irThresholdHigh;
+int irThresholdLow = 15;
+int irThresholdHigh = 35;
 bool irPrev = IR_SOLID;
 
 int lickThreshold = 1; //0 = licking, other = not licking.
 bool prevLick = LICK_OFF;
+
+const int irBufferSize = 10;
+int irBuffer[irBufferSize];
+int irBufferPos = 0;
 
 void setup() {
   delay(200); //let arduino wake up properly
@@ -30,10 +35,39 @@ void setup() {
 	//pin setup
   pinMode(PIN_IR_SENSOR, INPUT);
   pinMode(PIN_LICK_SENSOR, INPUT_PULLUP);
-	
-	//init IR
-	getBaselineIR();
+  pinMode(PIN_IR_LED, OUTPUT);
+}
 
+
+void getIRSample(){
+    // read background level
+  int bg0 = analogRead(PIN_IR_SENSOR);
+  
+  //turn on LED and read signal
+  digitalWrite(PIN_IR_LED,HIGH);
+  int signal0 = analogRead(PIN_IR_SENSOR);
+  delay(2);
+  int signal1 = analogRead(PIN_IR_SENSOR);
+  
+  //turn off LED and read background level again  
+  digitalWrite(PIN_IR_LED,LOW);
+  delay(2);
+  int bg1 = analogRead(PIN_IR_SENSOR);
+  
+  //calculate
+  irBuffer[irBufferPos] = signal0+signal1-bg0-bg1;
+  irBufferPos++;
+  if(irBufferPos == irBufferSize){
+     irBufferPos = 0; 
+  }
+}
+
+int getIRMean(){
+  int sum=0;
+  for(int i = 0; i < irBufferSize; i++){
+    sum+=irBuffer[i];
+  }
+  return (sum*10)/irBufferSize;
 }
 
 // the loop routine runs over and over again forever:
@@ -44,7 +78,10 @@ void loop() {
 }
 
 void checkIR(){
-  int irLevel = analogRead(PIN_IR_SENSOR);
+  getIRSample();
+  int irLevel = getIRMean();
+  
+    //Serial.println(irLevel);
 	if(irPrev == IR_SOLID && irLevel < irThresholdLow){
 		//Something's in the IR beam
 		Serial.println("Ix");
@@ -70,24 +107,6 @@ void checkLick(){
     prevLick = LICK_OFF;
   }
 }
-
-void getBaselineIR(){
-  //get a baseline -- average of the first 10 samples we see
-	double sum = 0.0;
-  for(int i = 0; i < 10; i++){
-    sum += analogRead(PIN_IR_SENSOR);
-    delay(5); // delay in between reads for stability
-  }
-	irBaseline = sum / 10;
-	irThresholdLow = irBaseline * 0.7;  //<---- Retest these thresholds on the actual cage! 
-	irThresholdHigh = irBaseline * 0.9; //<---- Have only tried it on a lab bench...
-	//Serial.println(irBaseline);
-}
-
-
-
-
-
 
 
 
