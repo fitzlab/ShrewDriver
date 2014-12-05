@@ -17,8 +17,8 @@
 #define LICK_ON LOW
 
 int irBaseline;
-int irThresholdLow = 15;
-int irThresholdHigh = 35;
+int irThresholdLow = 75;
+int irThresholdHigh = 100;
 bool irPrev = IR_SOLID;
 
 int lickThreshold = 1; //0 = licking, other = not licking.
@@ -41,21 +41,19 @@ void setup() {
 
 void getIRSample(){
     // read background level
+  delay(1); //let LED turn off properly from last loop
   int bg0 = analogRead(PIN_IR_SENSOR);
   
   //turn on LED and read signal
   digitalWrite(PIN_IR_LED,HIGH);
+  delay(1);
   int signal0 = analogRead(PIN_IR_SENSOR);
-  delay(2);
-  int signal1 = analogRead(PIN_IR_SENSOR);
   
-  //turn off LED and read background level again  
+  //turn LED off again.
   digitalWrite(PIN_IR_LED,LOW);
-  delay(2);
-  int bg1 = analogRead(PIN_IR_SENSOR);
   
-  //calculate
-  irBuffer[irBufferPos] = signal0+signal1-bg0-bg1;
+  irBuffer[irBufferPos] = signal0-bg0;
+  
   irBufferPos++;
   if(irBufferPos == irBufferSize){
      irBufferPos = 0; 
@@ -78,19 +76,18 @@ void loop() {
 }
 
 void checkIR(){
-  getIRSample();
-  int irLevel = getIRMean();
-  
-    //Serial.println(irLevel);
+  getIRSample(); //takes 2ms
+  int irLevel = getIRMean(); //way less than 1ms
+    
+    //Serial.println(irLevel); 
+    //delay(100);
 	if(irPrev == IR_SOLID && irLevel < irThresholdLow){
 		//Something's in the IR beam
 		Serial.println("Ix");
-    //Serial.println(analogRead(PIN_IR_SENSOR));
     irPrev = IR_BROKEN;
 	}
 	else if(irPrev == IR_BROKEN && irLevel > irThresholdHigh){
 		Serial.println("Io");
-		//Serial.println(analogRead(PIN_IR_SENSOR));
     irPrev = IR_SOLID;
 	}
 }
