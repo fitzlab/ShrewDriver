@@ -50,19 +50,18 @@ class Training():
         self.stateStartTime = 0
         self.stateEndTime = 0
 
-        #Animal-relevant settings -- These should be broken out into subclasses really.
-        #Will wait and see if this project keeps going first.
-        if self.shrewDriver.animalName == 'Chico':
-            print "Using settings for Chico!"
-            self.sPlusOrientations = [45,135]
-            self.sMinusOrientations = [45,135]
-            self.sMinusPresentations = [1, 2] #how many times to display the SMINUS
+        #Animal-relevant settings
+        if self.shrewDriver.animalName == 'Queen':
+            print "Using settings for Queen!"
+            self.sPlusOrientations = [135]
+            self.sMinusOrientations = [45]
+            self.sMinusPresentations = [0, 1] #how many times to display the SMINUS
             self.sequenceType = Sequences.RANDOM_RETRY
             
             self.timeoutFail = 10
             self.timeoutAbort = 10
-            self.timeoutSuccess = 3
-            self.timeoutNoResponse = 5
+            self.timeoutSuccess = 6
+            self.timeoutNoResponse = 10
             
             self.waitLickTime = 1
             
@@ -76,8 +75,35 @@ class Training():
             self.hintChance = 0.25 #chance of sending a low reward at the start of the reward period
             
             self.hintBolus = 0.03 #0.03 is a good amount; just enough that the shrew will notice it but not enough to be worth working for on its own.
-            self.rewardBolus = 0.15 
-            self.rewardBolusHardTrial = 0.25 
+            self.rewardBolus = 0.1 
+            self.rewardBolusHardTrial = 0.2 
+            
+        elif self.shrewDriver.animalName == 'Chico':
+            print "Using settings for Chico!"
+            self.sPlusOrientations = [45]
+            self.sMinusOrientations = [135]
+            self.sMinusPresentations = [1, 2] #how many times to display the SMINUS
+            self.sequenceType = Sequences.RANDOM_RETRY
+            
+            self.timeoutFail = 10
+            self.timeoutAbort = 10
+            self.timeoutSuccess = 6
+            self.timeoutNoResponse = 10
+            
+            self.waitLickTime = 1
+            
+            self.variableDelayMin = 0.5 #Should be at least 0.5 seconds, see Tucker & Fitzpatrick 2006.
+            self.variableDelayMax = 1.25
+            
+            self.gratingDuration = 0.5
+            self.grayDuration = 1
+            self.rewardPeriod = self.grayDuration #needs to be no longer than gray duration!
+            
+            self.hintChance = 0.25 #chance of sending a low reward at the start of the reward period
+            
+            self.hintBolus = 0.03 #0.03 is a good amount; just enough that the shrew will notice it but not enough to be worth working for on its own.
+            self.rewardBolus = 0.15
+            self.rewardBolusHardTrial = 0.25
             
         elif self.shrewDriver.animalName == 'Mercury':
             print "Using settings for Mercury!"
@@ -88,8 +114,35 @@ class Training():
             
             self.timeoutFail = 10
             self.timeoutAbort = 10
-            self.timeoutSuccess = 3
-            self.timeoutNoResponse = 5
+            self.timeoutSuccess = 6
+            self.timeoutNoResponse = 10
+            
+            self.waitLickTime = 1
+            
+            self.variableDelayMin = 0.5 #Should be at least 0.5 seconds, see Tucker & Fitzpatrick 2006.
+            self.variableDelayMax = 1.25
+            
+            self.gratingDuration = 0.5
+            self.grayDuration = 1
+            self.rewardPeriod = self.grayDuration #needs to be no longer than gray duration!
+            
+            self.hintChance = 0.25 #chance of sending a low reward at the start of the reward period
+            
+            self.hintBolus = 0.03 #0.03 is a good amount; just enough that the shrew will notice it but not enough to be worth working for on its own.
+            self.rewardBolus = 0.1 
+            self.rewardBolusHardTrial = 0.2 
+        
+        elif self.shrewDriver.animalName == 'Bernadette':
+            print "Using settings for Bernadette!"
+            self.sPlusOrientations = [90]
+            self.sMinusOrientations = [0]
+            self.sMinusPresentations = [0, 1] #how many times to display the SMINUS
+            self.sequenceType = Sequences.RANDOM_RETRY
+            
+            self.timeoutFail = 10
+            self.timeoutAbort = 10
+            self.timeoutSuccess = 6
+            self.timeoutNoResponse = 10
             
             self.waitLickTime = 1
             

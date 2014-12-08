@@ -173,7 +173,6 @@ class MyRenderer implements Renderer {
     	        | ((0xff));
     	txGray.setPixel(0, 0, pxVal);
     	
-    	
         gl.glEnable(GL10.GL_TEXTURE_2D);
         
         int numTextures = 3;
@@ -203,26 +202,25 @@ class MyRenderer implements Renderer {
 	        	txGratingIndex = i;
     		}
 	    }
-	    
     }
 
     public void setTextureToBlack(GL10 gl){
     	if(txBlackIndex >= 0){
     		gl.glBindTexture(GL10.GL_TEXTURE_2D, mTextureList[txBlackIndex]);
     	}
-    	serialConnection.writeSerialLine("b");
+    	//serialConnection.writeSerialLine("b");
     }
     public void setTextureToGray(GL10 gl){
     	if(txGrayIndex >= 0){
         	gl.glBindTexture(GL10.GL_TEXTURE_2D, mTextureList[txGrayIndex]);
     	}
-    	serialConnection.writeSerialLine("g");
+    	//serialConnection.writeSerialLine("g");
     }
     public void setTextureToGrating(GL10 gl){
     	if(txGratingIndex >= 0){
         	gl.glBindTexture(GL10.GL_TEXTURE_2D, mTextureList[txGratingIndex]);
     	}
-    	serialConnection.writeSerialLine("G");
+    	//serialConnection.writeSerialLine("G");
     }
 
     private Bitmap makeSinTexture(){
@@ -307,7 +305,7 @@ class MyRenderer implements Renderer {
 		mColorBuffer.position(0);
 		
 		// Set texture buffer
-		float gratingFrequency = 10.0f; /// <--- Right now this is how to control spatial frequency.
+		float gratingFrequency = 64.7f; /// <--- Right now this is how to control spatial frequency. 64.7 gives 0.25 cyc/degree at 120mm distance.
 		float texturecoords[] = {0.0f, 0.0f,   0.0f, gratingFrequency,   gratingFrequency, gratingFrequency,   gratingFrequency, 0.0f}; 
 		
 		ByteBuffer tbb = ByteBuffer.allocateDirect(texturecoords.length * 4);
