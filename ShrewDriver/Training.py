@@ -102,15 +102,15 @@ class Training():
             self.hintChance = 0.25 #chance of sending a low reward at the start of the reward period
             
             self.hintBolus = 0.03 #0.03 is a good amount; just enough that the shrew will notice it but not enough to be worth working for on its own.
-            self.rewardBolus = 0.15
-            self.rewardBolusHardTrial = 0.25
+            self.rewardBolus = 0.1
+            self.rewardBolusHardTrial = 0.2
             
         elif self.shrewDriver.animalName == 'Mercury':
             print "Using settings for Mercury!"
             self.sPlusOrientations = [0]
             self.sMinusOrientations = [90]
-            self.sMinusPresentations = [0, 1] #how many times to display the SMINUS
-            self.sequenceType = Sequences.RANDOM_RETRY
+            self.sMinusPresentations = [0, 0, 0, 0, 1] #how many times to display the SMINUS
+            self.sequenceType = Sequences.RANDOM
             
             self.timeoutFail = 10
             self.timeoutAbort = 10
@@ -119,8 +119,8 @@ class Training():
             
             self.waitLickTime = 1
             
-            self.variableDelayMin = 0.5 #Should be at least 0.5 seconds, see Tucker & Fitzpatrick 2006.
-            self.variableDelayMax = 1.25
+            self.variableDelayMin = 0.75 #Should be at least 0.5 seconds, see Tucker & Fitzpatrick 2006.
+            self.variableDelayMax = 2
             
             self.gratingDuration = 0.5
             self.grayDuration = 1
@@ -129,8 +129,8 @@ class Training():
             self.hintChance = 0.25 #chance of sending a low reward at the start of the reward period
             
             self.hintBolus = 0.03 #0.03 is a good amount; just enough that the shrew will notice it but not enough to be worth working for on its own.
-            self.rewardBolus = 0.1 
-            self.rewardBolusHardTrial = 0.2 
+            self.rewardBolus = 0.15 
+            self.rewardBolusHardTrial = 0.25
         
         elif self.shrewDriver.animalName == 'Bernadette':
             print "Using settings for Bernadette!"
