@@ -64,6 +64,12 @@ filePath = dirPath + "Chico_2014-12-10_1_log.txt"
 filePath = dirPath + "Chico_2014-12-10_2_log.txt"
 filePath = dirPath + "Chico_2014-12-10_2_log_firstHalf.txt"
 filePath = dirPath + "Mercury_2014-12-10_3_log.txt"
+filePath = dirPath + "Mercury_2014-12-11_2_log.txt"
+filePath = dirPath + "Chico_2014-12-11_2_log.txt"
+filePath = dirPath + "Chico_2014-12-12_1_log.txt"
+filePath = dirPath + "Mercury_2014-12-12_1_log.txt"
+filePath = dirPath + "Chico_2014-12-12_2_log.txt"
+filePath = dirPath + "Mercury_2014-12-12_2_log.txt"
 
 
 def concatType(type1, type2):
