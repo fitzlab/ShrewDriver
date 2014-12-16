@@ -26,7 +26,7 @@ class Training():
         self.stopFlag = False
         
         #start live plotting
-        self.livePlot = LivePlot()
+        self.livePlot = LivePlot(self.shrewDriver.animalName)
         
         #start sensor serial
         self.arduinoSerial = SerialPort(self.shrewDriver.arduinoPortName)

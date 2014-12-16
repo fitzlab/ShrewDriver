@@ -6,10 +6,10 @@ import cv2, time, threading
 
 class CameraReader():
     
-    def __init__(self, cameraID, vidPath):
+    def __init__(self, cameraID, vidPath, animalName):
         self.stopFlag = False
         self.frameRate = 30 #frames per second
-        self.windowName = 'a'#"ShrewView Cam" + str(cameraID)
+        self.windowName = animalName + ' - Camera (' + str(cameraID) + ")"
         
         #set up frame acquisition, display, and disk writing
         self.cap = cv2.VideoCapture(cameraID)
@@ -23,7 +23,7 @@ class CameraReader():
     def captureFrame(self):
         self.readFrame()
         self.video.write(self.frame)
-        cv2.imshow('a', self.frame); 
+        cv2.imshow(self.windowName, self.frame); 
         cv2.waitKey(1) #pauses 1ms, allows frame to display
     
     def stopCapture(self):

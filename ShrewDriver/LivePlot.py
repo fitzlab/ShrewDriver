@@ -12,7 +12,7 @@ class LivePlot(QWidget):
     #define signals that we will accept
     sigEvent = QtCore.pyqtSignal(str, float) 
 
-    def __init__(self):
+    def __init__(self, animalName):
         self.startTime = time.time()
         
         
@@ -26,7 +26,7 @@ class LivePlot(QWidget):
         self.pw.setXRange(0, 10)
         self.pw.setYRange(0, 10)
         self.pw.show()
-        self.pw.setWindowTitle('ShrewView Live Plot')
+        self.pw.setWindowTitle(animalName + " - Live Plot")
         
         self.pw.addLegend()
 

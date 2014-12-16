@@ -291,6 +291,10 @@ class ShrewDriver(QtGui.QMainWindow, ShrewDriver_class):
                 if t.result == Results.FAIL:
                     failLast20 += 1
         
+        if len(self.trialHistory) == 0 or (numSuccess + numFail) == 0 or (successLast20 + failLast20) == 0:
+            self.txtTrialStats.setPlainText("Waiting for a response trial...")
+            return
+        
         message = "==================\n"
         message += "Shrew: " + self.animalName + "\n\n"
         
@@ -301,9 +305,9 @@ class ShrewDriver(QtGui.QMainWindow, ShrewDriver_class):
         message += "% (" + str(numSuccess) + "/" + str(numSuccess + numFail) + ")\n"
         message += "Last 20 trials with responses: "
         message += str(percentSuccessLast20) + "%"
-        message += " (" + str(successLast20) + "/" + str(successLast20 + failLast20) + ")\n"
-        message += "\n"
-        
+        message += " (" + str(successLast20) + "/" + str(successLast20 + failLast20) + ")\n\n"
+        message += "Aborted Trials: " + str(numAbort) + "\n"
+        message += "No-response Trials: " + str(numNoResponse) + "\n\n"
         message += "Total mL: " + str(rewardMillis) + "\n\n"
         
         message += "=====\nSuccess breakdown: \n\n"
@@ -333,6 +337,7 @@ class ShrewDriver(QtGui.QMainWindow, ShrewDriver_class):
     #-- Dropdown Actions --# 
     def setAnimal(self):
         self.animalName = str(self.cbAnimalName.currentText())
+        self.setWindowTitle(self.animalName + " - ShrewDriver")
         self.loadAnimalSettings()
 
     def setArduinoPort(self):
@@ -364,7 +369,7 @@ class ShrewDriver(QtGui.QMainWindow, ShrewDriver_class):
         #begin live view and recording from camera
         vidPath = self.experimentPath + self.sessionFileName + '.avi'
         print 'Recording video to ' + vidPath
-        self.cameraReader = CameraReader(self.cameraID, vidPath)
+        self.cameraReader = CameraReader(self.cameraID, vidPath, self.animalName)
         self.cameraReader.startReadThread()
     
     def startLivePlot(self):
@@ -377,47 +382,6 @@ class ShrewDriver(QtGui.QMainWindow, ShrewDriver_class):
         
     def setExperimentPath(self):
         self.experimentPath = ''
-    
-
-
-class TrialHistoryModel(QtCore.QAbstractTableModel):
-    def __init__(self, parent=None): 
-        QtCore.QAbstractTableModel.__init__(self, parent) 
-        self.arraydata = []
-        self.headerdata = ['Trial', 'Result', 'sPlus', 'sMinus', '#sMinus', 'Hint']
- 
-    def rowCount(self, parent): 
-        return len(self.arraydata) 
- 
-    def columnCount(self, parent): 
-        return len(self.headerdata) 
- 
-    def data(self, index, role): 
-        if not index.isValid(): 
-            return QtCore.QVariant() 
-        elif role != QtCore.Qt.DisplayRole: 
-            return QtCore.QVariant() 
-        if len(self.arraydata) == 0:
-            return None
-        return QtCore.QVariant(self.arraydata[index.row()][index.column()]) 
-
-    def headerData(self, col, orientation, role):
-        if orientation == QtCore.Qt.Horizontal and role == QtCore.Qt.DisplayRole:
-            return QtCore.QVariant(self.headerdata[col])
-        return QtCore.QVariant()
-
-    def addRow(self, trialNum, result, sPlus, sMinus, numSMinus, hint):
-        self.arraydata.append([trialNum, result, sPlus, sMinus, numSMinus, hint])
-        self.emit(QtCore.SIGNAL("layoutChanged()"))
-
-    def sort(self, Ncol, order):
-        """Sort table by given column number.
-        """
-        self.emit(QtCore.SIGNAL("layoutAboutToBeChanged()"))
-        self.arraydata = sorted(self.arraydata, key=operator.itemgetter(Ncol))        
-        if order == QtCore.Qt.DescendingOrder:
-            self.arraydata.reverse()
-        self.emit(QtCore.SIGNAL("layoutChanged()"))
 
 
 if __name__ == '__main__':
