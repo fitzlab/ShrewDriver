@@ -184,7 +184,7 @@ class Training():
 
     def prepareTrial(self):
         #prepare to run trial
-        self.sMinusDisplaysLeft = self.currentTrial.sMinusPresentation
+        self.sMinusDisplaysLeft = self.currentTrial.numSMinus
         self.isHighRewardTrial = self.sMinusDisplaysLeft > min(self.sMinusPresentations)
         if random.uniform(0,1) < self.hintChance:
             self.doHint = True
@@ -193,14 +193,14 @@ class Training():
     
     def makeTrialSet(self):
         self.trialSet = []
-        for sMinusPresentation in self.sMinusPresentations:
+        for numSMinus in self.sMinusPresentations:
             for sPlusOrientation in self.sPlusOrientations:
                 for sMinusOrientation in self.sMinusOrientations:
                     if sMinusOrientation == sPlusOrientation:
                         #make sure SPLUS and SMINUS are different
                         continue
                     t = Trial()
-                    t.sMinusPresentation = sMinusPresentation
+                    t.numSMinus = numSMinus
                     t.sPlusOrientation = sPlusOrientation
                     t.sMinusOrientation = sMinusOrientation
                     
@@ -344,15 +344,16 @@ class Training():
     def changeState(self, newState):
         #runs every time a state changes
         #be sure to update self.stateDuration BEFORE calling this
+        self.oldState = self.state
         self.state = newState
         self.stateStartTime = time.time()
         
         #if changed to timeout, reset trial params for the new trial
         if (newState == States.TIMEOUT):
             #tell UI about the trial that just finished
-            self.shrewDriver.sigTrialEnd.emit(self.trialNum, Results.whatis(self.trialResult), \
+            self.shrewDriver.sigTrialEnd.emit(self.trialResult, self.oldState, \
                 self.currentTrial.sPlusOrientation, self.currentTrial.sMinusOrientation, \
-                self.currentTrial.sMinusPresentation, str(self.doHint))
+                self.currentTrial.numSMinus, self.doHint, self.currentTrial.totalMicroliters)
             
             #prepare next trial
             self.currentTrial = self.sequencer.getNextTrial(self.trialResult)
@@ -385,15 +386,18 @@ class Training():
         timestamp = time.time()
         self.syringeSerial.write(str(int(self.hintBolus*1000)) + "\n")
         self.logAndPlot("RL", time.time())
+        self.currentTrial.totalMicroliters += int(self.hintBolus*1000)
         self.logFile.write("hint:" + str(self.hintBolus) + " " + str(timestamp) + "\n")
     
     def dispenseReward(self):
         timestamp = time.time()
         if self.isHighRewardTrial:
             self.syringeSerial.write(str(int(self.rewardBolusHardTrial*1000)) + "\n")
+            self.currentTrial.totalMicroliters += int(self.rewardBolusHardTrial*1000)
             self.logFile.write("bolus:" + str(self.rewardBolusHardTrial) + " " + str(timestamp) + "\n")
         else:
             self.syringeSerial.write(str(int(self.rewardBolus*1000)) + "\n")
+            self.currentTrial.totalMicroliters += int(self.rewardBolus*1000)
             self.logFile.write("bolus:" + str(self.rewardBolus) + " " + str(timestamp) + "\n")
         self.logAndPlot("RH", timestamp)
             
