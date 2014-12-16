@@ -78,6 +78,7 @@ void setup(){
   /* LCD setup */  
   lcd.begin(16, 2);
   lcd.clear();
+  pinMode(10, OUTPUT); //disable backlight
 
   lcd.print("SyringePump v0.3");
 
