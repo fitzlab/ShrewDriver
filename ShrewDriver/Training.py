@@ -55,7 +55,7 @@ class Training():
             print "Using settings for Queen!"
             self.sPlusOrientations = [135]
             self.sMinusOrientations = [45]
-            self.sMinusPresentations = [0, 1] #how many times to display the SMINUS
+            self.sMinusPresentations = [0] #how many times to display the SMINUS
             self.sequenceType = Sequences.RANDOM_RETRY
             
             self.timeoutFail = 10
@@ -81,9 +81,9 @@ class Training():
         elif self.shrewDriver.animalName == 'Chico':
             print "Using settings for Chico!"
             self.sPlusOrientations = [45]
-            self.sMinusOrientations = [135]
+            self.sMinusOrientations = [45.01, 48.75, 52.5, 56.25, 60, 63.75, 67.5, 90, 135]
             self.sMinusPresentations = [1, 2] #how many times to display the SMINUS
-            self.sequenceType = Sequences.RANDOM_RETRY
+            self.sequenceType = Sequences.BLOCK
             
             self.timeoutFail = 10
             self.timeoutAbort = 10
@@ -102,17 +102,17 @@ class Training():
             self.hintChance = 0 #chance of sending a low reward at the start of the reward period
             
             self.hintBolus = 0.03 #0.03 is a good amount; just enough that the shrew will notice it but not enough to be worth working for on its own.
-            self.rewardBolus = 0.1
-            self.rewardBolusHardTrial = 0.2
+            self.rewardBolus = 0.15
+            self.rewardBolusHardTrial = 0.15
             
         elif self.shrewDriver.animalName == 'Mercury':
             print "Using settings for Mercury!"
             self.sPlusOrientations = [0]
-            self.sMinusOrientations = [90]
-            self.sMinusPresentations = [0, 0, 0, 0, 1] #how many times to display the SMINUS
-            self.sequenceType = Sequences.RANDOM
+            self.sMinusOrientations = [90, 135]
+            self.sMinusPresentations = [0, 1] #how many times to display the SMINUS
+            self.sequenceType = Sequences.RANDOM_RETRY
             
-            self.timeoutFail = 10
+            self.timeoutFail = 20 #Let's see if a long timeout cures those random licks. 
             self.timeoutAbort = 10
             self.timeoutSuccess = 6
             self.timeoutNoResponse = 10
@@ -126,17 +126,17 @@ class Training():
             self.grayDuration = 1
             self.rewardPeriod = self.grayDuration #needs to be no longer than gray duration!
             
-            self.hintChance = 0.25 #chance of sending a low reward at the start of the reward period
+            self.hintChance = 0 #chance of sending a low reward at the start of the reward period
             
             self.hintBolus = 0.03 #0.03 is a good amount; just enough that the shrew will notice it but not enough to be worth working for on its own.
-            self.rewardBolus = 0.15 
-            self.rewardBolusHardTrial = 0.25
+            self.rewardBolus = 0.1 
+            self.rewardBolusHardTrial = 0.1
         
         elif self.shrewDriver.animalName == 'Bernadette':
             print "Using settings for Bernadette!"
             self.sPlusOrientations = [90]
             self.sMinusOrientations = [0]
-            self.sMinusPresentations = [0, 1] #how many times to display the SMINUS
+            self.sMinusPresentations = [0] #how many times to display the SMINUS
             self.sequenceType = Sequences.RANDOM_RETRY
             
             self.timeoutFail = 10
@@ -153,7 +153,7 @@ class Training():
             self.grayDuration = 1
             self.rewardPeriod = self.grayDuration #needs to be no longer than gray duration!
             
-            self.hintChance = 0.25 #chance of sending a low reward at the start of the reward period
+            self.hintChance = 0.75 #chance of sending a low reward at the start of the reward period
             
             self.hintBolus = 0.03 #0.03 is a good amount; just enough that the shrew will notice it but not enough to be worth working for on its own.
             self.rewardBolus = 0.1 
@@ -185,6 +185,7 @@ class Training():
     def prepareTrial(self):
         #prepare to run trial
         self.sMinusDisplaysLeft = self.currentTrial.numSMinus
+        self.currentTrial.totalMicroliters = 0
         self.isHighRewardTrial = self.sMinusDisplaysLeft > min(self.sMinusPresentations)
         if random.uniform(0,1) < self.hintChance:
             self.doHint = True
