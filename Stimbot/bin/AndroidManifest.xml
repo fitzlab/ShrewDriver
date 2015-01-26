@@ -7,6 +7,9 @@
 	<!-- Needed for OpenGL -->
 	<uses-feature android:glEsVersion="0x00020000" android:required="true" />
 	
+	<!-- Can turn screen on and off -->
+	<uses-permission android:name="android.permission.WAKE_LOCK" />
+	
     <uses-sdk
         android:minSdkVersion="14"
         android:targetSdkVersion="19" />

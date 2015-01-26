@@ -1,14 +1,18 @@
 /*
   Sensor Arduino
 	
-	Listens for inputs from lick sensor and infrared sensor
+	Listens for inputs from lick sensor, infrared sensor, and tap sensor.
 	Forwards those to PC.
 
 */
 
 #define PIN_IR_SENSOR A0
+#define PIN_TAP_SENSOR A1
 #define PIN_LICK_SENSOR 2
 #define PIN_IR_LED 4
+
+#define TAP_ON HIGH
+#define TAP_OFF LOW
 
 #define IR_BROKEN HIGH
 #define IR_SOLID LOW
@@ -16,10 +20,12 @@
 #define LICK_OFF HIGH
 #define LICK_ON LOW
 
-int irBaseline;
 int irThresholdLow = 75;
 int irThresholdHigh = 100;
 bool irPrev = IR_SOLID;
+
+int tapThreshold = 2;
+bool tapState = TAP_OFF;
 
 int lickThreshold = 1; //0 = licking, other = not licking.
 bool prevLick = LICK_OFF;
@@ -34,10 +40,22 @@ void setup() {
 
 	//pin setup
   pinMode(PIN_IR_SENSOR, INPUT);
+	pinMode(PIN_TAP_SENSOR, INPUT);
   pinMode(PIN_LICK_SENSOR, INPUT_PULLUP);
   pinMode(PIN_IR_LED, OUTPUT);
 }
 
+void checkTap(){
+	int tap = analogRead(PIN_TAP_SENSOR);
+	if(tapState == TAP_OFF && tap > tapThreshold){
+		tapState = TAP_ON;
+    //Serial.println("Tx");
+	}
+	else if(tapState == TAP_ON && tap <= tapThreshold){
+		tapState = TAP_OFF;
+    //Serial.println("To");
+	}
+}
 
 void getIRSample(){
     // read background level
@@ -53,6 +71,7 @@ void getIRSample(){
   digitalWrite(PIN_IR_LED,LOW);
   
   irBuffer[irBufferPos] = signal0-bg0;
+  
   
   irBufferPos++;
   if(irBufferPos == irBufferSize){
@@ -73,6 +92,7 @@ void loop() {
 	//Check sensors
 	checkIR();
 	checkLick();
+	//checkTap();
 }
 
 void checkIR(){

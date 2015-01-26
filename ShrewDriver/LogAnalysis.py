@@ -43,7 +43,7 @@ for d in distractorTypes:
         successCounts[trialType] = 0
 
 # If it failed, let's find what state it failed at
-stateSet = ['TIMEOUT', 'WAITLICK', 'DELAY', 'GRAY', 'SPLUS', 'SMINUS', 'REWARD']
+stateSet = ['TIMEOUT', 'INIT', 'DELAY', 'GRAY', 'SPLUS', 'SMINUS', 'REWARD']
 failCounts = {}
 for s in stateSet:
     failCounts[s] = 0

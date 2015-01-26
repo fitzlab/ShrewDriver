@@ -41,58 +41,79 @@ class Training():
         self.stimSerial.startReadThread()
 
         #behavior inits
-        self.state = States.WAITLICK
+        self.state = States.TIMEOUT
         self.stateDuration = 1
         self.shrewPresent = False
         self.shrewEnteredAt = 0
         self.isLicking = False
         self.lastLickAt = 0
+        self.isTapping = False
+        self.lastTapAt = 0
         self.stateStartTime = 0
         self.stateEndTime = 0
-
+        
+        self.commandStrings = [''] * len(stateSet)
+        
         #Animal-relevant settings
         if self.shrewDriver.animalName == 'Queen':
             print "Using settings for Queen!"
             self.sPlusOrientations = [135]
             self.sMinusOrientations = [45]
             self.sMinusPresentations = [0] #how many times to display the SMINUS
+            self.guaranteedSPlus = False #is there always an SPLUS in the trial?
             self.sequenceType = Sequences.RANDOM_RETRY
+            self.initiation = Initiation.IR
             
-            self.timeoutFail = 10
+            self.timeoutFail = 15
             self.timeoutAbort = 10
             self.timeoutSuccess = 6
             self.timeoutNoResponse = 10
+            self.timeoutCorrectReject = 0
             
-            self.waitLickTime = 1
+            self.initTime = 1
             
-            self.variableDelayMin = 0.5 #Should be at least 0.5 seconds, see Tucker & Fitzpatrick 2006.
+            self.variableDelayMin = 0.5
             self.variableDelayMax = 1.25
             
             self.gratingDuration = 0.5
             self.grayDuration = 1
             self.rewardPeriod = self.grayDuration #needs to be no longer than gray duration!
             
-            self.hintChance = 0.25 #chance of sending a low reward at the start of the reward period
+            self.hintChance = 0.75 #chance of sending a low reward at the start of the reward period
             
             self.hintBolus = 0.03 #0.03 is a good amount; just enough that the shrew will notice it but not enough to be worth working for on its own.
             self.rewardBolus = 0.1 
             self.rewardBolusHardTrial = 0.2 
+            
+            #stimbot setup, including command strings for each state
+            #note that grating states will have an extra command added later to specify orientation and phase.
+            self.screenDistanceMillis = 150
+            self.commandStrings[States.TIMEOUT] = 'ac pab px24 py0 sx8 sy8\n'
+            self.commandStrings[States.INIT] = 'ac paw px24 py0 sx8 sy8\n'
+            self.commandStrings[States.DELAY] = 'sx0 sy0\n'
+            self.commandStrings[States.SMINUS] = 'ag sf0.25 tf0 jf0 ja0 px24 py0 sx48 sy48\n'
+            self.commandStrings[States.GRAY] = 'sx0 sy0\n'
+            self.commandStrings[States.SPLUS] = 'ag sf0.25 tf0 jf0 ja0 px24 py0 sx48 sy48\n'
+            self.commandStrings[States.REWARD] = 'sx0 sy0\n'
             
         elif self.shrewDriver.animalName == 'Chico':
             print "Using settings for Chico!"
             self.sPlusOrientations = [45]
             self.sMinusOrientations = [45.01, 48.75, 52.5, 56.25, 60, 63.75, 67.5, 90, 135]
             self.sMinusPresentations = [1, 2] #how many times to display the SMINUS
+            self.guaranteedSPlus = True #is there always an SPLUS in the trial?
             self.sequenceType = Sequences.BLOCK
+            self.initiation = Initiation.IR
             
             self.timeoutFail = 10
             self.timeoutAbort = 10
             self.timeoutSuccess = 6
             self.timeoutNoResponse = 10
+            self.timeoutCorrectReject = 3
             
-            self.waitLickTime = 1
+            self.initTime = 1
             
-            self.variableDelayMin = 0.5 #Should be at least 0.5 seconds, see Tucker & Fitzpatrick 2006.
+            self.variableDelayMin = 0.5
             self.variableDelayMax = 1.25
             
             self.gratingDuration = 0.5
@@ -105,21 +126,35 @@ class Training():
             self.rewardBolus = 0.15
             self.rewardBolusHardTrial = 0.15
             
+            #stimbot setup, including command strings for each state
+            #note that grating states will have an extra command added later to specify orientation and phase.
+            self.screenDistanceMillis = 150
+            self.commandStrings[States.TIMEOUT] = 'as pab px0 py0 sx80 sy80\n'
+            self.commandStrings[States.INIT] = 'as pab px0 py0 sx80 sy80\n'
+            self.commandStrings[States.DELAY] = 'sx0 sy0\n'
+            self.commandStrings[States.SMINUS] = 'ag sf0.25 tf0 jf0 ja0 px24 py0 sx48 sy48\n'
+            self.commandStrings[States.GRAY] = 'sx0 sy0\n'
+            self.commandStrings[States.SPLUS] = 'ag sf0.25 tf0 jf0 ja0 px24 py0 sx48 sy48\n'
+            self.commandStrings[States.REWARD] = 'sx0 sy0\n'
+            
         elif self.shrewDriver.animalName == 'Mercury':
             print "Using settings for Mercury!"
             self.sPlusOrientations = [0]
             self.sMinusOrientations = [90, 135]
             self.sMinusPresentations = [0, 1] #how many times to display the SMINUS
+            self.guaranteedSPlus = True #is there always an SPLUS in the trial?
             self.sequenceType = Sequences.RANDOM_RETRY
+            self.initiation = Initiation.IR
             
-            self.timeoutFail = 20 #Let's see if a long timeout cures those random licks. 
+            self.timeoutFail = 20
             self.timeoutAbort = 10
             self.timeoutSuccess = 6
             self.timeoutNoResponse = 10
+            self.timeoutCorrectReject = 0
             
-            self.waitLickTime = 1
+            self.initTime = 1
             
-            self.variableDelayMin = 0.75 #Should be at least 0.5 seconds, see Tucker & Fitzpatrick 2006.
+            self.variableDelayMin = 0.75
             self.variableDelayMax = 2
             
             self.gratingDuration = 0.5
@@ -129,24 +164,38 @@ class Training():
             self.hintChance = 0 #chance of sending a low reward at the start of the reward period
             
             self.hintBolus = 0.03 #0.03 is a good amount; just enough that the shrew will notice it but not enough to be worth working for on its own.
-            self.rewardBolus = 0.1 
-            self.rewardBolusHardTrial = 0.1
+            self.rewardBolus = 0.15 
+            self.rewardBolusHardTrial = 0.15
         
+            #stimbot setup, including command strings for each state
+            #note that grating states will have an extra command added later to specify orientation and phase.
+            self.screenDistanceMillis = 150
+            self.commandStrings[States.TIMEOUT] = 'as pab px0 py0 sx80 sy80\n'
+            self.commandStrings[States.INIT] = 'as pab px0 py0 sx80 sy80\n'
+            self.commandStrings[States.DELAY] = 'sx0 sy0\n'
+            self.commandStrings[States.SMINUS] = 'ag sf0.25 tf0 jf0 ja0 px24 py0 sx48 sy48\n'
+            self.commandStrings[States.GRAY] = 'sx0 sy0\n'
+            self.commandStrings[States.SPLUS] = 'ag sf0.25 tf0 jf0 ja0 px24 py0 sx48 sy48\n'
+            self.commandStrings[States.REWARD] = 'sx0 sy0\n'
+            
         elif self.shrewDriver.animalName == 'Bernadette':
             print "Using settings for Bernadette!"
             self.sPlusOrientations = [90]
             self.sMinusOrientations = [0]
             self.sMinusPresentations = [0] #how many times to display the SMINUS
-            self.sequenceType = Sequences.RANDOM_RETRY
+            self.guaranteedSPlus = False #is there always an SPLUS in the trial?
+            self.sequenceType = Sequences.RANDOM
+            self.initiation = Initiation.IR
             
-            self.timeoutFail = 10
+            self.timeoutFail = 15
             self.timeoutAbort = 10
             self.timeoutSuccess = 6
             self.timeoutNoResponse = 10
+            self.timeoutCorrectReject = 0
             
-            self.waitLickTime = 1
+            self.initTime = 1
             
-            self.variableDelayMin = 0.5 #Should be at least 0.5 seconds, see Tucker & Fitzpatrick 2006.
+            self.variableDelayMin = 0.5
             self.variableDelayMax = 1.25
             
             self.gratingDuration = 0.5
@@ -159,6 +208,17 @@ class Training():
             self.rewardBolus = 0.1 
             self.rewardBolusHardTrial = 0.2 
         
+            #stimbot setup, including command strings for each state
+            #note that grating states will have an extra command added later to specify orientation and phase.
+            self.screenDistanceMillis = 150
+            self.commandStrings[States.TIMEOUT] = 'ac pab px24 py0 sx8 sy8\n'
+            self.commandStrings[States.INIT] = 'ac paw px24 py0 sx8 sy8\n'
+            self.commandStrings[States.DELAY] = 'sx0 sy0\n'
+            self.commandStrings[States.SMINUS] = 'ag sf0.25 tf0 jf0 ja0 px24 py0 sx48 sy48\n'
+            self.commandStrings[States.GRAY] = 'sx0 sy0\n'
+            self.commandStrings[States.SPLUS] = 'ag sf0.25 tf0 jf0 ja0 px24 py0 sx48 sy48\n'
+            self.commandStrings[States.REWARD] = 'sx0 sy0\n'
+            
         else:
             raise Exception("ANIMAL NOT RECOGNIZED")
         
@@ -176,6 +236,17 @@ class Training():
         thisAsString = objectToString.objectToString(self)
         self.settingsFile.write(thisAsString)
         self.settingsFile.close()
+        
+        #set up stimbot commands for later use
+        self.stimSerial.write('screendist' + str(self.screenDistanceMillis) + '\n')
+        for i in xrange(0, len(stateSet)):
+            time.sleep(0.1) #wait a bit between long commands to make sure serial sends everything
+            saveCommand = 'save' + str(i) + ' ' + self.commandStrings[i]
+            self.stimSerial.write(saveCommand)
+        
+        #turn screen on, if needed
+        time.sleep(0.1) 
+        self.stimSerial.write('screenon\n')
         
         #set up the first trial
         self.currentTrial = self.sequencer.getNextTrial(None)
@@ -225,7 +296,7 @@ class Training():
             bunchaCrap = self.syringeSerial.getUpdates()
             bunchaCrap = self.stimSerial.getUpdates()
             #Don't do anything with that information because it's crap
-            
+    
     def processUpdates(self, inputStr):
         updateTokens = str.split(inputStr)
         evtType = updateTokens[0]
@@ -235,6 +306,12 @@ class Training():
             self.shrewEnteredAt = time.time()
         if evtType == 'Io':
             self.shrewPresent = False
+        if evtType == 'Tx':
+            self.isTapping = True
+            self.lastTapAt = time.time()
+        if evtType == 'To':
+            self.isTapping = False
+            self.lastTapAt = time.time()
         if evtType == 'Lx':
             self.isLicking = True
             self.lastLickAt = time.time()
@@ -250,19 +327,30 @@ class Training():
         
     def checkStateProgression(self):
         now = time.time()
-        #if shrew licks or leaves the IR beam, fail.
         
-        if self.state == States.WAITLICK:
+        if self.state == States.INIT:
             #-- fail conditions --#
             if not self.shrewPresent:
                 self.stateStartTime = now
-
-            if self.isLicking or self.lastLickAt > self.stateStartTime:
-                self.stateStartTime = now
+            
+            #Wait for the shrew to stop licking, unless its initiation type is LICK
+            if self.initiation != Initiation.LICK:
+                if self.isLicking or self.lastLickAt > self.stateStartTime:
+                    self.stateStartTime = now
+            
+            #recompute state end time based on the above
+            self.stateEndTime = self.stateStartTime + self.stateDuration
                 
             #-- progression condition --#
-            self.stateEndTime = self.stateStartTime + self.stateDuration
-            if now > self.stateEndTime:
+            doneWaiting = False
+            if self.initiation == Initiation.LICK and self.lastLickAt > self.stateStartTime:
+                doneWaiting = True
+            elif self.initiation == Initiation.TAP and self.lastTapAt > self.stateStartTime:
+                doneWaiting = True
+            elif self.initiation == Initiation.IR and now > self.stateEndTime:
+                doneWaiting = True
+            
+            if doneWaiting:
                 self.stateDuration = random.uniform(self.variableDelayMin, self.variableDelayMax)
                 self.changeState(States.DELAY)
         
@@ -289,7 +377,19 @@ class Training():
                 
             #-- progression condition --#
             if now > self.stateEndTime:
-                self.prepareGratingState()
+                if self.guaranteedSPlus or self.sMinusDisplaysLeft > 0:
+                    #still more gratings to do, continue on
+                    self.prepareGratingState()
+                elif self.currentTrial.numSMinus < max(self.sMinusPresentations):
+                    #OK, this happens when we have one SMINUS followed by an SPLUS,
+                    #e.g. in Chico's task.
+                    self.prepareGratingState()
+                else:
+                    #there's no SPLUS in this trial,
+                    #and we did all the SMINUS displays. All done!
+                    self.trialResult = Results.CORRECT_REJECT
+                    self.stateDuration = self.timeoutCorrectReject
+                    self.changeState(States.TIMEOUT)
             
         if self.state == States.SPLUS:
             #-- fail conditions --#
@@ -325,8 +425,8 @@ class Training():
         if self.state == States.TIMEOUT:
             #-- progression condition --#
             if now > self.stateEndTime and self.shrewPresent:
-                self.stateDuration = self.waitLickTime
-                self.changeState(States.WAITLICK)
+                self.stateDuration = self.initTime
+                self.changeState(States.INIT)
                 
             
     def prepareGratingState(self): 
@@ -338,9 +438,15 @@ class Training():
             self.sMinusDisplaysLeft -= 1
         else:
             #finished all SMINUS displays
-            #continue to SPLUS
-            self.stateDuration = self.gratingDuration
-            self.changeState(States.SPLUS)
+            if self.guaranteedSPlus or self.currentTrial.numSMinus < max(self.sMinusPresentations) or \
+                max(self.sMinusPresentations) == 0:
+                #continue to SPLUS
+                self.stateDuration = self.gratingDuration
+                self.changeState(States.SPLUS)
+            else:
+                self.trialResult = Results.CORRECT_REJECT
+                self.stateDuration = self.timeoutCorrectReject
+                self.changeState(States.TIMEOUT)
     
     def changeState(self, newState):
         #runs every time a state changes
@@ -352,6 +458,7 @@ class Training():
         #if changed to timeout, reset trial params for the new trial
         if (newState == States.TIMEOUT):
             #tell UI about the trial that just finished
+            print Results.whatis(self.trialResult) + "\n"
             self.shrewDriver.sigTrialEnd.emit(self.trialResult, self.oldState, \
                 self.currentTrial.sPlusOrientation, self.currentTrial.sMinusOrientation, \
                 self.currentTrial.numSMinus, self.doHint, self.currentTrial.totalMicroliters)
@@ -362,26 +469,25 @@ class Training():
             self.trialNum += 1
         
         #update screen
-        if (newState == States.DELAY) or \
-                (newState == States.GRAY) or \
-                (newState == States.REWARD):
-            self.grayScreen()
-        
-        if (newState == States.TIMEOUT) or \
-                (newState == States.WAITLICK):
-            self.blackScreen()
-        
-        if (newState == States.SPLUS):
-            self.grating(self.currentTrial.sPlusOrientation)
+        if self.stateDuration > 0:
+            if newState == States.SPLUS:
+                #it's a grating, so call the base grating command
+                #and add the orientation and phase
+                phase = str(round(random.random(), 2))
+                oriPhase = "sqr" + str(self.currentTrial.sPlusOrientation) + " ph" + phase
+                self.stimSerial.write(str(self.state) + " " + oriPhase + "\n")
+            elif newState == States.SMINUS:
+                phase = str(round(random.random(), 2))
+                oriPhase = "sqr" + str(self.currentTrial.sMinusOrientation) + " ph" + phase
+                self.stimSerial.write(str(self.state) + " " + oriPhase + "\n")
+            else:
+                self.stimSerial.write(str(self.state) + "\n")
             
-        if (newState == States.SMINUS):
-            self.grating(self.currentTrial.sMinusOrientation)
-        
         self.stateEndTime = self.stateStartTime + self.stateDuration
         
         self.logAndPlot("State" + str(self.state), time.time())
         
-        print 'state changed to ' + str(States.whatis(newState))
+        print 'state changed to ' + str(States.whatis(newState)) + ' duration ' + str(self.stateDuration)
     
     def dispenseHint(self):
         timestamp = time.time()
@@ -407,7 +513,12 @@ class Training():
         #(1) Shrew licks when it shouldn't, or
         #(2) Shrew leaves the annex
         if self.isLicking or self.lastLickAt > self.stateStartTime:
-            self.fail()
+            if self.state == States.DELAY and self.initiation == Initiation.LICK:
+                #it's OK to lick during DELAY if they lick to initiate the trial
+                pass
+            else:
+                #any other time, licks are bad m'kay
+                self.fail()
         if not self.shrewPresent:
             self.abort()
     
@@ -421,16 +532,11 @@ class Training():
         self.trialResult = Results.ABORT
         self.changeState(States.TIMEOUT)
     
-    def grayScreen(self):
-        self.stimSerial.write('g\n')
-        
     def blackScreen(self):
-        self.stimSerial.write('b\n')
-        self.logFile.flush() #update log file after each trial ends
-        
-    def grating(self, orientation):
-        self.stimSerial.write('o' + str(orientation) + "\n")
-        self.logFile.write("ori" + str(orientation) + " " + str(time.time()) + "\n")
+        #used by "stop recording" to black out screen at end of experiment
+        self.stimSerial.write('as pab px0 py0 sx80 sy80\n')
+        time.sleep(0.05)
+        self.stimSerial.write('screenoff\n')
     
     def stop(self):
         #end logfile
@@ -440,16 +546,19 @@ class Training():
         self.stopFlag = True
         time.sleep(0.01)
         self.blackScreen()
+        time.sleep(0.5)
         
         #stop serial thread
-        self.ser.close()
+        self.syringeSerial.close()
+        self.arduinoSerial.close()
+        self.stimSerial.close()
         
     
     def start(self):
         self.stopFlag = False
         
-        self.stateDuration = self.waitLickTime
-        self.changeState(States.WAITLICK)
+        self.stateDuration = self.initTime
+        self.changeState(States.INIT)
         
         self.startTime = time.time()
         

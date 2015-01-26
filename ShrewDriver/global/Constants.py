@@ -18,7 +18,7 @@ Sequences = Enumeration("Sequences", sequenceSet)
 '''
 Trial States:
     TIMEOUT - the black screen between trials. Longer timeout for failing, shorter for succeeding.
-    WAITLICK - black screen until it has been a certain amount of time since the last lick.
+    INIT - Trial initiation phase. See "Trial Initiation Modes" below.
     DELAY - gray screen of variable duration preceding the first grating presentation
     GRAY - gray screen between gratings, constant duration
     SPLUS - grating that is precedes rewardPeriod
@@ -26,17 +26,26 @@ Trial States:
     REWARD - gray screen during which reward is available. Same duration as GRAY.
 '''
 
-stateSet = ['TIMEOUT', 'WAITLICK', 'DELAY', 'GRAY', 'SPLUS', 'SMINUS', 'REWARD']
+stateSet = ['TIMEOUT', 'INIT', 'DELAY', 'GRAY', 'SPLUS', 'SMINUS', 'REWARD']
 States = Enumeration("States", stateSet)
-
 
 
 '''
 Trial Results:
     SUCCESS - Correct lick
+    CORRECT_REJECT - Not responding in a no-go trial
     FAIL - Incorrect lick
-    ABORT - Shrew left IR beam
     NO_RESPONSE - Shrew didn't lick
+    ABORT - Shrew left IR beam during trial
 '''
-resultsSet = ['SUCCESS', 'FAIL', 'ABORT', 'NO_RESPONSE'] 
+resultsSet = ['SUCCESS', 'CORRECT_REJECT', 'FAIL', 'NO_RESPONSE', 'ABORT'] 
 Results = Enumeration("Results", resultsSet)
+
+'''
+Trial Initiation Modes:
+    IR - Shrew enters infrared beam
+    LICK - Lick during INIT period starts trial; licks during DELAY are ignored
+    TAP - Tap sensor during INIT starts trial
+'''
+initSet = ['IR','LICK','TAP']
+Initiation = Enumeration("Initiation", initSet)

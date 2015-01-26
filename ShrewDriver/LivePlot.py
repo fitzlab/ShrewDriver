@@ -23,7 +23,7 @@ class LivePlot(QWidget):
         self.pw = pg.PlotWidget(viewBox=self.vb, axisItems={'bottom': self.axis}, enableMenu=False, title="")
         self.pw.showAxis('left', False)
         
-        self.pw.setXRange(0, 10)
+        self.pw.setXRange(0, 300)
         self.pw.setYRange(0, 10)
         self.pw.show()
         self.pw.setWindowTitle(animalName + " - Live Plot")
@@ -37,10 +37,11 @@ class LivePlot(QWidget):
         #--- init plot curves ---#
         numStates = 7
         
-        self.rewardPoints = IntCurve('Rewards', 4, [0,255,255], 1, self.pw)
-        self.hintPoints = IntCurve('Hints', 3, [0,255,0], 1, self.pw)
-        self.statePoints = IntCurve('State', 2, [128,128,128], numStates, self.pw)
-        self.lickPoints = IntCurve('Licks', 1, [255,0,0], 1, self.pw)
+        self.rewardPoints = IntCurve('Reward', 5, [0,255,255], 1, self.pw)
+        self.hintPoints = IntCurve('Hint', 4, [0,255,0], 1, self.pw)
+        self.statePoints = IntCurve('State', 3, [128,128,128], numStates, self.pw)
+        self.lickPoints = IntCurve('Lick', 2, [255,0,0], 1, self.pw)
+        self.tapPoints = IntCurve('Tap', 1, [255,255,0], 1, self.pw)
         self.irPoints = IntCurve('IR', 0, [128,0,255], 1, self.pw)
         
         QWidget.__init__(self) 
@@ -64,6 +65,10 @@ class LivePlot(QWidget):
             self.lickPoints.appendPoint(t,1)
         if evtType == 'Lo':
             self.lickPoints.appendPoint(t,0)
+        if evtType == 'Tx':
+            self.tapPoints.appendPoint(t,1)
+        if evtType == 'To':
+            self.tapPoints.appendPoint(t,0)
         if evtType.startswith('State'):
             stateNumber = int(evtType[5:])
             self.statePoints.appendPoint(t,stateNumber)
@@ -78,30 +83,37 @@ class LivePlot(QWidget):
         super(LivePlot, self).setFocus()
         
     def addTestPoints(self):
-        self.addEvent("Lx 100")
-        self.addEvent("Lo 130")
-        self.addEvent("Lx 500")
-        self.addEvent("Lo 530")
-        self.addEvent("Lx 800")
-        self.addEvent("Lo 830")
-        self.addEvent("Ix 200")
-        self.addEvent("Io 650")
-        self.addEvent("Ix 1200")
-        self.addEvent("Io 2650")
-        self.addEvent("State0 0")
-        self.addEvent("State1 500")
-        self.addEvent("State2 1000")
-        self.addEvent("State3 1500")
-        self.addEvent("State4 2000")
-        self.addEvent("State5 2500")
-        self.addEvent("State6 3000")
-        self.addEvent("State7 3500")
-        self.addEvent("State0 4000")
-        self.addEvent("RL 650")
-        self.addEvent("RL 1650")
-        self.addEvent("RL 3650")
-        self.addEvent("RH 700")
-        self.addEvent("RH 2700")
+        self.startTime = 0
+        self.addEvent("Lx", 100)
+        self.addEvent("Lo", 130)
+        self.addEvent("Lx", 500)
+        self.addEvent("Lo", 530)
+        self.addEvent("Lx", 800)
+        self.addEvent("Lo", 830)
+        self.addEvent("Ix", 200)
+        self.addEvent("Io", 650)
+        self.addEvent("Ix", 1200)
+        self.addEvent("Io", 2650)
+        self.addEvent("Tx", 200)
+        self.addEvent("To", 220)
+        self.addEvent("Tx", 1200)
+        self.addEvent("To", 1220)
+        self.addEvent("Tx", 1240)
+        self.addEvent("To", 1280)
+        self.addEvent("State0", 0)
+        self.addEvent("State1", 500)
+        self.addEvent("State2", 1000)
+        self.addEvent("State3", 1500)
+        self.addEvent("State4", 2000)
+        self.addEvent("State5", 2500)
+        self.addEvent("State6", 3000)
+        self.addEvent("State7", 3500)
+        self.addEvent("State0", 4000)
+        self.addEvent("RL", 650)
+        self.addEvent("RL", 1650)
+        self.addEvent("RL", 3650)
+        self.addEvent("RH", 700)
+        self.addEvent("RH", 2700)
 
 class IntCurve:
     def __init__(self, name, index, color, yMax, pw):
@@ -175,4 +187,8 @@ class TimeAxis(pg.AxisItem):
         return strns
 
 if __name__ == '__main__':
-    lp = LivePlot()
+    from pyqtgraph.Qt import QtGui, QtCore
+    app = QtGui.QApplication(sys.argv)
+    lp = LivePlot('AnimalName')
+    lp.addTestPoints()
+    QtGui.QApplication.instance().exec_()

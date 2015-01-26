@@ -1,142 +1,93 @@
 package com.example.stimbot;
 
-/*
- * MyRenderer (Example 3)
- * 
- * [AUTHOR]: Chunyen Liu
- * [SDK   ]: Android SDK 2.1 and up
- * [NOTE  ]: developer.com tutorial, "Fundamental OpenGL ES in Android"
- */
+// Accepts serial commands and displays the stim on the screen accordingly
+// Uses OpenGL ES 2.0. 
+// The scene is an orthographic projection. 
+// Far away is a "stim" object. This is a large square with a texture on it, e.g. a grating. 
+// Closer to the camera is an "aperture" object, which is an alpha mask (e.g. a Gabor).
+
+// Grating frequency and phase are controlled by manipulation of texture coordinates.
+// Aperture position is changed by translation. When aperture moves, the stim object moves too,
+// so that the phase of a grating won't change just because you moved the aperture.
 
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
+import java.nio.IntBuffer;
 import java.nio.ShortBuffer;
+import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
 
-import android.app.Activity;
+import com.example.stimbot.Texture;
+
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.opengl.GLSurfaceView.Renderer;
 import android.opengl.GLES20;
-import android.opengl.GLUtils;
-import android.opengl.Matrix;
+import android.os.PowerManager;
+import android.os.PowerManager.WakeLock;
 import android.util.Log;
-import android.view.MotionEvent;
 
 class MyRenderer implements Renderer {
 	private Context mContext;
-	private FloatBuffer mVertexBuffer = null;
-	private FloatBuffer mColorBuffer = null;
-	private ShortBuffer mTriangleIndexBuffer = null; 
-	private int mNumOfTriangleIndices = 0;
-	private FloatBuffer mTextureBuffer = null;
+	private StimbotActivity mActivity;
+	
+	private FloatBuffer mStimVertexBuffer = null;
+	private FloatBuffer mStimColorBuffer = null;
+	private ShortBuffer mStimTriangleIndexBuffer = null; 
+	private FloatBuffer mStimTextureBuffer = null;
+	private int mStimNumOfTriangleIndices = 0;
+	
+	private FloatBuffer mApertureVertexBuffer = null;
+	private FloatBuffer mApertureColorBuffer = null;
+	private ShortBuffer mApertureTriangleIndexBuffer = null; 
+	private FloatBuffer mApertureTextureBuffer = null;
+	private int mApertureNumOfTriangleIndices = 0;
+	
 	private int [] mTextureList = null;
-
-	private Bitmap txGrating;
-	private Bitmap txBlack;
-	private Bitmap txGray;
-
-	private int txBlackIndex = -1;
-	private int txGrayIndex = -1;
-	private int txGratingIndex = -1;
 	
-	public float mAngleX = 0.0f;
-	public float mAngleY = 0.0f;
-	public float mAngleZ = 0.0f;
-	private final float TOUCH_SCALE_FACTOR = 0.6f;
-    
+	private float grayValf = 180f/255f;
+	private TextureFactory textureFactory = new TextureFactory();
 
+	private ArrayList<Texture> textures;
+	
 	SerialConnection serialConnection;
+	
+	private float stimPosZ = -2.0f;
+	private float aperturePosZ = -1.0f;
+	
+	PowerManager pm;
+	WakeLock mWakeLock;
+	
+	//--- Display state and serial variables ---//
 	String serialDataBuffer = "";
+	private String[] savedCommands = new String[100];
+
+	private String stimTextureName = "sinGrating";
+	private String apertureTextureName = "gabor";
+
+	RenderedObject stim = new RenderedObject();
+	RenderedObject aperture = new RenderedObject();
 	
-	public MyRenderer(Context context) {
-		mContext = context;
-        serialConnection = new SerialConnection((Activity) context);
+	public MyRenderer(StimbotActivity activity) {
+		mActivity = activity;
+		mContext = mActivity.getApplicationContext();
+        serialConnection = new SerialConnection(activity);
+        
+        pm = (PowerManager) mContext.getSystemService(Context.POWER_SERVICE);
+        mWakeLock = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK | PowerManager.ACQUIRE_CAUSES_WAKEUP, "tag");
+		mWakeLock.acquire();
 	}
-	
-    public void onDrawFrame(GL10 gl) {
-        gl.glClear(GL10.GL_COLOR_BUFFER_BIT | GL10.GL_DEPTH_BUFFER_BIT);
-        gl.glMatrixMode(GL10.GL_MODELVIEW);
-        gl.glLoadIdentity();
-        
-        gl.glTranslatef(0, 0, -3.0f);
-        gl.glRotatef(mAngleX, 1, 0, 0);
-		gl.glRotatef(mAngleY, 0, 1, 0);
-		gl.glRotatef(mAngleZ, 0, 0, 1);
-        
-		// Draw all textured triangles
-        gl.glVertexPointer(3, GL10.GL_FLOAT, 0, mVertexBuffer);
-        gl.glColorPointer(4, GL10.GL_FLOAT, 0, mColorBuffer);
-        
-        gl.glTexCoordPointer(2, GL10.GL_FLOAT, 0, mTextureBuffer);
-        gl.glDrawElements(GL10.GL_TRIANGLES, mNumOfTriangleIndices,
-    			GL10.GL_UNSIGNED_SHORT, mTriangleIndexBuffer);
-        
-        
-        try{
-			serialDataBuffer += serialConnection.checkSerial();
-		}
-		catch(Exception ex){
-			arduinoError(ex);
-		}
-			
-		//parse serial data for commands
-		int newlinePos = serialDataBuffer.indexOf('\n');
-		if(newlinePos != -1){
-			String cmd = serialDataBuffer.substring(0, newlinePos);
-			//keep the remainder of the buffer, if there's anything there
-			if(serialDataBuffer.length() > newlinePos+1){
-				serialDataBuffer = serialDataBuffer.substring(newlinePos+1, serialDataBuffer.length());
-			}
-			else{
-				serialDataBuffer = "";
-			}
-			
-			if(cmd.equalsIgnoreCase("blonk")){
-				//make noise, confirm serial connection works
 
-		        Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-    			Ringtone r = RingtoneManager.getRingtone(mContext, notification);
-		        r.play();
-			}
-
-			if(cmd.startsWith("o")){
-				//display grating at given orientation
-				try{
-					mAngleZ = Float.parseFloat(cmd.substring(1,cmd.length()));
-					mAngleZ = 90 - mAngleZ; //change to lab's bizarre coordinate system standard
-					setTextureToGrating(gl);
-				}
-				catch(Exception ex){
-					//malformed command, do nothing
-				}
-			}
-
-			if(cmd.equals("g")){
-				//show gray screen
-	        	setTextureToGray(gl);
-			}
-
-			if(cmd.equals("b")){
-				//black screen
-	        	setTextureToBlack(gl);
-			}
-		}
-    }
-
-	public void arduinoError(Exception ex){
-		Log.d("Error", "Can't connect to Arduino: " + ex.toString());
-	}
-	
     public void onSurfaceCreated(GL10 gl, EGLConfig config) {
-    	gl.glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+    	gl.glClearColor(grayValf, grayValf, grayValf, 1.0f); //Equal luminant gray background
  		gl.glHint(GL10.GL_PERSPECTIVE_CORRECTION_HINT, GL10.GL_NICEST);
  		gl.glEnable(GL10.GL_DEPTH_TEST);
  		gl.glShadeModel(GL10.GL_SMOOTH);
@@ -148,38 +99,126 @@ class MyRenderer implements Renderer {
         gl.glEnableClientState(GL10.GL_COLOR_ARRAY);
         
         makeTextures(gl);
-        setTextureToBlack(gl);
         
         // Get all the buffers ready
-        setAllBuffers();
+        makeStimObject();
+        makeApertureObject();
 	}
+    
+    public void onSurfaceChanged(GL10 gl, int width, int height) {
+        gl.glViewport(0, 0, width, height);
+        gl.glMatrixMode(GL10.GL_PROJECTION);
+        gl.glLoadIdentity();
+        
+        //aspect ratio correction is now done in RenderedObject -- no need for it here.
+        //float aspect = (float)nexusScreenWidthPx / nexusScreenHeightPx;
+        float aspect = 1.0f;
+        gl.glOrthof(-aspect, aspect, -1.0f, 1.0f, 1.0f, 1000.0f);
+   }
+    
+    public void onDrawFrame(GL10 gl) {
+        gl.glClear(GL10.GL_COLOR_BUFFER_BIT | GL10.GL_DEPTH_BUFFER_BIT);
+        gl.glMatrixMode(GL10.GL_MODELVIEW);
 
-    public void makeTextures(GL10 gl){
-    	//make grating
-    	txGrating = makeSquareTexture();
-    	
-    	//make black and gray textures
-    	Bitmap.Config conf = Bitmap.Config.ARGB_8888; //4 bytes, alpha-red-green-blue
-    	
-    	txBlack = Bitmap.createBitmap(1, 1, conf);
-    	int blackVal = 0;
-    	txBlack.setPixel(0, 0, blackVal);
-    	
-    	txGray = Bitmap.createBitmap(1, 1, conf);
-    	int grayVal = 180; //This is an equal-luminant gray (or very close -- double check with a photodiode later.)
-    	int pxVal = ((grayVal  & 0xff) << 24)
-    	        | ((0xff) << 16)
-    	        | ((0xff) << 8)
-    	        | ((0xff));
-    	txGray.setPixel(0, 0, pxVal);
-    	
-        gl.glEnable(GL10.GL_TEXTURE_2D);
+        gl.glEnable(GL10.GL_BLEND);
+        gl.glBlendFunc(GL10.GL_SRC_ALPHA, GL10.GL_ONE_MINUS_SRC_ALPHA);
+
+        stim.computeParams();
+        aperture.computeParams();
         
-        int numTextures = 3;
-		mTextureList = new int[numTextures];
-        gl.glGenTextures(numTextures, mTextureList, 0);
+        drawStim(gl);
+        drawAperture(gl);
+       
+        // Done drawing! Let's see if we have any new commands waiting in the serial.
+        checkSerial(); 
+    }
+
+    private void drawStim(GL10 gl){
+    	//translate stim to its position and make it the right size
+        gl.glMatrixMode(GL10.GL_MODELVIEW);
+        gl.glLoadIdentity();
+        gl.glTranslatef(stim.posX, stim.posY, stim.posZ);
+        gl.glScalef(stim.scaleX, stim.scaleY, stim.scaleZ);
+        gl.glRotatef(stim.angleX, 1, 0, 0);
+		gl.glRotatef(stim.angleY, 0, 1, 0);
+		gl.glRotatef(stim.angleZ, 0, 0, 1);
+
+		//put the current stim texture on it
+        applyStimTexture(gl);
         
-	    for(int i = 0; i < numTextures; i++){   
+        //adjust texture position as needed.
+        //Note that we apply translation FIRST here, so that phase will act the same at all rotations + scales.
+        gl.glMatrixMode(GL10.GL_TEXTURE);
+        gl.glLoadIdentity();
+        gl.glTranslatef(stim.texturePosX, stim.texturePosY, stim.texturePosZ); //texture position: phase and animation
+        gl.glRotatef(stim.textureAngleX, 1, 0, 0); //texture rotation gives grating orientation
+		gl.glRotatef(stim.textureAngleY, 0, 1, 0);
+		gl.glRotatef(stim.textureAngleZ, 0, 0, 1);
+        gl.glScalef(stim.textureScaleX, stim.textureScaleY, stim.textureScaleZ); //texture scaling: spatial frequency
+        gl.glTranslatef(-0.5f, -0.5f, stim.texturePosZ);
+        
+		// Draw stim object
+        gl.glVertexPointer(3, GL10.GL_FLOAT, 0, mStimVertexBuffer);
+        gl.glColorPointer(4, GL10.GL_FLOAT, 0, mStimColorBuffer);
+        gl.glTexCoordPointer(2, GL10.GL_FLOAT, 0, mStimTextureBuffer);
+        gl.glDrawElements(GL10.GL_TRIANGLES, mStimNumOfTriangleIndices,
+    			GL10.GL_UNSIGNED_SHORT, mStimTriangleIndexBuffer);
+    }
+    
+    private void drawAperture(GL10 gl){
+    	//we do what we must, because we can
+        gl.glMatrixMode(GL10.GL_MODELVIEW);
+        gl.glLoadIdentity();
+        gl.glTranslatef(aperture.posX, aperture.posY, aperture.posZ);
+        gl.glScalef(aperture.scaleX, aperture.scaleY, aperture.scaleZ);
+        gl.glRotatef(aperture.angleX, 1, 0, 0);
+		gl.glRotatef(aperture.angleY, 0, 1, 0);
+		gl.glRotatef(aperture.angleZ, 0, 0, 1);
+        
+        applyApertureTexture(gl);
+        
+        //Make sure no transform is applied to the aperture texture
+        gl.glMatrixMode(GL10.GL_TEXTURE);
+        gl.glLoadIdentity();
+        
+        // Draw aperture object
+        gl.glVertexPointer(3, GL10.GL_FLOAT, 0, mApertureVertexBuffer);
+        gl.glColorPointer(4, GL10.GL_FLOAT, 0, mApertureColorBuffer);
+        gl.glTexCoordPointer(2, GL10.GL_FLOAT, 0, mApertureTextureBuffer);
+        gl.glDrawElements(GL10.GL_TRIANGLES, mApertureNumOfTriangleIndices,
+    			GL10.GL_UNSIGNED_SHORT, mApertureTriangleIndexBuffer);
+    }
+    
+	public void makeTextures(GL10 gl){
+		//stim textures
+		textures = new ArrayList<Texture>();
+		
+		//gratings
+		textures.add(textureFactory.squareGratingTexture());
+		textures.add(textureFactory.sinGratingTexture());
+		
+		//color patches
+		textures.add(textureFactory.whiteTexture());
+		textures.add(textureFactory.grayTexture());
+		textures.add(textureFactory.blackTexture());
+		textures.add(textureFactory.redTexture());
+		textures.add(textureFactory.blueTexture());
+		textures.add(textureFactory.greenTexture());
+		textures.add(textureFactory.cyanTexture());
+		textures.add(textureFactory.magentaTexture());
+		textures.add(textureFactory.yellowTexture());
+
+		//apertures
+		textures.add(textureFactory.gaborTexture());
+		textures.add(textureFactory.squareTexture());
+		textures.add(textureFactory.circleTexture());
+		
+		mTextureList = new int[textureFactory.numTextures];
+		
+		gl.glEnable(GL10.GL_TEXTURE_2D);
+		gl.glGenTextures(textureFactory.numTextures, mTextureList, 0);
+		
+		for(int i = 0; i < textures.size(); i++){	
 			gl.glBindTexture(GL10.GL_TEXTURE_2D, mTextureList[i]);
 			gl.glTexParameterf(GL10.GL_TEXTURE_2D, GL10.GL_TEXTURE_WRAP_S, GL10.GL_REPEAT);
 			gl.glTexParameterf(GL10.GL_TEXTURE_2D, GL10.GL_TEXTURE_WRAP_S, GL10.GL_REPEAT);
@@ -187,154 +226,405 @@ class MyRenderer implements Renderer {
 			gl.glTexParameterf(GL10.GL_TEXTURE_2D, GL10.GL_TEXTURE_MIN_FILTER, GL10.GL_LINEAR);
 			gl.glTexEnvf(GL10.GL_TEXTURE_ENV, GL10.GL_TEXTURE_ENV_MODE, GL10.GL_MODULATE);
 			gl.glClientActiveTexture(GL10.GL_TEXTURE0);
-	        gl.glEnableClientState(GL10.GL_TEXTURE_COORD_ARRAY);
-	        
-	        if(i==0){
-	        	GLUtils.texImage2D(GL10.GL_TEXTURE_2D, 0, txBlack, 0);
-	        	txBlackIndex = i;
-	        }
-	        if(i==1){
-	        	GLUtils.texImage2D(GL10.GL_TEXTURE_2D, 0, txGray, 0);
-	        	txGrayIndex = i; 
-	    	}
-	        if(i==2){
-	        	GLUtils.texImage2D(GL10.GL_TEXTURE_2D, 0, txGrating, 0);
-	        	txGratingIndex = i;
+			gl.glEnableClientState(GL10.GL_TEXTURE_COORD_ARRAY);
+			
+			Bitmap bmp = textures.get(i).bitmap;
+			if(textures.get(i).index != i){
+				Log.e("ERROR", "Wrong index on texture -- did you make these in the right order?");
+			}
+			
+			int width = bmp.getWidth();
+			int height = bmp.getHeight();
+			int bufPos = 0;
+			int[] data = new int[bmp.getWidth()*bmp.getHeight()];
+			for(int x = 0; x < bmp.getWidth(); x++){
+				for(int y = 0; y < bmp.getHeight(); y++){
+					data[bufPos] = bmp.getPixel(x, y);
+					bufPos++;
+				}
+			}
+			IntBuffer b = IntBuffer.wrap(data);
+			
+        	//GLUtils.texImage2D(GL10.GL_TEXTURE_2D, 0, GL10.GL_RGBA, bmp, 0); //using this produces some nasty artifacts at low alpha, idk why
+        	gl.glTexImage2D(GL10.GL_TEXTURE_2D, 0, GL10.GL_RGBA, width, height, 0, GL10.GL_RGBA, GL10.GL_UNSIGNED_BYTE, b);
+		}
+		
+	}
+
+    private void applyStimTexture(GL10 gl){
+    	for(int i = 0; i < textures.size(); i++){
+    		if(textures.get(i).name.equalsIgnoreCase(stimTextureName)){
+            	gl.glBindTexture(GL10.GL_TEXTURE_2D, mTextureList[textures.get(i).index]);
+            	return;
     		}
-	    }
-    }
-
-    public void setTextureToBlack(GL10 gl){
-    	if(txBlackIndex >= 0){
-    		gl.glBindTexture(GL10.GL_TEXTURE_2D, mTextureList[txBlackIndex]);
     	}
-    	//serialConnection.writeSerialLine("b");
-    }
-    public void setTextureToGray(GL10 gl){
-    	if(txGrayIndex >= 0){
-        	gl.glBindTexture(GL10.GL_TEXTURE_2D, mTextureList[txGrayIndex]);
-    	}
-    	//serialConnection.writeSerialLine("g");
-    }
-    public void setTextureToGrating(GL10 gl){
-    	if(txGratingIndex >= 0){
-        	gl.glBindTexture(GL10.GL_TEXTURE_2D, mTextureList[txGratingIndex]);
-    	}
-    	//serialConnection.writeSerialLine("G");
-    }
-
-    private Bitmap makeSinTexture(){
-        int texWidth = 1500;
-        int texHeight = 1;
-        Bitmap.Config conf = Bitmap.Config.ARGB_8888; // see other conf types
-        Bitmap b = Bitmap.createBitmap(texWidth, texHeight, conf); // this creates a MUTABLE bitmap
-        for(int i = 0; i < texWidth; i++){
-        	int val = (int) ((Math.sin( ((double) i) * 2 * Math.PI / texWidth )) * 127.5 + 127.5);
-        	int pxVal = ((val  & 0xff) << 24)
-            | ((0xff) << 16)
-            | ((0xff) << 8)
-            | ((0xff));
-        	b.setPixel(i, 0, pxVal);
-        }
-        return b;
-    }
-
-    private Bitmap makeSquareTexture(){
-        int texWidth = 1500;
-        int texHeight = 1;
-        Bitmap.Config conf = Bitmap.Config.ARGB_8888; // see other conf types
-        Bitmap b = Bitmap.createBitmap(texWidth, texHeight, conf); // this creates a MUTABLE bitmap
-        for(int i = 0; i < texWidth; i++){
-        	int val = 0;
-        	if(i >= texWidth / 2){
-        		val = 255;
-        	}
-        	int pxVal = ((val  & 0xff) << 24)
-            | ((0xff) << 16)
-            | ((0xff) << 8)
-            | ((0xff));
-        	b.setPixel(i, 0, pxVal);
-        }
-        return b;
+		Log.d("stim","no tex found");
     }
     
-    public void onSurfaceChanged(GL10 gl, int width, int height) {
-        gl.glViewport(0, 0, width, height);
-        float aspect = (float)width / height;
-        gl.glMatrixMode(GL10.GL_PROJECTION);
-        gl.glLoadIdentity();
-        gl.glFrustumf(-aspect, aspect, -1.0f, 1.0f, 1.0f, 10.0f);
-        
-   }
-    
-    private void setAllBuffers(){
-    	// Set vertex buffer
-        float vertexlist[] = {
-                -12.0f,  12.0f, 0.0f,   // top left
-                -12.0f, -12.0f, 0.0f,   // bottom left
-                 12.0f, -12.0f, 0.0f,   // bottom right
-                 12.0f,  12.0f, 0.0f }; // top right
-    	ByteBuffer vbb = ByteBuffer.allocateDirect(vertexlist.length * 4);
-		vbb.order(ByteOrder.nativeOrder());
-		mVertexBuffer = vbb.asFloatBuffer();
-		mVertexBuffer.put(vertexlist);
-		mVertexBuffer.position(0);
-		
-		// Set triangle buffer with vertex indices
-		short trigindexlist[] = { 0, 1, 2, 0, 2, 3 };
-		
-		mNumOfTriangleIndices = trigindexlist.length;
-		ByteBuffer ibb = ByteBuffer.allocateDirect(trigindexlist.length * 2);
-		ibb.order(ByteOrder.nativeOrder());
-		mTriangleIndexBuffer = ibb.asShortBuffer();
-		mTriangleIndexBuffer.put(trigindexlist);
-		mTriangleIndexBuffer.position(0);
-		
-		// Set triangle color buffer 
-		float trigcolorlist[] = { 
-				1.0f, 1.0f, 1.0f, 1.0f,    
-				1.0f, 1.0f, 1.0f, 1.0f,    
-				1.0f, 1.0f, 1.0f, 1.0f,    
-				1.0f, 1.0f, 1.0f, 1.0f
-		};
-		
-		ByteBuffer cbb = ByteBuffer.allocateDirect(trigcolorlist.length * 4);
-		cbb.order(ByteOrder.nativeOrder());
-		mColorBuffer = cbb.asFloatBuffer();
-		mColorBuffer.put(trigcolorlist);
-		mColorBuffer.position(0);
-		
-		// Set texture buffer
-		float gratingFrequency = 64.7f; /// <--- Right now this is how to control spatial frequency. 64.7 gives 0.25 cyc/degree at 120mm distance.
-		float texturecoords[] = {0.0f, 0.0f,   0.0f, gratingFrequency,   gratingFrequency, gratingFrequency,   gratingFrequency, 0.0f}; 
-		
-		ByteBuffer tbb = ByteBuffer.allocateDirect(texturecoords.length * 4);
-		tbb.order(ByteOrder.nativeOrder());
-		mTextureBuffer = tbb.asFloatBuffer();
-		mTextureBuffer.put(texturecoords);
-		mTextureBuffer.position(0);
+    private void applyApertureTexture(GL10 gl){
+    	for(int i = 0; i < textures.size(); i++){
+    		if(textures.get(i).name.equalsIgnoreCase(apertureTextureName)){
+            	gl.glBindTexture(GL10.GL_TEXTURE_2D, mTextureList[textures.get(i).index]);
+            	return;
+    		}
+    	}
+		Log.d("aperture","no tex found");
     }
     
-    /**
-     * Utility method for compiling a OpenGL shader.
-     *
-     * <p><strong>Note:</strong> When developing shaders, use the checkGlError()
-     * method to debug shader coding errors.</p>
-     *
-     * @param type - Vertex or fragment shader type.
-     * @param shaderCode - String containing the shader code.
-     * @return - Returns an id for the shader.
-     */
-    public static int loadShader(int type, String shaderCode){
+    public void checkSerial(){
+         try{
+ 			serialDataBuffer += serialConnection.checkSerial();
+ 		}
+ 		catch(Exception ex){
+ 			arduinoError(ex);
+ 		}
+ 		
+ 		//parse serial data for commands
+ 		int newlinePos = serialDataBuffer.indexOf('\n');
+ 		if(newlinePos != -1){
+ 			String cmdString = serialDataBuffer.substring(0, newlinePos);
+ 			//keep the remainder of the buffer, if there's anything there
+ 			if(serialDataBuffer.length() > newlinePos+1){
+ 				serialDataBuffer = serialDataBuffer.substring(newlinePos+1, serialDataBuffer.length());
+ 			}
+ 			else{
+ 				serialDataBuffer = "";
+ 			}
+ 			
+ 			//find each token in the command string
+ 			String[] tokens = cmdString.split(" ");
+ 			
+ 			for(int t = 0; t < tokens.length; t++){
+ 				//each token consists of a command and (often) a number. Split it up into those pieces.
+ 				String cmd = "";
+ 				Float number = null;
+ 				
+ 				Pattern p = Pattern.compile("[a-z|A-Z]+");
+ 				Matcher m = p.matcher(tokens[t]);
+ 				int numberPos = -1;
+ 				if(m.find()){
+ 					numberPos = m.end();
+ 					cmd = tokens[t].substring(0, m.end());
+ 					//Log.d("Serial", "Entered command: (" + cmd + ")");
+ 					if(numberPos < tokens[t].length()){
+ 						
+ 						String numberStr = tokens[t].substring(numberPos,tokens[t].length());
+ 						try{
+ 							number = Float.parseFloat(numberStr);
+ 						}
+ 						catch(Exception ex){
+ 							Log.d("Serial", "Error parsing command string: (" + cmdString + ") at token (" + tokens[t] + ")");
+ 						}
+ 					}
+ 				}
+ 				else if(! tokens[t].trim().isEmpty()){
+ 					//it may be just a number, invoking a saved command
+ 					cmd = "";
+ 					try{
+ 						number = Float.parseFloat(tokens[t]);
+ 					}
+ 					catch(Exception ex){
+ 						Log.d("Serial", "Error parsing command string: (" + cmdString + ") at token (" + tokens[t] + ")");
+ 					}
+ 				}
+ 				else{
+ 					//no command here, probably just a stray blank space
+ 					continue;
+ 				}
+ 				
+ 				/* --- SYSTEM COMMANDS --- */
+ 				
+ 				if(cmd.equalsIgnoreCase("screenon")){
+ 					//make some noise
+ 			        Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+ 	    			Ringtone r = RingtoneManager.getRingtone(mContext, notification);
+ 			        r.play();
+ 	
+ 			        //engage wake lock, forcing screen to turn on
+ 					if(!mWakeLock.isHeld()){
+ 						mWakeLock.acquire();
+ 					}
+ 				}
+ 				
+ 				if(cmd.equalsIgnoreCase("screenoff")){
+ 					//make some noise
+ 					Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+ 	    			Ringtone r = RingtoneManager.getRingtone(mContext, notification);
+ 			        r.play();
+ 	
+ 			        //Release wake lock, allowing screen to turn off naturally 
+ 					if(mWakeLock.isHeld()){
+ 						mWakeLock.release();
+ 					}
+ 				}
+ 				
+ 				if(cmd.equalsIgnoreCase("blonk")){
+ 					//make noise, confirm serial connection works
+ 			        Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+ 	    			Ringtone r = RingtoneManager.getRingtone(mContext, notification);
+ 			        r.play();
+ 				}
 
-        // create a vertex shader type (GLES20.GL_VERTEX_SHADER)
-        // or a fragment shader type (GLES20.GL_FRAGMENT_SHADER)
-        int shader = GLES20.glCreateShader(type);
+ 				/* --- STIM COMMANDS --- */
+ 				
+ 				if(cmd.equalsIgnoreCase("screendist") && number != null){
+ 					stim.setScreenDistanceMillis(number);
+ 					aperture.setScreenDistanceMillis(number);
+ 				}
+ 				
+ 				if(cmd.equalsIgnoreCase("sin") && number != null){
+ 					//display sinusoidal grating at given orientation
+ 					//change to lab's bizarre coordinate system standard
+ 					stimTextureName = "sinGrating";
+ 					stim.gratingOrientation = number;
+ 				}
+ 			
+ 				if(cmd.equalsIgnoreCase("sqr") && number != null){
+ 					//display square wave grating at given orientation
+ 					stimTextureName = "sqrGrating";
+ 					stim.gratingOrientation = number;
+ 				}
+ 				
+ 				//colors
+ 				if(cmd.equalsIgnoreCase("pag")){
+ 					stimTextureName = "gray";
+ 				}
+ 				if(cmd.equalsIgnoreCase("pab")){
+ 					stimTextureName = "black";
+ 				}
+ 				if(cmd.equalsIgnoreCase("paw")){
+ 					stimTextureName = "white";
+ 				}
+ 				if(cmd.equalsIgnoreCase("par")){
+ 					stimTextureName = "red";
+ 				}
+ 				if(cmd.equalsIgnoreCase("pae")){
+ 					stimTextureName = "green";
+ 				}
+ 				if(cmd.equalsIgnoreCase("pau")){
+ 					stimTextureName = "blue";
+ 				}
+ 				if(cmd.equalsIgnoreCase("pac")){
+ 					stimTextureName = "cyan";
+ 				}
+ 				if(cmd.equalsIgnoreCase("pay")){
+ 					stimTextureName = "yellow";
+ 				}
+ 				if(cmd.equalsIgnoreCase("pam")){
+ 					stimTextureName = "magenta";
+ 				}
 
-        // add the source code to the shader and compile it
-        GLES20.glShaderSource(shader, shaderCode);
-        GLES20.glCompileShader(shader);
+ 				if(cmd.equalsIgnoreCase("px") && number != null){
+ 					stim.centerXDegrees = number;
+ 					aperture.centerXDegrees = number;
+ 				}
+ 				
+ 				if(cmd.equalsIgnoreCase("py") && number != null){
+ 					stim.centerYDegrees = number;
+ 					aperture.centerYDegrees = number;
+ 				}
+ 				
+ 				if(cmd.equalsIgnoreCase("sx") && number != null){
+ 					stim.sizeXDegrees = number;
+ 					aperture.sizeXDegrees = number;
+ 				}
+ 				
+ 				if(cmd.equalsIgnoreCase("sy") && number != null){
+ 					stim.sizeYDegrees = number;
+ 					aperture.sizeYDegrees = number;
+ 				}
+ 				
+ 				if(cmd.equalsIgnoreCase("ac")){
+ 					apertureTextureName = "circle";
+ 				}
+ 				
+ 				if(cmd.equalsIgnoreCase("ag")){
+ 					apertureTextureName = "gabor";
+ 				}
 
-        return shader;
-    }
-}
+ 				if(cmd.equalsIgnoreCase("af")){
+ 					apertureTextureName = "fullScreen";
+ 				}
+ 				
+ 				if(cmd.equalsIgnoreCase("as")){
+ 					apertureTextureName = "square";
+ 				}
+
+ 				/* --- GRATING-SPECFIC COMMANDS --- */
+
+ 				if(cmd.equalsIgnoreCase("sf") && number != null){
+ 					stim.spatialFrequency = number;
+ 				}
+ 				
+ 				if(cmd.equalsIgnoreCase("tf") && number != null){
+ 					stim.temporalFrequency = number;
+ 				}
+
+ 				if(cmd.equalsIgnoreCase("jf")){
+ 					stim.jitterFrequency = number;
+ 				}
+
+ 				if(cmd.equalsIgnoreCase("ja")){
+ 					stim.jitterAmount = number;
+ 				}
+ 				
+ 				if(cmd.equalsIgnoreCase("ph")){
+ 					stim.setPhase(number);
+ 				}
+
+ 				/* --- SAVED COMMANDS --- */
+ 				if(cmd.equalsIgnoreCase("save") && number != null){
+ 					int idx = (int) number.floatValue();
+ 					if(idx > 99 || idx < 0){
+ 						continue;
+ 					}
+ 					savedCommands[idx] = "";
+ 					//add the remainder of this string to the command
+ 					for(int u = t+1; u < tokens.length; u++){
+ 						if(!tokens[u].startsWith("save")){ //don't want users to start saving save commands, could get messy
+ 							savedCommands[idx] += tokens[u] + " ";
+ 						}
+ 					}
+ 					savedCommands[idx] += "\n";
+ 					t = tokens.length;
+ 				}
+ 				
+ 				if(cmd.isEmpty() && number != null){
+ 					int idx = (int) number.floatValue();
+ 					if(idx > 99 || idx < 0){
+ 						continue;
+ 					}
+ 					//Log.d("Serial", "loaded command " + idx + " (" + savedCommands[idx] + ")");
+ 					serialDataBuffer = savedCommands[idx] + serialDataBuffer;
+ 					checkSerial();
+ 				}
+ 			}
+ 		}
+     }
+
+ 	public void arduinoError(Exception ex){
+ 		//Log.d("Error", "Can't connect to Arduino: " + ex.toString());
+ 	}
+ 	
+     
+     private void makeStimObject(){
+     	// Set vertex buffer
+     	float squareSize = 1.0f;
+         float vertexlist[] = {
+                 -squareSize,  squareSize, stimPosZ,   // top left
+                 -squareSize, -squareSize, stimPosZ,   // bottom left
+                  squareSize, -squareSize, stimPosZ,   // bottom right
+                  squareSize,  squareSize, stimPosZ}; // top right
+     	ByteBuffer vbb = ByteBuffer.allocateDirect(vertexlist.length * 4);
+ 		vbb.order(ByteOrder.nativeOrder());
+ 		mStimVertexBuffer = vbb.asFloatBuffer();
+ 		mStimVertexBuffer.put(vertexlist);
+ 		mStimVertexBuffer.position(0);
+ 		
+ 		// Set triangle buffer with vertex indices
+ 		short trigindexlist[] = { 0, 1, 2, 0, 2, 3 };
+ 		
+ 		mStimNumOfTriangleIndices = trigindexlist.length;
+ 		ByteBuffer ibb = ByteBuffer.allocateDirect(trigindexlist.length * 2);
+ 		ibb.order(ByteOrder.nativeOrder());
+ 		mStimTriangleIndexBuffer = ibb.asShortBuffer();
+ 		mStimTriangleIndexBuffer.put(trigindexlist);
+ 		mStimTriangleIndexBuffer.position(0);
+ 		
+ 		// Set triangle color buffer
+ 		float trigcolorlist[] = { 
+ 				1.0f, 1.0f, 1.0f, 1.0f,
+ 				1.0f, 1.0f, 1.0f, 1.0f,
+ 				1.0f, 1.0f, 1.0f, 1.0f,
+ 				1.0f, 1.0f, 1.0f, 1.0f
+ 		};
+ 		
+ 		ByteBuffer cbb = ByteBuffer.allocateDirect(trigcolorlist.length * 4);
+ 		cbb.order(ByteOrder.nativeOrder());
+ 		mStimColorBuffer = cbb.asFloatBuffer();
+ 		mStimColorBuffer.put(trigcolorlist);
+ 		mStimColorBuffer.position(0);
+ 		
+ 		// Set texture buffer
+ 		float texturecoords[] = {0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f, 0.0f}; 
+ 		
+ 		ByteBuffer tbb = ByteBuffer.allocateDirect(texturecoords.length * 4);
+ 		tbb.order(ByteOrder.nativeOrder());
+ 		mStimTextureBuffer = tbb.asFloatBuffer();
+ 		mStimTextureBuffer.put(texturecoords);
+ 		mStimTextureBuffer.position(0);
+     }
+     
+     private void makeApertureObject(){
+     	// Set vertex buffer
+     	float squareSize = 1.0f;
+         float vertexlist[] = {
+                 -squareSize,  squareSize, aperturePosZ,   // top left
+                 -squareSize, -squareSize, aperturePosZ,   // bottom left
+                  squareSize, -squareSize, aperturePosZ,   // bottom right
+                  squareSize,  squareSize, aperturePosZ }; // top right
+     	ByteBuffer vbb = ByteBuffer.allocateDirect(vertexlist.length * 4);
+ 		vbb.order(ByteOrder.nativeOrder());
+ 		mApertureVertexBuffer = vbb.asFloatBuffer();
+ 		mApertureVertexBuffer.put(vertexlist);
+ 		mApertureVertexBuffer.position(0);
+ 		
+ 		// Set triangle buffer with vertex indices
+ 		short trigindexlist[] = { 0, 1, 2, 0, 2, 3 };
+ 		
+ 		mApertureNumOfTriangleIndices = trigindexlist.length;
+ 		ByteBuffer ibb = ByteBuffer.allocateDirect(trigindexlist.length * 2);
+ 		ibb.order(ByteOrder.nativeOrder());
+ 		mApertureTriangleIndexBuffer = ibb.asShortBuffer();
+ 		mApertureTriangleIndexBuffer.put(trigindexlist);
+ 		mApertureTriangleIndexBuffer.position(0);
+ 		
+ 		// Set triangle color buffer
+ 		float trigcolorlist[] = { 
+ 				//r,g,b,a
+ 				1.0f, 1.0f, 1.0f, 1.0f,    
+ 				1.0f, 1.0f, 1.0f, 1.0f,    
+ 				1.0f, 1.0f, 1.0f, 1.0f,    
+ 				1.0f, 1.0f, 1.0f, 1.0f
+ 		};
+ 		
+ 		ByteBuffer cbb = ByteBuffer.allocateDirect(trigcolorlist.length * 4);
+ 		cbb.order(ByteOrder.nativeOrder());
+ 		mApertureColorBuffer = cbb.asFloatBuffer();
+ 		mApertureColorBuffer.put(trigcolorlist);
+ 		mApertureColorBuffer.position(0);
+ 		
+ 		// Set texture buffer
+ 		float texturecoords[] = {0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f, 0.0f}; 
+ 		
+ 		ByteBuffer tbb = ByteBuffer.allocateDirect(texturecoords.length * 4);
+ 		tbb.order(ByteOrder.nativeOrder());
+ 		mApertureTextureBuffer = tbb.asFloatBuffer();
+ 		mApertureTextureBuffer.put(texturecoords);
+ 		mApertureTextureBuffer.position(0);
+     }
+     
+     
+     /**
+      * Utility method for compiling a OpenGL shader.
+      *
+      * <p><strong>Note:</strong> When developing shaders, use the checkGlError()
+      * method to debug shader coding errors.</p>
+      *
+      * @param type - Vertex or fragment shader type.
+      * @param shaderCode - String containing the shader code.
+      * @return - Returns an id for the shader.
+      */
+     public static int loadShader(int type, String shaderCode){
+
+         // create a vertex shader type (GLES20.GL_VERTEX_SHADER)
+         // or a fragment shader type (GLES20.GL_FRAGMENT_SHADER)
+         int shader = GLES20.glCreateShader(type);
+
+         // add the source code to the shader and compile it
+         GLES20.glShaderSource(shader, shaderCode);
+         GLES20.glCompileShader(shader);
+
+         return shader;
+     }
+ }
