@@ -476,10 +476,12 @@ class Training():
                 phase = str(round(random.random(), 2))
                 oriPhase = "sqr" + str(self.currentTrial.sPlusOrientation) + " ph" + phase
                 self.stimSerial.write(str(self.state) + " " + oriPhase + "\n")
+                self.logFile.write(oriPhase + " " + str(time.time()) + "\n")
             elif newState == States.SMINUS:
                 phase = str(round(random.random(), 2))
                 oriPhase = "sqr" + str(self.currentTrial.sMinusOrientation) + " ph" + phase
                 self.stimSerial.write(str(self.state) + " " + oriPhase + "\n")
+                self.logFile.write(oriPhase + " " + str(time.time()) + "\n")
             else:
                 self.stimSerial.write(str(self.state) + "\n")
             
