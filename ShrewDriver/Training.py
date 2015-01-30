@@ -70,7 +70,7 @@ class Training():
             self.timeoutNoResponse = 10
             self.timeoutCorrectReject = 0
             
-            self.initTime = 1
+            self.initTime = 0
             
             self.variableDelayMin = 0.5
             self.variableDelayMax = 1.25
@@ -79,7 +79,7 @@ class Training():
             self.grayDuration = 1
             self.rewardPeriod = self.grayDuration #needs to be no longer than gray duration!
             
-            self.hintChance = 0.75 #chance of sending a low reward at the start of the reward period
+            self.hintChance = 0.25 #chance of sending a low reward at the start of the reward period
             
             self.hintBolus = 0.03 #0.03 is a good amount; just enough that the shrew will notice it but not enough to be worth working for on its own.
             self.rewardBolus = 0.1 
@@ -87,13 +87,13 @@ class Training():
             
             #stimbot setup, including command strings for each state
             #note that grating states will have an extra command added later to specify orientation and phase.
-            self.screenDistanceMillis = 150
+            self.screenDistanceMillis = 120
             self.commandStrings[States.TIMEOUT] = 'ac pab px24 py0 sx8 sy8\n'
             self.commandStrings[States.INIT] = 'ac paw px24 py0 sx8 sy8\n'
             self.commandStrings[States.DELAY] = 'sx0 sy0\n'
-            self.commandStrings[States.SMINUS] = 'ag sf0.25 tf0 jf0 ja0 px24 py0 sx48 sy48\n'
+            self.commandStrings[States.SMINUS] = 'as sf0.25 tf0 jf0 ja0 px24 py0 sx999 sy999\n'
             self.commandStrings[States.GRAY] = 'sx0 sy0\n'
-            self.commandStrings[States.SPLUS] = 'ag sf0.25 tf0 jf0 ja0 px24 py0 sx48 sy48\n'
+            self.commandStrings[States.SPLUS] = 'as sf0.25 tf0 jf0 ja0 px24 py0 sx999 sy999\n'
             self.commandStrings[States.REWARD] = 'sx0 sy0\n'
             
         elif self.shrewDriver.animalName == 'Chico':
@@ -139,18 +139,18 @@ class Training():
             
         elif self.shrewDriver.animalName == 'Mercury':
             print "Using settings for Mercury!"
-            self.sPlusOrientations = [0]
+            self.sPlusOrientations = [0,0,1]
             self.sMinusOrientations = [90, 135]
-            self.sMinusPresentations = [0, 1] #how many times to display the SMINUS
-            self.guaranteedSPlus = True #is there always an SPLUS in the trial?
-            self.sequenceType = Sequences.RANDOM_RETRY
+            self.sMinusPresentations = [0,1] #how many times to display the SMINUS
+            self.guaranteedSPlus = False #is there always an SPLUS in the trial?
+            self.sequenceType = Sequences.RANDOM
             self.initiation = Initiation.IR
             
-            self.timeoutFail = 20
+            self.timeoutFail = 15
             self.timeoutAbort = 10
             self.timeoutSuccess = 6
             self.timeoutNoResponse = 10
-            self.timeoutCorrectReject = 0
+            self.timeoutCorrectReject = 2
             
             self.initTime = 1
             
@@ -161,7 +161,7 @@ class Training():
             self.grayDuration = 1
             self.rewardPeriod = self.grayDuration #needs to be no longer than gray duration!
             
-            self.hintChance = 0 #chance of sending a low reward at the start of the reward period
+            self.hintChance = 0.0 #chance of sending a low reward at the start of the reward period
             
             self.hintBolus = 0.03 #0.03 is a good amount; just enough that the shrew will notice it but not enough to be worth working for on its own.
             self.rewardBolus = 0.15 
@@ -169,13 +169,13 @@ class Training():
         
             #stimbot setup, including command strings for each state
             #note that grating states will have an extra command added later to specify orientation and phase.
-            self.screenDistanceMillis = 150
-            self.commandStrings[States.TIMEOUT] = 'as pab px0 py0 sx80 sy80\n'
-            self.commandStrings[States.INIT] = 'as pab px0 py0 sx80 sy80\n'
+            self.screenDistanceMillis = 120
+            self.commandStrings[States.TIMEOUT] = 'ac pab px0 py0 sx80 sy80\n'
+            self.commandStrings[States.INIT] = 'ac pab px0 py0 sx80 sy80\n'
             self.commandStrings[States.DELAY] = 'sx0 sy0\n'
-            self.commandStrings[States.SMINUS] = 'ag sf0.25 tf0 jf0 ja0 px24 py0 sx48 sy48\n'
+            self.commandStrings[States.SMINUS] = 'as sf0.25 tf0 jf0 ja0 px24 py0 sx999 sy999\n'
             self.commandStrings[States.GRAY] = 'sx0 sy0\n'
-            self.commandStrings[States.SPLUS] = 'ag sf0.25 tf0 jf0 ja0 px24 py0 sx48 sy48\n'
+            self.commandStrings[States.SPLUS] = 'as sf0.25 tf0 jf0 ja0 px24 py0 sx999 sy999\n'
             self.commandStrings[States.REWARD] = 'sx0 sy0\n'
             
         elif self.shrewDriver.animalName == 'Bernadette':
@@ -193,16 +193,16 @@ class Training():
             self.timeoutNoResponse = 10
             self.timeoutCorrectReject = 0
             
-            self.initTime = 1
+            self.initTime = 0
             
             self.variableDelayMin = 0.5
             self.variableDelayMax = 1.25
             
-            self.gratingDuration = 0.5
+            self.gratingDuration = 0.25
             self.grayDuration = 1
             self.rewardPeriod = self.grayDuration #needs to be no longer than gray duration!
             
-            self.hintChance = 0.75 #chance of sending a low reward at the start of the reward period
+            self.hintChance = 0.25 #chance of sending a low reward at the start of the reward period
             
             self.hintBolus = 0.03 #0.03 is a good amount; just enough that the shrew will notice it but not enough to be worth working for on its own.
             self.rewardBolus = 0.1 
@@ -210,13 +210,13 @@ class Training():
         
             #stimbot setup, including command strings for each state
             #note that grating states will have an extra command added later to specify orientation and phase.
-            self.screenDistanceMillis = 150
+            self.screenDistanceMillis = 120
             self.commandStrings[States.TIMEOUT] = 'ac pab px24 py0 sx8 sy8\n'
             self.commandStrings[States.INIT] = 'ac paw px24 py0 sx8 sy8\n'
             self.commandStrings[States.DELAY] = 'sx0 sy0\n'
-            self.commandStrings[States.SMINUS] = 'ag sf0.25 tf0 jf0 ja0 px24 py0 sx48 sy48\n'
+            self.commandStrings[States.SMINUS] = 'as sf0.25 tf0 jf0 ja0 px24 py0 sx999 sy999\n'
             self.commandStrings[States.GRAY] = 'sx0 sy0\n'
-            self.commandStrings[States.SPLUS] = 'ag sf0.25 tf0 jf0 ja0 px24 py0 sx48 sy48\n'
+            self.commandStrings[States.SPLUS] = 'as sf0.25 tf0 jf0 ja0 px24 py0 sx999 sy999\n'
             self.commandStrings[States.REWARD] = 'sx0 sy0\n'
             
         else:

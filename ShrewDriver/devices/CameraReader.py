@@ -25,7 +25,7 @@ class CameraReader():
         self.video.write(self.frame)
         cv2.imshow(self.windowName, self.frame); 
         cv2.waitKey(1) #pauses 1ms, allows frame to display
-    
+
     def stopCapture(self):
         # When everything done, release the capture
         self.video.release()
