@@ -13,6 +13,7 @@ Sequences:
     BLOCK - Each trial is presented once (random order). 
     RANDOM_RETRY - Each trial is chosen randomly. If a trial is failed, keep retrying until success.
     BLOCK_RETRY - Each trial is presented once (random order). Unsuccessful trials are repeated until success.
+    SEQUENTIAL - Each trial is presented once (in order).
 
 Implementation:
 This is vaguely a Strategy pattern.
@@ -38,6 +39,9 @@ class Sequencer(object):
         if sequenceType == Sequences.BLOCK_RETRY:
             import SequencerBlockRetry
             self.sequencer = SequencerBlockRetry.SequencerBlockRetry(trialSet)
+        if sequenceType == Sequences.SEQUENTIAL:
+            import SequencerSequential
+            self.sequencer = SequencerSequential.SequencerSequential(trialSet)
         else:
             pass
     
@@ -79,6 +83,12 @@ if __name__ == '__main__':
             print "Success! Next trial: " + str(x.getNextTrial(Results.SUCCESS))
         else:
             print "Failure! Next trial: " + str(x.getNextTrial(Results.FAILURE))
+    
+    
+    print "\n==================\nSequential trials"
+    x = Sequencer(trialSet,Sequences.RANDOM)
+    for i in range(0,20):
+        print "  " + str(x.getNextTrial(Results.SUCCESS))
     
     
     

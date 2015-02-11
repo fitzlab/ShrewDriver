@@ -9,9 +9,10 @@ Sequences:
     BLOCK - Each trial is presented once (random order). 
     RANDOM_RETRY - Each trial is chosen randomly. If a trial is failed, keep retrying until success.
     BLOCK_RETRY - Each trial is presented once (random order). Unsuccessful trials are repeated until success.
+    SEQUENTIAL - Each trial is presented once (in order).
 '''
 
-sequenceSet = ['RANDOM', 'BLOCK', 'RANDOM_RETRY', 'BLOCK_RETRY'] 
+sequenceSet = ['RANDOM', 'BLOCK', 'RANDOM_RETRY', 'BLOCK_RETRY','SEQUENTIAL'] 
 Sequences = Enumeration("Sequences", sequenceSet)
 
 
