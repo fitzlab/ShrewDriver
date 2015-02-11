@@ -61,7 +61,7 @@ class Training():
             self.sMinusOrientations = [45]
             self.sMinusPresentations = [0,0,1] #how many times to display the SMINUS
             self.guaranteedSPlus = False #is there always an SPLUS in the trial?
-            self.sequenceType = Sequences.BLOCK
+            self.sequenceType = Sequences.RANDOM_RETRY
             self.initiation = Initiation.IR
             
             self.timeoutFail = 20
@@ -139,11 +139,11 @@ class Training():
             
         elif self.shrewDriver.animalName == 'Mercury':
             print "Using settings for Mercury!"
-            self.sPlusOrientations = [0] #or
+            self.sPlusOrientations = [0,0] 
             self.sMinusOrientations = [90, 135]
-            self.sMinusPresentations = [0,0,1] #how many times to display the SMINUS
+            self.sMinusPresentations = [0,1] #how many times to display the SMINUS
             self.guaranteedSPlus = False #is there always an SPLUS in the trial?
-            self.sequenceType = Sequences.BLOCK
+            self.sequenceType = Sequences.RANDOM
             self.initiation = Initiation.IR
             
             self.timeoutFail = 15
@@ -184,7 +184,7 @@ class Training():
             self.sMinusOrientations = [0]
             self.sMinusPresentations = [0,0,1] #how many times to display the SMINUS
             self.guaranteedSPlus = False #is there always an SPLUS in the trial?
-            self.sequenceType = Sequences.BLOCK
+            self.sequenceType = Sequences.RANDOM_RETRY
             self.initiation = Initiation.IR
             
             self.timeoutFail = 15
