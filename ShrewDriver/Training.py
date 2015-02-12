@@ -88,8 +88,8 @@ class Training():
             #stimbot setup, including command strings for each state
             #note that grating states will have an extra command added later to specify orientation and phase.
             self.screenDistanceMillis = 120
-            self.commandStrings[States.TIMEOUT] = 'ac pab px45 py0 sx16 sy16\n'
-            self.commandStrings[States.INIT] = 'ac paw px45 py0 sx16 sy16\n'
+            self.commandStrings[States.TIMEOUT] = 'ac pab px45 py0 sx12 sy12\n'
+            self.commandStrings[States.INIT] = 'ac paw px45 py0 sx12 sy12\n'
             self.commandStrings[States.DELAY] = 'sx0 sy0\n'
             self.commandStrings[States.SMINUS] = 'as sf0.25 tf0 jf0 ja0 px0 py0 sx999 sy999\n'
             self.commandStrings[States.GRAY] = 'sx0 sy0\n'
@@ -145,7 +145,7 @@ class Training():
             self.guaranteedSPlus = False #is there always an SPLUS in the trial?
             self.sequenceType = Sequences.RANDOM
             self.initiation = Initiation.IR
-            
+             
             self.timeoutFail = 15
             self.timeoutAbort = 10
             self.timeoutSuccess = 6
@@ -170,8 +170,8 @@ class Training():
             #stimbot setup, including command strings for each state
             #note that grating states will have an extra command added later to specify orientation and phase.
             self.screenDistanceMillis = 120
-            self.commandStrings[States.TIMEOUT] = 'ac pab px45 py0 sx16 sy16\n'
-            self.commandStrings[States.INIT] = 'ac paw px45 py0 sx16 sy16\n'
+            self.commandStrings[States.TIMEOUT] = 'ac pab px45 py0 sx12 sy12\n'
+            self.commandStrings[States.INIT] = 'ac paw px45 py0 sx12 sy12\n'
             self.commandStrings[States.DELAY] = 'sx0 sy0\n'
             self.commandStrings[States.SMINUS] = 'as sf0.25 tf0 jf0 ja0 px0 py0 sx999 sy999\n'
             self.commandStrings[States.GRAY] = 'sx0 sy0\n'
@@ -184,7 +184,7 @@ class Training():
             self.sMinusOrientations = [0]
             self.sMinusPresentations = [0,0,1] #how many times to display the SMINUS
             self.guaranteedSPlus = False #is there always an SPLUS in the trial?
-            self.sequenceType = Sequences.RANDOM_RETRY
+            self.sequenceType = Sequences.RANDOM
             self.initiation = Initiation.IR
             
             self.timeoutFail = 15
@@ -211,8 +211,8 @@ class Training():
             #stimbot setup, including command strings for each state
             #note that grating states will have an extra command added later to specify orientation and phase.
             self.screenDistanceMillis = 120
-            self.commandStrings[States.TIMEOUT] = 'ac pab px45 py0 sx16 sy16\n'
-            self.commandStrings[States.INIT] = 'ac paw px45 py0 sx16 sy16\n'
+            self.commandStrings[States.TIMEOUT] = 'ac pab px45 py0 sx12 sy12\n'
+            self.commandStrings[States.INIT] = 'ac paw px45 py0 sx12 sy12\n'
             self.commandStrings[States.DELAY] = 'sx0 sy0\n'
             self.commandStrings[States.SMINUS] = 'as sf0.25 tf0 jf0 ja0 px0 py0 sx999 sy999\n'
             self.commandStrings[States.GRAY] = 'sx0 sy0\n'
