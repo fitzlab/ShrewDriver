@@ -59,12 +59,12 @@ class Training():
             print "Using settings for Queen!"
             self.sPlusOrientations = [135]
             self.sMinusOrientations = [45]
-            self.sMinusPresentations = [0,0,1] #how many times to display the SMINUS
+            self.sMinusPresentations = [0,1] #how many times to display the SMINUS
             self.guaranteedSPlus = False #is there always an SPLUS in the trial?
             self.sequenceType = Sequences.RANDOM
             self.initiation = Initiation.IR
             
-            self.timeoutFail = 20
+            self.timeoutFail = 15
             self.timeoutAbort = 10
             self.timeoutSuccess = 6
             self.timeoutNoResponse = 10
@@ -82,7 +82,7 @@ class Training():
             self.hintChance = 0 #chance of sending a low reward at the start of the reward period
             
             self.hintBolus = 0.03 #0.03 is a good amount; just enough that the shrew will notice it but not enough to be worth working for on its own.
-            self.rewardBolus = 0.1 
+            self.rewardBolus = 0.1
             self.rewardBolusHardTrial = 0.2 
             
             #stimbot setup, including command strings for each state
@@ -105,10 +105,10 @@ class Training():
             self.sequenceType = Sequences.BLOCK
             self.initiation = Initiation.IR
             
-            self.timeoutFail = 10
+            self.timeoutFail = 12
             self.timeoutAbort = 10
             self.timeoutSuccess = 6
-            self.timeoutNoResponse = 10
+            self.timeoutNoResponse = 6
             self.timeoutCorrectReject = 3
             
             self.initTime = 1
@@ -123,8 +123,8 @@ class Training():
             self.hintChance = 0 #chance of sending a low reward at the start of the reward period
             
             self.hintBolus = 0.03 #0.03 is a good amount; just enough that the shrew will notice it but not enough to be worth working for on its own.
-            self.rewardBolus = 0.15
-            self.rewardBolusHardTrial = 0.15
+            self.rewardBolus = 0.050
+            self.rewardBolusHardTrial = 0.250
             
             #stimbot setup, including command strings for each state
             #note that grating states will have an extra command added later to specify orientation and phase.
@@ -146,7 +146,7 @@ class Training():
             self.sequenceType = Sequences.RANDOM
             self.initiation = Initiation.IR
              
-            self.timeoutFail = 15
+            self.timeoutFail = 10
             self.timeoutAbort = 10
             self.timeoutSuccess = 6
             self.timeoutNoResponse = 10
@@ -182,7 +182,7 @@ class Training():
             print "Using settings for Bernadette!"
             self.sPlusOrientations = [90]
             self.sMinusOrientations = [0]
-            self.sMinusPresentations = [0,0,1] #how many times to display the SMINUS
+            self.sMinusPresentations = [0,1] #how many times to display the SMINUS
             self.guaranteedSPlus = False #is there always an SPLUS in the trial?
             self.sequenceType = Sequences.RANDOM
             self.initiation = Initiation.IR
