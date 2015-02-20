@@ -99,7 +99,7 @@ class Training():
         elif self.shrewDriver.animalName == 'Chico':
             print "Using settings for Chico!"
             self.sPlusOrientations = [45]
-            self.sMinusOrientations = [45.01, 56.25, 60, 63.75, 90, 135]
+            self.sMinusOrientations = [45.01, 46.25, 47.5, 48.75, 52.5, 56.25, 60, 63.75, 90, 135]
             self.sMinusPresentations = [1, 2] #how many times to display the SMINUS
             self.guaranteedSPlus = True #is there always an SPLUS in the trial?
             self.sequenceType = Sequences.BLOCK

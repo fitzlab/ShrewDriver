@@ -338,6 +338,7 @@ class Analyzer():
         print 'correctRejects = ' + str(correctRejectsArray) + ';'
         print 'trialCounts = ' + str(sMinusTrialCountsArray) + ';'
         print 'plot(oris,correctRejects./trialCounts*100,\'b\');'
+        print 'hold on; plot(oris,correctRejects./trialCounts*100,\'bo\');'
         
         print 'xlim([' + str(round(min(sMinusOrientationsF))) + ',' + str(round(max(sMinusOrientationsF))) + ']);ylim([0,100]);'
         print '===='
@@ -355,7 +356,7 @@ if __name__ == '__main__':
     successRates = []
     sPlusResponseRates = []
 
-    dirPath = "C:/Users/theo/Desktop/ShrewDriver/analysis/2-17/"
+    dirPath = "C:/Users/fitzlab1/Desktop/junk/"
     import glob
     import os
     os.chdir(dirPath)
@@ -377,7 +378,6 @@ if __name__ == '__main__':
         
         print filePath + "\n\n\n\n\n"
 
-    print "\n\n\n"
 
     print "\nsplus response rate"
     print str(sPlusResponseRates)
