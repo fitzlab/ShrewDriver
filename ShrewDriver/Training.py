@@ -99,7 +99,7 @@ class Training():
         elif self.shrewDriver.animalName == 'Chico':
             print "Using settings for Chico!"
             self.sPlusOrientations = [45]
-            self.sMinusOrientations = [45.01, 46.25, 47.5, 48.75, 52.5, 56.25, 60, 63.75, 90, 135]
+            self.sMinusOrientations = [45.01, 52.5, 56.25, 90, 135]
             self.sMinusPresentations = [1, 2] #how many times to display the SMINUS
             self.guaranteedSPlus = True #is there always an SPLUS in the trial?
             self.sequenceType = Sequences.BLOCK
@@ -123,8 +123,8 @@ class Training():
             self.hintChance = 0 #chance of sending a low reward at the start of the reward period
             
             self.hintBolus = 0.03 #0.03 is a good amount; just enough that the shrew will notice it but not enough to be worth working for on its own.
-            self.rewardBolus = 0.050
-            self.rewardBolusHardTrial = 0.250
+            self.rewardBolus = 0.100
+            self.rewardBolusHardTrial = 0.200
             
             #stimbot setup, including command strings for each state
             #note that grating states will have an extra command added later to specify orientation and phase.
