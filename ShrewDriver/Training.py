@@ -57,8 +57,8 @@ class Training():
         #Animal-relevant settings
         if self.shrewDriver.animalName == 'Queen':
             print "Using settings for Queen!"
-            self.sPlusOrientations = [135]
-            self.sMinusOrientations = [45]
+            self.sPlusOrientations = [135,135,135]
+            self.sMinusOrientations = [45,0,90]
             self.sMinusPresentations = [0,1] #how many times to display the SMINUS
             self.guaranteedSPlus = False #is there always an SPLUS in the trial?
             self.sequenceType = Sequences.RANDOM
@@ -99,10 +99,10 @@ class Training():
         elif self.shrewDriver.animalName == 'Chico':
             print "Using settings for Chico!"
             self.sPlusOrientations = [45]
-            self.sMinusOrientations = [45.01, 52.5, 56.25, 90, 135]
+            self.sMinusOrientations = [67.5]
             self.sMinusPresentations = [1, 2] #how many times to display the SMINUS
             self.guaranteedSPlus = True #is there always an SPLUS in the trial?
-            self.sequenceType = Sequences.BLOCK
+            self.sequenceType = Sequences.RANDOM_RETRY
             self.initiation = Initiation.IR
             
             self.timeoutFail = 12
@@ -139,8 +139,8 @@ class Training():
             
         elif self.shrewDriver.animalName == 'Mercury':
             print "Using settings for Mercury!"
-            self.sPlusOrientations = [0,0] 
-            self.sMinusOrientations = [90, 135]
+            self.sPlusOrientations = [0,0,0] 
+            self.sMinusOrientations = [90, 135, 45]
             self.sMinusPresentations = [0,1] #how many times to display the SMINUS
             self.guaranteedSPlus = False #is there always an SPLUS in the trial?
             self.sequenceType = Sequences.RANDOM
@@ -173,15 +173,15 @@ class Training():
             self.commandStrings[States.TIMEOUT] = 'ac pab px45 py0 sx12 sy12\n'
             self.commandStrings[States.INIT] = 'ac paw px45 py0 sx12 sy12\n'
             self.commandStrings[States.DELAY] = 'sx0 sy0\n'
-            self.commandStrings[States.SMINUS] = 'as sf0.25 tf0 jf0 ja0 px0 py0 sx999 sy999\n'
+            self.commandStrings[States.SMINUS] = 'acgf sf0.25 tf0 jf0 ja0 px45 py0 sx60 sy60\n'
             self.commandStrings[States.GRAY] = 'sx0 sy0\n'
-            self.commandStrings[States.SPLUS] = 'as sf0.25 tf0 jf0 ja0 px0 py0 sx999 sy999\n'
+            self.commandStrings[States.SPLUS] = 'acgf sf0.25 tf0 jf0 ja0 px45 py0 sx60 sy60\n'
             self.commandStrings[States.REWARD] = 'sx0 sy0\n'
             
         elif self.shrewDriver.animalName == 'Bernadette':
             print "Using settings for Bernadette!"
-            self.sPlusOrientations = [90]
-            self.sMinusOrientations = [0]
+            self.sPlusOrientations = [90,90,90]
+            self.sMinusOrientations = [0,45,135]
             self.sMinusPresentations = [0,1] #how many times to display the SMINUS
             self.guaranteedSPlus = False #is there always an SPLUS in the trial?
             self.sequenceType = Sequences.RANDOM

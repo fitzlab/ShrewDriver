@@ -8,7 +8,7 @@ class CameraReader():
     
     def __init__(self, cameraID, vidPath, animalName):
         self.stopFlag = False
-        self.frameRate = 30 #frames per second
+        self.frameRate = 15 #frames per second
         self.windowName = animalName + ' - Camera (' + str(cameraID) + ")"
         
         #set up frame acquisition, display, and disk writing

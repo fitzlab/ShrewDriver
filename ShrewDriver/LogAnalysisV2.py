@@ -356,7 +356,7 @@ if __name__ == '__main__':
     successRates = []
     sPlusResponseRates = []
 
-    dirPath = "E:/data/"
+    dirPath = "C:/Users/fitzlab1/Desktop/day/"
     import glob
     import os
     os.chdir(dirPath)
