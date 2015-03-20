@@ -188,12 +188,12 @@ class TaskGoNoGo(Task.Task):
                 phase = str(round(random.random(), 2))
                 oriPhase = "sqr" + str(self.currentTrial.sPlusOrientation) + " ph" + phase
                 self.training.stimSerial.write(str(self.state) + " " + oriPhase + "\n")
-                self.training.logPlotAndAnalyze(oriPhase + " ", time.time())
+                self.training.logPlotAndAnalyze(oriPhase, time.time())
             elif newState == States.SMINUS:
                 phase = str(round(random.random(), 2))
                 oriPhase = "sqr" + str(self.currentTrial.sMinusOrientation) + " ph" + phase
                 self.training.stimSerial.write(str(self.state) + " " + oriPhase + "\n")
-                self.training.logPlotAndAnalyze(oriPhase + " ", time.time())
+                self.training.logPlotAndAnalyze(oriPhase, time.time())
             else:
                 self.training.stimSerial.write(str(self.state) + "\n")
             
