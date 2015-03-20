@@ -36,7 +36,7 @@ class SequencerStaircase(Sequencer.Sequencer):
             self.currentTrial = random.choice(self.trialSet)
             return self.currentTrial
         else:
-            if trialResult == Results.SUCCESS or trialResult == Results.CORRECT_REJECT:
+            if trialResult == Results.HIT or trialResult == Results.CORRECT_REJECT:
                 #pick a new trial (possibly the same one again)
                 self.currentTrial = random.choice(self.trialSet)
                 return self.currentTrial

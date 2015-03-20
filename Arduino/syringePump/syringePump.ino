@@ -3,7 +3,6 @@
 
 #include <LiquidCrystal.h>
 #include <LCDKeypad.h>
-#include <AccelStepper.h>
 
 /* -- Constants -- */
 #define SYRINGE_VOLUME_ML 30.0
@@ -41,9 +40,6 @@ const int mLBolusStepsLength = 9;
 float mLBolusSteps[9] = {0.001, 0.005, 0.010, 0.050, 0.100, 0.500, 1.000, 5.000, 10.000};
 
 /* -- Default Parameters -- */
-int motorSpeed = 15000; //maximum steps per second
-int motorAccel = 150000; //steps/second/second to accelerate
-
 float mLBolus = 0.500; //default bolus size
 float mLBigBolus = 1.000; //default large bolus size
 float mLUsed = 0.0;
@@ -53,12 +49,13 @@ float mLBolusStep = mLBolusSteps[mLBolusStepIdx];
 long stepperPos = 0; //in microsteps
 char charBuf[16];
 
-//debounce params
+//key and debounce params
 long lastKeyRepeatAt = 0;
 long keyRepeatDelay = 400;
 long keyDebounce = 125;
 int prevKey = KEY_NONE;
-        
+int selectHoldCount = 0;
+
 //menu stuff
 int uiState = MAIN;
 
@@ -71,7 +68,6 @@ String serialStr = "";
 boolean serialStrReady = false;
 
 /* -- Initialize libraries -- */
-AccelStepper stepper(1, motorStepPin, motorDirPin); //the "1" tells it we are using a driver
 LiquidCrystal lcd(8, 13, 9, 4, 5, 6, 7);
 
 void setup(){
@@ -80,13 +76,17 @@ void setup(){
   lcd.clear();
   pinMode(10, OUTPUT); //disable backlight
 
-  lcd.print("SyringePump v0.3");
+  lcd.print("SyringePump v0.4");
 
   /* Triggering setup */
   pinMode(triggerPin, INPUT);
   pinMode(bigTriggerPin, INPUT);
   digitalWrite(triggerPin, HIGH); //enable pullup resistor
   digitalWrite(bigTriggerPin, HIGH); //enable pullup resistor
+  
+  /* Motor Setup */
+  pinMode(motorStepPin, OUTPUT);
+  pinMode(motorDirPin, OUTPUT);
   
   /* Serial setup */
   //Note that serial commands must be terminated with a newline
@@ -150,19 +150,18 @@ void processSerial(){
 	//process serial commands as they are read in
         int uLbolus = serialStr.toInt();
         mLBolus = (float)uLbolus / 1000.0;
-	bolus(PUSH);
+        if(mLBolus < 0){
+          mLBolus = -mLBolus;
+    	  bolus(PULL);
+        }
+        else{
+          bolus(PUSH);
+        }
         serialStrReady = false;
 	serialStr = "";
         updateScreen();
+        
         /*
-	if(serialStr.equals("+")){
-		bolus(PUSH);
-		updateScreen();
-	}
-	else if(serialStr.equals("-")){
-		bolus(PULL);
-		updateScreen();
-	}
         else{
            Serial.write("Invalid command: ["); 
            char buf[40];
@@ -230,6 +229,22 @@ void readKey(){
           processThisKey = false;
         }  
         
+        //holding the SELECT key will move the pump to position 0
+        if (key == KEY_SELECT && prevKey == KEY_SELECT){
+            selectHoldCount++;
+            if(selectHoldCount > 15000){
+                //reset position to 0 mL used
+                double savedBolusSize = mLBolus;
+                mLBolus = mLUsed;
+                bolus(PULL);
+                mLBolus = savedBolusSize;
+                updateScreen();
+            }
+        }
+        else{
+           selectHoldCount = 0; 
+        }
+                
         prevKey = key;
         
         if(processThisKey){

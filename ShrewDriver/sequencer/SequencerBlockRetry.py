@@ -17,7 +17,7 @@ class SequencerBlockRetry(Sequencer.Sequencer):
     def getNextTrial(self, trialResult):
         if len(self.block) == 0:
             self.resetBlock()
-        if trialResult == Results.SUCCESS or trialResult == Results.CORRECT_REJECT or self.currentTrial == None:
+        if trialResult == Results.HIT or trialResult == Results.CORRECT_REJECT or self.currentTrial == None:
             self.currentTrial = self.block.pop(random.randint(0,len(self.block)-1))
             return self.currentTrial
         else:

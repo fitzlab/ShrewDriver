@@ -78,6 +78,7 @@ class LivePlot(QWidget):
         if evtType == 'RH':
             self.rewardPoints.appendPoint(t,1)
             self.rewardPoints.appendPoint(t+0.001,0)
+        #ignore any other noise, e.g. "bolus" notifications
         
         super(LivePlot, self).repaint()
         super(LivePlot, self).setFocus()

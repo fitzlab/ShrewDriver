@@ -10,7 +10,7 @@ Run this file to see an example.
 
 Sequences:
     RANDOM - Each trial is chosen randomly from the set of possible trials. (sample with replacement)
-    BLOCK - Each trial is presented once (random order). 
+    BLOCK - Each trial is presented once in random order. (sample without replacement)
     RANDOM_RETRY - Each trial is chosen randomly. If a trial is failed, keep retrying until success.
     BLOCK_RETRY - Each trial is presented once (random order). Unsuccessful trials are repeated until success.
     SEQUENTIAL - Each trial is presented once (in order).
@@ -57,38 +57,38 @@ if __name__ == '__main__':
     print "\n==================\nRandom trials"
     x = Sequencer(trialSet,Sequences.RANDOM)
     for i in range(0,20):
-        print "  " + str(x.getNextTrial(Results.SUCCESS))
+        print "  " + str(x.getNextTrial(Results.HIT))
     
     
     print "\n==================\nRandom Trials, repeat on failure"
     x = Sequencer(trialSet,Sequences.RANDOM_RETRY)
     for i in range(0,20):
         if random.choice([True, False]):
-            print "Success! Next trial: " + str(x.getNextTrial(Results.SUCCESS))
+            print "Success! Next trial: " + str(x.getNextTrial(Results.HIT))
         else:
-            print "Failure! Next trial: " + str(x.getNextTrial(Results.FAILURE))
+            print "Failure! Next trial: " + str(x.getNextTrial(Results.FALSE_ALARM))
     
     
 
     print "\n==================\nBlock Trials"
     x = Sequencer(trialSet,Sequences.BLOCK)
     for i in range(0,20):
-        print "  " + str(x.getNextTrial(Results.SUCCESS))
+        print "  " + str(x.getNextTrial(Results.HIT))
     
     
     print "\n==================\nBlock Trials, repeat on failure"
     x = Sequencer(trialSet,Sequences.BLOCK_RETRY)
     for i in range(0,20):
         if random.choice([True, False]):
-            print "Success! Next trial: " + str(x.getNextTrial(Results.SUCCESS))
+            print "Success! Next trial: " + str(x.getNextTrial(Results.HIT))
         else:
-            print "Failure! Next trial: " + str(x.getNextTrial(Results.FAILURE))
+            print "Failure! Next trial: " + str(x.getNextTrial(Results.FALSE_ALARM))
     
     
     print "\n==================\nSequential trials"
     x = Sequencer(trialSet,Sequences.RANDOM)
     for i in range(0,20):
-        print "  " + str(x.getNextTrial(Results.SUCCESS))
+        print "  " + str(x.getNextTrial(Results.HIT))
     
     
     

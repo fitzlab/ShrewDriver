@@ -1,5 +1,24 @@
 from __future__ import division
 import math, random
+from scipy import stats
+
+def fisherExact(g1r1, g1r2, g2r1, g2r2, nTails=1):
+    #returns a p-value
+    #Params: group 1 result 1, group 1 result 2, etc.
+    
+    p = 0
+    if nTails == 1:
+        pGreater = stats.fisher_exact([[g1r1, g1r2], [g2r1, g2r2]], alternative='greater')[1]
+        pLess = stats.fisher_exact([[g1r1, g1r2], [g2r1, g2r2]], alternative='less')[1]
+        
+        p = pLess
+        if pGreater < pLess:
+            p = pGreater
+    else:
+        #default is two tailed
+        p = stats.fisher_exact([[g1r1, g1r2], [g2r1, g2r2]])[1]
+    
+    return p
 
 def dPrime(sPlusHitRate, falseAlarmRate):
     zHit = invNormApprox(sPlusHitRate);
@@ -42,10 +61,19 @@ def invNormApprox(p):
 
 
 if __name__ == '__main__':
-    testSet = ((0.5, 0.5), (0.0, 1.0), (1.0, 1.0), (0.75, 0.3), (0.9, 0.3), (0.68, 0.09))
+    testSet = ((0.5, 0.5), (0.0, 1.0), (1.0, 1.0), (0.75, 0.3), (0.9, 0.3), (0.68, 0.09), (0.9, 0.5), (0.70, 0.30))
     
     print "\nTesting dPrime(hitRate, falseAlarmRate)\n"
     for test in testSet:
         print "dPrime(" + str(test[0]) + ", " + str(test[1]) + "): " + str(dPrime(test[0], test[1]))
     
+    print "\nTesting Fisher Exact\n"
+    print "Typical shrew results: " + str(fisherExact(12, 24, 5, 31, nTails=1))
+    print "Wikipedia example: " + str(fisherExact(1, 11, 9, 3, nTails=1))
     
+    
+    nTrials = 100
+    nWinsControl = 10
+    for nWinsTest in range(15,25):
+        res = round(fisherExact(nWinsControl, nTrials-nWinsControl, nWinsTest, nTrials-nWinsTest, nTails=2),3)
+        print str(nWinsTest) + " / " + str(nTrials) + " vs 10% gives pValue of " + str(res)

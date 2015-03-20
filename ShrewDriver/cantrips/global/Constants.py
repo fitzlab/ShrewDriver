@@ -18,10 +18,10 @@ Sequences = Enumeration("Sequences", sequenceSet)
 
 '''
 Trial Results:
-    SUCCESS - Correct lick
+    HIT - Correct lick
     FAILURE - Incorrect lick
     ABORT - Shrew left IR beam
     NORESPONSE - Shrew didn't lick
 '''
-resultsSet = ['SUCCESS', 'FAILURE', 'ABORT', 'NORESPONSE'] 
+resultsSet = ['HIT', 'FAILURE', 'ABORT', 'NORESPONSE'] 
 Results = Enumeration("Results", resultsSet)

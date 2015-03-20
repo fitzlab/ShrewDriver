@@ -92,7 +92,7 @@ for line in fileinput.input(filePath):
                     #no response
                     noResponseCount += 1
             else: 
-                print str(trialNum)  + " SUCCESS " + str(m[1])
+                print str(trialNum)  + " HIT " + str(m[1])
             #new trial, so reset variables
             hint = False
             numDistractors = 0
@@ -152,7 +152,7 @@ print "Total Failures: " + str(numFailures)
 #success breakdown
 numSuccesses = 0
 print "===="
-print "SUCCESSES:"
+print "HITS:"
 for key in successCounts.keys():
     if successCounts[key] > 0:
         print key + ' ' + str(successCounts[key])

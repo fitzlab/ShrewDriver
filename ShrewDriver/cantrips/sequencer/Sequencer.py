@@ -53,14 +53,14 @@ if __name__ == '__main__':
     print "\n==================\nRandom trials"
     x = Sequencer(trialSet,Sequences.RANDOM)
     for i in range(0,20):
-        print "  " + str(x.getNextTrial(Results.SUCCESS))
+        print "  " + str(x.getNextTrial(Results.HIT))
     
     
     print "\n==================\nRandom Trials, repeat on failure"
     x = Sequencer(trialSet,Sequences.RANDOM_RETRY)
     for i in range(0,20):
         if random.choice([True, False]):
-            print "Success! Next trial: " + str(x.getNextTrial(Results.SUCCESS))
+            print "Success! Next trial: " + str(x.getNextTrial(Results.HIT))
         else:
             print "Failure! Next trial: " + str(x.getNextTrial(Results.FAILURE))
     
@@ -69,14 +69,14 @@ if __name__ == '__main__':
     print "\n==================\nBlock Trials"
     x = Sequencer(trialSet,Sequences.BLOCK)
     for i in range(0,20):
-        print "  " + str(x.getNextTrial(Results.SUCCESS))
+        print "  " + str(x.getNextTrial(Results.HIT))
     
     
     print "\n==================\nBlock Trials, repeat on failure"
     x = Sequencer(trialSet,Sequences.BLOCK_RETRY)
     for i in range(0,20):
         if random.choice([True, False]):
-            print "Success! Next trial: " + str(x.getNextTrial(Results.SUCCESS))
+            print "Success! Next trial: " + str(x.getNextTrial(Results.HIT))
         else:
             print "Failure! Next trial: " + str(x.getNextTrial(Results.FAILURE))
     

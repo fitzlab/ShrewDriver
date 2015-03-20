@@ -14,7 +14,7 @@ class SequencerRandomRetry(Sequencer.Sequencer):
             self.currentTrial = random.choice(self.trialSet)
             return self.currentTrial
         else:
-            if trialResult == Results.SUCCESS:
+            if trialResult == Results.HIT:
                 #pick a new trial (possibly the same one again)
                 self.currentTrial = random.choice(self.trialSet)
                 return self.currentTrial
