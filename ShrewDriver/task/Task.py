@@ -285,3 +285,7 @@ class Task(object):
             
         else:
             raise Exception("ANIMAL NOT RECOGNIZED")
+        
+if __name__ == '__main__':
+    print "run ShrewDriver.py instead!"
+        
