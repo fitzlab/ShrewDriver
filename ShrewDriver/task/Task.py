@@ -19,11 +19,11 @@ A Task is a set of trial states and transitions, with logic to describe what hap
 
 This is where all the procedural logic lives.
 
-Task types:
-    TWOAFC - Two-alternative forced choice. 
+Task types (not implemented yet):
     GNG - Go / No Go. 
     GNG_SPLUS - Go / No Go, but with an SPLUS following every correct rejection.
     NOSTIM - Task that doesn't use the screen, e.g. for acclimation to initiations or headfix.
+    TWOAFC - Two-alternative forced choice. 
 
 Uses a weird subclassing system, because reasons.
 
@@ -163,7 +163,7 @@ class Task(object):
         elif self.shrewDriver.animalName == 'Chico':
             print "Using settings for Chico!"
             self.sPlusOrientations = [45]
-            self.sMinusOrientations = [67.5]
+            self.sMinusOrientations = [53]
             self.sMinusPresentations = [1, 2] #how many times to display the SMINUS
             self.guaranteedSPlus = True #is there always an SPLUS in the trial?
             self.sequenceType = Sequences.RANDOM_RETRY
@@ -203,8 +203,8 @@ class Task(object):
             
         elif self.shrewDriver.animalName == 'Mercury':
             print "Using settings for Mercury!"
-            self.sPlusOrientations = [0,0,0] 
-            self.sMinusOrientations = [90, 135, 45]
+            self.sPlusOrientations = [0,0]
+            self.sMinusOrientations = [30, 150]
             self.sMinusPresentations = [0,1] #how many times to display the SMINUS
             self.guaranteedSPlus = False #is there always an SPLUS in the trial?
             self.sequenceType = Sequences.RANDOM
@@ -244,12 +244,12 @@ class Task(object):
             
         elif self.shrewDriver.animalName == 'Bernadette':
             print "Using settings for Bernadette!"
-            self.sPlusOrientations = [90,90,90]
-            self.sMinusOrientations = [0,45,135]
+            self.sPlusOrientations = [90]
+            self.sMinusOrientations = [0]
             self.sMinusPresentations = [0,1] #how many times to display the SMINUS
             self.guaranteedSPlus = False #is there always an SPLUS in the trial?
             self.sequenceType = Sequences.RANDOM
-            self.initiation = Initiation.IR
+            self.initiation = Initiation.LICK
             
             self.timeoutFail = 15
             self.timeoutAbort = 10
@@ -262,7 +262,7 @@ class Task(object):
             self.variableDelayMin = 0.5
             self.variableDelayMax = 1.25
             
-            self.gratingDuration = 0.5
+            self.gratingDuration = 0.4
             self.grayDuration = 1
             self.rewardPeriod = self.grayDuration #needs to be no longer than gray duration!
             
@@ -285,7 +285,7 @@ class Task(object):
             
         else:
             raise Exception("ANIMAL NOT RECOGNIZED")
-        
+
 if __name__ == '__main__':
     print "run ShrewDriver.py instead!"
         
