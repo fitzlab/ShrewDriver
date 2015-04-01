@@ -19,11 +19,11 @@ A Task is a set of trial states and transitions, with logic to describe what hap
 
 This is where all the procedural logic lives.
 
-Task types (not implemented yet):
+Task types:
+    TWOAFC - Two-alternative forced choice. 
     GNG - Go / No Go. 
     GNG_SPLUS - Go / No Go, but with an SPLUS following every correct rejection.
     NOSTIM - Task that doesn't use the screen, e.g. for acclimation to initiations or headfix.
-    TWOAFC - Two-alternative forced choice. 
 
 Uses a weird subclassing system, because reasons.
 
@@ -203,11 +203,17 @@ class Task(object):
             
         elif self.shrewDriver.animalName == 'Mercury':
             print "Using settings for Mercury!"
-            self.sPlusOrientations = [0,0]
-            self.sMinusOrientations = [20, 160]
+            self.sPlusOrientations = [0,0,0,0] 
+            self.sMinusOrientations = [20,160,45,135]
             self.sMinusPresentations = [0,1] #how many times to display the SMINUS
             self.guaranteedSPlus = False #is there always an SPLUS in the trial?
-            self.sequenceType = Sequences.RANDOM_RETRY
+            
+            self.sequenceType = Sequences.INTERVAL_RETRY
+            self.easyOris = [45,135]
+            self.hardOris = [20,160]
+            self.numEasy = 30
+            self.numHard = 15
+            
             self.initiation = Initiation.IR
              
             self.timeoutFail = 10
@@ -234,12 +240,12 @@ class Task(object):
             #stimbot setup, including command strings for each state
             #note that grating states will have an extra command added later to specify orientation and phase.
             self.screenDistanceMillis = 120
-            self.commandStrings[States.TIMEOUT] = 'ac pab px45 py0 sx12 sy12\n'
-            self.commandStrings[States.INIT] = 'ac paw px45 py0 sx12 sy12\n'
+            self.commandStrings[States.TIMEOUT] = 'ac pab px35 py0 sx12 sy12\n'
+            self.commandStrings[States.INIT] = 'ac paw px35 py0 sx12 sy12\n'
             self.commandStrings[States.DELAY] = 'sx0 sy0\n'
-            self.commandStrings[States.SMINUS] = 'acgf sf0.25 tf0 jf0 ja0 px45 py0 sx60 sy60\n'
+            self.commandStrings[States.SMINUS] = 'acgf sf0.25 tf0 jf0 ja0 px35 py0 sx60 sy60\n'
             self.commandStrings[States.GRAY] = 'sx0 sy0\n'
-            self.commandStrings[States.SPLUS] = 'acgf sf0.25 tf0 jf0 ja0 px45 py0 sx60 sy60\n'
+            self.commandStrings[States.SPLUS] = 'acgf sf0.25 tf0 jf0 ja0 px35 py0 sx60 sy60\n'
             self.commandStrings[States.REWARD] = 'sx0 sy0\n'
             
         elif self.shrewDriver.animalName == 'Bernadette':
@@ -269,7 +275,7 @@ class Task(object):
             self.hintChance = 0 #chance of sending a low reward at the start of the reward period
             
             self.hintBolus = 0.03 #0.03 is a good amount; just enough that the shrew will notice it but not enough to be worth working for on its own.
-            self.rewardBolus = 0.15
+            self.rewardBolus = 0.15 
             self.rewardBolusHardTrial = 0.2 
         
             #stimbot setup, including command strings for each state
@@ -285,7 +291,7 @@ class Task(object):
             
         else:
             raise Exception("ANIMAL NOT RECOGNIZED")
-
+        
 if __name__ == '__main__':
     print "run ShrewDriver.py instead!"
         

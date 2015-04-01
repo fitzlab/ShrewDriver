@@ -14,6 +14,7 @@ Sequences:
     RANDOM_RETRY - Each trial is chosen randomly. If a trial is failed, keep retrying until success.
     BLOCK_RETRY - Each trial is presented once (random order). Unsuccessful trials are repeated until success.
     SEQUENTIAL - Each trial is presented once (in order).
+    INTERVAL - A set of hard trials, then a set of easy trials, and so on.
 
 Implementation:
 This is vaguely a Strategy pattern.
@@ -42,6 +43,12 @@ class Sequencer(object):
         if sequenceType == Sequences.SEQUENTIAL:
             import SequencerSequential
             self.sequencer = SequencerSequential.SequencerSequential(trialSet)
+        if sequenceType == Sequences.INTERVAL:
+            import SequencerInterval
+            self.sequencer = SequencerInterval.SequencerInterval(trialSet)
+        if sequenceType == Sequences.INTERVAL_RETRY:
+            import SequencerIntervalRetry
+            self.sequencer = SequencerIntervalRetry.SequencerIntervalRetry(trialSet)
         else:
             pass
     
@@ -88,6 +95,12 @@ if __name__ == '__main__':
     print "\n==================\nSequential trials"
     x = Sequencer(trialSet,Sequences.RANDOM)
     for i in range(0,20):
+        print "  " + str(x.getNextTrial(Results.HIT))
+    
+
+    print "\n==================\nInterval trials"
+    x = Sequencer(trialSet,Sequences.INTERVAL)
+    for i in range(0,60):
         print "  " + str(x.getNextTrial(Results.HIT))
     
     

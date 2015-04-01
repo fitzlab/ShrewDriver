@@ -47,6 +47,11 @@ class TaskGoNoGo(Task.Task):
         print str(len(self.trialSet)) + " different trial conditions."
         
         self.sequencer = Sequencer(self.trialSet, self.sequenceType)
+        if self.sequenceType == Sequences.INTERVAL or self.sequenceType == Sequences.INTERVAL_RETRY:
+            self.sequencer.sequencer.easyOris = self.easyOris
+            self.sequencer.sequencer.hardOris = self.hardOris
+            self.sequencer.sequencer.numEasy = self.numEasy
+            self.sequencer.sequencer.numHard = self.numHard
         
     def start(self):
         self.stateDuration = self.initTime

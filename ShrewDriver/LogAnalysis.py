@@ -6,7 +6,8 @@ from util.Stats import dPrime, criterion
 sys.path.append("./trial")
 from Trial import Trial
 
-from Analyzer import Analyzer
+from AnalyzerRetry import Analyzer
+#from Analyzer import Analyzer
 
 sys.path.append("./global")
 from Constants import *
@@ -18,23 +19,54 @@ if __name__ == '__main__':
     successRates = []
     sPlusResponseRates = []
     
-    dirPath = "C:/Users/fitzlab1/Desktop/queenmachine/"
+    dirPath = "C:/Users/theo/Desktop/ShrewDriver/analysis/bern/"
     import glob
     import os
     os.chdir(dirPath)
     shrewName = 'other'
     if dirPath.lower().find("chico") > -1:
         shrewName= "Chico"
+        
     for file in glob.glob("*.txt"):
-        a = Analyzer(shrew=shrewName)
         filePath = dirPath + file
         
+        a = Analyzer(shrew=shrewName)     
         a.readFile(filePath)
         
+        a.recomputeIfNeeded()        
         msg = a.getSummaryResults()
         msg += a.getDiscriminationPerformance()
         msg += a.getTaskErrors()
+        msg += filePath + "\n\n\n\n\n"
         
         print msg
         
-        print filePath + "\n\n\n\n\n"
+        '''
+        a.recomputeIfNeeded()
+        sMinus = a.sMinusPerformances.keys()[0]
+        nSMinusCorrect = a.sMinusPerformances[sMinus].numCorrect
+        nSMinusTrials = a.sMinusPerformances[sMinus].numTrials
+        percentCorrect = nSMinusCorrect / nSMinusTrials
+        dPrime = a.sMinusPerformances[sMinus].dPrime
+        
+        sPlus = a.sPlusPerformances.keys()[0]
+        nSPlusCorrect = a.sPlusPerformances[sPlus].numCorrect
+        nSPlusTrials = a.sPlusPerformances[sPlus].numTrials
+        percentSPlusCorrect = nSPlusCorrect / nSPlusTrials
+        
+        percentDiscrimCorrect = (nSMinusCorrect + nSPlusCorrect) / (nSMinusTrials + nSPlusTrials) * 100
+        
+        nTotalTrials = nSPlusTrials + nSMinusTrials
+        
+        msg = str(sMinus) + " " 
+        #msg += "s+:" + str(nSPlusCorrect) + "/" 
+        #msg += str(nSPlusTrials) + " " 
+        #msg += "s-:" + str(nSMinusCorrect) + "/" 
+        #msg += str(nSMinusTrials) + " " 
+        #msg += str(round(percentCorrect,3)) + " "
+        #msg += str(round(percentSPlusCorrect,3)) + " "
+        #msg += str(dPrime) + " " 
+        msg += str(nTotalTrials) + " " 
+        msg += str(percentDiscrimCorrect) + " " 
+        print msg
+        '''

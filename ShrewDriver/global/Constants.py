@@ -21,9 +21,11 @@ Sequences:
     RANDOM_RETRY - Each trial is chosen randomly. If a trial is failed, keep retrying until success.
     BLOCK_RETRY - Each trial is presented once (random order). Unsuccessful trials are repeated until success.
     SEQUENTIAL - Each trial is presented once (in order).
+    INTERVAL - A set of hard trials, then a set of easy trials, and so on. Requires some setup, see SequencerInterval.py.
+    INTERVAL_RETRY - A set of hard trials, then a set of easy trials, and so on. Requires setup. Unsuccessful trials are repeated until success.
 '''
 
-sequenceSet = ['RANDOM', 'BLOCK', 'RANDOM_RETRY', 'BLOCK_RETRY','SEQUENTIAL'] 
+sequenceSet = ['RANDOM', 'BLOCK', 'RANDOM_RETRY', 'BLOCK_RETRY','SEQUENTIAL','INTERVAL','INTERVAL_RETRY'] 
 Sequences = Enumeration("Sequences", sequenceSet)
 
 
@@ -45,7 +47,7 @@ States = Enumeration("States", stateSet)
 
 
 '''
-Trial Initiation Modes:
+Trial Actions:
     LICK - Shrew licks (onset)
     LEAVE - Shrew exits infrared beam
 '''
