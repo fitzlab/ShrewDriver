@@ -126,7 +126,7 @@ class Task(object):
             self.sMinusPresentations = [0,1] #how many times to display the SMINUS
             self.guaranteedSPlus = False #is there always an SPLUS in the trial?
             self.sequenceType = Sequences.RANDOM
-            self.initiation = Initiation.IR
+            self.initiation = Initiation.LICK
             
             self.timeoutFail = 15
             self.timeoutAbort = 10
@@ -163,7 +163,7 @@ class Task(object):
         elif self.shrewDriver.animalName == 'Chico':
             print "Using settings for Chico!"
             self.sPlusOrientations = [45]
-            self.sMinusOrientations = [53]
+            self.sMinusOrientations = [58]
             self.sMinusPresentations = [1, 2] #how many times to display the SMINUS
             self.guaranteedSPlus = True #is there always an SPLUS in the trial?
             self.sequenceType = Sequences.RANDOM_RETRY
@@ -204,10 +204,10 @@ class Task(object):
         elif self.shrewDriver.animalName == 'Mercury':
             print "Using settings for Mercury!"
             self.sPlusOrientations = [0,0]
-            self.sMinusOrientations = [30, 150]
+            self.sMinusOrientations = [20, 160]
             self.sMinusPresentations = [0,1] #how many times to display the SMINUS
             self.guaranteedSPlus = False #is there always an SPLUS in the trial?
-            self.sequenceType = Sequences.RANDOM
+            self.sequenceType = Sequences.RANDOM_RETRY
             self.initiation = Initiation.IR
              
             self.timeoutFail = 10
@@ -248,7 +248,7 @@ class Task(object):
             self.sMinusOrientations = [0]
             self.sMinusPresentations = [0,1] #how many times to display the SMINUS
             self.guaranteedSPlus = False #is there always an SPLUS in the trial?
-            self.sequenceType = Sequences.RANDOM
+            self.sequenceType = Sequences.RANDOM_RETRY
             self.initiation = Initiation.LICK
             
             self.timeoutFail = 15
@@ -262,14 +262,14 @@ class Task(object):
             self.variableDelayMin = 0.5
             self.variableDelayMax = 1.25
             
-            self.gratingDuration = 0.4
+            self.gratingDuration = 0.5
             self.grayDuration = 1
             self.rewardPeriod = self.grayDuration #needs to be no longer than gray duration!
             
             self.hintChance = 0 #chance of sending a low reward at the start of the reward period
             
             self.hintBolus = 0.03 #0.03 is a good amount; just enough that the shrew will notice it but not enough to be worth working for on its own.
-            self.rewardBolus = 0.1 
+            self.rewardBolus = 0.15
             self.rewardBolusHardTrial = 0.2 
         
             #stimbot setup, including command strings for each state
