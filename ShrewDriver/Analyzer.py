@@ -48,6 +48,7 @@ class Analyzer():
         #summary data
         self.abortCount = 0
         self.noResponseCount = 0
+        self.successCount = 0
         self.correctRejectCount = 0
         self.taskFailCount = 0
         self.falseAlarmCount = 0
@@ -81,12 +82,24 @@ class Analyzer():
         self.sMinusPerformances = {}
         self.sPlusBySMinusPerformances = {}
         
+        #used in determining if this is a "retry" or not
+        self.prevTrialSuccess = False
+        
+        #limit analysis to the first n trials in each file
+        self.trialsLimit = 99999
+        self.cancelRepeatTrials = False
+        
     def readFile(self, filePath):
         #read all lines in the given file. For offline use.
+        thisFileTrials = 0
         if filePath is not "":
             # we're doing offline processing
             for line in fileinput.input(filePath):
-                self.processLine(line)
+                if thisFileTrials < self.trialsLimit:
+                    nTrialsCurrent = len(self.trials)
+                    self.processLine(line)
+                    if len(self.trials) > nTrialsCurrent:
+                        thisFileTrials += 1
     
     def calcSummaryResults(self):
         #reset counts
@@ -198,8 +211,8 @@ class Analyzer():
                 if self.animalName.lower() == 'chico':
                     #Chico's a bit harder to analyze since he's got multiple gratings
                     
-                    if t.sMinusOrientation != '-1' and t.stateHistory.count(States.GRAY) == 2:
-                        #This trial has an S- at position 2 (S- trial)
+                    if t.sMinusOrientation != '-1' and t.stateHistory.count(States.GRAY) == 2 and t.result != Results.TASK_FAIL:
+                        #This trial contains two GRAY states, so it's an S- trial
                         #create dictionary entry if needed
                         if not t.sMinusOrientation in self.sMinusPerformances:
                             op = OrientationPerformance()
@@ -208,12 +221,12 @@ class Analyzer():
                             self.sMinusPerformances[t.sMinusOrientation] = op
                         
                         self.sMinusPerformances[t.sMinusOrientation].numTrials += 1
-                        if States.SPLUS in t.stateHistory:
-                            #If Chico made it to the SPLUS after two GRAYs, he must have correctly rejected.
+                        
+                        if t.result == Results.CORRECT_REJECT:
                             self.sMinusPerformances[t.sMinusOrientation].numCorrect += 1
                     
                     if t.sPlusOrientation != '-1' and t.stateHistory.count(States.GRAY) == 1 and States.REWARD in t.stateHistory:
-                        #This has an S+ at position 2 (S+ trial)
+                        #It's an S+ trial
                         #create dictionary entry if needed
                         if not t.sPlusOrientation in self.sPlusPerformances:
                             op = OrientationPerformance()
@@ -284,6 +297,7 @@ class Analyzer():
         if self.sMinusTrials > 0:      
             self.sMinusCorrectRate = self.sMinusCorrect / self.sMinusTrials
         
+        self.discriminationPercent = (self.sPlusCorrect + self.sMinusCorrect) / (self.sPlusTrials + self.sMinusTrials) * 100
         self.dPrimeOverall = dPrime(self.sPlusCorrectRate, 1-self.sMinusCorrectRate)
     
         #calculate d' for each S- orientation against all S+
@@ -297,14 +311,15 @@ class Analyzer():
         
         message = '====' + '\n'
         message += 'DISCRIMINATION PERFORMANCE' + "\n"
-        
+
+        message += "\nOverall Discrimination: " + str(round(self.discriminationPercent,2)) + "%"
+        message += "\nOverall d': " + str(round(self.dPrimeOverall,3)) + "\n"    
+
         message += "\nS+ Response Rate: " + str(round(self.sPlusCorrectRate*100, 2)) 
         message += "% (" + str(self.sPlusCorrect) + "/" + str(self.sPlusTrials) + ")"
         
         message += "\nS- Reject Rate: " + str(round(self.sMinusCorrectRate*100, 2)) 
         message += "% (" + str(self.sMinusCorrect) + "/" + str(self.sMinusTrials) + ")"
-
-        message += "\nOverall d': " + str(round(self.dPrimeOverall,3))
 
         message += "\n"
         
@@ -360,48 +375,6 @@ class Analyzer():
         message += "\n"                   
         return message
     
-    
-    def getPlotCode(self):
-        pass
-        
-#        if totalSMinusTrials > 0:
-#            correctRejectRate = totalCorrectRejects / totalSMinusTrials
-#            print "Correct Reject Rate: " + str(round(100 * correctRejectRate,2)) + "% (" + str(totalCorrectRejects) + "/" + str(totalSMinusTrials) +")"
-#        else:
-#            print "\nNo trials contained an S-.\n"
-#        
-#        print "d': " + str(dPrime(sPlusResponseRate, 1-correctRejectRate))
-#        
-#        print "\nCorrect Rejects by Orientation"
-#        for sMinusOrientation in sMinusOrientations:
-#            
-#        for idx in range(0,len(sMinusOrientations)):
-#            if numSMinusTrials != 0:
-#                dPrimeOri = dPrime(sPlusResponseRate,1-sMinusSuccessRate)
-#                cOri = criterion(sPlusResponseRate,1-sMinusSuccessRate)
-#                
-#                oriStr = str(sMinusOrientations[idx]) + " degrees:"
-#                oriStr += " " * (17-len(oriStr))
-#                oriStr += str(round(sMinusSuccessRate * 100,2)) +"% (" + str(oriCorrectReject)
-#                oriStr += "/" + str(numSMinusTrials) + ")"
-#                oriStr += " " * (36-len(oriStr))
-#                oriStr += "d'=" + str(dPrimeOri) + "   "
-#                oriStr += "c=" + str(cOri) + ""
-#                print oriStr
-#        
-#        print "===="
-#        sMinusOrientationsF = [float(x) for x in sMinusOrientations]
-#        
-#        print 'Plot code:'
-#        print 'oris = ' + str(sMinusOrientationsF) + ';'
-#        print 'correctRejects = ' + str(correctRejectsArray) + ';'
-#        print 'trialCounts = ' + str(sMinusTrialCountsArray) + ';'
-#        print 'plot(oris,correctRejects./trialCounts*100,\'b\');'
-#        
-#        print 'xlim([' + str(round(min(sMinusOrientationsF))) + ',' + str(round(max(sMinusOrientationsF))) + ']);ylim([0,100]);'
-#        print '===='
-#        
-    
     def getLastNTrials(self, nTrials):        
         trialsToReturn = []
         for i in range(len(self.trials)-1, -1, -1):
@@ -422,7 +395,92 @@ class Analyzer():
         message += self.getDiscriminationPerformance()
         message += self.getTaskErrors()
         return message
-
+    
+    def endOfTrial(self):
+        #called by processLine whenever a trial is completed
+        #Figure out what the trial result was based on actions and states
+        prevState = self.t.stateHistory[-2]
+        prevStateStart = self.t.stateTimes[-2]
+        
+        if len(self.t.actionTimes) == 0 or self.t.actionTimes[-1] < prevStateStart:
+            #shrew did nothing this trial, so must be CORRECT_REJECT or NO_RESPONSE
+            if prevState == States.GRAY:
+                self.t.result = Results.CORRECT_REJECT
+            elif prevState == States.REWARD:
+                self.t.result = Results.NO_RESPONSE
+            elif len(self.t.actionTimes) >= 3 and (self.t.stateTimes[-1] - self.t.stateTimes[-2]) < 0.1:
+                if self.t.actionHistory[-1] == Actions.LEAVE:
+                    self.t.result = Results.ABORT
+                else:
+                    #Went straight from DELAY into an S+ / S- and the shrew was in mid-lick at the time, causing an immediate fail.
+                    #Quite rare but it happens.
+                    self.t.result = Results.TASK_FAIL
+            else:  
+                print "Error in trial number " + str(self.trialNum)
+                print str(self.t.stateHistory)
+                print str(self.t.stateTimes)
+                print str(self.t.actionHistory)
+                print str(self.t.actionTimes)
+                print "\n"        
+        
+             
+        elif self.t.actionHistory[-1] == Actions.LEAVE and self.t.actionTimes[-1] >= prevStateStart:
+            #Leaving caused the previous state to end, so this was an abort
+            self.t.result = Results.ABORT
+            
+        elif self.t.actionHistory[-1] == Actions.LICK and self.t.actionTimes[-1] >= prevStateStart:
+            #Licking caused state to end... but was it a good lick or a bad one?
+            if self.animalName.lower() == 'chico':
+                if prevState == States.REWARD:
+                    if self.t.stateHistory.count(States.GRAY) == 2:
+                        self.t.result = Results.CORRECT_REJECT
+                    else:
+                        self.t.result = Results.HIT                
+                elif prevState == States.GRAY and self.t.stateHistory.count(States.GRAY) == 2:
+                    self.t.result = Results.FALSE_ALARM
+                else:
+                    #If it wasn't a false alarm, it was just a general screwup
+                    self.t.result = Results.TASK_FAIL
+            else:
+                #any non-chico animal
+                if prevState == States.REWARD:
+                    self.t.result = Results.HIT
+                elif prevState == States.GRAY:
+                    #Anyone else false alarms by licking at GRAY
+                    self.t.result = Results.FALSE_ALARM
+                else:
+                    self.t.result = Results.TASK_FAIL
+                    
+        else:
+            print "Error reading trial number " + str(self.trialNum)
+            print str(self.t.stateHistory)
+            print str(self.t.stateTimes)
+            print str(self.t.actionHistory)
+            print str(self.t.actionTimes)
+            print "\n"
+            
+        #Retry: We only want to analyze the very first instance of each trial, repeats should be skipped
+        if self.trialNum == 1 or self.prevTrialSuccess or not self.cancelRepeatTrials:
+            self.trialNum += 1
+            self.trials.append(self.t)
+        
+        #now determine if the current trial was a success for next time
+        finalState = self.t.stateHistory[-2]
+        result = self.t.result      
+        
+        if result == Results.HIT or result == Results.CORRECT_REJECT:
+            self.prevTrialSuccess = True
+        else:
+            self.prevTrialSuccess = False  
+        
+        #new trial, so reset variables 
+        endState = self.t.stateHistory[-1]
+        endStateStart = self.t.stateTimes[-1]
+        self.t = Trial()
+        self.t.trialNum = self.trialNum   
+        self.t.stateHistory.append(endState) #the end of the last trial is the beginning of this one
+        self.t.stateTimes.append(endStateStart)
+    
     def processLine(self,line):
         self.needToCalculate = True
         p = re.compile('\d+')
@@ -439,58 +497,13 @@ class Analyzer():
                 
             if self.t.stateHistory[-1] == States.SMINUS:
                 self.t.sMinusOrientation = self.t.currentOri                  
-                
+            
             if self.t.stateHistory[-1] == States.TIMEOUT:
-                #end of trial
-                #Figure out what the trial result was based on actions and states
-                prevState = self.t.stateHistory[-2]
-                prevStateStart = self.t.stateTimes[-2]
-                
-                if len(self.t.actionTimes) == 0 or self.t.actionTimes[-1] < prevStateStart:
-                    #shrew did nothing this trial, so must be CORRECT_REJECT or NO_RESPONSE
-                    if prevState == States.GRAY:
-                        self.t.result = Results.CORRECT_REJECT
-                    elif prevState == States.REWARD:
-                        self.t.result = Results.NO_RESPONSE
-                    else:
-                        print "Error in trial number " + str(self.trialNum)
-                        print str(self.t.stateHistory)
-                        print str(self.t.stateTimes)
-                        print str(self.t.actionHistory)
-                        print str(self.t.actionTimes)
-                        print "\n"
-                elif self.t.actionHistory[-1] == Actions.LEAVE and self.t.actionTimes[-1] >= prevStateStart:
-                    #Leaving caused the previous state to end, so this was an abort
-                    self.t.result = Results.ABORT
-                elif self.t.actionHistory[-1] == Actions.LICK and self.t.actionTimes[-1] >= prevStateStart:
-                    #Licking caused state to end... but was it a good lick or a bad one?
-                    if prevState == States.REWARD:
-                        self.t.result = Results.HIT
-                    else:
-                        if self.animalName.lower() == 'chico' and self.t.stateHistory.count(States.GRAY) == 2 and prevState == States.GRAY:
-                            #Chico only false alarms for the second GRAY, not the first
-                            self.t.result = Results.FALSE_ALARM
-                        elif self.animalName.lower() != 'chico' and prevState == States.GRAY:
-                            #Anyone else false alarms by licking at GRAY
-                            self.t.result = Results.FALSE_ALARM
-                        else:
-                            #If it wasn't a false alarm, it was just a general screwup
-                            self.t.result = Results.TASK_FAIL
-                else:
-                    print "Error reading trial number " + str(self.trialNum)
-                    print str(self.t.stateHistory)
-                    print str(self.t.stateTimes)
-                    print str(self.t.actionHistory)
-                    print str(self.t.actionTimes)
-                    print "\n"
-                    
-                #print self.t.result
-                
-                #new trial, so reset variables
-                self.t.trialNum = self.trialNum
-                self.trialNum += 1
-                self.trials.append(self.t)
-                self.t = Trial()
+                self.endOfTrial()
+                 
+            if len(self.trials) > 0 and self.t.stateHistory[-1] == States.INIT and self.t.stateHistory[-2] != States.TIMEOUT:
+                #After the first trial, if it goes to init without a timeout, it was a correct reject.
+                self.endOfTrial()
             
         if re.search('ori', line) or re.search('sqr', line):
             toks = line.split()
@@ -514,7 +527,19 @@ class Analyzer():
             self.t.actionHistory.append(Actions.LICK)
             m = p.findall(line)
             self.t.actionTimes.append(float(m[0] + '.' + m[1]))
-        
+            
+            #Measure lick time since S+ presentation
+            #lickTime = float(m[0] + '.' + m[1])
+            #lickTimeSinceSPlus = 0
+            #if States.SPLUS in self.t.stateHistory:
+                #for x in range(len(self.t.stateHistory)-1, -1, -1):
+                    #if self.t.stateHistory[x] == States.SPLUS:
+                        #sPlusTime = self.t.stateTimes[x]
+                        #lickTimeSinceSPlus = lickTime - sPlusTime
+                        #break
+            #if lickTimeSinceSPlus != 0:
+                #print str(lickTimeSinceSPlus)
+            
         elif re.search('bolus', line):
             m = p.findall(line)
             bolusSize = float(m[0] + "." + m[1])

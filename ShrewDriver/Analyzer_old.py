@@ -48,7 +48,6 @@ class Analyzer():
         #summary data
         self.abortCount = 0
         self.noResponseCount = 0
-        self.successCount = 0
         self.correctRejectCount = 0
         self.taskFailCount = 0
         self.falseAlarmCount = 0
@@ -82,24 +81,12 @@ class Analyzer():
         self.sMinusPerformances = {}
         self.sPlusBySMinusPerformances = {}
         
-        #used in determining if this is a "retry" or not
-        self.prevTrialSuccess = False
-        
-        #limit analysis to the first n trials in each file
-        self.trialsLimit = 999
-        self.cancelRepeatTrials = True
-        
     def readFile(self, filePath):
         #read all lines in the given file. For offline use.
-        thisFileTrials = 0
         if filePath is not "":
             # we're doing offline processing
             for line in fileinput.input(filePath):
-                if thisFileTrials < self.trialsLimit:
-                    nTrialsCurrent = len(self.trials)
-                    self.processLine(line)
-                    if len(self.trials) > nTrialsCurrent:
-                        thisFileTrials += 1
+                self.processLine(line)
     
     def calcSummaryResults(self):
         #reset counts
@@ -297,7 +284,6 @@ class Analyzer():
         if self.sMinusTrials > 0:      
             self.sMinusCorrectRate = self.sMinusCorrect / self.sMinusTrials
         
-        self.discriminationPercent = (self.sPlusCorrect + self.sMinusCorrect) / (self.sPlusTrials + self.sMinusTrials) * 100
         self.dPrimeOverall = dPrime(self.sPlusCorrectRate, 1-self.sMinusCorrectRate)
     
         #calculate d' for each S- orientation against all S+
@@ -311,15 +297,14 @@ class Analyzer():
         
         message = '====' + '\n'
         message += 'DISCRIMINATION PERFORMANCE' + "\n"
-
-        message += "\nOverall Discrimination: " + str(round(self.discriminationPercent,2)) + "%"
-        message += "\nOverall d': " + str(round(self.dPrimeOverall,3)) + "\n"    
-
+        
         message += "\nS+ Response Rate: " + str(round(self.sPlusCorrectRate*100, 2)) 
         message += "% (" + str(self.sPlusCorrect) + "/" + str(self.sPlusTrials) + ")"
         
         message += "\nS- Reject Rate: " + str(round(self.sMinusCorrectRate*100, 2)) 
         message += "% (" + str(self.sMinusCorrect) + "/" + str(self.sMinusTrials) + ")"
+
+        message += "\nOverall d': " + str(round(self.dPrimeOverall,3))
 
         message += "\n"
         
@@ -499,31 +484,13 @@ class Analyzer():
                     print str(self.t.actionTimes)
                     print "\n"
                     
+                #print self.t.result
                 
-                
-                #Retry: We only want to analyze the very first instance of each trial, repeats should be skipped
-                if self.trialNum == 1 or self.prevTrialSuccess or not self.cancelRepeatTrials:
-                    self.trialNum += 1
-                    self.trials.append(self.t)
-                
-                #now determine if the current trial was a success for next time
-                finalState = self.t.stateHistory[-2]
-                result = self.t.result      
-                
-                #print str(Results.whatis(result)) 
-                
-                if self.animalName.lower() == "chico" and (result == Results.HIT or result == Results.CORRECT_REJECT) and finalState == States.REWARD:
-                    self.prevTrialSuccess = True
-                elif self.animalName.lower() != "chico" and (result == Results.HIT or result == Results.CORRECT_REJECT):
-                    self.prevTrialSuccess = True
-                else:
-                    self.prevTrialSuccess = False  
-                
-                #self.prevTrialSuccess = True   
-                
-                #new trial, so reset variables                  
+                #new trial, so reset variables
+                self.t.trialNum = self.trialNum
+                self.trialNum += 1
+                self.trials.append(self.t)
                 self.t = Trial()
-                self.t.trialNum = self.trialNum  
             
         if re.search('ori', line) or re.search('sqr', line):
             toks = line.split()

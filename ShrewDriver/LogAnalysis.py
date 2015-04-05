@@ -1,13 +1,16 @@
 from __future__ import division
-import fileinput, re, math, sys
+import fileinput, re, math, sys, random
 
 from util.Stats import dPrime, criterion
+
+from GraphPerformance import GraphPerformance
+from pyqtgraph.Qt import QtGui, QtCore
 
 sys.path.append("./trial")
 from Trial import Trial
 
-from AnalyzerRetry import Analyzer
-#from Analyzer import Analyzer
+#from AnalyzerRetry import Analyzer
+from Analyzer import Analyzer
 
 sys.path.append("./global")
 from Constants import *
@@ -19,7 +22,7 @@ if __name__ == '__main__':
     successRates = []
     sPlusResponseRates = []
     
-    dirPath = "C:/Users/theo/Desktop/ShrewDriver/analysis/bern/"
+    dirPath = "C:/Users/theo/Desktop/ShrewDriver/analysis/chicoshrew/"
     import glob
     import os
     os.chdir(dirPath)
@@ -27,19 +30,25 @@ if __name__ == '__main__':
     if dirPath.lower().find("chico") > -1:
         shrewName= "Chico"
         
+    
+    gp = GraphPerformance()
+    
     for file in glob.glob("*.txt"):
         filePath = dirPath + file
         
         a = Analyzer(shrew=shrewName)     
         a.readFile(filePath)
         
+        '''      
         a.recomputeIfNeeded()        
         msg = a.getSummaryResults()
         msg += a.getDiscriminationPerformance()
         msg += a.getTaskErrors()
         msg += filePath + "\n\n\n\n\n"
-        
+           
         print msg
+        
+        #gp.plotSession(a.trials, [random.randint(0,255),random.randint(0,255),random.randint(0,255)])
         
         '''
         a.recomputeIfNeeded()
@@ -57,6 +66,8 @@ if __name__ == '__main__':
         percentDiscrimCorrect = (nSMinusCorrect + nSPlusCorrect) / (nSMinusTrials + nSPlusTrials) * 100
         
         nTotalTrials = nSPlusTrials + nSMinusTrials
+
+        
         
         msg = str(sMinus) + " " 
         #msg += "s+:" + str(nSPlusCorrect) + "/" 
@@ -66,7 +77,12 @@ if __name__ == '__main__':
         #msg += str(round(percentCorrect,3)) + " "
         #msg += str(round(percentSPlusCorrect,3)) + " "
         #msg += str(dPrime) + " " 
-        msg += str(nTotalTrials) + " " 
-        msg += str(percentDiscrimCorrect) + " " 
+        #msg += str(nTotalTrials) + " " 
+        #msg += str(percentDiscrimCorrect) + " " 
+        msg += str(a.taskErrorRate) + " " 
         print msg
-        '''
+        
+    
+    #gp.show()
+        
+        

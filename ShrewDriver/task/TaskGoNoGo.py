@@ -75,8 +75,11 @@ class TaskGoNoGo(Task.Task):
                 
             #-- progression condition --#
             doneWaiting = False
-            if self.initiation == Initiation.LICK and self.lastLickAt > self.stateStartTime:
-                doneWaiting = True
+            if self.initiation == Initiation.LICK and self.lastLickAt > self.stateStartTime and not self.isLicking:
+                #Shrew is supposed to lick, and it has, but it's not licking right now.
+                if (now - self.lastLickAt) > 0.5:
+                    #In fact, it licked at least half a second ago, so it should REALLY not be licking now. Let's proceed with the trial.
+                    doneWaiting = True
             elif self.initiation == Initiation.TAP and self.lastTapAt > self.stateStartTime:
                 doneWaiting = True
             elif self.initiation == Initiation.IR and now > self.stateEndTime:
@@ -216,12 +219,8 @@ class TaskGoNoGo(Task.Task):
         #(1) Shrew licks when it shouldn't, or
         #(2) Shrew leaves the annex
         if self.isLicking or self.lastLickAt > self.stateStartTime:
-            if self.state == States.DELAY and self.initiation == Initiation.LICK:
-                #it's OK to lick during DELAY if they lick to initiate the trial
-                pass
-            else:
-                #any other time, licks are bad m'kay
-                self.fail()
+            #any other time, licks are bad m'kay
+            self.fail()
         if not self.shrewPresent:
             self.abort()
     
