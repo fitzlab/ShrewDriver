@@ -297,7 +297,8 @@ class Analyzer():
         if self.sMinusTrials > 0:      
             self.sMinusCorrectRate = self.sMinusCorrect / self.sMinusTrials
         
-        self.discriminationPercent = (self.sPlusCorrect + self.sMinusCorrect) / (self.sPlusTrials + self.sMinusTrials) * 100
+        if (self.sPlusTrials + self.sMinusTrials) > 0:
+            self.discriminationPercent = (self.sPlusCorrect + self.sMinusCorrect) / (self.sPlusTrials + self.sMinusTrials) * 100
         self.dPrimeOverall = dPrime(self.sPlusCorrectRate, 1-self.sMinusCorrectRate)
     
         #calculate d' for each S- orientation against all S+

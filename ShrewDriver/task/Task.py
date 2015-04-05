@@ -163,7 +163,7 @@ class Task(object):
         elif self.shrewDriver.animalName == 'Chico':
             print "Using settings for Chico!"
             self.sPlusOrientations = [45]
-            self.sMinusOrientations = [58]
+            self.sMinusOrientations = [135]
             self.sMinusPresentations = [1, 2] #how many times to display the SMINUS
             self.guaranteedSPlus = True #is there always an SPLUS in the trial?
             self.sequenceType = Sequences.RANDOM_RETRY
@@ -203,14 +203,14 @@ class Task(object):
             
         elif self.shrewDriver.animalName == 'Mercury':
             print "Using settings for Mercury!"
-            self.sPlusOrientations = [0,0,0,0] 
-            self.sMinusOrientations = [20,160,45,135]
+            self.sPlusOrientations = [0,0] #don't forget to put in 0,0 when you add other ones back
+            self.sMinusOrientations = [25,45] #135 and 160 are out for today
             self.sMinusPresentations = [0,1] #how many times to display the SMINUS
             self.guaranteedSPlus = False #is there always an SPLUS in the trial?
             
             self.sequenceType = Sequences.INTERVAL_RETRY
-            self.easyOris = [45,135]
-            self.hardOris = [20,160]
+            self.easyOris = [45] #,135
+            self.hardOris = [25] #,160
             self.numEasy = 30
             self.numHard = 15
             
@@ -252,7 +252,7 @@ class Task(object):
             print "Using settings for Bernadette!"
             self.sPlusOrientations = [90]
             self.sMinusOrientations = [0]
-            self.sMinusPresentations = [0,1] #how many times to display the SMINUS
+            self.sMinusPresentations = [0] #how many times to display the SMINUS
             self.guaranteedSPlus = False #is there always an SPLUS in the trial?
             self.sequenceType = Sequences.RANDOM_RETRY
             self.initiation = Initiation.LICK
@@ -268,11 +268,11 @@ class Task(object):
             self.variableDelayMin = 0.5
             self.variableDelayMax = 1.25
             
-            self.gratingDuration = 0.5
+            self.gratingDuration = 0.65
             self.grayDuration = 1
             self.rewardPeriod = self.grayDuration #needs to be no longer than gray duration!
             
-            self.hintChance = 0 #chance of sending a low reward at the start of the reward period
+            self.hintChance = 0.5 #chance of sending a low reward at the start of the reward period
             
             self.hintBolus = 0.03 #0.03 is a good amount; just enough that the shrew will notice it but not enough to be worth working for on its own.
             self.rewardBolus = 0.15 
