@@ -288,6 +288,11 @@ class Task(object):
             self.commandStrings[States.GRAY] = 'sx0 sy0\n'
             self.commandStrings[States.SPLUS] = 'as sf0.25 tf0 jf0 ja0 px0 py0 sx999 sy999\n'
             self.commandStrings[States.REWARD] = 'sx0 sy0\n'
+
+        elif self.shrewDriver.animalName == 'Headfix':
+            print "Using settings for headfix acclimation!"
+            self.rewardCooldown = 1
+            self.rewardBolus = 0.1
             
         else:
             raise Exception("ANIMAL NOT RECOGNIZED")

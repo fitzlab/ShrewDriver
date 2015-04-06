@@ -52,7 +52,10 @@ class Training():
         self.stimSerial.startReadThread()
         
         #set up task
-        self.task = TaskGoNoGo(self, shrewDriver)
+        if self.shrewDriver.animalName == 'Headfix':
+            self.task = TaskHeadfix(self, shrewDriver)
+        else:
+            self.task = TaskGoNoGo(self, shrewDriver)
         
         #start file logging
         self.logFilePath = self.shrewDriver.experimentPath + self.shrewDriver.sessionFileName + "_log.txt" 
