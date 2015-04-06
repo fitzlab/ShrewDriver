@@ -69,7 +69,8 @@ class Task(object):
         self.makeTrialSet()
 
         #set up the first trial
-        self.currentTrial = self.sequencer.getNextTrial(None)
+        if hasattr(self, 'sequencer'):
+            self.currentTrial = self.sequencer.getNextTrial(None)
         self.prepareTrial()
         self.trialNum = 1
         
@@ -163,7 +164,7 @@ class Task(object):
         elif self.shrewDriver.animalName == 'Chico':
             print "Using settings for Chico!"
             self.sPlusOrientations = [45]
-            self.sMinusOrientations = [135]
+            self.sMinusOrientations = [120]
             self.sMinusPresentations = [1, 2] #how many times to display the SMINUS
             self.guaranteedSPlus = True #is there always an SPLUS in the trial?
             self.sequenceType = Sequences.RANDOM_RETRY

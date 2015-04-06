@@ -16,6 +16,7 @@ from Sequencer import *
 
 sys.path.append("./task")
 from TaskGoNoGo import *
+from TaskHeadfix import *
 
 from LivePlot import *
 from ShrewDriver import *

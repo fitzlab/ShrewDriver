@@ -40,14 +40,16 @@ class TaskHeadfix(Task.Task):
                
         if self.state == States.REWARD:
             #Wait for the shrew to stop licking
-            if self.isLicking or self.lastLickAt > self.stateStartTime:
+            if self.lastLickAt > self.stateStartTime and self.lastLickAt != 0:
                 self.training.dispenseReward(self.rewardBolus)
                 self.changeState(States.TIMEOUT)
                 
     def changeState(self, newState):
         #runs every time a state changes
-        self.training.logPlotAndAnalyze("State" + str(self.state), time.time())        
-
+        #self.training.logPlotAndAnalyze("State" + str(self.state), time.time())        
+        self.stateStartTime = time.time()
+        self.state = newState
+        
         #if changed to timeout, reset trial params for the new trial
         if (newState == States.TIMEOUT):
             #tell UI about the trial that just finished
@@ -66,4 +68,12 @@ class TaskHeadfix(Task.Task):
         pass
     
     def prepareGratingState(self): 
+        pass
+    
+    def setUpCommands(self):
+        #overwrite parent
+        pass
+        
+    def makeTrialSet(self):
+        #overwrite parent
         pass
