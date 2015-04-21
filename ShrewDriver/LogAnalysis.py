@@ -22,7 +22,7 @@ if __name__ == '__main__':
     successRates = []
     sPlusResponseRates = []
     
-    dirPath = "C:/Users/theo/Desktop/ShrewDriver/analysis/chicoshrew/"
+    dirPath = "C:/Users/fitzlab1/Desktop/day2/"
     import glob
     import os
     os.chdir(dirPath)
@@ -39,7 +39,7 @@ if __name__ == '__main__':
         a = Analyzer(shrew=shrewName)     
         a.readFile(filePath)
         
-        '''      
+           
         a.recomputeIfNeeded()        
         msg = a.getSummaryResults()
         msg += a.getDiscriminationPerformance()
@@ -47,6 +47,7 @@ if __name__ == '__main__':
         msg += filePath + "\n\n\n\n\n"
            
         print msg
+        
         
         #gp.plotSession(a.trials, [random.randint(0,255),random.randint(0,255),random.randint(0,255)])
         
@@ -66,7 +67,6 @@ if __name__ == '__main__':
         percentDiscrimCorrect = (nSMinusCorrect + nSPlusCorrect) / (nSMinusTrials + nSPlusTrials) * 100
         
         nTotalTrials = nSPlusTrials + nSMinusTrials
-
         
         
         msg = str(sMinus) + " " 
@@ -81,7 +81,7 @@ if __name__ == '__main__':
         #msg += str(percentDiscrimCorrect) + " " 
         msg += str(a.taskErrorRate) + " " 
         print msg
-        
+        '''
     
     #gp.show()
         
