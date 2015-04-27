@@ -6,10 +6,14 @@
 
 */
 
+#include <CapacitiveSensor.h>
+
+
 #define PIN_IR_SENSOR A0
 #define PIN_TAP_SENSOR A1
 #define PIN_LICK_SENSOR 2
 #define PIN_IR_LED 4
+#define PIN_CAPACITIVE_GROUND 8
 
 #define TAP_ON HIGH
 #define TAP_OFF LOW
@@ -27,12 +31,14 @@ bool irPrev = IR_SOLID;
 int tapThreshold = 2;
 bool tapState = TAP_OFF;
 
-int lickThreshold = 1; //0 = licking, other = not licking.
+int lickThreshold = 1000; //1000+ = licking, less = not licking.
 bool prevLick = LICK_OFF;
 
 const int irBufferSize = 10;
 int irBuffer[irBufferSize];
 int irBufferPos = 0;
+
+CapacitiveSensor csLick = CapacitiveSensor(PIN_CAPACITIVE_GROUND,PIN_LICK_SENSOR);
 
 void setup() {
   delay(200); //let arduino wake up properly
@@ -113,13 +119,13 @@ void checkIR(){
 }
 
 void checkLick(){
-  int lickReading = digitalRead(PIN_LICK_SENSOR);
-  if(prevLick == LICK_OFF && lickReading == LOW){
-    //there was a lick, alert the media
+	long lickReading =  csLick.capacitiveSensor(30);
+	if(prevLick == LICK_OFF && lickReading >= lickThreshold){
+		//there was a lick, alert the media
     Serial.println("Lx");
     prevLick = LICK_ON;
-  }
-  else if(prevLick == LICK_ON && lickReading == HIGH){
+	}
+  else if(prevLick == LICK_ON && lickReading <= lickThreshold){
     Serial.println("Lo");
     prevLick = LICK_OFF;
   }
