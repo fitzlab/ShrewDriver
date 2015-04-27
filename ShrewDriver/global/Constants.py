@@ -25,7 +25,7 @@ Sequences:
     INTERVAL_RETRY - A set of hard trials, then a set of easy trials, and so on. Requires setup. Unsuccessful trials are repeated until success.
 '''
 
-sequenceSet = ['RANDOM', 'BLOCK', 'RANDOM_RETRY', 'BLOCK_RETRY','SEQUENTIAL','INTERVAL','INTERVAL_RETRY'] 
+sequenceSet = ['RANDOM', 'BLOCK', 'RANDOM_RETRY', 'BLOCK_RETRY','SEQUENTIAL','INTERVAL','INTERVAL_RETRY','SPLUS_FOR_REJECT','SPLUS_FOR_REJECT_RETRY'] 
 Sequences = Enumeration("Sequences", sequenceSet)
 
 

@@ -122,8 +122,8 @@ class Task(object):
         #Animal-relevant settings
         if self.shrewDriver.animalName == 'Queen':
             print "Using settings for Queen!"
-            self.sPlusOrientations = [135,135,135,135]
-            self.sMinusOrientations = [90, 180, 95, 175]
+            self.sPlusOrientations = [135,135,135,135,135,135]
+            self.sMinusOrientations = [90, 180, 100, 170, 105, 165]
             self.sMinusPresentations = [0,1] #how many times to display the SMINUS
             self.guaranteedSPlus = False #is there always an SPLUS in the trial?
             self.sequenceType = Sequences.RANDOM
@@ -164,7 +164,7 @@ class Task(object):
         elif self.shrewDriver.animalName == 'Chico':
             print "Using settings for Chico!"
             self.sPlusOrientations = [45]
-            self.sMinusOrientations = [50]
+            self.sMinusOrientations = [53]
             self.sMinusPresentations = [1, 2] #how many times to display the SMINUS
             self.guaranteedSPlus = True #is there always an SPLUS in the trial?
             self.sequenceType = Sequences.RANDOM_RETRY
@@ -201,6 +201,7 @@ class Task(object):
             self.commandStrings[States.GRAY] = 'sx0 sy0\n'
             self.commandStrings[States.SPLUS] = 'acgf sf0.25 tf0 jf0 ja0 px35 py0 sx60 sy60\n'
             self.commandStrings[States.REWARD] = 'sx0 sy0\n'
+            
             
         elif self.shrewDriver.animalName == 'Mercury':
             print "Using settings for Mercury!"
@@ -260,7 +261,7 @@ class Task(object):
             self.sequenceType = Sequences.RANDOM_RETRY
             self.initiation = Initiation.IR
             
-            self.timeoutFail = 15
+            self.timeoutFail = 30
             self.timeoutAbort = 10
             self.timeoutSuccess = 6
             self.timeoutNoResponse = 10

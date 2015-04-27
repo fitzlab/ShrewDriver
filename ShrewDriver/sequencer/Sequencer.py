@@ -49,6 +49,12 @@ class Sequencer(object):
         if sequenceType == Sequences.INTERVAL_RETRY:
             import SequencerIntervalRetry
             self.sequencer = SequencerIntervalRetry.SequencerIntervalRetry(trialSet)
+        if sequenceType == Sequences.SPLUS_FOR_REJECT:
+            import SequencerSPlusForReject
+            self.sequencer = SequencerSPlusForReject.SequencerSPlusForReject(trialSet)
+        if sequenceType == Sequences.SPLUS_FOR_REJECT_RETRY:
+            import SequencerSPlusForRejectRetry
+            self.sequencer = SequencerSPlusForRejectRetry.SequencerSPlusForRejectRetry(trialSet)
         else:
             pass
     
