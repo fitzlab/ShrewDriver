@@ -31,7 +31,7 @@ bool irPrev = IR_SOLID;
 int tapThreshold = 2;
 bool tapState = TAP_OFF;
 
-int lickThreshold = 1000; //1000+ = licking, less = not licking.
+int lickThreshold = 2000; //2000+ = licking, less = not licking.
 bool prevLick = LICK_OFF;
 
 const int irBufferSize = 10;
@@ -119,7 +119,7 @@ void checkIR(){
 }
 
 void checkLick(){
-	long lickReading =  csLick.capacitiveSensor(30);
+	long lickReading =  csLick.capacitiveSensor(50);
 	if(prevLick == LICK_OFF && lickReading >= lickThreshold){
 		//there was a lick, alert the media
     Serial.println("Lx");
