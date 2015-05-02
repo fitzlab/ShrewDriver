@@ -123,7 +123,7 @@ class Task(object):
         if self.shrewDriver.animalName == 'Queen':
             print "Using settings for Queen!"
             self.sPlusOrientations = [135,135,135,135,135,135]
-            self.sMinusOrientations = [90, 180, 100, 170, 105, 165]
+            self.sMinusOrientations = [90, 180, 105, 165, 110, 160]
             self.sMinusPresentations = [0,1] #how many times to display the SMINUS
             self.guaranteedSPlus = False #is there always an SPLUS in the trial?
             self.sequenceType = Sequences.RANDOM
@@ -170,7 +170,7 @@ class Task(object):
             self.sequenceType = Sequences.RANDOM_RETRY
             self.initiation = Initiation.IR
             
-            self.timeoutFail = 12
+            self.timeoutFail = 25
             self.timeoutAbort = 10
             self.timeoutSuccess = 6
             self.timeoutNoResponse = 6
@@ -189,7 +189,7 @@ class Task(object):
             
             self.hintBolus = 0.03 #0.03 is a good amount; just enough that the shrew will notice it but not enough to be worth working for on its own.
             self.rewardBolus = 0.100
-            self.rewardBolusHardTrial = 0.200
+            self.rewardBolusHardTrial = 0.250
             
             #stimbot setup, including command strings for each state
             #note that grating states will have an extra command added later to specify orientation and phase.
@@ -254,14 +254,14 @@ class Task(object):
             
         elif self.shrewDriver.animalName == 'Bernadette':
             print "Using settings for Bernadette!"
-            self.sPlusOrientations = [90]
-            self.sMinusOrientations = [0]
-            self.sMinusPresentations = [0] #how many times to display the SMINUS
+            self.sPlusOrientations = [90,90,90]
+            self.sMinusOrientations = [0,45,135]
+            self.sMinusPresentations = [0,1] #how many times to display the SMINUS
             self.guaranteedSPlus = False #is there always an SPLUS in the trial?
-            self.sequenceType = Sequences.RANDOM_RETRY
+            self.sequenceType = Sequences.RANDOM
             self.initiation = Initiation.IR
             
-            self.timeoutFail = 30
+            self.timeoutFail = 25
             self.timeoutAbort = 10
             self.timeoutSuccess = 6
             self.timeoutNoResponse = 10
