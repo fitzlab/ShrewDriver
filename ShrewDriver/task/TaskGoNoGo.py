@@ -80,7 +80,7 @@ class TaskGoNoGo(Task.Task):
                 if (now - self.lastLickAt) > 0.5:
                     #In fact, it licked at least half a second ago, so it should REALLY not be licking now. Let's proceed with the trial.
                     doneWaiting = True
-            elif self.initiation == Initiation.TAP and self.lastTapAt > self.stateStartTime:
+            elif self.initiation == Initiation.TAP and (self.lastTapAt > self.stateStartTime or self.isTapping):
                 doneWaiting = True
             elif self.initiation == Initiation.IR and now > self.stateEndTime:
                 doneWaiting = True
@@ -221,8 +221,8 @@ class TaskGoNoGo(Task.Task):
         if self.isLicking or self.lastLickAt > self.stateStartTime:
             #any other time, licks are bad m'kay
             self.fail()
-        if not self.shrewPresent:
-            self.abort()
+        elif not self.shrewPresent:
+                self.abort()
     
     def fail(self):
         self.stateDuration = self.timeoutFail
