@@ -40,6 +40,10 @@ class Analyzer():
         
         self.animalName = shrew
         
+        #shitty hack time
+        if self.animalName.lower() == 'chico':
+            self.animalName = 'newChico'
+        
         # Recompute flag for lazy processing, changes when we get new data
         self.needToCalculate = False
         

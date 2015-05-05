@@ -221,8 +221,8 @@ class TaskGoNoGo(Task.Task):
         if self.isLicking or self.lastLickAt > self.stateStartTime:
             #any other time, licks are bad m'kay
             self.fail()
-        elif not self.shrewPresent:
-                self.abort()
+        elif not self.shrewPresent and self.initiation != Initiation.TAP:
+            self.abort()
     
     def fail(self):
         self.stateDuration = self.timeoutFail

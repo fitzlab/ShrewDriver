@@ -29,11 +29,11 @@ bool irPrev = IR_SOLID;
 
 int tapThreshold = 4000;
 bool tapState = TAP_OFF;
-numTapSamples = 50;
+int numTapSamples = 50;
 
 int lickThreshold = 2500;
 bool lickState = LICK_OFF;
-numLickSamples = 50;
+int numLickSamples = 50;
 
 const int irBufferSize = 10;
 int irBuffer[irBufferSize];
@@ -83,12 +83,12 @@ void checkLick(){
 }
 
 void checkTap(){
-	long lickReading =  csTap.capacitiveSensor(numTapSamples);
-	if(tapState == TAP_OFF && tap > tapThreshold){
+	long tapReading =  csTap.capacitiveSensor(numTapSamples);
+	if(tapState == TAP_OFF && tapReading > tapThreshold){
 		tapState = TAP_ON;
     Serial.println("Tx");
 	}
-	else if(tapState == TAP_ON && tap < tapThreshold){
+	else if(tapState == TAP_ON && tapReading < tapThreshold){
 		tapState = TAP_OFF;
     Serial.println("To");
 	}
@@ -129,7 +129,7 @@ void loop() {
 	//Check sensors
 	checkIR();
 	checkLick();
-	checkTap();
+	//checkTap();
 }
 
 
