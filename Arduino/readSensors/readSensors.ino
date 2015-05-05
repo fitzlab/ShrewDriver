@@ -8,9 +8,8 @@
 
 #include <CapacitiveSensor.h>
 
-
 #define PIN_IR_SENSOR A0
-#define PIN_TAP_SENSOR A1
+#define PIN_TAP_SENSOR 6
 #define PIN_LICK_SENSOR 2
 #define PIN_IR_LED 4
 #define PIN_CAPACITIVE_GROUND 8
@@ -28,17 +27,20 @@ int irThresholdLow = 75;
 int irThresholdHigh = 100;
 bool irPrev = IR_SOLID;
 
-int tapThreshold = 2;
+int tapThreshold = 4000;
 bool tapState = TAP_OFF;
+numTapSamples = 50;
 
-int lickThreshold = 2000; //2000+ = licking, less = not licking.
-bool prevLick = LICK_OFF;
+int lickThreshold = 2500;
+bool lickState = LICK_OFF;
+numLickSamples = 50;
 
 const int irBufferSize = 10;
 int irBuffer[irBufferSize];
 int irBufferPos = 0;
 
 CapacitiveSensor csLick = CapacitiveSensor(PIN_CAPACITIVE_GROUND,PIN_LICK_SENSOR);
+CapacitiveSensor csTap = CapacitiveSensor(PIN_CAPACITIVE_GROUND,PIN_TAP_SENSOR);
 
 void setup() {
   delay(200); //let arduino wake up properly
@@ -51,15 +53,44 @@ void setup() {
   pinMode(PIN_IR_LED, OUTPUT);
 }
 
+void checkIR(){
+  getIRSample(); //takes 2ms
+  int irLevel = getIRMean(); //way less than 1ms
+    
+    //Serial.println(irLevel); 
+    //delay(100);
+	if(irPrev == IR_SOLID && irLevel < irThresholdLow){
+		//Something's in the IR beam
+		Serial.println("Ix");
+    irPrev = IR_BROKEN;
+	}
+	else if(irPrev == IR_BROKEN && irLevel > irThresholdHigh){
+		Serial.println("Io");
+    irPrev = IR_SOLID;
+	}
+}
+
+void checkLick(){
+	long lickReading =  csLick.capacitiveSensor(numLickSamples);
+	if(lickState == LICK_OFF && lickReading > lickThreshold){
+    lickState = LICK_ON;
+    Serial.println("Lx");
+	}
+  else if(lickState == LICK_ON && lickReading < lickThreshold){
+    lickState = LICK_OFF;
+    Serial.println("Lo");
+  }
+}
+
 void checkTap(){
-	int tap = analogRead(PIN_TAP_SENSOR);
+	long lickReading =  csTap.capacitiveSensor(numTapSamples);
 	if(tapState == TAP_OFF && tap > tapThreshold){
 		tapState = TAP_ON;
-    //Serial.println("Tx");
+    Serial.println("Tx");
 	}
-	else if(tapState == TAP_ON && tap <= tapThreshold){
+	else if(tapState == TAP_ON && tap < tapThreshold){
 		tapState = TAP_OFF;
-    //Serial.println("To");
+    Serial.println("To");
 	}
 }
 
@@ -98,39 +129,8 @@ void loop() {
 	//Check sensors
 	checkIR();
 	checkLick();
-	//checkTap();
+	checkTap();
 }
-
-void checkIR(){
-  getIRSample(); //takes 2ms
-  int irLevel = getIRMean(); //way less than 1ms
-    
-    //Serial.println(irLevel); 
-    //delay(100);
-	if(irPrev == IR_SOLID && irLevel < irThresholdLow){
-		//Something's in the IR beam
-		Serial.println("Ix");
-    irPrev = IR_BROKEN;
-	}
-	else if(irPrev == IR_BROKEN && irLevel > irThresholdHigh){
-		Serial.println("Io");
-    irPrev = IR_SOLID;
-	}
-}
-
-void checkLick(){
-	long lickReading =  csLick.capacitiveSensor(50);
-	if(prevLick == LICK_OFF && lickReading >= lickThreshold){
-		//there was a lick, alert the media
-    Serial.println("Lx");
-    prevLick = LICK_ON;
-	}
-  else if(prevLick == LICK_ON && lickReading <= lickThreshold){
-    Serial.println("Lo");
-    prevLick = LICK_OFF;
-  }
-}
-
 
 
 
