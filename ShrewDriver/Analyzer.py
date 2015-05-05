@@ -40,9 +40,6 @@ class Analyzer():
         
         self.animalName = shrew
         
-        #shitty hack time
-        if self.animalName.lower() == 'chico':
-            self.animalName = 'newChico'
         
         # Recompute flag for lazy processing, changes when we get new data
         self.needToCalculate = False
@@ -163,7 +160,7 @@ class Analyzer():
                 if t.stateHistory[-2] == States.SMINUS:
                     self.failsSMinus += 1
                 if self.animalName.lower() == "chico" and t.stateHistory[-2] == States.GRAY and \
-                t.stateHistory.count(States.GRAY) == 1:
+                t.stateHistory.count(States.GRAY) == 0:
                     self.failsGray += 1
         
         self.taskFailCount = self.failsDelay + self.failsSPlus + self.failsSMinus + self.failsGray
@@ -185,8 +182,8 @@ class Analyzer():
         message += "DELAY: " + str(self.failsDelay) + "\n"
         message += "SPLUS: " + str(self.failsSPlus) + "\n"
         message += "SMINUS: " + str(self.failsSMinus) + "\n"
-        if self.animalName.lower() == "chico":
-            message += "GRAY (first one only): " + str(self.failsGray) + "\n"
+        #if self.animalName.lower() == "chico":
+            #message += "GRAY (first one only): " + str(self.failsGray) + "\n"
         message += "\n"
         return message
         
@@ -437,11 +434,11 @@ class Analyzer():
             #Licking caused state to end... but was it a good lick or a bad one?
             if self.animalName.lower() == 'chico':
                 if prevState == States.REWARD:
-                    if self.t.stateHistory.count(States.GRAY) == 2:
+                    if self.t.stateHistory.count(States.GRAY) == 1:
                         self.t.result = Results.CORRECT_REJECT
                     else:
                         self.t.result = Results.HIT                
-                elif prevState == States.GRAY and self.t.stateHistory.count(States.GRAY) == 2:
+                elif prevState == States.GRAY and self.t.stateHistory.count(States.GRAY) == 1:
                     self.t.result = Results.FALSE_ALARM
                 else:
                     #If it wasn't a false alarm, it was just a general screwup
