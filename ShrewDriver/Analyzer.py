@@ -77,6 +77,7 @@ class Analyzer():
         self.sMinusTrials = 0     
         self.sMinusCorrectRate = 0
         
+        self.discriminationPercent = 0
         self.dPrimeOverall = 0
     
         self.sPlusPerformances = {} #will be a dictionary of OrientationPerformance objects

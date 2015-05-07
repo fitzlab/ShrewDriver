@@ -129,7 +129,7 @@ class Task(object):
             self.sequenceType = Sequences.RANDOM
             self.initiation = Initiation.IR
             
-            self.timeoutFail = 25
+            self.timeoutFail = 15
             self.timeoutAbort = 10
             self.timeoutSuccess = 6
             self.timeoutNoResponse = 6
