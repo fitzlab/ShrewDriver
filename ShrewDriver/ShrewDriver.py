@@ -205,7 +205,7 @@ class ShrewDriver(QtGui.QMainWindow, ShrewDriver_class):
     def updateResults(self):
         message = "Shrew: " + self.animalName + "\n\n"
         message += self.training.analyzer.getLiveSummary()
-        message += "====\nTimestamp: " + str(time.time()) + "\n"
+        message += "====\nTimestamp: " + str(time.time()) + "\n\n\n"
         
         if message is not None:
             self.txtTrialStats.setPlainText(message)

@@ -27,11 +27,11 @@ int irThresholdLow = 75;
 int irThresholdHigh = 100;
 bool irPrev = IR_SOLID;
 
-int tapThreshold = 4000;
+int tapThreshold = 2500;
 bool tapState = TAP_OFF;
 int numTapSamples = 50;
 
-int lickThreshold = 2500;
+int lickThreshold = 3500;
 bool lickState = LICK_OFF;
 int numLickSamples = 50;
 

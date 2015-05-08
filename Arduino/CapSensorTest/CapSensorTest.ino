@@ -13,7 +13,7 @@ CapacitiveSensor   cs_8_2 = CapacitiveSensor(8,2);        // 10M resistor betwee
 
 void setup()                    
 {
-   cs_8_2.set_CS_AutocaL_Millis(0xFFFFFFFF);     // turn off autocalibrate on channel 1 - just as an example
+   //cs_8_2.set_CS_AutocaL_Millis(0xFFFFFFFF);     // turn off autocalibrate on channel 1 - just as an example
    Serial.begin(57600);
 }
 
@@ -23,5 +23,5 @@ void loop()
 
     Serial.println(total1);                  // print sensor output 1
 
-    delay(30);                             // arbitrary delay to limit data to serial port 
+    delay(100);                             // arbitrary delay to limit data to serial port 
 }

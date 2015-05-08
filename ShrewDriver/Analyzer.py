@@ -213,7 +213,7 @@ class Analyzer():
                 if self.animalName.lower() == 'chico':
                     #Chico's a bit harder to analyze since he's got multiple gratings
                     
-                    if t.sMinusOrientation != '-1' and t.stateHistory.count(States.GRAY) == 2 and t.result != Results.TASK_FAIL:
+                    if t.sMinusOrientation != '-1' and t.stateHistory.count(States.GRAY) == 1 and t.result != Results.TASK_FAIL:
                         #This trial contains two GRAY states, so it's an S- trial
                         #create dictionary entry if needed
                         if not t.sMinusOrientation in self.sMinusPerformances:
@@ -227,7 +227,7 @@ class Analyzer():
                         if t.result == Results.CORRECT_REJECT:
                             self.sMinusPerformances[t.sMinusOrientation].numCorrect += 1
                     
-                    if t.sPlusOrientation != '-1' and t.stateHistory.count(States.GRAY) == 1 and States.REWARD in t.stateHistory:
+                    if t.sPlusOrientation != '-1' and t.stateHistory.count(States.GRAY) == 0 and States.REWARD in t.stateHistory:
                         #It's an S+ trial
                         #create dictionary entry if needed
                         if not t.sPlusOrientation in self.sPlusPerformances:

@@ -22,7 +22,7 @@ if __name__ == '__main__':
     successRates = []
     sPlusResponseRates = []
     
-    dirPath = "C:/Users/fitzlab1/Desktop/day2/"
+    dirPath = "C:/Users/fitzlab1/Desktop/day2/chico/"
     import glob
     import os
     os.chdir(dirPath)

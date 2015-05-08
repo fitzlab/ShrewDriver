@@ -164,8 +164,8 @@ class Task(object):
         
         elif self.shrewDriver.animalName == 'Queen':
             print "Using settings for Queen!"
-            self.sPlusOrientations = [135,135,]
-            self.sMinusOrientations = [110,160]
+            self.sPlusOrientations = [135]
+            self.sMinusOrientations = [160]
             self.sMinusPresentations = [0,1] #how many times to display the SMINUS
             self.guaranteedSPlus = False #is there always an SPLUS in the trial?
             self.sequenceType = Sequences.RANDOM
@@ -213,7 +213,7 @@ class Task(object):
             self.sequenceType = Sequences.RANDOM
             self.initiation = Initiation.TAP
             
-            self.timeoutFail = 10
+            self.timeoutFail = 5
             self.timeoutAbort = 10
             self.timeoutSuccess = 6
             self.timeoutNoResponse = 10
@@ -250,8 +250,8 @@ class Task(object):
             
         elif self.shrewDriver.animalName == 'Bernadette':
             print "Using settings for Bernadette!"
-            self.sPlusOrientations = [90]
-            self.sMinusOrientations = [0]
+            self.sPlusOrientations = [90,90,90]
+            self.sMinusOrientations = [0,45,135]
             self.sMinusPresentations = [0,1] #how many times to display the SMINUS
             self.guaranteedSPlus = False #is there always an SPLUS in the trial?
             self.sequenceType = Sequences.RANDOM
