@@ -230,8 +230,8 @@ class Task(object):
             
             self.hintChance = 1.0 #chance of sending a low reward at the start of the reward period
             
-            self.hintBolus = 0.05 #0.03 is a good amount; just enough that the shrew will notice it but not enough to be worth working for on its own.
-            self.rewardBolus = 0.15
+            self.hintBolus = 0.1 #0.03 is a good amount; just enough that the shrew will notice it but not enough to be worth working for on its own.
+            self.rewardBolus = 0.3
             self.rewardBolusHardTrial = 0.2 
             
             #stimbot setup, including command strings for each state

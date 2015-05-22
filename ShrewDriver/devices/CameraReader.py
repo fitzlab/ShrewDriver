@@ -22,6 +22,7 @@ class CameraReader():
         
     def captureFrame(self):
         self.readFrame()
+        self.frame = cv2.flip(self.frame, -1) #rotate frame 180
         self.video.write(self.frame)
         cv2.imshow(self.windowName, self.frame); 
         cv2.waitKey(1) #pauses 1ms, allows frame to display
