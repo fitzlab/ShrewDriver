@@ -160,7 +160,7 @@ class Analyzer():
                     self.failsSPlus += 1
                 if t.stateHistory[-2] == States.SMINUS:
                     self.failsSMinus += 1
-                if self.animalName.lower() == "chico" and t.stateHistory[-2] == States.GRAY and \
+                if (self.animalName.lower() == "chico" or self.animalName.lower() == "queen" or self.animalName.lower() == "bernadette") and t.stateHistory[-2] == States.GRAY and \
                 t.stateHistory.count(States.GRAY) == 0:
                     self.failsGray += 1
         
@@ -210,7 +210,7 @@ class Analyzer():
                 #OK, the shrew didn't screw up this trial
                 #So this is a trial that contains something interesting for results analysis
                 
-                if self.animalName.lower() == 'chico':
+                if (self.animalName.lower() == "chico" or self.animalName.lower() == "queen" or self.animalName.lower() == "bernadette"):
                     #Chico's a bit harder to analyze since he's got multiple gratings
                     
                     if t.sMinusOrientation != '-1' and t.stateHistory.count(States.GRAY) == 1 and t.result != Results.TASK_FAIL:
@@ -433,7 +433,7 @@ class Analyzer():
             
         elif self.t.actionHistory[-1] == Actions.LICK and self.t.actionTimes[-1] >= prevStateStart:
             #Licking caused state to end... but was it a good lick or a bad one?
-            if self.animalName.lower() == 'chico':
+            if (self.animalName.lower() == "chico" or self.animalName.lower() == "queen" or self.animalName.lower() == "bernadette") :
                 if prevState == States.REWARD:
                     if self.t.stateHistory.count(States.GRAY) == 1:
                         self.t.result = Results.CORRECT_REJECT

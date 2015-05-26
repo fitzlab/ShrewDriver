@@ -122,8 +122,8 @@ class Task(object):
         #Animal-relevant settings
         if self.shrewDriver.animalName == 'Chico':
             print "Using settings for Chico!"
-            self.sPlusOrientations = [135]
-            self.sMinusOrientations = [45]
+            self.sPlusOrientations = [45]
+            self.sMinusOrientations = [135]
             self.sMinusPresentations = [0,1] #how many times to display the SMINUS
             self.guaranteedSPlus = True #is there always an SPLUS in the trial?
             self.sequenceType = Sequences.RANDOM_RETRY
@@ -133,7 +133,7 @@ class Task(object):
             self.timeoutAbort = 10
             self.timeoutSuccess = 6
             self.timeoutNoResponse = 6
-            self.timeoutCorrectReject = 3
+            self.timeoutCorrectReject = 0
             
             self.initTime = 1
             
@@ -164,10 +164,10 @@ class Task(object):
         
         elif self.shrewDriver.animalName == 'Queen':
             print "Using settings for Queen!"
-            self.sPlusOrientations = [135,135]
+            self.sPlusOrientations = [135]
             self.sMinusOrientations = [165,105]
             self.sMinusPresentations = [0,1] #how many times to display the SMINUS
-            self.guaranteedSPlus = False #is there always an SPLUS in the trial?
+            self.guaranteedSPlus = True #is there always an SPLUS in the trial?
             self.sequenceType = Sequences.RANDOM_RETRY
             self.initiation = Initiation.IR
             
@@ -190,7 +190,7 @@ class Task(object):
             
             self.hintBolus = 0.03 #0.03 is a good amount; just enough that the shrew will notice it but not enough to be worth working for on its own.
             self.rewardBolus = 0.15
-            self.rewardBolusHardTrial = 0.2 
+            self.rewardBolusHardTrial = 0.25
             
             #stimbot setup, including command strings for each state
             #note that grating states will have an extra command added later to specify orientation and phase.
@@ -250,10 +250,10 @@ class Task(object):
             
         elif self.shrewDriver.animalName == 'Bernadette':
             print "Using settings for Bernadette!"
-            self.sPlusOrientations = [90,90,90]
+            self.sPlusOrientations = [90]
             self.sMinusOrientations = [0,45,135]
             self.sMinusPresentations = [0,1] #how many times to display the SMINUS
-            self.guaranteedSPlus = False #is there always an SPLUS in the trial?
+            self.guaranteedSPlus = True #is there always an SPLUS in the trial?
             self.sequenceType = Sequences.RANDOM
             self.initiation = Initiation.IR
             
@@ -275,8 +275,8 @@ class Task(object):
             self.hintChance = 0.0 #chance of sending a low reward at the start of the reward period
             
             self.hintBolus = 0.0 #0.03 is a good amount; just enough that the shrew will notice it but not enough to be worth working for on its own.
-            self.rewardBolus = 0.2
-            self.rewardBolusHardTrial = 0.2 
+            self.rewardBolus = 0.15
+            self.rewardBolusHardTrial = 0.25 
         
             #stimbot setup, including command strings for each state
             #note that grating states will have an extra command added later to specify orientation and phase.
