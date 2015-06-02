@@ -129,7 +129,7 @@ void loop() {
 	//Check sensors
 	checkIR();
 	checkLick();
-	//checkTap();
+	checkTap();
 }
 
 

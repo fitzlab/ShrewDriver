@@ -22,6 +22,10 @@ class CameraReader():
         
     def captureFrame(self):
         self.readFrame()
+        rows,cols,channels = self.frame.shape
+        if rows == 0 or cols == 0:
+            #Once in a while, a bad frame comes off the camera. Skip it.
+            return
         self.frame = cv2.flip(self.frame, -1) #rotate frame 180
         self.video.write(self.frame)
         cv2.imshow(self.windowName, self.frame); 

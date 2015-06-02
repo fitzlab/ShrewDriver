@@ -165,7 +165,7 @@ class Task(object):
         elif self.shrewDriver.animalName == 'Queen':
             print "Using settings for Queen!"
             self.sPlusOrientations = [135]
-            self.sMinusOrientations = [165,105]
+            self.sMinusOrientations = [150,120]
             self.sMinusPresentations = [0,1] #how many times to display the SMINUS
             self.guaranteedSPlus = True #is there always an SPLUS in the trial?
             self.sequenceType = Sequences.RANDOM_RETRY
@@ -228,7 +228,7 @@ class Task(object):
             self.grayDuration = 1
             self.rewardPeriod = self.grayDuration #needs to be no longer than gray duration!
             
-            self.hintChance = 1.0 #chance of sending a low reward at the start of the reward period
+            self.hintChance = 0.5 #chance of sending a low reward at the start of the reward period
             
             self.hintBolus = 0.1 #0.03 is a good amount; just enough that the shrew will notice it but not enough to be worth working for on its own.
             self.rewardBolus = 0.3
@@ -251,10 +251,10 @@ class Task(object):
         elif self.shrewDriver.animalName == 'Bernadette':
             print "Using settings for Bernadette!"
             self.sPlusOrientations = [90]
-            self.sMinusOrientations = [0,45,135]
+            self.sMinusOrientations = [65,115]
             self.sMinusPresentations = [0,1] #how many times to display the SMINUS
             self.guaranteedSPlus = True #is there always an SPLUS in the trial?
-            self.sequenceType = Sequences.RANDOM
+            self.sequenceType = Sequences.RANDOM_RETRY
             self.initiation = Initiation.IR
             
             self.timeoutFail = 15
