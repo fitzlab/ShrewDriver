@@ -122,8 +122,8 @@ class Task(object):
         #Animal-relevant settings
         if self.shrewDriver.animalName == 'Chico':
             print "Using settings for Chico!"
-            self.sPlusOrientations = [45]
-            self.sMinusOrientations = [135]
+            self.sPlusOrientations = [135]
+            self.sMinusOrientations = [45]
             self.sMinusPresentations = [0,1] #how many times to display the SMINUS
             self.guaranteedSPlus = True #is there always an SPLUS in the trial?
             self.sequenceType = Sequences.RANDOM_RETRY
@@ -144,7 +144,7 @@ class Task(object):
             self.grayDuration = 1
             self.rewardPeriod = self.grayDuration #needs to be no longer than gray duration!
             
-            self.hintChance = 0.0 #chance of sending a low reward at the start of the reward period
+            self.hintChance = 0 #chance of sending a low reward at the start of the reward period
             
             self.hintBolus = 0.03 #0.03 is a good amount; just enough that the shrew will notice it but not enough to be worth working for on its own.
             self.rewardBolus = 0.100
