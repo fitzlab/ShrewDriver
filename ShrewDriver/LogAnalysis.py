@@ -22,13 +22,13 @@ if __name__ == '__main__':
     successRates = []
     sPlusResponseRates = []
     
-    dirPath = r"C:\Users\fitzlab1\Desktop\chico_0609" + "\\"
+    dirPath = r"C:\Users\fitzlab1\Desktop\2015-11-12" + "\\"
     import glob
     import os
     os.chdir(dirPath)
-    shrewName = 'other'
-    if dirPath.lower().find("chico") > -1:
-        shrewName= "Chico"
+    
+    
+    shrewName= "Chico"
         
     
     gp = GraphPerformance()

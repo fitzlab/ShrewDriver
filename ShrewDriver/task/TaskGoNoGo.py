@@ -1,6 +1,6 @@
-from __future__ import division
+portalfrom __future__ import division
 
-import fileinput, re, math, sys, random, time
+import fileinput, re, math, sys, random, time, itertools
 
 import Task
 
@@ -28,21 +28,22 @@ class TaskGoNoGo(Task.Task):
         else:
             self.doHint = False
     
-    
     def makeTrialSet(self):
         self.trialSet = []
+        all_pairs = list(itertools.product(self.sPlusOrientations, self.sMinusOrientations))
         for numSMinus in self.sMinusPresentations:
-            for sPlusOrientation in self.sPlusOrientations:
-                for sMinusOrientation in self.sMinusOrientations:
-                    if sMinusOrientation == sPlusOrientation:
-                        #make sure SPLUS and SMINUS are different
-                        continue
-                    t = Trial()
-                    t.numSMinus = numSMinus
-                    t.sPlusOrientation = sPlusOrientation
-                    t.sMinusOrientation = sMinusOrientation
-                    
-                    self.trialSet.append(t)
+            for p in all_pairs:
+                (sPlusOrientation,sMinusOrientation) = p
+                if abs(sPlusOrientation - sMinusOrientation) < 0.001:
+                    #make sure SPLUS and SMINUS are different
+                    continue
+                
+                t = Trial()
+                t.numSMinus = numSMinus
+                t.sPlusOrientation = sPlusOrientation
+                t.sMinusOrientation = sMinusOrientation
+                
+                self.trialSet.append(t)
         
         print str(len(self.trialSet)) + " different trial conditions."
         

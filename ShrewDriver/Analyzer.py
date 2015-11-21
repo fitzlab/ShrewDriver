@@ -160,8 +160,7 @@ class Analyzer():
                     self.failsSPlus += 1
                 if t.stateHistory[-2] == States.SMINUS:
                     self.failsSMinus += 1
-                if (self.animalName.lower() == "chico" or self.animalName.lower() == "queen" or self.animalName.lower() == "bernadette") and t.stateHistory[-2] == States.GRAY and \
-                t.stateHistory.count(States.GRAY) == 0:
+                if t.stateHistory[-2] == States.GRAY and t.stateHistory.count(States.GRAY) == 1:
                     self.failsGray += 1
         
         self.taskFailCount = self.failsDelay + self.failsSPlus + self.failsSMinus + self.failsGray
@@ -183,8 +182,7 @@ class Analyzer():
         message += "DELAY: " + str(self.failsDelay) + "\n"
         message += "SPLUS: " + str(self.failsSPlus) + "\n"
         message += "SMINUS: " + str(self.failsSMinus) + "\n"
-        #if self.animalName.lower() == "chico":
-            #message += "GRAY (first one only): " + str(self.failsGray) + "\n"
+        message += "GRAY (first one only): " + str(self.failsGray) + "\n"
         message += "\n"
         return message
         
@@ -207,81 +205,51 @@ class Analyzer():
         for t in self.trials:
             
             if t.result != Results.ABORT:
-                #OK, the shrew didn't screw up this trial
+                #OK, the shrew didn't walk out of this trial
                 #So this is a trial that contains something interesting for results analysis
+            
+                if t.sMinusOrientation != '-1' and t.stateHistory.count(States.GRAY) == 2 and t.result != Results.TASK_FAIL:
+                    #This trial contains two GRAY states, so it's an S- trial
+                    #create dictionary entry if needed
+                    if not t.sMinusOrientation in self.sMinusPerformances:
+                        op = OrientationPerformance()
+                        op.sMinusOrientation = t.sMinusOrientation
+                        op.sPlusOrientation = t.sPlusOrientation
+                        self.sMinusPerformances[t.sMinusOrientation] = op
+                    
+                    self.sMinusPerformances[t.sMinusOrientation].numTrials += 1
+                    
+                    if t.result == Results.CORRECT_REJECT:
+                        self.sMinusPerformances[t.sMinusOrientation].numCorrect += 1
                 
-                if (self.animalName.lower() == "chico" or self.animalName.lower() == "queen" or self.animalName.lower() == "bernadette"):
-                    #Chico's a bit harder to analyze since he's got multiple gratings
+                if t.sPlusOrientation != '-1' and t.stateHistory.count(States.GRAY) == 1 and States.REWARD in t.stateHistory:
+                    #It's an S+ trial
+                    #create dictionary entry if needed
+                    if not t.sPlusOrientation in self.sPlusPerformances:
+                        op = OrientationPerformance()
+                        op.sMinusOrientation = t.sMinusOrientation
+                        op.sPlusOrientation = t.sPlusOrientation
+                        self.sPlusPerformances[t.sPlusOrientation] = op
                     
-                    if t.sMinusOrientation != '-1' and t.stateHistory.count(States.GRAY) == 1 and t.result != Results.TASK_FAIL:
-                        #This trial contains two GRAY states, so it's an S- trial
-                        #create dictionary entry if needed
-                        if not t.sMinusOrientation in self.sMinusPerformances:
-                            op = OrientationPerformance()
-                            op.sMinusOrientation = t.sMinusOrientation
-                            op.sPlusOrientation = t.sPlusOrientation
-                            self.sMinusPerformances[t.sMinusOrientation] = op
-                        
-                        self.sMinusPerformances[t.sMinusOrientation].numTrials += 1
-                        
-                        if t.result == Results.CORRECT_REJECT:
-                            self.sMinusPerformances[t.sMinusOrientation].numCorrect += 1
+                    #update entry with trial results
+                    self.sPlusPerformances[t.sPlusOrientation].numTrials += 1
+                    if t.result == Results.HIT:
+                        self.sPlusPerformances[t.sPlusOrientation].numCorrect += 1
                     
-                    if t.sPlusOrientation != '-1' and t.stateHistory.count(States.GRAY) == 0 and States.REWARD in t.stateHistory:
-                        #It's an S+ trial
-                        #create dictionary entry if needed
-                        if not t.sPlusOrientation in self.sPlusPerformances:
-                            op = OrientationPerformance()
-                            op.sMinusOrientation = t.sMinusOrientation
-                            op.sPlusOrientation = t.sPlusOrientation
-                            self.sPlusPerformances[t.sPlusOrientation] = op
-                        
-                        #update entry with trial results
-                        self.sPlusPerformances[t.sPlusOrientation].numTrials += 1
-                        if t.result == Results.HIT:
-                            self.sPlusPerformances[t.sPlusOrientation].numCorrect += 1
-                        
-                        # Testing this out...
-                        #potentially interesting -- get S+ results by S- orientation as well.
-                        #Looks like no real correlation here; leaving code in in case it shows up
-                        #with more data or something.
-                        #if not t.sMinusOrientation in self.sPlusBySMinusPerformances:
-                            #op = OrientationPerformance()
-                            #op.sMinusOrientation = t.sMinusOrientation
-                            #op.sPlusOrientation = t.sPlusOrientation
-                            #self.sPlusBySMinusPerformances[t.sMinusOrientation] = op
-                        #self.sPlusBySMinusPerformances[t.sMinusOrientation].numTrials += 1
-                        #if t.result == Results.HIT:
-                            #self.sPlusBySMinusPerformances[t.sMinusOrientation].numCorrect += 1
-                      
-                else:
-                    #It's simple go / no go, analysis is easy
-                    
-                    if t.sPlusOrientation != '-1' and t.result != Results.TASK_FAIL:
-                        #create dictionary entry if needed
-                        if not t.sPlusOrientation in self.sPlusPerformances:
-                            op = OrientationPerformance()
-                            op.sMinusOrientation = t.sMinusOrientation
-                            op.sPlusOrientation = t.sPlusOrientation
-                            self.sPlusPerformances[t.sPlusOrientation] = op
-                        
-                        #update entry with trial results
-                        self.sPlusPerformances[t.sPlusOrientation].numTrials += 1
-                        if t.result == Results.HIT:
-                            self.sPlusPerformances[t.sPlusOrientation].numCorrect += 1
-                        
-                    if t.sMinusOrientation != '-1' and t.result != Results.TASK_FAIL:
-                        #create dictionary entry if needed
-                        if not t.sMinusOrientation in self.sMinusPerformances:
-                            op = OrientationPerformance()
-                            op.sMinusOrientation = t.sMinusOrientation
-                            op.sPlusOrientation = t.sPlusOrientation
-                            self.sMinusPerformances[t.sMinusOrientation] = op
-                            
-                        #update entry with trial results
-                        self.sMinusPerformances[t.sMinusOrientation].numTrials += 1
-                        if t.result == Results.CORRECT_REJECT:
-                            self.sMinusPerformances[t.sMinusOrientation].numCorrect += 1
+                    # Testing this out...
+                    #potentially interesting -- get S+ results by S- orientation as well.
+                    #Looks like no real correlation here; leaving code in in case it shows up
+                    #with more data or something.
+                    #if not t.sMinusOrientation in self.sPlusBySMinusPerformances:
+                        #op = OrientationPerformance()
+                        #op.sMinusOrientation = t.sMinusOrientation
+                        #op.sPlusOrientation = t.sPlusOrientation
+                        #self.sPlusBySMinusPerformances[t.sMinusOrientation] = op
+                    #self.sPlusBySMinusPerformances[t.sMinusOrientation].numTrials += 1
+                    #if t.result == Results.HIT:
+                        #self.sPlusBySMinusPerformances[t.sMinusOrientation].numCorrect += 1
+                  
+            
         
         #overall discrimination stats
         sPlusOrientations = self.sPlusPerformances.keys()
@@ -437,27 +405,18 @@ class Analyzer():
             
         elif self.t.actionHistory[-1] == Actions.LICK and self.t.actionTimes[-1] >= prevStateStart:
             #Licking caused state to end... but was it a good lick or a bad one?
-            if (self.animalName.lower() == "chico" or self.animalName.lower() == "queen" or self.animalName.lower() == "bernadette") :
-                if prevState == States.REWARD:
-                    if self.t.stateHistory.count(States.GRAY) == 1:
-                        self.t.result = Results.CORRECT_REJECT
-                    else:
-                        self.t.result = Results.HIT                
-                elif prevState == States.GRAY and self.t.stateHistory.count(States.GRAY) == 1:
-                    self.t.result = Results.FALSE_ALARM
+        
+            if prevState == States.REWARD:
+                if self.t.stateHistory.count(States.GRAY) == 2:
+                    self.t.result = Results.CORRECT_REJECT
                 else:
-                    #If it wasn't a false alarm, it was just a general screwup
-                    self.t.result = Results.TASK_FAIL
+                    self.t.result = Results.HIT                
+            elif prevState == States.GRAY and self.t.stateHistory.count(States.GRAY) == 2:
+                self.t.result = Results.FALSE_ALARM
             else:
-                #any non-chico animal
-                if prevState == States.REWARD:
-                    self.t.result = Results.HIT
-                elif prevState == States.GRAY:
-                    #Anyone else false alarms by licking at GRAY
-                    self.t.result = Results.FALSE_ALARM
-                else:
-                    self.t.result = Results.TASK_FAIL
-                    
+                #If it wasn't a false alarm, it was just a general screwup
+                self.t.result = Results.TASK_FAIL
+                
         else:
             print "Error reading trial number " + str(self.trialNum)
             print str(self.t.stateHistory)

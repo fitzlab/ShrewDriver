@@ -9,10 +9,13 @@
 #include <CapacitiveSensor.h>
 
 #define PIN_IR_SENSOR A0
-#define PIN_TAP_SENSOR 6
-#define PIN_LICK_SENSOR 2
 #define PIN_IR_LED 4
-#define PIN_CAPACITIVE_GROUND 8
+
+#define PIN_LICK_SENSOR 2
+#define PIN_CAPACITIVE_GROUND_LICK 4
+
+#define PIN_TAP_SENSOR 8
+#define PIN_CAPACITIVE_GROUND_TAP 10
 
 #define TAP_ON HIGH
 #define TAP_OFF LOW
@@ -27,11 +30,11 @@ int irThresholdLow = 75;
 int irThresholdHigh = 100;
 bool irPrev = IR_SOLID;
 
-int tapThreshold = 2500;
+int tapThreshold = 1000;
 bool tapState = TAP_OFF;
 int numTapSamples = 50;
 
-int lickThreshold = 4000;
+int lickThreshold = 1000;
 bool lickState = LICK_OFF;
 int numLickSamples = 50;
 
@@ -39,12 +42,13 @@ const int irBufferSize = 10;
 int irBuffer[irBufferSize];
 int irBufferPos = 0;
 
-CapacitiveSensor csLick = CapacitiveSensor(PIN_CAPACITIVE_GROUND,PIN_LICK_SENSOR);
-CapacitiveSensor csTap = CapacitiveSensor(PIN_CAPACITIVE_GROUND,PIN_TAP_SENSOR);
+CapacitiveSensor csLick = CapacitiveSensor(PIN_CAPACITIVE_GROUND_LICK,PIN_LICK_SENSOR);
+CapacitiveSensor csTap = CapacitiveSensor(PIN_CAPACITIVE_GROUND_TAP,PIN_TAP_SENSOR);
 
 void setup() {
   delay(200); //let arduino wake up properly
   Serial.begin(57600);
+  Serial.println("Ix");
 
 	//pin setup
   pinMode(PIN_IR_SENSOR, INPUT);
@@ -127,7 +131,7 @@ int getIRMean(){
 // the loop routine runs over and over again forever:
 void loop() {
 	//Check sensors
-	checkIR();
+	//checkIR();
 	checkLick();
 	checkTap();
 }
