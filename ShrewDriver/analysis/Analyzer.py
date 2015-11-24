@@ -64,16 +64,16 @@ class OnlineAnalyzer():
         """
         while len(self.eventsToProcess) > 0:
             line = self.eventsToProcess.popleft()
-            self.analyzer.processLine(line) 
+            self.analyzer.process_line(line) 
 
         #compute stats
         self.analyzer.trial_stats()
 
         #get summary data 
-        summary = a.str_overview() + a.str_discrimination() + a.str_task_errors()
+        summary = self.analyzer.str_overview() + self.analyzer.str_discrimination() + self.analyzer.str_task_errors()
 
         #save summary data to backup file
-        with open(summaryFile, 'w') as fh:
+        with open(self.summaryFile, 'w') as fh:
             fh.write(summary)
 
         return summary    
@@ -285,8 +285,14 @@ class Analyzer():
         self.session_mL = 0
         for t in self.trials:
             self.session_mL += t.total_mL
-            
-        if len(self.trials) > 0:
+        
+        self.rewardPerHour = 0
+        self.runTime = ""
+        self.startTime = ""
+        self.endTime = ""
+        self.midSessionTime = ""
+        
+        if len(self.trials) > 1:
             t0 = self.trials[0]
             tN = self.trials[-1]
             if len(t0.stateTimes) > 0 and len(tN.stateTimes) > 0:
@@ -383,7 +389,7 @@ class Analyzer():
 
         #look at settings file name
         #get shrew name, date, and session number
-        m = re.match("(.*)_(.*)_(\\d+)_settings.txt", self.settingsFile.split(os.sep)[-1])
+        m = re.match(".*\W(\w+)_(.*)_(\\d+)_settings.txt", self.settingsFile.split(os.sep)[-1])
         self.shrewName = m.group(1)
         self.sessionNumber = int(m.group(3))
         
