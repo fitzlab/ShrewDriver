@@ -1,4 +1,4 @@
-portalfrom __future__ import division
+from __future__ import division
 
 import fileinput, re, math, sys, random, time, itertools
 
