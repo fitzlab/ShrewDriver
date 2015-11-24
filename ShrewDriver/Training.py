@@ -21,7 +21,11 @@ from TaskHeadfix import *
 from LivePlot import *
 from ShrewDriver import *
 from Trial import *
-from Analyzer import *
+
+sys.path.append("..")
+from analysis.Analyzer import *
+
+
 
 '''
 Training.py is the control center. 
@@ -63,7 +67,7 @@ class Training():
         self.logFile = open(self.logFilePath, 'w')
         
         #make the live data analyzer
-        self.analyzer = Analyzer(shrew=self.shrewDriver.animalName)
+        self.analyzer = OnlineAnalyzer(self.task.settingsFilePath, self.task.summaryFilePath)
         
         #turn screen on, if needed
         time.sleep(0.1) 
@@ -99,7 +103,7 @@ class Training():
         self.livePlot.sigEvent.emit(eventType, timestamp)
         line = eventType + " " + str(timestamp) + "\n"
         self.logFile.write(line)
-        self.analyzer.processLine(line)
+        self.analyzer.event(line)
         
     
     def dispenseHint(self, rewardMillis):

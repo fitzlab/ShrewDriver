@@ -112,6 +112,7 @@ class Task(object):
     
     def writeSettingsFile(self):
         self.settingsFilePath = self.shrewDriver.experimentPath + self.shrewDriver.sessionFileName + "_settings.txt" 
+        self.summaryFilePath = self.shrewDriver.experimentPath + self.shrewDriver.sessionFileName + "_summary.txt" 
         self.settingsFile = open(self.settingsFilePath, 'w')
         self.settingsFile.write("States: " + str(stateSet) + "\n")
         thisAsString = objectToString.objectToString(self)
