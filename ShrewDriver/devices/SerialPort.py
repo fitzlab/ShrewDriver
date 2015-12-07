@@ -43,13 +43,28 @@ class SerialPort():
                     self.updates.append(byteStr)
     
     def close(self):
+        """For closing serial at end of task"""
         self.stopFlag = True
         time.sleep(0.1)
         self.ser.close()
     
+    def reopen(self):
+        """In case of failure, reopen serial. Read/write lock is acquired while reopening."""
+        print "Reopening serial after write failure..."
+        with self.threadLock:
+            self.ser.close()
+            self.ser = serial.Serial(self.serialPortName, self.baudRate, timeout=5)
+            time.sleep(2)
+        print "Opened."
+        
+
     def write(self, command):
-        self.ser.write(command)
-    
+        try:
+            self.ser.write(command)
+        except Exception as e:
+            print traceback.format_exception(*sys.exc_info())
+            self.reopen()
+
     def startReadThread(self):
         self.stopFlag = False
         thread = threading.Thread(target=self.readData)
