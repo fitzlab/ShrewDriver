@@ -145,12 +145,8 @@ class TaskGoNoGo(Task.Task):
             if not self.shrewPresent:
                 self.abort()
             
-            #-- early response fail condition. Helps teach the shrews to respond to the gray. --#
-            if self.lastLickAt > self.stateStartTime and self.lastLickAt < self.stateStartTime + 0.05:
-                self.fail()
-            
             #-- success condition --#
-            if self.lastLickAt >= self.stateStartTime + 0.05:
+            if self.lastLickAt >= self.stateStartTime:
                 if self.isHighRewardTrial:
                     self.training.dispenseReward(self.rewardBolusHardTrial)
                 else:
