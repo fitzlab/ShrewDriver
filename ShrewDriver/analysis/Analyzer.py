@@ -389,7 +389,8 @@ class Analyzer():
 
         #look at settings file name
         #get shrew name, date, and session number
-        m = re.match(".*\W(\w+)_(.*)_(\\d+)_settings.txt", self.settingsFile.split(os.sep)[-1])
+        m = re.match("(\w+)_(.*)_(\\d+)_settings.txt", self.settingsFile.split(os.sep)[-1])
+        print self.settingsFile.split(os.sep)[-1]
         self.shrewName = m.group(1)
         self.sessionNumber = int(m.group(3))
         
@@ -478,7 +479,7 @@ class Analyzer():
             toks = line.split()
             ori = toks[0][3:]
             
-            if float(ori) in self.sMinusOrientations:
+            if float(ori) in self.sMinusOrientations and self.t.sMinusOrientation == -1:
                 self.t.sMinusOrientation = float(ori)
             else:
                 self.t.sPlusOrientation = float(ori)
@@ -550,7 +551,7 @@ def analyzeDir(baseDir):
         logFilePath = os.path.abspath(logFile)
         settingsFilePath = os.path.abspath(settingsFile)
 
-        a = Analysis(settingsFilePath, logFilePath)
+        a = Analyzer(settingsFilePath, logFilePath)
         analyses.append(a)
         
     return analyses
