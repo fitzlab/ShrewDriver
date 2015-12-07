@@ -54,6 +54,7 @@ class ShrewDriver(QtGui.QMainWindow, ShrewDriver_class):
         self.trialHistory = []
         
         #init dropdown choices
+        #init dropdown choices
         self.getAnimalDirs()
         self.getAvailableSerialPorts()
         self.getAvailableCameras()
@@ -181,12 +182,12 @@ class ShrewDriver(QtGui.QMainWindow, ShrewDriver_class):
     
     def makeSession(self):
         #make the dirs for a new recording session
-        animalPath = self.baseDataPath + self.animalName + '/'
-        datePath = animalPath + self.dateStr + '/'
+        animalPath = self.baseDataPath + self.animalName + os.sep
+        datePath = animalPath + self.dateStr + os.sep
         if not os.path.exists(datePath):
             os.makedirs(datePath)
         for i in range(1,10000):
-            sessionPath = datePath + str(i).zfill(4) + '/'
+            sessionPath = datePath + str(i).zfill(4) + os.sep
             if not os.path.exists(sessionPath):
                 self.sessionNumber = i
                 os.makedirs(sessionPath)
