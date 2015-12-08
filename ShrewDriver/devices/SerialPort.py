@@ -1,4 +1,4 @@
-import serial, time, re, threading
+import serial, time, re, threading, sys, traceback
 
 class SerialPort():
     # This class talks to an Arduino and reads the raw data from it, adding timestamps.
