@@ -129,7 +129,13 @@ class TaskGoNoGo(Task.Task):
             
         if self.state == States.SPLUS:
             #-- fail conditions --#
-            self.checkFailOrAbort()
+            if self.shrewDriver.animalName == "Bernadette":
+                if now > self.stateStartTime + 0.250:
+                    pass
+                else:
+                    self.checkFailOrAbort()
+            else:
+                self.checkFailOrAbort()
                 
             #-- progression condition --#
             if now > self.stateEndTime:
