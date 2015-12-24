@@ -159,8 +159,8 @@ class Task(object):
         elif self.shrewDriver.animalName == 'Carmen':
             #temp name of new shrew
             print "Using settings for Carmen!"
-            self.sPlusOrientations = [0,45,45,45]
-            self.sMinusOrientations = [45,45,45,90]
+            self.sPlusOrientations = [0,45,45]
+            self.sMinusOrientations = [45,45,90]
             self.sMinusPresentations = [1,2] #how many times to display the SMINUS
             self.guaranteedSPlus = True #is there always an SPLUS in the trial?
             self.sequenceType = Sequences.RANDOM_RETRY
@@ -193,9 +193,9 @@ class Task(object):
             self.commandStrings[States.TIMEOUT] = 'ac pab px45 py0 sx12 sy12\n'
             self.commandStrings[States.INIT] = 'ac paw px45 py0 sx12 sy12\n'
             self.commandStrings[States.DELAY] = 'sx0 sy0\n'
-            self.commandStrings[States.SMINUS] = 'acgf sf0.25 tf0 jf0 ja0 px35 py0 sx60 sy60\n'
+            self.commandStrings[States.SMINUS] = 'as sf0.25 tf0 jf3 ja0.25 px0 py0 sx999 sy999\n'
             self.commandStrings[States.GRAY] = 'sx0 sy0\n'
-            self.commandStrings[States.SPLUS] = 'acgf sf0.25 tf0 jf0 ja0 px35 py0 sx60 sy60\n'
+            self.commandStrings[States.SMINUS] = 'as sf0.25 tf0 jf3 ja0.25 px0 py0 sx999 sy999\n'
             self.commandStrings[States.REWARD] = 'sx0 sy0\n'
         
         elif self.shrewDriver.animalName == 'Queen':
