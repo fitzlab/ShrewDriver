@@ -159,11 +159,11 @@ class Task(object):
         elif self.shrewDriver.animalName == 'Carmen':
             #temp name of new shrew
             print "Using settings for Carmen!"
-            self.sPlusOrientations = [0,45,45,135]
-            self.sMinusOrientations = [135,45,45,90]
+            self.sPlusOrientations = [135,0,45,90]
+            self.sMinusOrientations = [135,0,45,90]
             self.sMinusPresentations = [1,2] #how many times to display the SMINUS
             self.guaranteedSPlus = True #is there always an SPLUS in the trial?
-            self.sequenceType = Sequences.RANDOM_RETRY
+            self.sequenceType = Sequences.RANDOM
             self.initiation = Initiation.TAP
             
             self.timeoutFail = 6
@@ -181,11 +181,11 @@ class Task(object):
             self.grayDuration = 1
             self.rewardPeriod = self.grayDuration #needs to be no longer than gray duration!
             
-            self.hintChance = 0.0 #chance of sending a low reward at the start of the reward period
+            self.hintChance = 0.5 #chance of sending a low reward at the start of the reward period
             
             self.hintBolus = 0.05 #0.03 is a good amount; just enough that the shrew will notice it but not enough to be worth working for on its own.
-            self.rewardBolus = 0.200
-            self.rewardBolusHardTrial = 0.300
+            self.rewardBolus = 0.300
+            self.rewardBolusHardTrial = 0.400
             
             #stimbot setup, including command strings for each state
             #note that grating states will have an extra command added later to specify orientation and phase.
@@ -193,9 +193,9 @@ class Task(object):
             self.commandStrings[States.TIMEOUT] = 'ac pab px45 py0 sx12 sy12\n'
             self.commandStrings[States.INIT] = 'ac paw px45 py0 sx12 sy12\n'
             self.commandStrings[States.DELAY] = 'sx0 sy0\n'
-            self.commandStrings[States.SMINUS] = 'as sf0.25 tf0 jf3 ja0.25 px0 py0 sx999 sy999\n'
+            self.commandStrings[States.SMINUS] = 'as sf0.25 gc0.1 tf0 jf3 ja0.25 px0 py0 sx999 sy999\n'
             self.commandStrings[States.GRAY] = 'sx0 sy0\n'
-            self.commandStrings[States.SMINUS] = 'as sf0.25 tf0 jf3 ja0.25 px0 py0 sx999 sy999\n'
+            self.commandStrings[States.SPLUS] = 'as sf0.25 gc1.0 tf0 jf3 ja0.25 px0 py0 sx999 sy999\n'
             self.commandStrings[States.REWARD] = 'sx0 sy0\n'
         
         elif self.shrewDriver.animalName == 'Queen':
