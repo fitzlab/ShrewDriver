@@ -148,8 +148,8 @@ class Task(object):
             #stimbot setup, including command strings for each state
             #note that grating states will have an extra command added later to specify orientation and phase.
             self.screenDistanceMillis = 120
-            self.commandStrings[States.TIMEOUT] = 'ac pab px45 py0 sx12 sy12\n'
-            self.commandStrings[States.INIT] = 'ac paw px45 py0 sx12 sy12\n'
+            self.commandStrings[States.TIMEOUT] = 'ac pab px0 py0 sx12 sy12\n'
+            self.commandStrings[States.INIT] = 'ac paw px0 py0 sx12 sy12\n'
             self.commandStrings[States.DELAY] = 'sx0 sy0\n'
             self.commandStrings[States.SMINUS] = 'as sf0.25 tf0 jf3 ja0.25 px0 py0 sx999 sy999\n'
             self.commandStrings[States.GRAY] = 'sx0 sy0\n'
@@ -159,8 +159,8 @@ class Task(object):
         elif self.shrewDriver.animalName == 'Carmen':
             #temp name of new shrew
             print "Using settings for Carmen!"
-            self.sPlusOrientations = [135,0,45,90]
-            self.sMinusOrientations = [135,0,45,90]
+            self.sPlusOrientations = [135,45,90]
+            self.sMinusOrientations = [135,45,90]
             self.sMinusPresentations = [1,2] #how many times to display the SMINUS
             self.guaranteedSPlus = True #is there always an SPLUS in the trial?
             self.sequenceType = Sequences.RANDOM_RETRY
@@ -190,8 +190,8 @@ class Task(object):
             #stimbot setup, including command strings for each state
             #note that grating states will have an extra command added later to specify orientation and phase.
             self.screenDistanceMillis = 120
-            self.commandStrings[States.TIMEOUT] = 'ac pab px45 py0 sx12 sy12\n'
-            self.commandStrings[States.INIT] = 'ac paw px45 py0 sx12 sy12\n'
+            self.commandStrings[States.TIMEOUT] = 'ac pab px0 py0 sx12 sy12\n'
+            self.commandStrings[States.INIT] = 'ac paw px0 py0 sx12 sy12\n'
             self.commandStrings[States.DELAY] = 'sx0 sy0\n'
             self.commandStrings[States.SMINUS] = 'as sf0.25 gc0.2 tf0 jf3 ja0.25 px0 py0 sx999 sy999\n'
             self.commandStrings[States.GRAY] = 'sx0 sy0\n'
@@ -230,8 +230,8 @@ class Task(object):
             #stimbot setup, including command strings for each state
             #note that grating states will have an extra command added later to specify orientation and phase.
             self.screenDistanceMillis = 120
-            self.commandStrings[States.TIMEOUT] = 'ac pab px45 py0 sx12 sy12\n'
-            self.commandStrings[States.INIT] = 'ac paw px45 py0 sx12 sy12\n'
+            self.commandStrings[States.TIMEOUT] = 'ac pab px0 py0 sx12 sy12\n'
+            self.commandStrings[States.INIT] = 'ac paw px0 py0 sx12 sy12\n'
             self.commandStrings[States.DELAY] = 'sx0 sy0\n'
             self.commandStrings[States.SMINUS] = 'as sf0.25 tf0 jf3 ja0.25 px0 py0 sx999 sy999\n'
             self.commandStrings[States.GRAY] = 'sx0 sy0\n'
@@ -271,8 +271,8 @@ class Task(object):
             #stimbot setup, including command strings for each state
             #note that grating states will have an extra command added later to specify orientation and phase.
             self.screenDistanceMillis = 120
-            self.commandStrings[States.TIMEOUT] = 'ac pab px45 py0 sx12 sy12\n'
-            self.commandStrings[States.INIT] = 'ac paw p450 py0 sx12 sy12\n'
+            self.commandStrings[States.TIMEOUT] = 'ac pab px0 py0 sx12 sy12\n'
+            self.commandStrings[States.INIT] = 'ac paw px0 py0 sx12 sy12\n'
             self.commandStrings[States.DELAY] = 'sx0 sy0\n'
             self.commandStrings[States.SMINUS] = 'acgf sf0.25 tf0 jf0 ja0 px0 py0 sx999 sy999\n'
             self.commandStrings[States.GRAY] = 'sx0 sy0\n'
@@ -315,8 +315,8 @@ class Task(object):
             #stimbot setup, including command strings for each state
             #note that grating states will have an extra command added later to specify orientation and phase.
             self.screenDistanceMillis = 120
-            self.commandStrings[States.TIMEOUT] = 'ac pab px45 py0 sx12 sy12\n'
-            self.commandStrings[States.INIT] = 'ac paw px45 py0 sx12 sy12\n'
+            self.commandStrings[States.TIMEOUT] = 'ac pab px0 py0 sx12 sy12\n'
+            self.commandStrings[States.INIT] = 'ac paw px0 py0 sx12 sy12\n'
             self.commandStrings[States.DELAY] = 'sx0 sy0\n'
             self.commandStrings[States.SMINUS] = 'acgf sf0.25 tf0 jf0 ja0 px35 py0 sx999 sy999\n'
             self.commandStrings[States.GRAY] = 'sx0 sy0\n'
@@ -332,7 +332,7 @@ class Task(object):
             self.sequenceType = Sequences.RANDOM_RETRY
             self.initiation = Initiation.TAP
             
-            self.timeoutFail = 6
+            self.timeoutFail = 10
             self.timeoutAbort = 6
             self.timeoutSuccess = 6
             self.timeoutNoResponse = 6
@@ -356,8 +356,8 @@ class Task(object):
             #stimbot setup, including command strings for each state
             #note that grating states will have an extra command added later to specify orientation and phase.
             self.screenDistanceMillis = 120
-            self.commandStrings[States.TIMEOUT] = 'ac pab px45 py0 sx12 sy12\n'
-            self.commandStrings[States.INIT] = 'ac paw px45 py0 sx12 sy12\n'
+            self.commandStrings[States.TIMEOUT] = 'ac pab px0 py0 sx12 sy12\n'
+            self.commandStrings[States.INIT] = 'ac paw px0 py0 sx12 sy12\n'
             self.commandStrings[States.DELAY] = 'sx0 sy0\n'
             self.commandStrings[States.SMINUS] = 'acgf sf0.25 tf0 jf0 ja0 px35 py0 sx999 sy999\n'
             self.commandStrings[States.GRAY] = 'sx0 sy0\n'
@@ -398,8 +398,8 @@ class Task(object):
             #stimbot setup, including command strings for each state
             #note that grating states will have an extra command added later to specify orientation and phase.
             self.screenDistanceMillis = 120
-            self.commandStrings[States.TIMEOUT] = 'ac pab px45 py0 sx12 sy12\n'
-            self.commandStrings[States.INIT] = 'ac paw px45 py0 sx12 sy12\n'
+            self.commandStrings[States.TIMEOUT] = 'ac pab px0 py0 sx12 sy12\n'
+            self.commandStrings[States.INIT] = 'ac paw px0 py0 sx12 sy12\n'
             self.commandStrings[States.DELAY] = 'sx0 sy0\n'
             self.commandStrings[States.SMINUS] = 'acgf sf0.25 tf0 jf0 ja0 px35 py0 sx999 sy60\n'
             self.commandStrings[States.GRAY] = 'sx0 sy0\n'
