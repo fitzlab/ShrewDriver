@@ -201,16 +201,16 @@ class Task(object):
         elif self.shrewDriver.animalName == 'Queen':
             print "Using settings for Queen!"
             self.sPlusOrientations = [135]
-            self.sMinusOrientations = [160,155,145,140]
+            self.sMinusOrientations = [157.5,152.5,147.5]
             self.sMinusPresentations = [1,2] #how many times to display the SMINUS
             self.guaranteedSPlus = True #is there always an SPLUS in the trial?
-            self.sequenceType = Sequences.RANDOM_RETRY
+            self.sequenceType = Sequences.RANDOM
             self.initiation = Initiation.TAP            
-            self.timeoutFail = 15
-            self.timeoutAbort = 10
-            self.timeoutSuccess = 6
-            self.timeoutNoResponse = 10
-            self.timeoutCorrectReject = 0
+            self.timeoutFail = 6
+            self.timeoutAbort = 6
+            self.timeoutSuccess = 2
+            self.timeoutNoResponse = 6
+            self.timeoutCorrectReject = 2
             
             self.initTime = 1
             
