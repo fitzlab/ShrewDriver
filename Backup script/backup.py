@@ -53,7 +53,7 @@ def backup(inDir, outDir, overwrite=False):
     print "Copying " + str(nFiles) + " files."
     percentDone = 0
     for i, f in enumerate(files_to_copy):
-        if i/nFiles > percentDone:
+        if i/nFiles*100 > percentDone:
             print str(percentDone) + "% done"
             percentDone += 5
 
