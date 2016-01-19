@@ -47,7 +47,6 @@ def backup(inDir, outDir, overwrite=False):
 
         files_to_copy = newFiles
     
-        print newFiles  
 
     #Perform copying
     nFiles = len(newFileSubPaths)
