@@ -329,10 +329,10 @@ class Task(object):
             self.sMinusOrientations = [65] #90-65 = 25 degree difference.
             self.sMinusPresentations = [0,1] #how many times to display the SMINUS
             self.guaranteedSPlus = True #is there always an SPLUS in the trial?
-            self.sequenceType = Sequences.RANDOM_RETRY
+            self.sequenceType = Sequences.RANDOM
             self.initiation = Initiation.TAP
             
-            self.timeoutFail = 10
+            self.timeoutFail = 6
             self.timeoutAbort = 6
             self.timeoutSuccess = 6
             self.timeoutNoResponse = 6
