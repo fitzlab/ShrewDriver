@@ -152,7 +152,7 @@ class TaskGoNoGo(Task.Task):
                 self.abort()
             
             #-- success condition --#
-            if self.lastLickAt >= self.stateStartTime + 0.100:
+            if self.lastLickAt >= self.stateStartTime:
                 if self.isHighRewardTrial:
                     self.training.dispenseReward(self.rewardBolusHardTrial)
                 else:
