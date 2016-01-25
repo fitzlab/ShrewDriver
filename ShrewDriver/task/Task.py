@@ -193,7 +193,7 @@ class Task(object):
             self.commandStrings[States.TIMEOUT] = 'ac pab px0 py0 sx12 sy12\n'
             self.commandStrings[States.INIT] = 'ac paw px0 py0 sx12 sy12\n'
             self.commandStrings[States.DELAY] = 'sx0 sy0\n'
-            self.commandStrings[States.SMINUS] = 'as sf0.25 gc0.5 tf0 jf3 ja0.25 px0 py0 sx999 sy999\n'
+            self.commandStrings[States.SMINUS] = 'as sf0.25 gc0.4 tf0 jf3 ja0.25 px0 py0 sx999 sy999\n'
             self.commandStrings[States.GRAY] = 'sx0 sy0\n'
             self.commandStrings[States.SPLUS] = 'as sf0.25 gc1.0 tf0 jf3 ja0.25 px0 py0 sx999 sy999\n'
             self.commandStrings[States.REWARD] = 'sx0 sy0\n'
