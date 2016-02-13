@@ -157,7 +157,10 @@ class TaskGoNoGo(Task.Task):
                     self.training.dispenseReward(self.rewardBolusHardTrial)
                 else:
                     self.training.dispenseReward(self.rewardBolus)
-                    
+                
+                if self.shrewDriver.animalName == "Splinter":
+                    self.training.stimSerial.write("tone5\n")
+                
                 self.stateDuration = self.timeoutSuccess
                 self.trialResult = Results.HIT
                 self.changeState(States.TIMEOUT)
