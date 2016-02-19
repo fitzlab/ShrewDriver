@@ -227,8 +227,8 @@ class Task(object):
             self.hintChance = 0.0 #chance of sending a low reward at the start of the reward period
             
             self.hintBolus = 0.05 #0.03 is a good amount; just enough that the shrew will notice it but not enough to be worth working for on its own.
-            self.rewardBolus = 0.200
-            self.rewardBolusHardTrial = 0.300
+            self.rewardBolus = 0.050
+            self.rewardBolusHardTrial = 0.100
             
             #stimbot setup, including command strings for each state
             #note that grating states will have an extra command added later to specify orientation and phase.
@@ -244,7 +244,7 @@ class Task(object):
         elif self.shrewDriver.animalName == 'Splinter':
             print "Using settings for Splinter!"
             self.sPlusOrientations = [90]
-            self.sMinusOrientations = [65] #90-65 = 25 degree difference.
+            self.sMinusOrientations = [45] #90-65 = 25 degree difference.
             self.sMinusPresentations = [0,1] #how many times to display the SMINUS
             self.guaranteedSPlus = True #is there always an SPLUS in the trial?
             self.sequenceType = Sequences.RANDOM_RETRY
