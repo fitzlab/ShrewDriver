@@ -3,6 +3,7 @@ import time, threading, random, sys
 
 sys.path.append("./devices")
 from SerialPort import *
+from psycho import *
 
 sys.path.append("./util")
 from Enumeration import *
@@ -50,8 +51,9 @@ class Training():
         self.syringeSerial.startReadThread()
         
         #start stim serial
-        if self.shrewDriver.animalName == 'Clucker':
-            # Just patching in PsychoPy here. Dirty, but I'll totally fix it later, probably.
+        if self.shrewDriver.syringePortName == "COM91" or self.shrewDriver.syringePortName == "COM101":
+            #If we're upstairs, use PsychoPy to render stims
+            time.sleep(9)  #lets users drag windows around.
             self.stimSerial = Psycho(windowed=False)
         else:
             self.stimSerial = SerialPort(self.shrewDriver.stimPortName)

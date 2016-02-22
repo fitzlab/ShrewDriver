@@ -32,6 +32,12 @@ class Psycho():
         self.proc.stdin.write(s + "\n")        
         if self.logFile:
             t = time.time()
+            
+    def close(self):
+        pass
+    
+    def getUpdates(self):
+        pass
 
 class PsychoSubproc():
     '''
@@ -282,25 +288,24 @@ class PsychoSubproc():
                 #load saved command and run it
                 number = int(m.group(2))
                 self.cmds.append(self.savedCommands[number])
-                self.doCommands()
-                return
-            
-            #parse token
-            cmd = m.group(1)
-            number = None
-            if len(m.group(2)) > 0:
-                number = float(m.group(2))
-            
-            #handle special case of "save". "save" must be at the beginning of saved command.
-            if cmd == "save":
-                remainder = (" ").join(toks[1:])
-                assert "save" not in remainder #avoid infinite loop
-                self.savedCommands[int(number)] = remainder
-                break
-            else:
-                #do the command
-                self.doCommand(cmd, number)
                 
+            else:
+                #parse token
+                cmd = m.group(1)
+                number = None
+                if len(m.group(2)) > 0:
+                    number = float(m.group(2))
+                
+                #handle special case of "save". "save" must be at the beginning of saved command.
+                if cmd == "save":
+                    remainder = (" ").join(toks[1:])
+                    assert "save" not in remainder #avoid infinite loop
+                    self.savedCommands[int(number)] = remainder
+                    break
+                else:
+                    #do the command
+                    self.doCommand(cmd, number)
+                    
     def showPatch(self):
         self.drawGrating = False
         self.drawPatch = True
@@ -326,22 +331,22 @@ if __name__ == "__main__":
         #Demonstration
         pw = Psycho(windowed=False)
     
-        #cmds = ["as pab sx999 sy999",
-                #"save0 ac sqr-10 sf2",
-                #"save1 sx3 sy3 acgf sqr45",
-                #"0",
-                #"1",
-                #"tf1.0",
-                #"tf0",
-                #"ph0.25",
-                #"ph0.5 gc0.5",
-                #"ph0.75",
-                #"sx3 sy3 acgf sqr45 ja1.0 jf1.0"]
+        cmds = ["as pab sx999 sy999",
+                "save0 ac sf2 ph0.76",
+                "save1 sf0.5 sx30 sy30 as",
+                "0 sqr45 ph0.76",
+                "1",
+                "tf1.0",
+                "tf0",
+                "ph0.25",
+                "ph0.5 gc0.5",
+                "ph0.75",
+                "sx3 sy3 acgf sqr45 ja1.0 jf1.0"]
     
-        #for cmd in cmds:
-            #time.sleep(1.5) 
-            #print cmd
-            #pw.write(cmd)
+        for cmd in cmds:
+            time.sleep(1.5) 
+            print cmd
+            pw.write(cmd)
             
             
         cmds = ["paw", "pab"]

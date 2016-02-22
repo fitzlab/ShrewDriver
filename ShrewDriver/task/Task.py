@@ -227,18 +227,18 @@ class Task(object):
             self.hintChance = 0.0 #chance of sending a low reward at the start of the reward period
             
             self.hintBolus = 0.05 #0.03 is a good amount; just enough that the shrew will notice it but not enough to be worth working for on its own.
-            self.rewardBolus = 0.050
-            self.rewardBolusHardTrial = 0.100
+            self.rewardBolus = 0.150
+            self.rewardBolusHardTrial = 0.200
             
             #stimbot setup, including command strings for each state
             #note that grating states will have an extra command added later to specify orientation and phase.
-            self.screenDistanceMillis = 120
+            self.screenDistanceMillis = 25
             self.commandStrings[States.TIMEOUT] = 'ac pab px0 py0 sx12 sy12\n'
             self.commandStrings[States.INIT] = 'ac paw px0 py0 sx12 sy12\n'
             self.commandStrings[States.DELAY] = 'sx0 sy0\n'
-            self.commandStrings[States.SMINUS] = 'acgf sf0.25 tf0 jf0 ja0 px35 py0 sx999 sy999\n'
+            self.commandStrings[States.SMINUS] = 'as sf0.25 tf0 jf0 ja0 px35 py0 sx999 sy999\n'
             self.commandStrings[States.GRAY] = 'sx0 sy0\n'
-            self.commandStrings[States.SPLUS] = 'acgf sf0.25 tf0 jf0 ja0 px35 py0 sx999 sy999\n'
+            self.commandStrings[States.SPLUS] = 'as sf0.25 tf0 jf0 ja0 px35 py0 sx999 sy999\n'
             self.commandStrings[States.REWARD] = 'sx0 sy0\n'
             
         elif self.shrewDriver.animalName == 'Splinter':
