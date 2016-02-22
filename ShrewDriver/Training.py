@@ -25,14 +25,11 @@ from Trial import *
 sys.path.append("..")
 from analysis.Analyzer import *
 
-
-
 '''
 Training.py is the control center. 
 This is where the main loop lives (listen to sensors, send commands to screen, etc.)
 It also controls live plotting and analysis.
 '''
-
 
 class Training():
     
@@ -53,8 +50,12 @@ class Training():
         self.syringeSerial.startReadThread()
         
         #start stim serial
-        self.stimSerial = SerialPort(self.shrewDriver.stimPortName)
-        self.stimSerial.startReadThread()
+        if self.shrewDriver.animalName == 'Clucker':
+            # Just patching in PsychoPy here. Dirty, but I'll totally fix it later, probably.
+            self.stimSerial = Psycho(windowed=False)
+        else:
+            self.stimSerial = SerialPort(self.shrewDriver.stimPortName)
+            self.stimSerial.startReadThread()
         
         #set up task
         if self.shrewDriver.animalName == 'Headfix':
