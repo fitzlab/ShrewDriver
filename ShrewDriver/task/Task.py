@@ -142,7 +142,7 @@ class Task(object):
             self.hintChance = 0.0 #chance of sending a low reward at the start of the reward period
             
             self.hintBolus = 0.03 #0.03 is a good amount; just enough that the shrew will notice it but not enough to be worth working for on its own.
-            self.rewardBolus = 0.075
+            self.rewardBolus = 0.150
             self.rewardBolusHardTrial = 0.250
             
             #stimbot setup, including command strings for each state
@@ -183,8 +183,8 @@ class Task(object):
             self.hintChance = 0.5 #chance of sending a low reward at the start of the reward period
             
             self.hintBolus = 0.03 #0.03 is a good amount; just enough that the shrew will notice it but not enough to be worth working for on its own.
-            self.rewardBolus = 0.050
-            self.rewardBolusHardTrial = 0.100
+            self.rewardBolus = 0.100
+            self.rewardBolusHardTrial = 0.200
         
             #stimbot setup, including command strings for each state
             #note that grating states will have an extra command added later to specify orientation and phase.
