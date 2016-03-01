@@ -38,7 +38,7 @@ Actions = Enumeration("Actions", actionSet)
 resultsSet = ['HIT', 'CORRECT_REJECT', 'TASK_FAIL', 'MISS', 'NO_RESPONSE', 'ABORT', 'FALSE_ALARM'] 
 Results = Enumeration("Results", resultsSet)
 
-taskFailStates = ["DELAY", "SPLUS", "SMINUS", "GRAY"]
+taskFailStates = ["DELAY", "SPLUS", "SMINUS", "GRAY", "NO_RESPONSE"]
 
 class OnlineAnalyzer():
     """
@@ -136,7 +136,7 @@ class Analyzer():
             "Task Error Rate: " + str(self.taskErrorRate) + "% (" + str(self.taskErrors) + "/" + str(self.nTrials) + ")" + "\n"
             
             '\nAborts: ' + str(self.abortCount) + "\n"
-            '\nLicks during incorrect states: ' + str(self.taskFailCount) + "\n"
+            '\nTask error details: \n'
         )
         for f in self.stateFailCounts:
             message += f + " " + str(self.stateFailCounts[f]) + "\n"
@@ -144,11 +144,13 @@ class Analyzer():
         return message
     
     def str_discrimination(self):
+        nCorrect = self.sPlusResponses + self.sMinusRejects
+        nDiscrimTrials = self.sPlusTrials + self.sMinusTrials
         message = (
             '====' + '\n'
             'DISCRIMINATION PERFORMANCE' + "\n"
             
-            "\nOverall Discrimination: " + str(self.discriminationRate) + "%"
+            "\nOverall Discrimination: " + str(self.discriminationRate) + "%" + " (" + str(nCorrect) + "/" + str(nDiscrimTrials) + ")"
             #"\nOverall d': " + str(round(self.dPrimeOverall,3)) + "\n"    
             
             "\nS+ Response Rate: " + str(self.sPlusResponseRate) + "% "
@@ -254,14 +256,16 @@ class Analyzer():
         
         #Task errors
         self.abortCount = results["ABORT"]
-        self.taskFailCount = results["TASK_FAIL"]
-        self.taskErrors = results["TASK_FAIL"] + results["ABORT"]
+        self.taskFailCount = results["TASK_FAIL"] + results["ABORT"] + results["NO_RESPONSE"]
+        self.taskErrors = results["TASK_FAIL"] + results["ABORT"] + results["NO_RESPONSE"]
         self.taskErrorRate = round(100* (self.taskErrors / self.nTrials), 2)
 
-        self.stateFailCounts = dict(zip(taskFailStates, [0]*4))
+        self.stateFailCounts = dict(zip(taskFailStates, [0]*len(taskFailStates)))
         for t in self.trials:
             if t.result == Results.TASK_FAIL:
                 self.stateFailCounts[States.whatis(t.stateHistory[-2])] += 1
+            if t.result == Results.NO_RESPONSE:
+                self.stateFailCounts["NO_RESPONSE"] += 1
         
         
         #sPlus and sMinus correct counts
