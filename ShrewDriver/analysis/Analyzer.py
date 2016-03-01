@@ -561,7 +561,7 @@ def test():
     """
     Run the three test files, and print some data
     """
-    testDir = r'C:\Users\fitzlab1\Desktop\butters analysis'#r".\test_logs"
+    testDir = r'C:\Users\theo\Documents\ShrewData\Bernadette\2016-02-29\0003'#r".\test_logs"
     analyses = analyzeDir(testDir)
     
     for a in analyses:
