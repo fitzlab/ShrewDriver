@@ -25,6 +25,7 @@ from Trial import *
 
 sys.path.append("..")
 from analysis.Analyzer import *
+from analysis.HeadfixAnalyzer import *
 
 '''
 Training.py is the control center. 
@@ -70,7 +71,10 @@ class Training():
         self.logFile = open(self.logFilePath, 'w')
         
         #make the live data analyzer
-        self.analyzer = OnlineAnalyzer(self.task.settingsFilePath, self.task.summaryFilePath)
+        if self.shrewDriver.animalName == "Headfix":
+            self.analyzer = HeadfixOnlineAnalyzer(self.task.settingsFilePath, self.task.summaryFilePath)
+        else:
+            self.analyzer = OnlineAnalyzer(self.task.settingsFilePath, self.task.summaryFilePath)
         
         #turn screen on, if needed
         time.sleep(0.1) 
