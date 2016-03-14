@@ -435,7 +435,7 @@ class Analyzer():
                     self.t.result = Results.ABORT
 
                 #lick caused trial to end
-                elif self.t.actionHistory[-1] == Actions.LICK: #and self.t.actionTimes[-1] >= prevStateStart:
+                elif self.t.actionHistory[-1] == Actions.LICK and self.t.actionTimes[-1] >= prevStateStart:
                     if prevState == States.REWARD:
                         #licks in reward states are good! But which kind of good?   
                         if self.guaranteedSPlus == False:
