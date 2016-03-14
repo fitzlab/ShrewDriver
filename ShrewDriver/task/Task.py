@@ -124,11 +124,11 @@ class Task(object):
             self.sequenceType = Sequences.RANDOM
             self.initiation = Initiation.TAP
             
-            self.timeoutFail = 6
-            self.timeoutAbort = 6
-            self.timeoutSuccess = 6
-            self.timeoutNoResponse = 6
-            self.timeoutCorrectReject = 6
+            self.timeoutFail = 10
+            self.timeoutAbort = 10
+            self.timeoutSuccess = 10
+            self.timeoutNoResponse = 10
+            self.timeoutCorrectReject = 10
             
             self.initTime = 1
             
@@ -165,10 +165,10 @@ class Task(object):
             self.sequenceType = Sequences.RANDOM_RETRY
             self.initiation = Initiation.TAP
             
-            self.timeoutFail = 6
-            self.timeoutAbort = 6
-            self.timeoutSuccess = 6
-            self.timeoutNoResponse = 6
+            self.timeoutFail = 10
+            self.timeoutAbort = 10
+            self.timeoutSuccess = 10
+            self.timeoutNoResponse = 10
             self.timeoutCorrectReject = 0
             
             self.initTime = 1
@@ -209,10 +209,10 @@ class Task(object):
             self.sequenceType = Sequences.RANDOM_RETRY
             self.initiation = Initiation.TAP
             
-            self.timeoutFail = 6
-            self.timeoutAbort = 6
-            self.timeoutSuccess = 6
-            self.timeoutNoResponse = 6
+            self.timeoutFail = 10
+            self.timeoutAbort = 10
+            self.timeoutSuccess = 10
+            self.timeoutNoResponse = 10
             self.timeoutCorrectReject = 0
             
             self.initTime = 1
@@ -250,10 +250,10 @@ class Task(object):
             self.sequenceType = Sequences.RANDOM_RETRY
             self.initiation = Initiation.TAP
             
-            self.timeoutFail = 6
-            self.timeoutAbort = 6
-            self.timeoutSuccess = 6
-            self.timeoutNoResponse = 6
+            self.timeoutFail = 10
+            self.timeoutAbort = 10
+            self.timeoutSuccess = 10
+            self.timeoutNoResponse = 10
             self.timeoutCorrectReject = 0
             
             self.initTime = 1
@@ -292,10 +292,10 @@ class Task(object):
             self.sequenceType = Sequences.RANDOM_RETRY
             self.initiation = Initiation.TAP
             
-            self.timeoutFail = 6
-            self.timeoutAbort = 6
-            self.timeoutSuccess = 6
-            self.timeoutNoResponse = 6
+            self.timeoutFail = 10
+            self.timeoutAbort = 10
+            self.timeoutSuccess = 10
+            self.timeoutNoResponse = 10
             self.timeoutCorrectReject = 0
             
             self.initTime = 1
