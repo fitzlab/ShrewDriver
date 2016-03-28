@@ -1,338 +1,188 @@
-from __future__ import division
-import fileinput, re, math, sys, time
+import time
+import datetime
+import threading
+import os
+import re
+import itertools
+import random
+import pickle
+import sys
+import copy
 
-sys.path.append("./trial")
-from Trial import Trial
+sys.path.append("..")
+from ui import launch
+from ui import tracer
+from ui import interact
 
-sys.path.append("./global")
-from Constants import *
+from output.logging import Log
 
-sys.path.append("./util")
-from Enumeration import *
-import objectToString
+from devices.psycho import Psycho
+from devices.syringe_pump import SyringePump
+from devices.arduino_sensor import ArduinoSensor
+from devices.camera_reader import CameraReader
 
-sys.path.append("./sequencer")
-from Sequencer import *
 
-'''
-A Task is a set of trial states and transitions, with logic to describe what happens in response to a shrew's actions.
+class Params(object):
 
-This is where all the procedural logic lives.
+    PHASE_DISCRIMINATION = "phase discrimination" #not implemented; maybe someday
+    ORIENTATION_DISCRIMINATION = "orientation discrimination"
 
-Task types: There's actually only one, and it's called GNG, even though it can do nonmatch-to-sample. Awesome! 
+    def __init__(self):
+        self.discriminationType = self.ORIENTATION_DISCRIMINATION
 
-'''
+    #common functions
+    def getNonMatchingPair(self, list1, list2):
+        """
+        Given two lists, picks an element from each list such that the elements do not match. 
+        Returns a tuple containing the two elements.
+
+        Example:
+        Returns a tuple (sPlus, sMinus) where sPlus != sMinus, chosen from sMinusOrientations and sPlusOrientations.
+        Used in task_discrim and task_nonmatch.
+        """
+        all_pairs = list(itertools.product(list1, list2))
+        distinct_pairs = []
+        for pair in all_pairs:
+            #elements are considered equal if within 0.0001 degrees. Prevents float errors.
+            if abs(pair[0] - pair[1]) > 0.0001:
+                distinct_pairs.append(pair)
+
+        return random.choice(distinct_pairs)        
+
+class Trial(object):
+
+    def __init__(self):
+        self.stateHistory = []
+
 
 class Task(object):
-    
-    def __init__(self, taskType, training, shrewDriver):
-        if taskType == TaskTypes.GNG:
-            import TaskGoNoGo
-            return TaskGoNoGo.TaskGoNoGo(training, shrewDriver)
-        else:
-            pass
-        
-    def makeStuff(self):
-        #called from subclass inits
-        
-        #behavior inits
-        self.state = States.TIMEOUT
-        self.stateDuration = 1
-        self.shrewPresent = False
-        self.shrewEnteredAt = 0
-        self.isLicking = False
-        self.lastLickAt = 0
-        self.isTapping = False
-        self.lastTapAt = 0
-        self.stateStartTime = 0
-        self.stateEndTime = 0
-        
-        self.commandStrings = [''] * len(stateSet)
-        
-        #load and record this session's settings
-        self.loadAnimalSettings()
-        self.writeSettingsFile()
-        
-        #send commands to prepare stimbot
-        self.setUpCommands()
-        
-        #make a set of trial objects and a sequencer
-        self.makeTrialSet()
 
-        #set up the first trial
-        if hasattr(self, 'sequencer'):
-            self.currentTrial = self.sequencer.getNextTrial(None)
-        self.prepareTrial()
-        self.trialNum = 1
-        
-    def start(self):
-        pass
-    
-    def prepareTrial(self):
-        pass
-    
-    def checkStateProgression(self):
-        pass
-    
-    def setUpCommands(self):
-        #set up stimbot commands for later use
-        self.training.stimSerial.write('screendist' + str(self.screenDistanceMillis) + '\n')
-        for i in xrange(0, len(stateSet)):
-            time.sleep(0.1) #wait a bit between long commands to make sure serial sends everything
-            saveCommand = 'save' + str(i) + ' ' + self.commandStrings[i]
-            self.training.stimSerial.write(saveCommand)
-    
-    def sensorUpdate(self, evtType, timestamp):
-        if evtType == 'Ix':
-            self.shrewPresent = True
-            self.shrewEnteredAt = time.time()
-        if evtType == 'Io':
-            self.shrewPresent = False
-        if evtType == 'Tx':
-            self.isTapping = True
-            self.lastTapAt = time.time()
-        if evtType == 'To':
-            self.isTapping = False
-            self.lastTapAt = time.time()
-        if evtType == 'Lx':
-            self.isLicking = True
-            self.lastLickAt = time.time()
-        if evtType == 'Lo':
-            self.isLicking = False
-            #self.lastLickAt = time.time()
-    
-    def writeSettingsFile(self):
-        self.settingsFilePath = self.shrewDriver.experimentPath + self.shrewDriver.sessionFileName + "_settings.txt" 
-        self.summaryFilePath = self.shrewDriver.experimentPath + self.shrewDriver.sessionFileName + "_summary.txt" 
-        self.settingsFile = open(self.settingsFilePath, 'w')
-        self.settingsFile.write("States: " + str(stateSet) + "\n")
-        thisAsString = objectToString.objectToString(self)
-        self.settingsFile.write(thisAsString)
-        self.settingsFile.close()
-    
-    def loadAnimalSettings(self):
-        #Animal-relevant settings
-        
-        #--- First rig animals ---#
-        
-        if self.shrewDriver.animalName == 'Chico':
-            print "Using settings for Chico!"
-            self.sPlusOrientations = [135]
-            self.sMinusOrientations = [180]
-            self.sMinusPresentations = [0,1] #how many times to display the SMINUS
-            self.guaranteedSPlus = True #is there always an SPLUS in the trial?
-            self.sequenceType = Sequences.RANDOM
-            self.initiation = Initiation.TAP
-            
-            self.timeoutFail = 10
-            self.timeoutAbort = 10
-            self.timeoutSuccess = 10
-            self.timeoutNoResponse = 10
-            self.timeoutCorrectReject = 10
-            
-            self.initTime = 1
-            
-            self.variableDelayMin = 1.0
-            self.variableDelayMax = 1.75
-            
-            self.gratingDuration = 0.5
-            self.grayDuration = 1
-            self.rewardPeriod = self.grayDuration #needs to be no longer than gray duration!
-            
-            self.hintChance = 0.0 #chance of sending a low reward at the start of the reward period
-            
-            self.hintBolus = 0.03 #0.03 is a good amount; just enough that the shrew will notice it but not enough to be worth working for on its own.
-            self.rewardBolus = 0.150
-            self.rewardBolusHardTrial = 0.250
-            
-            #stimbot setup, including command strings for each state
-            #note that grating states will have an extra command added later to specify orientation and phase.
-            self.screenDistanceMillis = 25
-            self.commandStrings[States.TIMEOUT] = 'ac pab px0 py0 sx12 sy12\n'
-            self.commandStrings[States.INIT] = 'ac paw px0 py0 sx12 sy12\n'
-            self.commandStrings[States.DELAY] = 'sx0 sy0\n'
-            self.commandStrings[States.SMINUS] = 'as sf0.25 tf0 jf0 ja0 px0 py0 sx999 sy999\n'
-            self.commandStrings[States.GRAY] = 'sx0 sy0\n'
-            self.commandStrings[States.SPLUS] = 'as sf0.25 tf0 jf0 ja0 px0 py0 sx999 sy999\n'
-            self.commandStrings[States.REWARD] = 'sx0 sy0\n'
-            
-        elif self.shrewDriver.animalName == 'Bernadette':
-            print "Using settings for Bernadette!"
-            self.sPlusOrientations = [90]
-            self.sMinusOrientations = [135]
-            self.sMinusPresentations = [0,1] #how many times to display the SMINUS
-            self.guaranteedSPlus = True #is there always an SPLUS in the trial?
-            self.sequenceType = Sequences.RANDOM_RETRY
-            self.initiation = Initiation.TAP
-            
-            self.timeoutFail = 10
-            self.timeoutAbort = 10
-            self.timeoutSuccess = 10
-            self.timeoutNoResponse = 10
-            self.timeoutCorrectReject = 0
-            
-            self.initTime = 1
-            
-            self.variableDelayMin = 1.0
-            self.variableDelayMax = 1.75
-            
-            self.gratingDuration = 0.5
-            self.grayDuration = 1
-            self.rewardPeriod = self.grayDuration #needs to be no longer than gray duration!
-            
-            self.hintChance = 0.0 #chance of sending a low reward at the start of the reward period
-            
-            self.hintBolus = 0.03 #0.03 is a good amount; just enough that the shrew will notice it but not enough to be worth working for on its own.
-            self.rewardBolus = 0.100
-            self.rewardBolusHardTrial = 0.200
-        
-            #stimbot setup, including command strings for each state
-            #note that grating states will have an extra command added later to specify orientation and phase.
-            self.screenDistanceMillis = 120
-            self.commandStrings[States.TIMEOUT] = 'ac pab px0 py0 sx12 sy12\n'
-            self.commandStrings[States.INIT] = 'ac paw px0 py0 sx12 sy12\n'
-            self.commandStrings[States.DELAY] = 'sx0 sy0\n'
-            self.commandStrings[States.SMINUS] = 'acgf sf0.25 tf0 jf0 ja0 px0 py0 sx999 sy999\n'
-            self.commandStrings[States.GRAY] = 'sx0 sy0\n'
-            self.commandStrings[States.SPLUS] = 'acgf sf0.25 tf0 jf0 ja0 px0 py0 sx999 sy999\n'
-            self.commandStrings[States.REWARD] = 'sx0 sy0\n'
-        
-        
-        #--- Second rig animals ---#
-        
-        elif self.shrewDriver.animalName == 'Clucker':
-            print "Using settings for Clucker!"
-            self.sPlusOrientations = [45]
-            self.sMinusOrientations = [70]
-            self.sMinusPresentations = [0,1] #how many times to display the SMINUS
-            self.guaranteedSPlus = True #is there always an SPLUS in the trial?
-            self.sequenceType = Sequences.RANDOM_RETRY
-            self.initiation = Initiation.TAP
-            
-            self.timeoutFail = 10
-            self.timeoutAbort = 10
-            self.timeoutSuccess = 10
-            self.timeoutNoResponse = 10
-            self.timeoutCorrectReject = 0
-            
-            self.initTime = 1
-            
-            self.variableDelayMin = 1.0
-            self.variableDelayMax = 1.75
-            
-            self.gratingDuration = 0.5
-            self.grayDuration = 1
-            self.rewardPeriod = self.grayDuration #needs to be no longer than gray duration!
-            
-            self.hintChance = 0.0 #chance of sending a low reward at the start of the reward period
-            
-            self.hintBolus = 0.05 #0.03 is a good amount; just enough that the shrew will notice it but not enough to be worth working for on its own.
-            self.rewardBolus = 0.100
-            self.rewardBolusHardTrial = 0.150
-            
-            #stimbot setup, including command strings for each state
-            #note that grating states will have an extra command added later to specify orientation and phase.
-            self.screenDistanceMillis = 25
-            self.commandStrings[States.TIMEOUT] = 'ac pab px0 py0 sx12 sy12\n'
-            self.commandStrings[States.INIT] = 'ac paw px0 py0 sx12 sy12\n'
-            self.commandStrings[States.DELAY] = 'sx0 sy0\n'
-            self.commandStrings[States.SMINUS] = 'as sf0.25 tf0 jf0 ja0 px0 py0 sx999 sy999\n'
-            self.commandStrings[States.GRAY] = 'sx0 sy0\n'
-            self.commandStrings[States.SPLUS] = 'as sf0.25 tf0 jf0 ja0 px0 py0 sx999 sy999\n'
-            self.commandStrings[States.REWARD] = 'sx0 sy0\n'
-            
-        elif self.shrewDriver.animalName == 'Splinter':
-            print "Using settings for Splinter!"
-            self.sPlusOrientations = [90]
-            self.sMinusOrientations = [45] #90-65 = 25 degree difference.
-            self.sMinusPresentations = [0,1] #how many times to display the SMINUS
-            self.guaranteedSPlus = True #is there always an SPLUS in the trial?
-            self.sequenceType = Sequences.RANDOM_RETRY
-            self.initiation = Initiation.TAP
-            
-            self.timeoutFail = 10
-            self.timeoutAbort = 10
-            self.timeoutSuccess = 10
-            self.timeoutNoResponse = 10
-            self.timeoutCorrectReject = 0
-            
-            self.initTime = 1
-            
-            self.variableDelayMin = 1.0
-            self.variableDelayMax = 1.75
-            
-            self.gratingDuration = 0.5
-            self.grayDuration = 1
-            self.rewardPeriod = self.grayDuration #needs to be no longer than gray duration!
-            
-            self.hintChance = 0.0 #chance of sending a low reward at the start of the reward period
-            
-            self.hintBolus = 0.05 #0.03 is a good amount; just enough that the shrew will notice it but not enough to be worth working for on its own.
-            self.rewardBolus = 0.100
-            self.rewardBolusHardTrial = 0.150
-            
-            #stimbot setup, including command strings for each state
-            #note that grating states will have an extra command added later to specify orientation and phase.
-            self.screenDistanceMillis = 120
-            self.commandStrings[States.TIMEOUT] = 'ac pab px0 py0 sx12 sy12\n'
-            self.commandStrings[States.INIT] = 'ac paw px0 py0 sx12 sy12\n'
-            self.commandStrings[States.DELAY] = 'sx0 sy0\n'
-            self.commandStrings[States.SMINUS] = 'acgf sf0.25 tf0 jf0 ja0 px35 py0 sx999 sy999\n'
-            self.commandStrings[States.GRAY] = 'sx0 sy0\n'
-            self.commandStrings[States.SPLUS] = 'acgf sf0.25 tf0 jf0 ja0 px35 py0 sx999 sy999\n'
-            self.commandStrings[States.REWARD] = 'sx0 sy0\n'
-            
-        
-        elif self.shrewDriver.animalName == 'Peanut':
-            print "Using settings for Peanut!"
-            self.sPlusOrientations = [0]
-            self.sMinusOrientations = [155] #180-155 = 25 degree difference.
-            self.sMinusPresentations = [0,1] #how many times to display the SMINUS
-            self.guaranteedSPlus = True #is there always an SPLUS in the trial?
-            self.sequenceType = Sequences.RANDOM_RETRY
-            self.initiation = Initiation.TAP
-            
-            self.timeoutFail = 10
-            self.timeoutAbort = 10
-            self.timeoutSuccess = 10
-            self.timeoutNoResponse = 10
-            self.timeoutCorrectReject = 0
-            
-            self.initTime = 1
-            
-            self.variableDelayMin = 1.0
-            self.variableDelayMax = 1.75
-            
-            self.gratingDuration = 0.5
-            self.grayDuration = 1
-            self.rewardPeriod = self.grayDuration #needs to be no longer than gray duration!
-            
-            self.hintChance = 0.0 #chance of sending a low reward at the start of the reward period
-            
-            self.hintBolus = 0.05 #0.03 is a good amount; just enough that the shrew will notice it but not enough to be worth working for on its own.
-            self.rewardBolus = 0.100
-            self.rewardBolusHardTrial = 0.150
-            
-            #stimbot setup, including command strings for each state
-            #note that grating states will have an extra command added later to specify orientation and phase.
-            self.screenDistanceMillis = 120
-            self.commandStrings[States.TIMEOUT] = 'ac pab px0 py0 sx12 sy12\n'
-            self.commandStrings[States.INIT] = 'ac paw px0 py0 sx12 sy12\n'
-            self.commandStrings[States.DELAY] = 'sx0 sy0\n'
-            self.commandStrings[States.SMINUS] = 'acgf sf0.25 tf0 jf0 ja0 px35 py0 sx999 sy60\n'
-            self.commandStrings[States.GRAY] = 'sx0 sy0\n'
-            self.commandStrings[States.SPLUS] = 'acgf sf0.25 tf0 jf0 ja0 px35 py0 sx999 sy999\n'
-            self.commandStrings[States.REWARD] = 'sx0 sy0\n'
-            
+    #constants
+    PULSE_TIME = 0.010 #seconds between each sensor check
 
-        elif self.shrewDriver.animalName == 'Headfix':
-            print "Using settings for headfix acclimation!"
-            self.rewardCooldown = 0.5 #If shrew has not licked for this many seconds, make reward available.
-            self.rewardBolus = 0.1
-            
+    INIT_TAP = "init_tap"
+    INIT_LICK = "init_lick"
+    INIT_AUTO = "init_auto"
+    INIT_IR = "init_ir"
+    initModes = [INIT_TAP, INIT_LICK, INIT_AUTO, INIT_IR]
+    
+
+    def __init__(self, shrew):
+        self.shrew = shrew
+
+        self.startTime = time.time()
+
+        #device setup
+        self.ardSensor = ArduinoSensor(self.shrew.ardSensorPort)
+        self.syringePump = SyringePump(self.shrew.syringePort)  
+
+        if self.shrew.stimDevice is not None:
+            self.stimDevice = self.shrew.stimDevice
         else:
-            raise Exception("ANIMAL NOT RECOGNIZED")
+            self.stimDevice = Stimbot(self.shrew.stimbotPort)
+            
+        self.stimDevice.write('screendist' + str(self.shrew.screenDist) + "\n")
+
+    #--- Common functions used by all task types ---#
+    def makeTrialSequencer(self):
         
-if __name__ == '__main__':
-    print "run ShrewDriver.py instead!"
+        pass        
+
+    def dispense(self, mL):
+        self.syringePump.bolus(mL)
+        #record mL used
+        self.mainLog.write("reward " + str(mL))
+        print "dispensed " + str(mL) + "mL, total " + str(self.syringePump.total_mL) + " mL"
+
+
+    def update_tracer(self, updates):
+        for update in updates:
+            (data, t) = update
+            toks = data.rstrip().split()
+            if len(toks) < 2 or not toks[1].isdigit:
+                continue
+            try:
+                level = int(toks[1])
+                elapsed = float(t) - self.startTime
+                if toks[0] == "L":
+                    self.tracer.sig_add_data.emit("Lick", elapsed, level)
+                if toks[0] == "T":
+                    self.tracer.sig_add_data.emit("Tap", elapsed, level)
+            except:
+                continue            
+
+    def save_data(self):
+        """ 
+        Called at the end of each trial.
+        Flushes log output.
+        Saves params and trials to pickle files.
+        """
         
+        if hasattr(self, "mainLog") and self.mainLog is not None:    
+            self.mainLog.flush()    
+        
+        if hasattr(self, "outFilePathPkl"):
+            pickle.dump((self.trialHistory, self.params, (self.ardSensor.historyLick, self.ardSensor.historyTap)), open(self.outFilePathPkl, 'wb'))
+    
+    def _ui_setup(self, qtThread):
+        #called once PyQt is running. 
+        self.uiThread = qtThread
+        
+        #add "lick" and "tap" plots to the UI
+        self.tracer.sig_add_trace.emit("Lick")  
+        self.tracer.sig_add_trace.emit("Tap")     
+    
+        #Define thresholds on the tracer
+        self.tracer.sig_set_threshold.emit("Lick", self.ardSensor.lickThreshold)  
+        self.tracer.sig_set_threshold.emit("Tap", self.ardSensor.tapThreshold)        
+        
+        self.run()   
+
+    def initialize_daq(self):
+        try:
+            print "Initializing DAQ..."
+            #The import takes several seconds so it's best to do it
+            #in the midst of the code, rather than at the top of the file.
+            from devices.daq import MccDaq
+            sys.stdout.flush()
+            self.daq = MccDaq()
+        except:
+            print "Warning: No Measurement Computing DAQ available."
+            
+            
+    #--- UI callbacks ---#
+    def ui_fail_task(self):
+        print "Failing task at user's request"
+        self.mainLog.write("User signaled a task fail")
+        self.taskFail()
+        
+    def ui_start_trial(self):
+        print "Starting trial at user's request"
+        self.mainLog.write("User started trial")
+        self.startTrial()
+        
+    def ui_dispense(self, mL):
+        print "Giving " + str(mL) + " mL"
+        self.mainLog.write("User gave shrew juice")
+        self.dispense(mL)
+
+
+#--- Main function, for testing only. Please use shrew files to start specific tasks. ---#
+if __name__ == "__main__":
+    #test out the State class for replayability
+    print "Running tests on State class"
+
+    s = State(replay=False)
+    s.duration = 2
+    s.restart()
+    while not s.isDone():
+        pass
+    assert (time.time() - s.startTime) >= 2
+    
+    s2 = State(replay=True)
+    s2.duration = 2
+    s2.restart()
+    s2.t = time.time() + 2
+    assert s2.isDone() == True
+
+    print "Tests complete!"
