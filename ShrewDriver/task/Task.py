@@ -99,7 +99,7 @@ class Task(object):
             self.lastLickAt = time.time()
         if evtType == 'Lo':
             self.isLicking = False
-            self.lastLickAt = time.time()
+            #self.lastLickAt = time.time()
     
     def writeSettingsFile(self):
         self.settingsFilePath = self.shrewDriver.experimentPath + self.shrewDriver.sessionFileName + "_settings.txt" 
@@ -124,11 +124,11 @@ class Task(object):
             self.sequenceType = Sequences.RANDOM
             self.initiation = Initiation.TAP
             
-            self.timeoutFail = 6
-            self.timeoutAbort = 6
-            self.timeoutSuccess = 6
-            self.timeoutNoResponse = 6
-            self.timeoutCorrectReject = 6
+            self.timeoutFail = 10
+            self.timeoutAbort = 10
+            self.timeoutSuccess = 10
+            self.timeoutNoResponse = 10
+            self.timeoutCorrectReject = 10
             
             self.initTime = 1
             
@@ -147,7 +147,7 @@ class Task(object):
             
             #stimbot setup, including command strings for each state
             #note that grating states will have an extra command added later to specify orientation and phase.
-            self.screenDistanceMillis = 120
+            self.screenDistanceMillis = 25
             self.commandStrings[States.TIMEOUT] = 'ac pab px0 py0 sx12 sy12\n'
             self.commandStrings[States.INIT] = 'ac paw px0 py0 sx12 sy12\n'
             self.commandStrings[States.DELAY] = 'sx0 sy0\n'
@@ -165,10 +165,10 @@ class Task(object):
             self.sequenceType = Sequences.RANDOM_RETRY
             self.initiation = Initiation.TAP
             
-            self.timeoutFail = 6
-            self.timeoutAbort = 6
-            self.timeoutSuccess = 6
-            self.timeoutNoResponse = 6
+            self.timeoutFail = 10
+            self.timeoutAbort = 10
+            self.timeoutSuccess = 10
+            self.timeoutNoResponse = 10
             self.timeoutCorrectReject = 0
             
             self.initTime = 1
@@ -209,10 +209,10 @@ class Task(object):
             self.sequenceType = Sequences.RANDOM_RETRY
             self.initiation = Initiation.TAP
             
-            self.timeoutFail = 6
-            self.timeoutAbort = 6
-            self.timeoutSuccess = 6
-            self.timeoutNoResponse = 6
+            self.timeoutFail = 10
+            self.timeoutAbort = 10
+            self.timeoutSuccess = 10
+            self.timeoutNoResponse = 10
             self.timeoutCorrectReject = 0
             
             self.initTime = 1
@@ -236,9 +236,9 @@ class Task(object):
             self.commandStrings[States.TIMEOUT] = 'ac pab px0 py0 sx12 sy12\n'
             self.commandStrings[States.INIT] = 'ac paw px0 py0 sx12 sy12\n'
             self.commandStrings[States.DELAY] = 'sx0 sy0\n'
-            self.commandStrings[States.SMINUS] = 'as sf0.25 tf0 jf0 ja0 px35 py0 sx999 sy999\n'
+            self.commandStrings[States.SMINUS] = 'as sf0.25 tf0 jf0 ja0 px0 py0 sx999 sy999\n'
             self.commandStrings[States.GRAY] = 'sx0 sy0\n'
-            self.commandStrings[States.SPLUS] = 'as sf0.25 tf0 jf0 ja0 px35 py0 sx999 sy999\n'
+            self.commandStrings[States.SPLUS] = 'as sf0.25 tf0 jf0 ja0 px0 py0 sx999 sy999\n'
             self.commandStrings[States.REWARD] = 'sx0 sy0\n'
             
         elif self.shrewDriver.animalName == 'Splinter':
@@ -250,10 +250,10 @@ class Task(object):
             self.sequenceType = Sequences.RANDOM_RETRY
             self.initiation = Initiation.TAP
             
-            self.timeoutFail = 6
-            self.timeoutAbort = 6
-            self.timeoutSuccess = 6
-            self.timeoutNoResponse = 6
+            self.timeoutFail = 10
+            self.timeoutAbort = 10
+            self.timeoutSuccess = 10
+            self.timeoutNoResponse = 10
             self.timeoutCorrectReject = 0
             
             self.initTime = 1
@@ -292,10 +292,10 @@ class Task(object):
             self.sequenceType = Sequences.RANDOM_RETRY
             self.initiation = Initiation.TAP
             
-            self.timeoutFail = 6
-            self.timeoutAbort = 6
-            self.timeoutSuccess = 6
-            self.timeoutNoResponse = 6
+            self.timeoutFail = 10
+            self.timeoutAbort = 10
+            self.timeoutSuccess = 10
+            self.timeoutNoResponse = 10
             self.timeoutCorrectReject = 0
             
             self.initTime = 1
