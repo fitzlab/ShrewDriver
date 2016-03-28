@@ -31,6 +31,7 @@ int numLickSamples = 50;
 CapacitiveSensor csLick = CapacitiveSensor(PIN_CAPACITIVE_GROUND_LICK,PIN_LICK_SENSOR);
 CapacitiveSensor csTap = CapacitiveSensor(PIN_CAPACITIVE_GROUND_TAP,PIN_TAP_SENSOR);
 
+
 void setup() {
   delay(200); //let arduino wake up properly
   Serial.begin(57600);
@@ -66,11 +67,21 @@ void checkTap(){
 	}
 }
 
+void checkSerial(){
+  byte s = Serial.read();
+  if((s == 'm') || (s == 'M')){
+    //Signal to check device connection.
+    //If computer sends Marco, device answers Polo.
+        Serial.println('P');
+  }
+}
+
 // the loop routine runs over and over again forever:
 void loop() {
 	//Check sensors
 	checkLick();
 	checkTap();
+  checkSerial();
 }
 
 

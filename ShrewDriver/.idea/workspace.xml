@@ -1,6 +1,272 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
+    <list default="true" id="b1ee761d-24c1-496c-aee7-bba7fda5eba1" name="Default" comment="">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Arduino/TrainingSimulator/TrainingSimulator.ino" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/analysis/Analyzer.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/analysis/Analyzer_another_old.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/analysis/Analyzer_old.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/analysis/LogAnalysis.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/analysis/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/analysis/test_logs/Bernadette_2015-07-10_1_log.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/analysis/test_logs/Bernadette_2015-07-10_1_settings.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/analysis/test_logs/Carmen_2015-12-04_1_log.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/analysis/test_logs/Carmen_2015-12-04_1_settings.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/analysis/test_logs/Chico_2015-08-03_1_log.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/analysis/test_logs/Chico_2015-08-03_1_settings.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/analysis/test_logs/Splinter_2015-11-12_1_log.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/analysis/test_logs/Splinter_2015-11-12_1_settings.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/README.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/SerialReader.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/cameraDemo.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/chooseOrientationTest.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/eventViewer.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/genGrating.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/global/Constants.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/graphajigger.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/makeTextures.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/openglTexGrating.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/parseShrewData.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/GraphicsScene/GraphicsScene.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/GraphicsScene/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/GraphicsScene/exportDialog.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/GraphicsScene/exportDialogTemplate.ui" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/GraphicsScene/exportDialogTemplate_pyqt.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/GraphicsScene/exportDialogTemplate_pyside.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/GraphicsScene/mouseEvents.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/PIL_Fix/Image.py-1.6" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/PIL_Fix/Image.py-1.7" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/PIL_Fix/README" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/PlotData.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/Point.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/Qt.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/SRTTransform.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/SRTTransform3D.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/SignalProxy.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/ThreadsafeTimer.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/Transform3D.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/Vector.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/WidgetGroup.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/canvas/Canvas.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/canvas/CanvasItem.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/canvas/CanvasManager.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/canvas/CanvasTemplate.ui" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/canvas/CanvasTemplate_pyqt.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/canvas/CanvasTemplate_pyside.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/canvas/TransformGuiTemplate.ui" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/canvas/TransformGuiTemplate_pyqt.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/canvas/TransformGuiTemplate_pyside.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/canvas/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/colormap.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/configfile.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/console/CmdInput.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/console/Console.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/console/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/console/template.ui" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/console/template_pyqt.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/console/template_pyside.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/debug.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/dockarea/Container.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/dockarea/Dock.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/dockarea/DockArea.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/dockarea/DockDrop.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/dockarea/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/dockarea/tests/test_dock.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/exceptionHandling.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/exporters/CSVExporter.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/exporters/Exporter.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/exporters/ImageExporter.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/exporters/Matplotlib.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/exporters/PrintExporter.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/exporters/SVGExporter.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/exporters/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/exporters/tests/test_svg.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/flowchart/Flowchart.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/flowchart/FlowchartCtrlTemplate.ui" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/flowchart/FlowchartCtrlTemplate_pyqt.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/flowchart/FlowchartCtrlTemplate_pyside.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/flowchart/FlowchartGraphicsView.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/flowchart/FlowchartTemplate.ui" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/flowchart/FlowchartTemplate_pyqt.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/flowchart/FlowchartTemplate_pyside.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/flowchart/Node.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/flowchart/NodeLibrary.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/flowchart/Terminal.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/flowchart/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/flowchart/eq.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/flowchart/library/Data.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/flowchart/library/Display.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/flowchart/library/Filters.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/flowchart/library/Operators.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/flowchart/library/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/flowchart/library/common.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/flowchart/library/functions.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/frozenSupport.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/functions.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/graphicsItems/ArrowItem.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/graphicsItems/AxisItem.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/graphicsItems/BarGraphItem.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/graphicsItems/ButtonItem.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/graphicsItems/CurvePoint.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/graphicsItems/ErrorBarItem.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/graphicsItems/FillBetweenItem.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/graphicsItems/GradientEditorItem.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/graphicsItems/GradientLegend.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/graphicsItems/GraphItem.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/graphicsItems/GraphicsItem.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/graphicsItems/GraphicsLayout.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/graphicsItems/GraphicsObject.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/graphicsItems/GraphicsWidget.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/graphicsItems/GraphicsWidgetAnchor.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/graphicsItems/GridItem.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/graphicsItems/HistogramLUTItem.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/graphicsItems/ImageItem.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/graphicsItems/InfiniteLine.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/graphicsItems/IsocurveItem.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/graphicsItems/ItemGroup.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/graphicsItems/LabelItem.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/graphicsItems/LegendItem.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/graphicsItems/LinearRegionItem.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/graphicsItems/MultiPlotItem.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/graphicsItems/PlotCurveItem.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/graphicsItems/PlotDataItem.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/graphicsItems/PlotItem/PlotItem.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/graphicsItems/PlotItem/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/graphicsItems/PlotItem/plotConfigTemplate.ui" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/graphicsItems/PlotItem/plotConfigTemplate_pyqt.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/graphicsItems/PlotItem/plotConfigTemplate_pyside.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/graphicsItems/ROI.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/graphicsItems/ScaleBar.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/graphicsItems/ScatterPlotItem.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/graphicsItems/TextItem.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/graphicsItems/UIGraphicsItem.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/graphicsItems/VTickGroup.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/graphicsItems/ViewBox/ViewBox.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/graphicsItems/ViewBox/ViewBoxMenu.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/graphicsItems/ViewBox/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/graphicsItems/ViewBox/axisCtrlTemplate.ui" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/graphicsItems/ViewBox/axisCtrlTemplate_pyqt.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/graphicsItems/ViewBox/axisCtrlTemplate_pyside.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/graphicsItems/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/graphicsItems/tests/ScatterPlotItem.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/graphicsItems/tests/ViewBox.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/graphicsItems/tests/test_GraphicsItem.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/graphicsWindows.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/imageview/ImageView.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/imageview/ImageViewTemplate.ui" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/imageview/ImageViewTemplate_pyqt.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/imageview/ImageViewTemplate_pyside.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/imageview/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/imageview/tests/test_imageview.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/metaarray/MetaArray.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/metaarray/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/metaarray/license.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/metaarray/readMeta.m" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/multiprocess/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/multiprocess/bootstrap.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/multiprocess/parallelizer.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/multiprocess/processes.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/multiprocess/remoteproxy.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/numpy_fix.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/opengl/GLGraphicsItem.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/opengl/GLViewWidget.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/opengl/MeshData.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/opengl/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/opengl/glInfo.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/opengl/items/GLAxisItem.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/opengl/items/GLBarGraphItem.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/opengl/items/GLBoxItem.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/opengl/items/GLGridItem.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/opengl/items/GLImageItem.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/opengl/items/GLLinePlotItem.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/opengl/items/GLMeshItem.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/opengl/items/GLScatterPlotItem.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/opengl/items/GLSurfacePlotItem.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/opengl/items/GLVolumeItem.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/opengl/items/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/opengl/shaders.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/ordereddict.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/parametertree/Parameter.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/parametertree/ParameterItem.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/parametertree/ParameterTree.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/parametertree/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/parametertree/parameterTypes.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/pgcollections.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/pixmaps/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/pixmaps/auto.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/pixmaps/compile.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/pixmaps/ctrl.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/pixmaps/default.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/pixmaps/icons.svg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/pixmaps/lock.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/pixmaps/pixmapData_2.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/pixmaps/pixmapData_3.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/ptime.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/python2_3.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/reload.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/tests/test_functions.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/tests/test_qt.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/tests/test_srttransform3d.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/units.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/util/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/util/colorama/LICENSE.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/util/colorama/README.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/util/colorama/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/util/colorama/win32.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/util/colorama/winterm.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/util/cprint.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/util/lru_cache.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/util/mutex.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/util/tests/test_lru_cache.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/widgets/BusyCursor.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/widgets/CheckTable.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/widgets/ColorButton.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/widgets/ColorMapWidget.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/widgets/ComboBox.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/widgets/DataFilterWidget.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/widgets/DataTreeWidget.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/widgets/FeedbackButton.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/widgets/FileDialog.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/widgets/GradientWidget.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/widgets/GraphicsLayoutWidget.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/widgets/GraphicsView.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/widgets/HistogramLUTWidget.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/widgets/JoystickButton.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/widgets/LayoutWidget.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/widgets/MatplotlibWidget.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/widgets/MultiPlotWidget.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/widgets/PathButton.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/widgets/PlotWidget.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/widgets/ProgressDialog.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/widgets/RawImageWidget.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/widgets/RemoteGraphicsView.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/widgets/ScatterPlotWidget.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/widgets/SpinBox.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/widgets/TableWidget.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/widgets/TreeWidget.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/widgets/ValueLabel.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/widgets/VerticalLabel.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/widgets/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/pyqtgraph/widgets/tests/test_combobox.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/sequencer/Enumeration.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/sequencer/Sequencer.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/sequencer/SequencerBlock.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/sequencer/SequencerBlockRetry.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/sequencer/SequencerRandom.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/sequencer/SequencerRandomRetry.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/sequencer/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/sequencerTest.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/shrewView.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/shrewViewLive.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/cantrips/twoQt.py" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Arduino/readSensorsTap/readSensorsTap.ino" afterPath="$PROJECT_DIR$/../Arduino/readSensorsTap/readSensorsTap.ino" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Arduino/syringePump/syringePump.ino" afterPath="$PROJECT_DIR$/../Arduino/syringePump/syringePump.ino" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Arduino/syringePump_lcd2/syringePump_lcd2.ino" afterPath="$PROJECT_DIR$/../Arduino/syringePump_lcd2/syringePump_lcd2.ino" />
+    </list>
+    <ignored path="ShrewDriver.iws" />
+    <ignored path=".idea/workspace.xml" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -11,7 +277,20 @@
   <component name="CreatePatchCommitExecutor">
     <option name="PATCH_PATH" value="" />
   </component>
-  <component name="ProjectLevelVcsManager" settingsEditedManually="false">
+  <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
+  <component name="FavoritesManager">
+    <favorites_list name="ShrewDriver" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectFrameBounds">
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
+    <option name="width" value="1936" />
+    <option name="height" value="1176" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <OptionsSetting value="true" id="Add" />
     <OptionsSetting value="true" id="Remove" />
     <OptionsSetting value="true" id="Checkout" />
@@ -21,14 +300,98 @@
     <ConfirmationsSetting value="0" id="Add" />
     <ConfirmationsSetting value="0" id="Remove" />
   </component>
+  <component name="ProjectView">
+    <navigator currentView="ProjectPane" proportions="" version="1">
+      <flattenPackages />
+      <showMembers />
+      <showModules />
+      <showLibraryContents />
+      <hideEmptyPackages />
+      <abbreviatePackageNames />
+      <autoscrollToSource />
+      <autoscrollFromSource />
+      <sortByType />
+      <manualOrder />
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ShrewDriver" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ShrewDriver" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ShrewDriver" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ShrewDriver" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ShrewDriver" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="analysis" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="old" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+      <pane id="Scratches" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+  </component>
   <component name="ShelveChangesManager" show_recycled="false" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
+      <changelist id="b1ee761d-24c1-496c-aee7-bba7fda5eba1" name="Default" comment="" />
       <created>1456125598166</created>
       <option name="number" value="Default" />
       <updated>1456125598166</updated>
     </task>
     <servers />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-8" y="-8" width="1936" height="1176" extended-state="6" />
+    <editor active="false" />
+    <layout>
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24973656" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+    </layout>
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />

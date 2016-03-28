@@ -137,6 +137,14 @@ void readSerial(){
 		//builds serialStr and sets ready flag when newline is found
 		while (Serial.available()) {
 			char inChar = (char)Serial.read(); 
+     
+      if ((inChar == 'm') || (inChar == 'M')){
+        //Signal to check device connection.
+        //If computer sends Marco, device answers Polo.
+        Serial.println('P');
+        return;
+      }
+      
 			if (inChar == '\n') {
 				serialStrReady = true;
 			} 
