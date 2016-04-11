@@ -1,9 +1,12 @@
 from __future__ import division
+import sys
+sys.path.append("..")
+
+
 from collections import deque
 import time
 import threading
 import re 
-import sys
 import subprocess
 import os
 
@@ -376,4 +379,4 @@ if __name__ == "__main__":
         while True:
             s = raw_input()
             p.write(s.rstrip() + "\n") #ensure newline on writes
-       
+

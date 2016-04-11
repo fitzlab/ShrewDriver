@@ -1,0 +1,7 @@
+Open a command prompt
+cd to PyUniversalLibrary-20061020\
+type:
+python setup.py install
+
+Enjoy!
+--Theo

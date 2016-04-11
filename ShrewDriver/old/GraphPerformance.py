@@ -1,6 +1,9 @@
-from __future__ import division
+from _header import *
 
-import time, re, sys, threading, random
+import time
+import re
+import threading
+import random
 
 import pyqtgraph as pg
 from PyQt4.QtCore import * 

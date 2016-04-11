@@ -1,4 +1,6 @@
 from __future__ import division
+import sys
+sys.path.append("..")
 
 import threading
 from collections import deque
@@ -28,7 +30,7 @@ class EventLoop(object):
                 print str
             else:
                 # It may just be a function for us to call.
-                (evt, args) =
+                (evt, args) = (None, None) #umm, there was supposed to be something here I think
             if evt == None:
                 self.c.wait()
             

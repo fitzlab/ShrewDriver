@@ -2,30 +2,129 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b1ee761d-24c1-496c-aee7-bba7fda5eba1" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/db/__init__.py" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/GraphPerformance.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/LivePlot.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/README.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/StimbotDemo.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Training.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/analysis/HeadfixAnalyzer.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/codecs/Xvid-1.3.3-20140407.exe" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/devices/SerialPort.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/sequencer/SequencerBlock.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/sequencer/SequencerBlockRetry.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/sequencer/SequencerInterval.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/sequencer/SequencerIntervalRetry.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/sequencer/SequencerRandom.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/sequencer/SequencerRandomRetry.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/sequencer/SequencerSPlusForReject.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/sequencer/SequencerSPlusForRejectRetry.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/sequencer/SequencerSequential.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/sequencer/SequencerStaircase.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/task/TaskGoNoGo.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/task/TaskHeadfix.py" afterPath="" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/constants/__init__.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/db/server_data.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/old/old_analysis/__init__.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/shrew_graphs.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/task/task_mixin.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/testing/__init__.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/trial/discrimination_trial.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/trial/headfix_trial.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/util/collection_utils.py" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Arduino/CapSensorTest/CapSensorTest.ino" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Arduino/lcd2test/lcd2test.ino" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Arduino/readSensorsTap/readSensorsTap.ino" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Arduino/readSensorsTap/readme.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Arduino/syringePump/syringePump.ino" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Arduino/syringePump/syringePump.ino.bak" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Arduino/syringePump/unused/keypadTest/keypadTest.cpp" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Arduino/syringePump/unused/keypadTest/keypadTest.cpp.bak" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Arduino/syringePump/unused/keypadTest/keypadTestV2.cpp" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Arduino/syringePump/unused/keypadTest/keypadTestV2.cpp.bak" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Arduino/syringePump/unused/syringeAda/syringeAda.ino" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Arduino/syringePump/unused/syringeAda/syringeAda.ino.bak" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Arduino/syringePump/unused/syringePump/syringePump.ino" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Arduino/syringePump/unused/syringePump/syringePump.ino.bak" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Arduino/syringePump/unused/syringePumpV2/syringePumpV2.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Arduino/syringePump/unused/syringePumpV2/syringePumpV2.txt.bak" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Arduino/syringePump/unused/temp/temp/temp.ino" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Arduino/syringePump/unused/temp/temp/temp_pde/temp_pde.pde" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Arduino/syringePump/unused/this-one.cpp" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../Arduino/syringePump_lcd2/syringePump_lcd2.ino" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/old/resources.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/shrew/example.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/task/old/Task.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/task/task_constants.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/testing/flashScreen.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/util/loadResults.py" afterPath="" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/analysis/old/Analyzer.py" afterPath="$PROJECT_DIR$/old/old_analysis/Analyzer.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/analysis/old/Analyzer_another_old.py" afterPath="$PROJECT_DIR$/old/old_analysis/Analyzer_another_old.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/analysis/old/Analyzer_old.py" afterPath="$PROJECT_DIR$/old/old_analysis/Analyzer_old.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/analysis/old/LogAnalysis.py" afterPath="$PROJECT_DIR$/old/old_analysis/LogAnalysis.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/analysis/old/__init__.py" afterPath="$PROJECT_DIR$/anesthetized/__init__.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/analysis/old/test_logs/Bernadette_2015-07-10_1_log.txt" afterPath="$PROJECT_DIR$/old/old_analysis/test_logs/Bernadette_2015-07-10_1_log.txt" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/analysis/old/test_logs/Bernadette_2015-07-10_1_settings.txt" afterPath="$PROJECT_DIR$/old/old_analysis/test_logs/Bernadette_2015-07-10_1_settings.txt" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/analysis/old/test_logs/Carmen_2015-12-04_1_log.txt" afterPath="$PROJECT_DIR$/old/old_analysis/test_logs/Carmen_2015-12-04_1_log.txt" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/analysis/old/test_logs/Carmen_2015-12-04_1_settings.txt" afterPath="$PROJECT_DIR$/old/old_analysis/test_logs/Carmen_2015-12-04_1_settings.txt" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/analysis/old/test_logs/Chico_2015-08-03_1_log.txt" afterPath="$PROJECT_DIR$/old/old_analysis/test_logs/Chico_2015-08-03_1_log.txt" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/analysis/old/test_logs/Chico_2015-08-03_1_settings.txt" afterPath="$PROJECT_DIR$/old/old_analysis/test_logs/Chico_2015-08-03_1_settings.txt" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/analysis/old/test_logs/Splinter_2015-11-12_1_log.txt" afterPath="$PROJECT_DIR$/old/old_analysis/test_logs/Splinter_2015-11-12_1_log.txt" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/analysis/old/test_logs/Splinter_2015-11-12_1_settings.txt" afterPath="$PROJECT_DIR$/old/old_analysis/test_logs/Splinter_2015-11-12_1_settings.txt" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/devices/CameraReader.py" afterPath="$PROJECT_DIR$/devices/camera_reader.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/global/Constants.py" afterPath="$PROJECT_DIR$/constants/task_constants.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/mainwindow.ui" afterPath="$PROJECT_DIR$/ui/shrewdriver.ui" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/old/LivePlot.py" afterPath="$PROJECT_DIR$/ui/live_plot.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/old/ShrewDriver.py" afterPath="$PROJECT_DIR$/ShrewDriver.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/old/Training.py" afterPath="$PROJECT_DIR$/task/training.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/resources.py" afterPath="$PROJECT_DIR$/task/resources.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/sequencer/Sequencer.py" afterPath="$PROJECT_DIR$/sequencer/sequencer_base.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/sequencer/random.py" afterPath="$PROJECT_DIR$/sequencer/random_seq.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/sequencer/sequencer_block.py" afterPath="$PROJECT_DIR$/sequencer/block.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/sequencer/sequencer_interval.py" afterPath="$PROJECT_DIR$/sequencer/interval.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/shrew/queen_anesthetized.py" afterPath="$PROJECT_DIR$/anesthetized.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/task/Task.py" afterPath="$PROJECT_DIR$/task/sd2_unused/task.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/task/old/TaskGoNoGo.py" afterPath="$PROJECT_DIR$/task/task_discrimination.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/task/old/TaskHeadfix.py" afterPath="$PROJECT_DIR$/task/task_headfix.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/task/task_anesthetized.py" afterPath="$PROJECT_DIR$/anesthetized/stim_script.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/task/task_discrim.py" afterPath="$PROJECT_DIR$/task/sd2_unused/task_discrim.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/task/task_go_nogo.py" afterPath="$PROJECT_DIR$/task/sd2_unused/task_go_nogo.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/task/task_headfix.py" afterPath="$PROJECT_DIR$/task/sd2_unused/task_headfix.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/task/task_nonmatch.py" afterPath="$PROJECT_DIR$/task/sd2_unused/task_nonmatch.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/task/task_nonmatch_jsMod.py" afterPath="$PROJECT_DIR$/task/sd2_unused/task_nonmatch_jsMod.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/trial/Trial.py" afterPath="$PROJECT_DIR$/task/Trial.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/ui/main_ui.py" afterPath="$PROJECT_DIR$/ui/graph_ui.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/ui/main_ui.ui" afterPath="$PROJECT_DIR$/ui/graph_ui.ui" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/ui_graphs/graph_constants.py" afterPath="$PROJECT_DIR$/constants/graph_constants.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/util/TermSet.py" afterPath="$PROJECT_DIR$/util/term_set.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/util/objectToString.py" afterPath="$PROJECT_DIR$/util/serialize.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ShrewDriver.py" afterPath="$PROJECT_DIR$/ShrewDriver.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/task/Task.py" afterPath="$PROJECT_DIR$/task/Task.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/analysis/discrimination_analysis.py" afterPath="$PROJECT_DIR$/analysis/discrimination_analysis.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/analysis/headfix_analysis.py" afterPath="$PROJECT_DIR$/analysis/headfix_analysis.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/create_db_files.py" afterPath="$PROJECT_DIR$/db/create_db_files.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/db_events.py" afterPath="$PROJECT_DIR$/db/db_events.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/db_history.py" afterPath="$PROJECT_DIR$/db/db_history.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/db_lick_times.py" afterPath="$PROJECT_DIR$/db/db_lick_times.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/db_mixin.py" afterPath="$PROJECT_DIR$/db/db_mixin.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/db_performance.py" afterPath="$PROJECT_DIR$/db/db_performance.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/devices/ard_speed_test.py" afterPath="$PROJECT_DIR$/devices/ard_speed_test.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/devices/arduino_sensor.py" afterPath="$PROJECT_DIR$/devices/arduino_sensor.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/devices/available.py" afterPath="$PROJECT_DIR$/devices/available.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/devices/daq.py" afterPath="$PROJECT_DIR$/devices/daq.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/devices/psycho.py" afterPath="$PROJECT_DIR$/devices/psycho.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/devices/psycho_textures.py" afterPath="$PROJECT_DIR$/devices/psycho_textures.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/devices/serial_port.py" afterPath="$PROJECT_DIR$/devices/serial_port.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/devices/stimbot.py" afterPath="$PROJECT_DIR$/devices/stimbot.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/devices/syringe_pump.py" afterPath="$PROJECT_DIR$/devices/syringe_pump.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/old/GraphPerformance.py" afterPath="$PROJECT_DIR$/old/GraphPerformance.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pyqtgraph/debug.py" afterPath="$PROJECT_DIR$/pyqtgraph/debug.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sequencer/__init__.py" afterPath="$PROJECT_DIR$/sequencer/__init__.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sequencer/block_retry.py" afterPath="$PROJECT_DIR$/sequencer/block_retry.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sequencer/interval_retry.py" afterPath="$PROJECT_DIR$/sequencer/interval_retry.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sequencer/random_retry.py" afterPath="$PROJECT_DIR$/sequencer/random_retry.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sequencer/sequential.py" afterPath="$PROJECT_DIR$/sequencer/sequential.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sequencer/staircase.py" afterPath="$PROJECT_DIR$/sequencer/staircase.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/shrew/bernadette.py" afterPath="$PROJECT_DIR$/shrew/bernadette.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/shrew/chico.py" afterPath="$PROJECT_DIR$/shrew/chico.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/shrew/clucker.py" afterPath="$PROJECT_DIR$/shrew/clucker.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/shrew/peanut.py" afterPath="$PROJECT_DIR$/shrew/peanut.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/shrew/queen.py" afterPath="$PROJECT_DIR$/shrew/queen.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/shrew/shrew.py" afterPath="$PROJECT_DIR$/shrew/shrew.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/shrew/splinter.py" afterPath="$PROJECT_DIR$/shrew/splinter.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/task/state.py" afterPath="$PROJECT_DIR$/task/state.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ui/interact.py" afterPath="$PROJECT_DIR$/ui/interact.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ui/movie_widget.py" afterPath="$PROJECT_DIR$/ui/movie_widget.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ui_graphs/graph_axes.py" afterPath="$PROJECT_DIR$/ui_graphs/graph_axes.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ui_graphs/graph_curves.py" afterPath="$PROJECT_DIR$/ui_graphs/graph_curves.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ui_graphs/graph_events.py" afterPath="$PROJECT_DIR$/ui_graphs/graph_events.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ui_graphs/graph_history.py" afterPath="$PROJECT_DIR$/ui_graphs/graph_history.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ui_graphs/graph_lick_times.py" afterPath="$PROJECT_DIR$/ui_graphs/graph_lick_times.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ui_graphs/graph_performance.py" afterPath="$PROJECT_DIR$/ui_graphs/graph_performance.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/util/Enumeration.py" afterPath="$PROJECT_DIR$/util/Enumeration.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/util/Human.py" afterPath="$PROJECT_DIR$/util/Human.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/util/Stats.py" afterPath="$PROJECT_DIR$/util/Stats.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/util/cache_decorators.py" afterPath="$PROJECT_DIR$/util/cache_decorators.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/util/cond_event.py" afterPath="$PROJECT_DIR$/util/cond_event.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/util/event_loop.py" afterPath="$PROJECT_DIR$/util/event_loop.py" />
     </list>
     <ignored path="ShrewDriver.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -45,36 +144,12 @@
     <favorites_list name="ShrewDriver" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="create_db_files.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/db/create_db_files.py">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="discrimination_analysis.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/analysis/discrimination_analysis.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.26879272">
-              <caret line="58" column="7" selection-start-line="58" selection-start-column="7" selection-end-line="58" selection-end-column="7" />
-              <folding>
-                <element signature="e#103#134#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="shrewdriver.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/shrewdriver.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
-              <folding>
-                <element signature="e#0#10#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="main_ui.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ui/main_ui.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-9.827586">
-              <caret line="154" column="72" selection-start-line="154" selection-start-column="72" selection-end-line="154" selection-end-column="72" />
+            <state vertical-scroll-proportion="-9.4827585">
+              <caret line="112" column="49" selection-start-line="112" selection-start-column="49" selection-end-line="112" selection-end-column="49" />
               <folding>
                 <element signature="e#0#31#0" expanded="true" />
               </folding>
@@ -82,23 +157,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="db_mixin.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/db/db_mixin.py">
+      <file leaf-file-name="task_discrimination.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/task/task_discrimination.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="13" column="52" selection-start-line="13" selection-start-column="52" selection-end-line="13" selection-end-column="52" />
-              <folding>
-                <element signature="e#0#9#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="db_history.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/db/db_history.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="17" column="56" selection-start-line="17" selection-start-column="56" selection-end-line="17" selection-end-column="56" />
+            <state vertical-scroll-proportion="-14.068966">
+              <caret line="228" column="0" selection-start-line="228" selection-start-column="0" selection-end-line="228" selection-end-column="0" />
               <folding>
                 <element signature="e#0#31#0" expanded="true" />
               </folding>
@@ -106,13 +169,87 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="db_lick_times.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/db/db_lick_times.py">
+      <file leaf-file-name="stats.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/util/stats.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="104" column="0" selection-start-line="104" selection-start-column="0" selection-end-line="104" selection-end-column="0" />
+              <caret line="72" column="36" selection-start-line="72" selection-start-column="36" selection-end-line="72" selection-end-column="36" />
               <folding>
-                <element signature="e#1#11#0" expanded="true" />
+                <element signature="e#0#31#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="human.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/util/human.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="15" column="0" selection-start-line="15" selection-start-column="0" selection-end-line="26" selection-end-column="18" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Analyzer.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/old/old_analysis/Analyzer.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-8.310345">
+              <caret line="153" column="51" selection-start-line="153" selection-start-column="47" selection-end-line="153" selection-end-column="51" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Analyzer_another_old.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/old/old_analysis/Analyzer_another_old.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-8.310345">
+              <caret line="275" column="29" selection-start-line="275" selection-start-column="29" selection-end-line="275" selection-end-column="84" />
+              <folding>
+                <element signature="e#0#31#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="headfix_analysis.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/analysis/headfix_analysis.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="28" column="0" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="bernadette.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/shrew/bernadette.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="19" column="24" selection-start-line="19" selection-start-column="24" selection-end-line="19" selection-end-column="24" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="training.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/task/training.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="33" column="63" selection-start-line="33" selection-start-column="63" selection-end-line="33" selection-end-column="63" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="interact.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/ui/interact.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.067639254">
+              <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
+              <folding>
+                <element signature="e#0#31#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -126,19 +263,57 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/analysis/discrim_analysis.py" />
-        <option value="$PROJECT_DIR$/db/db_events.py" />
-        <option value="$PROJECT_DIR$/db/db_performance.py" />
-        <option value="$PROJECT_DIR$/analysis/discrimination_analysis.py" />
-        <option value="$PROJECT_DIR$/db/create_db_files.py" />
-        <option value="$PROJECT_DIR$/ui/main_ui.py" />
-        <option value="$PROJECT_DIR$/db/db_history.py" />
-        <option value="$PROJECT_DIR$/db/db_mixin.py" />
-        <option value="$PROJECT_DIR$/ui_graphs/graph_history.py" />
+        <option value="$PROJECT_DIR$/trial/headfix_trial.py" />
+        <option value="$PROJECT_DIR$/ui/interact.py" />
+        <option value="$PROJECT_DIR$/ui/live_plot.py" />
+        <option value="$PROJECT_DIR$/ui/movie_widget.py" />
+        <option value="$PROJECT_DIR$/ui_graphs/graph_axes.py" />
+        <option value="$PROJECT_DIR$/ui_graphs/graph_curves.py" />
         <option value="$PROJECT_DIR$/ui_graphs/graph_events.py" />
-        <option value="$PROJECT_DIR$/ui_graphs/graph_performance.py" />
+        <option value="$PROJECT_DIR$/ui_graphs/graph_history.py" />
         <option value="$PROJECT_DIR$/ui_graphs/graph_lick_times.py" />
-        <option value="$PROJECT_DIR$/db/db_lick_times.py" />
+        <option value="$PROJECT_DIR$/ui_graphs/graph_performance.py" />
+        <option value="$PROJECT_DIR$/util/cache_decorators.py" />
+        <option value="$PROJECT_DIR$/util/collection_utils.py" />
+        <option value="$PROJECT_DIR$/util/cond_event.py" />
+        <option value="$PROJECT_DIR$/util/enumeration.py" />
+        <option value="$PROJECT_DIR$/util/event_loop.py" />
+        <option value="$PROJECT_DIR$/util/human.py" />
+        <option value="$PROJECT_DIR$/util/serialize.py" />
+        <option value="$PROJECT_DIR$/util/term_set.py" />
+        <option value="$PROJECT_DIR$/shrew_graphs.py" />
+        <option value="$PROJECT_DIR$/db/db_events.py" />
+        <option value="$PROJECT_DIR$/devices/daq.py" />
+        <option value="$PROJECT_DIR$/devices/psycho.py" />
+        <option value="$PROJECT_DIR$/anesthetized/stim_script.py" />
+        <option value="$PROJECT_DIR$/anesthetized.py" />
+        <option value="$PROJECT_DIR$/task/trial.py" />
+        <option value="$PROJECT_DIR$/devices/camera_reader.py" />
+        <option value="$PROJECT_DIR$/devices/serial_port.py" />
+        <option value="$PROJECT_DIR$/shrew/shrew.py" />
+        <option value="$PROJECT_DIR$/ui/graph_ui.py" />
+        <option value="$PROJECT_DIR$/sequencer/sequencer.py" />
+        <option value="$PROJECT_DIR$/constants/task_constants.py" />
+        <option value="$PROJECT_DIR$/sequencer/block.py" />
+        <option value="$PROJECT_DIR$/sequencer/block_retry.py" />
+        <option value="$PROJECT_DIR$/sequencer/interval.py" />
+        <option value="$PROJECT_DIR$/sequencer/interval_retry.py" />
+        <option value="$PROJECT_DIR$/sequencer/random_retry.py" />
+        <option value="$PROJECT_DIR$/sequencer/random_seq.py" />
+        <option value="$PROJECT_DIR$/sequencer/sequential.py" />
+        <option value="$PROJECT_DIR$/sequencer/staircase.py" />
+        <option value="$PROJECT_DIR$/task/task_mixin.py" />
+        <option value="$PROJECT_DIR$/task/task_headfix.py" />
+        <option value="$PROJECT_DIR$/sequencer/sequencer_base.py" />
+        <option value="$PROJECT_DIR$/db/create_db_files.py" />
+        <option value="$PROJECT_DIR$/analysis/headfix_analysis.py" />
+        <option value="$PROJECT_DIR$/shrewdriver.py" />
+        <option value="$PROJECT_DIR$/shrew/bernadette.py" />
+        <option value="$PROJECT_DIR$/old/old_analysis/Analyzer_another_old.py" />
+        <option value="$PROJECT_DIR$/util/stats.py" />
+        <option value="$PROJECT_DIR$/analysis/discrimination_analysis.py" />
+        <option value="$PROJECT_DIR$/task/task_discrimination.py" />
+        <option value="$PROJECT_DIR$/task/training.py" />
       </list>
     </option>
   </component>
@@ -173,7 +348,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -202,68 +376,13 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="util" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ShrewDriver" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ShrewDriver" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ui_graphs" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ShrewDriver" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ShrewDriver" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
               <option name="myItemId" value="ui" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ShrewDriver" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ShrewDriver" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="db" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ShrewDriver" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ShrewDriver" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="analysis" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
       <pane id="Scratches" />
     </panes>
   </component>
@@ -271,24 +390,52 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\theo\Documents\ShrewDriver\ShrewDriver\constants" />
+      <recent name="C:\Users\theo\Documents\ShrewDriver\ShrewDriver\anesthetized" />
+      <recent name="C:\Users\theo\Documents\ShrewDriver\ShrewDriver\trial" />
+      <recent name="C:\Users\theo\Documents\ShrewDriver\ShrewDriver\analysis" />
       <recent name="C:\Users\theo\Documents\ShrewDriver\ShrewDriver\db" />
     </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\theo\Documents\ShrewDriver\ShrewDriver\constants" />
+      <recent name="C:\Users\theo\Documents\ShrewDriver\ShrewDriver\old" />
+      <recent name="C:\Users\theo\Documents\ShrewDriver\ShrewDriver" />
+      <recent name="C:\Users\theo\Documents\ShrewDriver\ShrewDriver\ui" />
+      <recent name="C:\Users\theo\Documents\ShrewDriver\ShrewDriver\task" />
+    </key>
   </component>
-  <component name="RunManager" selected="Python.shrewdriver">
-    <configuration default="false" name="create_db_files" type="PythonConfigurationType" factoryName="Python" temporary="true">
+  <component name="RunManager" selected="Python.interact">
+    <configuration default="false" name="shrew_graphs" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/analysis" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="ShrewDriver" />
-      <option name="SCRIPT_NAME" value="C:\Users\theo\Documents\ShrewDriver\ShrewDriver\db\create_db_files.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/shrew_graphs.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="anesthetized" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="ShrewDriver" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/anesthetized.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
@@ -310,19 +457,36 @@
       <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
     </configuration>
-    <configuration default="false" name="create_db_files (1)" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration default="false" name="stats" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/db" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/util" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="ShrewDriver" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/db/create_db_files.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/util/stats.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="interact" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/ui" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="ShrewDriver" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/ui/interact.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
@@ -449,16 +613,20 @@
       <option name="USE_KEYWORD" value="false" />
       <method />
     </configuration>
-    <list size="3">
-      <item index="0" class="java.lang.String" itemvalue="Python.create_db_files" />
-      <item index="1" class="java.lang.String" itemvalue="Python.shrewdriver" />
-      <item index="2" class="java.lang.String" itemvalue="Python.create_db_files (1)" />
+    <list size="5">
+      <item index="0" class="java.lang.String" itemvalue="Python.shrew_graphs" />
+      <item index="1" class="java.lang.String" itemvalue="Python.anesthetized" />
+      <item index="2" class="java.lang.String" itemvalue="Python.shrewdriver" />
+      <item index="3" class="java.lang.String" itemvalue="Python.stats" />
+      <item index="4" class="java.lang.String" itemvalue="Python.interact" />
     </list>
     <recent_temporary>
-      <list size="3">
-        <item index="0" class="java.lang.String" itemvalue="Python.shrewdriver" />
-        <item index="1" class="java.lang.String" itemvalue="Python.create_db_files (1)" />
-        <item index="2" class="java.lang.String" itemvalue="Python.create_db_files" />
+      <list size="5">
+        <item index="0" class="java.lang.String" itemvalue="Python.interact" />
+        <item index="1" class="java.lang.String" itemvalue="Python.shrewdriver" />
+        <item index="2" class="java.lang.String" itemvalue="Python.stats" />
+        <item index="3" class="java.lang.String" itemvalue="Python.anesthetized" />
+        <item index="4" class="java.lang.String" itemvalue="Python.shrew_graphs" />
       </list>
     </recent_temporary>
   </component>
@@ -476,25 +644,25 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1176" extended-state="7" />
+    <frame x="-8" y="-8" width="1936" height="1176" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24973656" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1380597" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32950193" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.13218391" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32981783" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.30201343" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32981783" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2502397" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32950193" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32885906" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.5604839" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -510,11 +678,75 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager />
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="python-line">
+          <url>file://$PROJECT_DIR$/ui_graphs/graph_lick_times.py</url>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+      </breakpoints>
+      <option name="time" value="4" />
+    </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/../../ShrewDriver2/ShrewDriver/stim/stim_script.py">
+    <entry file="file://$PROJECT_DIR$/util/collection_utils.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#31#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/util/cond_event.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#31#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/util/enumeration.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="7" column="7" selection-start-line="7" selection-start-column="7" selection-end-line="7" selection-end-column="7" />
+          <folding>
+            <element signature="e#0#31#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/util/event_loop.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/util/serialize.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#31#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/util/term_set.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/.PyCharm50/system/python_stubs/884504192/win32clipboard.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -522,164 +754,398 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../../ShrewDriver2/ShrewDriver/resources.py">
+    <entry file="file://$PROJECT_DIR$/shrew_graphs.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.2821577">
+          <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/db/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/analysis/old/Analyzer.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="202" column="27" selection-start-line="118" selection-start-column="0" selection-end-line="208" selection-end-column="4" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/db/db_events.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="43" column="29" selection-start-line="43" selection-start-column="29" selection-end-line="43" selection-end-column="29" />
-          <folding>
-            <element signature="e#1#11#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/.PyCharm50/system/python_stubs/884504192/exceptions.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.4524391">
-          <caret line="79" column="6" selection-start-line="79" selection-start-column="6" selection-end-line="79" selection-end-column="6" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/analysis/discrimination_analysis.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-6.724138">
-          <caret line="262" column="39" selection-start-line="262" selection-start-column="39" selection-end-line="262" selection-end-column="39" />
-          <folding>
-            <element signature="e#0#31#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/db/db_performance.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#31#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ui/main_ui.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-9.827586">
-          <caret line="154" column="72" selection-start-line="154" selection-start-column="72" selection-end-line="154" selection-end-column="72" />
-          <folding>
-            <element signature="e#0#31#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/db/db_mixin.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="13" column="52" selection-start-line="13" selection-start-column="52" selection-end-line="13" selection-end-column="52" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ui_graphs/graph_history.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="85" column="37" selection-start-line="85" selection-start-column="37" selection-end-line="85" selection-end-column="37" />
-          <folding>
-            <element signature="e#0#31#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/ui_graphs/graph_events.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="102" column="36" selection-start-line="102" selection-start-column="36" selection-end-line="102" selection-end-column="36" />
+          <caret line="5" column="11" selection-start-line="5" selection-start-column="11" selection-end-line="5" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/db/db_mixin.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="32" column="30" selection-start-line="32" selection-start-column="30" selection-end-line="32" selection-end-column="30" />
           <folding>
             <element signature="e#0#31#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ui_graphs/graph_performance.py">
+    <entry file="file://$PROJECT_DIR$/db/db_events.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="104" column="41" selection-start-line="104" selection-start-column="41" selection-end-line="104" selection-end-column="41" />
+          <caret line="39" column="8" selection-start-line="39" selection-start-column="8" selection-end-line="39" selection-end-column="8" />
           <folding>
             <element signature="e#0#31#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ui_graphs/graph_lick_times.py">
+    <entry file="file://$PROJECT_DIR$/devices/daq.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-21.551723">
-          <caret line="203" column="25" selection-start-line="203" selection-start-column="25" selection-end-line="203" selection-end-column="25" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="29" column="67" selection-start-line="29" selection-start-column="67" selection-end-line="29" selection-end-column="67" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/Anaconda2/Lib/site-packages/scipy/io/matlab/mio.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="145" column="4" selection-start-line="145" selection-start-column="4" selection-end-line="145" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/Anaconda2/Lib/os.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="156" column="0" selection-start-line="156" selection-start-column="0" selection-end-line="156" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/anesthetized/stim_script.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="51" column="14" selection-start-line="51" selection-start-column="14" selection-end-line="51" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/devices/psycho.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="85" column="8" selection-start-line="85" selection-start-column="8" selection-end-line="85" selection-end-column="21" />
           <folding>
             <element signature="e#0#31#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/db/db_history.py">
+    <entry file="file://$PROJECT_DIR$/anesthetized.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="17" column="56" selection-start-line="17" selection-start-column="56" selection-end-line="17" selection-end-column="56" />
+          <caret line="39" column="14" selection-start-line="39" selection-start-column="14" selection-end-line="39" selection-end-column="14" />
+          <folding>
+            <element signature="e#0#31#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/trial/discrimination_trial.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
           <folding>
             <element signature="e#0#31#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/db/db_lick_times.py">
+    <entry file="file://$PROJECT_DIR$/task/trial.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="104" column="0" selection-start-line="104" selection-start-column="0" selection-end-line="104" selection-end-column="0" />
+          <caret line="6" column="15" selection-start-line="6" selection-start-column="15" selection-end-line="6" selection-end-column="15" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/Anaconda2/Lib/site-packages/serial/serialwin32.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="46" column="0" selection-start-line="46" selection-start-column="0" selection-end-line="46" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/Anaconda2/Lib/site-packages/serial/serialutil.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="179" column="0" selection-start-line="179" selection-start-column="0" selection-end-line="179" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/Anaconda2/Lib/site-packages/serial/serialjava.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="52" column="6" selection-start-line="52" selection-start-column="6" selection-end-line="52" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ui/graph_ui.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3098202">
+          <caret line="96" column="45" selection-start-line="96" selection-start-column="45" selection-end-line="97" selection-end-column="45" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/shrew/shrew.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="42" column="11" selection-start-line="42" selection-start-column="11" selection-end-line="42" selection-end-column="11" />
           <folding>
-            <element signature="e#1#11#0" expanded="true" />
+            <element signature="e#0#9#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/shrewdriver.py">
+    <entry file="file://$PROJECT_DIR$/sequencer/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sequencer/block.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="7" column="21" selection-start-line="7" selection-start-column="21" selection-end-line="7" selection-end-column="21" />
           <folding>
-            <element signature="e#0#10#0" expanded="true" />
+            <element signature="e#0#31#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sequencer/block_retry.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="4" column="46" selection-start-line="4" selection-start-column="46" selection-end-line="4" selection-end-column="46" />
+          <folding>
+            <element signature="e#0#31#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sequencer/interval.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="4" column="46" selection-start-line="4" selection-start-column="46" selection-end-line="4" selection-end-column="46" />
+          <folding>
+            <element signature="e#0#31#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sequencer/interval_retry.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="4" column="46" selection-start-line="4" selection-start-column="46" selection-end-line="4" selection-end-column="46" />
+          <folding>
+            <element signature="e#0#31#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sequencer/random_retry.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="4" column="46" selection-start-line="4" selection-start-column="46" selection-end-line="4" selection-end-column="46" />
+          <folding>
+            <element signature="e#0#31#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sequencer/sequential.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="4" column="46" selection-start-line="4" selection-start-column="46" selection-end-line="4" selection-end-column="46" />
+          <folding>
+            <element signature="e#0#31#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sequencer/staircase.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="4" column="46" selection-start-line="4" selection-start-column="46" selection-end-line="4" selection-end-column="46" />
+          <folding>
+            <element signature="e#0#31#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/task/task_headfix.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="13" column="46" selection-start-line="13" selection-start-column="46" selection-end-line="13" selection-end-column="46" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sequencer/random_seq.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#31#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/devices/serial_port.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="36" column="37" selection-start-line="36" selection-start-column="37" selection-end-line="36" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/devices/camera_reader.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="24" column="0" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/constants/task_constants.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.59416443">
+          <caret line="75" column="0" selection-start-line="75" selection-start-column="0" selection-end-line="75" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/db/create_db_files.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.26879272">
-          <caret line="58" column="7" selection-start-line="58" selection-start-column="7" selection-end-line="58" selection-end-column="7" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="68" column="35" selection-start-line="68" selection-start-column="35" selection-end-line="68" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sequencer/sequencer_base.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="30" column="0" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
           <folding>
-            <element signature="e#103#134#0" expanded="true" />
+            <element signature="e#0#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/shrewdriver.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-17.103449">
+          <caret line="160" column="13" selection-start-line="160" selection-start-column="13" selection-end-line="160" selection-end-column="13" />
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/task/task_mixin.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-20.62069">
+          <caret line="90" column="8" selection-start-line="90" selection-start-column="8" selection-end-line="90" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/analysis/headfix_analysis.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="28" column="0" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/shrew/bernadette.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="19" column="24" selection-start-line="19" selection-start-column="24" selection-end-line="19" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/old/old_analysis/Analyzer.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-8.310345">
+          <caret line="153" column="51" selection-start-line="153" selection-start-column="47" selection-end-line="153" selection-end-column="51" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/util/human.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="15" column="0" selection-start-line="15" selection-start-column="0" selection-end-line="26" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/old/old_analysis/Analyzer_another_old.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-8.310345">
+          <caret line="275" column="29" selection-start-line="275" selection-start-column="29" selection-end-line="275" selection-end-column="84" />
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/util/stats.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="72" column="36" selection-start-line="72" selection-start-column="36" selection-end-line="72" selection-end-column="36" />
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/analysis/discrimination_analysis.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-9.4827585">
+          <caret line="112" column="49" selection-start-line="112" selection-start-column="49" selection-end-line="112" selection-end-column="49" />
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/task/task_discrimination.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-14.068966">
+          <caret line="228" column="0" selection-start-line="228" selection-start-column="0" selection-end-line="228" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/task/training.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="33" column="63" selection-start-line="33" selection-start-column="63" selection-end-line="33" selection-end-column="63" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ui/interact.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.067639254">
+          <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
           </folding>
         </state>
       </provider>

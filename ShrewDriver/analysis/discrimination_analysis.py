@@ -1,14 +1,18 @@
 from __future__ import division
+import sys
+sys.path.append("..")
+
 import re
 import fileinput
 import glob
 import datetime
-import sys
 
-sys.path.append("..")
 from util.enumeration import Enumeration
 from util.cache_decorators import *
-from task.task_constants import *
+from constants.task_constants import *
+from trial.discrimination_trial import *
+from util.human import secondsToHuman
+from util.stats import dPrime, criterion
 
 """
 Analyzes data.
@@ -16,163 +20,14 @@ Reads in the log and settings files.
 Produces a set of trials.
 """
 
+class OrientationPerformance():
+    def __init__(self):
+        """Used in tabulating performance for display"""
+        self.numTrials = 0
+        self.numCorrect = 0
+        self.percentCorrect = 0
 
 # This is for analyzing data, based on the raw log file and settings file.
-
-class DiscriminationTrial:
-    
-    def __init__(self, analysis=None):
-        self.analysis = analysis  # type: DiscriminationAnalysis
-        self.guaranteedSPlus = self.analysis.guaranteedSPlus
-        self.sMinusPresentations = self.analysis.sMinusPresentations
-        self.sMinusOrientations = self.analysis.sMinusOrientations
-        self.sPlusOrientations = self.analysis.sPlusOrientations
-
-        self.sMinusOrientation = -1
-        self.sPlusOrientation = -1
-        
-        self.numSMinus = 0 #number of times SMINUS was presented
-    
-        self.trialStartTime = 0
-        self.hint = False # type: bool, true if hint was dispensed
-        self.reward = False  # type: bool, true if reward was dispensed
-        self.totalmL = 0
-        self.trialNum = 0
-
-        #results
-        self.result = None
-        self.resultState = None
-        self.hint = True
-
-        self.hintTime = None
-        self.rewardTime = None
-
-        self.stateHistory = []
-        self.stateTimes = []
-        self.actionHistory = []
-        self.actionTimes = []
-
-        self.lines = [] #stores logfile lines until trial is finished and ready to be analyzed
-
-    def analyze(self):
-        p = re.compile('\d+')
-
-        # determine what orientations were used in this trial
-        for line in self.lines:
-            if re.search('ori', line) or re.search('sqr', line):
-                toks = line.split()
-                ori = toks[0][3:]
-
-                if float(ori) in self.sMinusOrientations:
-                    self.sMinusOrientation = float(ori)
-                else:
-                    self.sPlusOrientation = float(ori)
-
-        # record events
-        for line in self.lines:
-            if re.search('RL', line):
-                self.hint = True
-                m = p.findall(line)
-                self.hintTime = float(m[0] + '.' + m[1])
-            elif re.search('RH', line):
-                self.reward = True
-                m = p.findall(line)
-                self.rewardTime = float(m[0] + '.' + m[1])
-            elif re.search('bolus', line):
-                m = p.findall(line)
-                bolusSize = float(m[0] + "." + m[1])
-                self.totalmL += bolusSize
-
-            elif re.search('Lx', line):
-                self.isLicking = True
-                self.actionHistory.append(Actions.LICK)
-                m = p.findall(line)
-                self.actionTimes.append(float(m[0] + '.' + m[1]))
-            elif re.search('Lo', line):
-                self.isLicking = False
-                self.actionHistory.append(Actions.LICK_DONE)
-                m = p.findall(line)
-                self.actionTimes.append(float(m[0] + '.' + m[1]))
-
-            elif re.search('Tx', line):
-                self.actionHistory.append(Actions.TAP)
-                m = p.findall(line)
-                self.actionTimes.append(float(m[0] + '.' + m[1]))
-            elif re.search('To', line):
-                self.actionHistory.append(Actions.TAP_DONE)
-                m = p.findall(line)
-                self.actionTimes.append(float(m[0] + '.' + m[1]))
-
-            elif re.search('Io', line):
-                self.actionHistory.append(Actions.LEAVE)
-                m = p.findall(line)
-                self.actionTimes.append(float(m[0] + '.' + m[1]))
-
-
-        # examine what states occurred
-        for line in self.lines:
-            if re.search('State', line):
-                m = p.findall(line)
-                self.stateHistory.append(int(m[0]))
-                self.stateTimes.append(float(m[1] + "." + m[2]))
-
-                if self.stateHistory[-1] == States.DELAY:
-                    self.trialStartTime = float(m[1] + "." + m[2])
-
-                if self.stateHistory[-1] == States.SMINUS:
-                    self.numSMinus += 1
-
-                if self.stateHistory[-1] == States.TIMEOUT:
-                    #end of trial
-                    #Figure out what the trial result was based on actions and states
-                    prevState = self.stateHistory[-2]
-                    prevStateStart = self.stateTimes[-2]
-                    self.resultState = prevState
-
-                    if self.reward:
-                        #could be a HIT or CORRECT_REJECT.
-                        if self.guaranteedSPlus == False:
-                            #the only lick result with a reward is HIT
-                            self.result = Results.HIT
-                        elif self.guaranteedSPlus == True:
-                            #could be an sMinus or sPlus trial, let's find out
-                            if self.numSMinus == max(self.sMinusPresentations):
-                                #S- trial, so CR
-                                self.result = Results.CORRECT_REJECT
-                            else:
-                                #S+ trial, so hit
-                                self.result = Results.HIT
-
-                    else:
-                        #no reward earned; could be an ABORT, FALSE_ALARM, TASK_FAIL, MISS, NO_RESPONSE, or CORRECT_REJECT.
-                        if prevState == States.DELAY:
-                            #shrew was already licking when delay state began, causing an instant fail
-                            self.result = Results.TASK_FAIL
-
-                        elif len(self.actionHistory) > 0 and self.actionHistory[-1] == Actions.LEAVE and self.actionTimes[-1] >= prevStateStart:
-                            #final action was leaving, and it led to the timeout. Was an aborted trial.
-                            self.result = Results.ABORT
-
-                        elif len(self.actionHistory) > 0 and self.actionHistory[-1] == Actions.LICK and self.actionTimes[-1] >= prevStateStart:
-                            #lick caused trial to end; could be FALSE_ALARM or TASK_FAIL.
-                            if prevState == States.GRAY:
-                                if self.numSMinus == 1 and min(self.sMinusPresentations) == 1:
-                                    #it was during the memory delay on a template task. It's a task error.
-                                    self.result = Results.TASK_FAIL
-                                else:
-                                    #Test grating was just presented; this is a false alarm.
-                                    self.result = Results.FALSE_ALARM
-                            else:
-                                #licks in any other states are screwups
-                                self.result = Results.TASK_FAIL
-                        else:
-                            #trial ended on its own, so it's a MISS, NO_RESPONSE, or CORRECT_REJECT.
-                            if self.guaranteedSPlus == True and self.numSMinus == max(self.sMinusPresentations):
-                                self.result = Results.NO_RESPONSE
-                            elif self.guaranteedSPlus == False and prevState == States.GRAY:
-                                self.result = Results.CORRECT_REJECT
-                            else:
-                                self.result = Results.MISS
 
 class DiscriminationAnalysis:
     """
@@ -180,8 +35,8 @@ class DiscriminationAnalysis:
     Requires the corresponding settings file.
     Init will read in files, then you can use the get_performance functions to summarize results.
     """
-    
-    def __init__(self, logFile, settingsFile, notesFile):
+
+    def __init__(self, logFile=None, settingsFile=None, notesFile=None):
         self.trials = []
 
         self.isLicking = False
@@ -196,15 +51,22 @@ class DiscriminationAnalysis:
         self.shrewName = ""
         self.notes = "" #contents of notes file, not including automated analysis
 
+
         #do reading of settings file
         self.read_settings_file(settingsFile)
 
+        #make first trial
+        self.t = DiscriminationTrial(analysis=self)
+
+        #If no logfile, this is a live session -- nothing more to do yet, just wait for process_line calls etc.
+        if logFile is None:
+            return
+
         #process log file
-        self.t = DiscriminationTrial(analysis=self) #make first trial
         self.read_log_file(logFile)
 
         #--- pull out some more metadata ---#
-        
+
         #trainer name, if available
         if notesFile is not None:
             self.read_notes_file(notesFile)
@@ -212,13 +74,13 @@ class DiscriminationAnalysis:
         #shrew name and day of week
         m = re.match("(.*)_(.*)_(\\d+)_log.txt", logFile.split("\\")[-1])
         self.shrewName = m.group(1)
-        dateStr = m.group(2)        
+        dateStr = m.group(2)
         (year, month, date) = dateStr.split("-")
         self.date = datetime.date(int(year),int(month),int(date))
         self.session = m.group(3)
         daysOfWeek = ["","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"]
         self.dayOfWeek = daysOfWeek[self.date.isoweekday()]
-                
+
         #get time of day at middle of training session, in hh:mm format
         if len(self.trials) > 0:
             t0 = self.trials[0]
@@ -227,10 +89,10 @@ class DiscriminationAnalysis:
                 tMid = (t0.stateTimes[0] + tN.stateTimes[0]) / 2
                 dtMid = datetime.datetime.fromtimestamp(tMid)
                 self.midSessionTime = str(dtMid.hour).zfill(2) + ":" + str(dtMid.minute).zfill(2)
-        
+
         #organize results into summary data for nice plotting
         self.trial_stats()
-    
+
     def read_notes_file(self, notesFile):
         if not os.path.isfile(notesFile):
             return
@@ -256,6 +118,10 @@ class DiscriminationAnalysis:
 
     def read_settings_file(self, settingsFile):
         """eat a settings file, and thereby gain its powers"""
+
+        m = re.match("(.*)_(.*)_(\\d+)_settings.txt", settingsFile.split("\\")[-1])
+        self.shrewName = m.group(1)
+
         fileinput.close() # Close any existing fileinput handles, just in case
         for line in fileinput.input(settingsFile):
             toks = line.split(" ")
@@ -265,7 +131,7 @@ class DiscriminationAnalysis:
                     self.hintsUsed = False
                 else:
                     self.hintsUsed = True
-            
+
             if toks[0] == "guaranteedSPlus":
                 if toks[2].rstrip() == "True":
                     self.guaranteedSPlus = True
@@ -276,7 +142,7 @@ class DiscriminationAnalysis:
                 exec("self." + line)
 
             if toks[0] == "sPlusOrientations":
-                exec("self." + line)    
+                exec("self." + line)
 
             if toks[0] == "sMinusOrientations":
                 exec("self." + line)
@@ -321,7 +187,7 @@ class DiscriminationAnalysis:
         """eat a log file, to absorb its knowledge"""
         fileinput.close() # Close any existing fileinput handles, just in case
         for line in fileinput.input(logFile):
-            self.process_line(line)   
+            self.process_line(line)
 
     def process_line(self, line):
         """Reads a single line of the log. If line represents a timeout state, trial is complete."""
@@ -334,24 +200,30 @@ class DiscriminationAnalysis:
     def trial_stats(self):
         """
         Call this after data processing to get statistics.
-        Makes raw numbers easily accessible. 
+        Makes raw numbers easily accessible.
         Percents will be rounded to the hundredths.
         """
-        
+
         #inits
         self.nTrials = len(self.trials)
         self.taskErrors = 0
         self.taskErrorRate = 0
+        self.stateFailCounts = {}
+
+        self.overallSuccessRate = 0
 
         self.discriminationPercent = 0
+        self.dPrimeOverall = 0
 
         self.sPlusResponses = 0
         self.sPlusTrials = 0
         self.sPlusResponseRate = 0
+        self.sPlusPerformances = {sPlusOri : OrientationPerformance() for sPlusOri in self.sPlusOrientations}  # todo
 
         self.sMinusRejects = 0
         self.sMinusTrials = 0
         self.sMinusRejectRate = 0
+        self.sMinusPerformances = {sMinusOri : OrientationPerformance() for sMinusOri in self.sMinusOrientations}  # todo
 
         self.totalmL = 0
         self.mLPerHour = 0
@@ -368,26 +240,57 @@ class DiscriminationAnalysis:
                 continue
             self.resultCounts[Results.whatis(t.result)] += 1
 
-            
+
         results = self.resultCounts #shorthand
-        
+
         #Task error rate
-        self.taskErrors = results["TASK_FAIL"]
+        self.taskErrors = results["TASK_FAIL"] + results["NO_RESPONSE"] + results["ABORT"]
         self.taskErrorRate = round(100* (self.taskErrors / self.nTrials), 2)
-        
+
+        for t in self.trials:  # type: DiscriminationTrial
+            if t.result == Results.TASK_FAIL:
+                if States.whatis(t.resultState) in self.stateFailCounts:
+                    self.stateFailCounts[States.whatis(t.resultState)] += 1
+                else:
+                    self.stateFailCounts[States.whatis(t.resultState)] = 1
+
         #sPlus and sMinus correct counts
         self.sPlusResponses = results["HIT"]
         self.sPlusTrials = results["MISS"] + results["HIT"]
         if self.sPlusTrials > 0:
             self.sPlusResponseRate = round(100*(self.sPlusResponses / self.sPlusTrials), 2)
-            
+
         self.sMinusRejects = results["CORRECT_REJECT"]
         self.sMinusTrials = results["CORRECT_REJECT"] + results["FALSE_ALARM"]
         if self.sMinusTrials > 0:
             self.sMinusRejectRate = round(100*(self.sMinusRejects / self.sMinusTrials), 2)
-            
+
+        #breakdown by orientation
+        for t in self.trials:
+            sPlusOri = t.sPlusOrientation
+            sMinusOri = t.sMinusOrientation
+            if t.numSMinus == max(self.sMinusPresentations) and len(self.sMinusPresentations) > 1:
+                #it's an sMinus trial
+                if t.result == Results.CORRECT_REJECT:
+                    self.sMinusPerformances[sMinusOri].numCorrect += 1
+                    self.sMinusPerformances[sMinusOri].numTrials += 1
+                elif t.result == Results.FALSE_ALARM:
+                    self.sMinusPerformances[sMinusOri].numTrials += 1
+            else:
+                #it's an sPlus trial
+                if t.result == Results.HIT:
+                    self.sPlusPerformances[sPlusOri].numCorrect += 1
+                    self.sPlusPerformances[sPlusOri].numTrials += 1
+                elif t.result == Results.MISS:
+                    self.sPlusPerformances[sPlusOri].numTrials += 1
+
+
         #Discrimination percent
         self.discriminationPercent = round(0.5*self.sPlusResponseRate + 0.5*self.sMinusRejectRate, 2)
+        self.dPrimeOverall = dPrime(self.sPlusResponseRate/100, 1-self.sMinusRejectRate/100)
+
+        # Success rate
+        self.overallSuccessRate = (self.sPlusResponses + self.sMinusRejects) / self.nTrials
 
         #duration
         self.trainingDuration = (self.trials[-1].trialStartTime - self.trials[0].trialStartTime) / 60 / 60
@@ -409,29 +312,16 @@ class DiscriminationAnalysis:
 
     #--- Display Functions ---#
     def str_overview(self):
+        trainTime = secondsToHuman(self.trainingDuration*60*60)
         message = (
             "====" + "\n"
             "Shrew: " + self.shrewName + "\n" + "\n"
-            'Success rate: ' + str(round(self.overallSuccessRate,2)) + '% (' + str(self.sPlusResponses+self.sMinusRejects) + '/' + str(self.nTrials) + ')' + "\n"
-            '\nTotal Reward (mL): ' + str(self.session_mL) + "\n"
-            "Run Time: " + self.runTime + "\n"
-            "Reward Rate (mL/hour): " + str(self.rewardPerHour) + "\n"
+            'Success rate: ' + str(round(self.overallSuccessRate, 2)) + '% (' + str(self.sPlusResponses+self.sMinusRejects) + '/' + str(self.nTrials) + ')' + "\n"
+            '\nTotal Reward (mL): ' + str(self.totalmL) + "\n"
+            "Run Time: " + str(trainTime) + "\n"
+            "Reward Rate (mL/hour): " + str(round(self.mLPerHour, 2)) + "\n"
             "\n"
         )
-        return message
-
-    def str_task_errors(self):
-        message = (
-            '====' + "\n"
-            "TASK ERRORS\n" + "\n"
-            "Task Error Rate: " + str(self.taskErrorRate) + "% (" + str(self.taskErrors) + "/" + str(self.nTrials) + ")" + "\n"
-
-            '\nAborts: ' + str(self.abortCount) + "\n"
-            '\nTask error details: \n'
-        )
-        for f in self.stateFailCounts:
-            message += f + " " + str(self.stateFailCounts[f]) + "\n"
-        message += "\n"
         return message
 
     def str_discrimination(self):
@@ -441,8 +331,8 @@ class DiscriminationAnalysis:
             '====' + '\n'
             'DISCRIMINATION PERFORMANCE' + "\n"
 
-            "\nOverall Discrimination: " + str(self.discriminationRate) + "%" + " (" + str(nCorrect) + "/" + str(nDiscrimTrials) + ")"
-            #"\nOverall d': " + str(round(self.dPrimeOverall,3)) + "\n"
+            "\nOverall Discrimination: " + str(self.discriminationPercent) + "%" + " (" + str(nCorrect) + "/" + str(nDiscrimTrials) + ")"
+            "\nOverall d': " + str(round(self.dPrimeOverall,3)) + "\n"
 
             "\nS+ Response Rate: " + str(self.sPlusResponseRate) + "% "
             "(" + str(self.sPlusResponses) + "/" + str(self.sPlusTrials) + ")"
@@ -453,14 +343,8 @@ class DiscriminationAnalysis:
         )
 
         message += "\nS+ Response Rate by Orientation" + "\n"
-        #sort dictionary keys
-        sPlusOrientations = self.sPlusPerformances.keys()
-        sMinusOrientations = self.sMinusPerformances.keys()
 
-        sPlusOrientations = sorted(sPlusOrientations)
-        sMinusOrientations = sorted(sMinusOrientations)
-
-        for sPlusOrientation in sPlusOrientations:
+        for sPlusOrientation in self.sPlusOrientations:
             numCorrect = self.sPlusPerformances[sPlusOrientation].numCorrect
             numTrials = self.sPlusPerformances[sPlusOrientation].numTrials
 
@@ -478,7 +362,7 @@ class DiscriminationAnalysis:
             message += oriStr
 
         message += "\nS- Reject Rate by Orientation" + "\n"
-        for sMinusOrientation in sMinusOrientations:
+        for sMinusOrientation in self.sMinusOrientations:
             numCorrect = self.sMinusPerformances[sMinusOrientation].numCorrect
             numTrials = self.sMinusPerformances[sMinusOrientation].numTrials
 
@@ -498,7 +382,28 @@ class DiscriminationAnalysis:
         message += "\n"
         return message
 
+    def str_task_errors(self):
+        message = (
+            '====' + "\n"
+            "TASK ERRORS\n" + "\n"
+            "Task Error Rate: " + str(self.taskErrorRate) + "% (" + str(self.taskErrors) + "/" + str(self.nTrials) + ")" + "\n")
 
+        if self.resultCounts["ABORT"] > 0:
+            # Probably won't appear; aborts are impossible now that IR is gone.
+            # Kept for analysis of historical data only.
+            message += '\nAborts: ' + str(self.resultCounts["ABORT"]) + "\n"
+
+        if len(self.stateFailCounts.keys()) > 0:
+            message += '\nTask error details: \n'
+
+        for f in self.stateFailCounts:
+            message += f + " " + str(self.stateFailCounts[f]) + "\n"
+        message += "\n"
+        return message
+
+    def get_results_str(self):
+        self.trial_stats()
+        return self.str_overview() + self.str_discrimination() + self.str_task_errors()
 
 
 
@@ -508,10 +413,10 @@ def analyzeDir(dirPath):
     """
     Assumes the directory at dirPath contains sets of files including (logFile, settingsFile, notesFile).
     notesFiles are optional but nice.
-    
+
     Returns a set of Analysis objects, one for each logFile.
     """
-    
+
     os.chdir(baseDir)
     analyses = []
 
@@ -537,10 +442,10 @@ def analyzeDir(dirPath):
 
         if not os.path.isfile(settingsFile):
             continue
-        
+
         a = DiscriminationAnalysis(logFile, settingsFile, notesFile)
         analyses.append(a)
-        
+
     return analyses
 
 if __name__ == "__main__":
@@ -550,4 +455,3 @@ if __name__ == "__main__":
         print a.discriminationPercent
         print a.sPlusResponseRate
         print a.sMinusRejectRate
-    

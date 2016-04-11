@@ -1,4 +1,11 @@
-import types, string, pprint, exceptions
+from __future__ import division
+import sys
+sys.path.append("..")
+
+import types
+import string
+import pprint
+import exceptions
 
 # Class that takes in a list of strings and makes two dicts,
 # one for forward lookup and one for reverse lookup.

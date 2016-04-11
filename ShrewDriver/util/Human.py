@@ -1,5 +1,9 @@
 from __future__ import division
-import math, random
+import sys
+sys.path.append("..")
+
+import math
+import random
 
 '''
 Contains functions for making data more human-like in formatting.

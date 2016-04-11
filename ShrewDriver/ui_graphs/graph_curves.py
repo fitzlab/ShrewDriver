@@ -1,9 +1,12 @@
 from __future__ import division
+import sys
+sys.path.append("..")
+
 import numpy as np
 
 from PyQt4 import QtCore, QtGui
 
-from graph_constants import *
+from constants.graph_constants import *
 
 
 class IntCurve:

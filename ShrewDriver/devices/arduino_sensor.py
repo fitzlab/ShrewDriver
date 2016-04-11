@@ -1,13 +1,12 @@
+from __future__ import division
+import sys
+sys.path.append("..")
+
+
 from serial_port import SerialPort
 
 import time
-import sys
 
-sys.path.append("..")
-
-import pyqtgraph as pg
-from pyqtgraph.Qt import QtCore, QtGui
-import numpy as np
 
 class ArduinoSensor():
     

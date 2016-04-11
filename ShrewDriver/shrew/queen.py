@@ -1,55 +1,23 @@
+from _header import *
+
 """Contains at least one function that defines a shrew's task and devices."""
 
-import sys
-sys.path.append("..")
+def set_params(task):
 
-class QueenARC():
-    
-    def __init__(self):
-        self.name = "Queen"
-        self.ardSensorPort = "COM20"
-        self.syringePort = "COM21"
-        self.stimbotPort = "COM22"
-        self.stimDevice = None
-        self.cameraID = 5
-
-        self.screenDist = 25
-        
-class QueenUpstairs():
-    
-    def __init__(self):
-        self.name = "Queen"
-        self.ardSensorPort = "COM100"
-        self.syringePort = "COM101"
-        self.stimbotPort = None
-        self.stimDevice = Psycho(windowed=False)
-        self.cameraID = 5
-
-        self.screenDist = 20
-'''
-def queen_headfix():
     shrew = QueenUpstairs()
-    task = TaskHeadfix(shrew)
-    
-    #params
-    params = ParamsHeadfix()
-    params.reward_mL = 0.2
-    task.params = params
+    task = TaskDiscrimination(shrew)
 
-    #screen commands 
-    task.setUpStates()
-    task.initMode = Task.INIT_TAP
+    self.stimDevice = None
+    self.cameraID = 5
 
-    #ready to go
-    task.start(do_ui=True, do_camera=False, do_logging=True)
+    self.screenDist = 25
 
-def queen_nonmatch_imaging():
-    
-    shrew = QueenUpstairs()
-    task = TaskNonMatch(shrew)
-    
-    #params
-    params = ParamsNonMatch()
+    self.stimbotPort = None
+    self.stimDevice = Psycho(windowed=False)
+    self.cameraID = 5
+
+    self.screenDist = 20
+
     params.sPlusOrientations = [135]
     params.sMinusOrientations = [160]
 
@@ -81,7 +49,6 @@ def queen_nonmatch_imaging():
     task.start(do_ui=True, do_camera=False, do_logging=True)
 
 
-if __name__ == "__main__":
-    queen_nonmatch_imaging()
-    
-    '''
+'''
+
+'''

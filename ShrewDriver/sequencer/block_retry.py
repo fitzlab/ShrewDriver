@@ -1,9 +1,12 @@
-import Sequencer, random
+from __future__ import division
 import sys
-sys.path.append("../global")
-from Constants import *
+sys.path.append("..")
 
-class SequencerBlockRetry(Sequencer.Sequencer):
+from sequencer.sequencer_base import Sequencer
+import random
+from constants.task_constants import *
+
+class SequencerBlockRetry(Sequencer):
     
     def __init__(self, trialSet):
         self.trialSet = trialSet

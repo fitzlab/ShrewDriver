@@ -1,7 +1,9 @@
 from __future__ import division
+import sys
+sys.path.append("..")
+
 
 import time
-import sys
 import threading
 from collections import OrderedDict
 
@@ -10,8 +12,8 @@ import pyqtgraph as pg
 
 from db.db_events import *
 from graph_axes import *
-from graph_constants import *
 from graph_curves import *
+from constants.graph_constants import *
 
 class Event():
 
@@ -125,7 +127,6 @@ class GraphEvents():
         for cn in self.curves:
             self.curves[cn].update()
 
-        print 'events loaded'
 
     def clear_curves(self):
         for cn in self.curves:

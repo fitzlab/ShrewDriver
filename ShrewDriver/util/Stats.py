@@ -1,5 +1,9 @@
 from __future__ import division
-import math, random
+import sys
+sys.path.append("..")
+
+import math
+import random
 from scipy import stats
 
 def fisherExact(g1r1, g1r2, g2r1, g2r2, nTails=1):
@@ -21,28 +25,27 @@ def fisherExact(g1r1, g1r2, g2r1, g2r2, nTails=1):
     return p
 
 def dPrime(sPlusHitRate, falseAlarmRate):
-    zHit = invNormApprox(sPlusHitRate);
-    zFA = invNormApprox(falseAlarmRate);
-    dPrime = zHit - zFA;
+    zHit = invNormApprox(sPlusHitRate)
+    zFA = invNormApprox(falseAlarmRate)
+    dPrime = zHit - zFA
     
     return dPrime
 
 def criterion(sPlusHitRate, falseAlarmRate):
-    zHit = invNormApprox(sPlusHitRate);
-    zFA = invNormApprox(falseAlarmRate);
-    c = -(zHit + zFA)/2;
+    zHit = invNormApprox(sPlusHitRate)
+    zFA = invNormApprox(falseAlarmRate)
+    c = -(zHit + zFA)/2
     return c
 
 def invNormApprox(p):
-    #InvNormApprox:  Pass the hit rate and false alarm rate, and this
-    #routine returns zHit and zFa.  d' = zHit - zFa.
-    #Converted from a basic routine provided by:
-    #Brophy, A. L. (1986).  Alternatives to a table of criterion 
+    # InvNormApprox:  Pass the hit rate and false alarm rate, and this
+    # routine returns zHit and zFa.  d' = zHit - zFa.
+    # Converted from a basic routine provided by:
+    # Brophy, A. L. (1986).  Alternatives to a table of criterion
     #  values in signal detection theory.  Behavior Research 
     #  Methods, Instruments, & Computers, 18, 285-286.
     #
-    #Code adapted from http://memory.psych.mun.ca/models/dprime/
-    #And just to be thorough, the results were confirmed against three other independent d' measurements.
+    # Code adapted from http://memory.psych.mun.ca/models/dprime/
 
     sign = -1
     

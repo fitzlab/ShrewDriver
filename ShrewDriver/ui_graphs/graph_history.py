@@ -1,19 +1,22 @@
 from __future__ import division
+import sys
+sys.path.append("..")
+
 
 import time
 import os
 import shelve
 import re
-import sys
 
 from PyQt4 import QtCore, QtGui, uic
 import pyqtgraph as pg
 
 from graph_axes import *
-from graph_constants import *
+from constants.graph_constants import *
 from graph_curves import *
 import random
 import copy
+
 
 sys.path.append("..")
 from db.db_history import DbHistory

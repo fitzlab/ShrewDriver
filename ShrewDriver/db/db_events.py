@@ -1,11 +1,13 @@
-
+from __future__ import division
 import sys
+sys.path.append("..")
+
+
 import threading
 
 from db_mixin import DbMixin
 
-sys.path.append("..")
-from ui_graphs.graph_constants import *
+from constants.graph_constants import *
 from analysis.discrimination_analysis import *
 
 
@@ -62,4 +64,3 @@ class DbEvents(DbMixin):
             db = self.get(a.shrewName)
             db[dateStr] = entry
         self.sync(a.shrewName)
-

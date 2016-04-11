@@ -28,7 +28,7 @@ class ChicoUpstairs():
 
         self.screenDist = 25
 
-'''
+
 def chico_headfix():
     shrew = ChicoUpstairs()
     task = TaskHeadfix(shrew)
@@ -45,44 +45,44 @@ def chico_headfix():
     #ready to go
     task.start(do_ui=True, do_camera=False, do_logging=True)
 
-def chico_nonmatch():
+def chico_discrimination():
+    print "Using settings for Chico!"
+    self.sPlusOrientations = [135]
+    self.sMinusOrientations = [180]
+    self.sMinusPresentations = [0,1] #how many times to display the SMINUS
+    self.guaranteedSPlus = True #is there always an SPLUS in the trial?
+    self.sequenceType = Sequences.RANDOM
+    self.initiation = Initiation.TAP
 
-    shrew = ChicoUpstairs()
-    task = TaskNonMatch(shrew)
+    self.timeoutFail = 10
+    self.timeoutAbort = 10
+    self.timeoutSuccess = 10
+    self.timeoutNoResponse = 10
+    self.timeoutCorrectReject = 10
 
-    #params
-    params = ParamsNonMatch()
-    params.sPlusOrientations = [135]
-    params.sMinusOrientations = [160]
+    self.initTime = 1
 
-    params.hintChance = 0.0 #<--- Decreased from 0.25 to 0 on Jan. 15 at Val's advice, since Chico's becoming too hint dependent.
-    params.hintBolus = 0.050
+    self.variableDelayMin = 1.0
+    self.variableDelayMax = 1.75
 
-    params.hitBolus = 0.300
-    params.correctRejectBolus = 0.400
+    self.gratingDuration = 0.5
+    self.grayDuration = 1
+    self.rewardPeriod = self.grayDuration #needs to be no longer than gray duration!
 
-    task.params = params
+    self.hintChance = 0.0 #chance of sending a low reward at the start of the reward period
 
-    #screen commands 
-    task.setUpStates()
-    task.states["Timeout"].screenCommand = "ac pab px0 py0 sx12 sy12"
-    task.states["Init"].screenCommand = "ac paw px0 py0 sx12 sy12"
-    task.states["TimingDelay"].screenCommand = "sx0 sy0"
-    task.states["Sample"].screenCommand = "as sf0.25 tf0 jf3 ja0.25 px0 py0 sx999 sy999"
-    task.states["MemoryDelay"].screenCommand = "sx0 sy0"
-    task.states["NonMatch"].screenCommand = "as sf0.25 tf0 jf3 ja0.25 px0 py0 sx999 sy999"
-    task.states["NonMatchResponse"].screenCommand = "sx0 sy0"
-    task.states["Match"].screenCommand = "as sf0.25 tf0 jf3 ja0.25 px0 py0 sx999 sy999"
-    task.states["MatchResponse"].screenCommand = "sx0 sy0"
-    task.states["NonMatchFinal"].screenCommand = "as sf0.25 tf0 jf3 ja0.25 px0 py0 sx999 sy999"
-    task.states["NonMatchFinalResponse"].screenCommand = "sx0 sy0"
-    
-    task.initMode = task.INIT_TAP
-    
-    #ready to go    
-    task.start(do_ui=True, do_camera=False, do_logging=True)
+    self.hintBolus = 0.03 #0.03 is a good amount; just enough that the shrew will notice it but not enough to be worth working for on its own.
+    self.rewardBolus = 0.150
+    self.rewardBolusHardTrial = 0.250
 
-if __name__ == "__main__":
-    chico_nonmatch()
-    
-   '''
+    #stimbot setup, including command strings for each state
+    #note that grating states will have an extra command added later to specify orientation and phase.
+    self.screenDistanceMillis = 25
+    self.commandStrings[States.TIMEOUT] = 'ac pab px0 py0 sx12 sy12\n'
+    self.commandStrings[States.INIT] = 'ac paw px0 py0 sx12 sy12\n'
+    self.commandStrings[States.DELAY] = 'sx0 sy0\n'
+    self.commandStrings[States.SMINUS] = 'as sf0.25 tf0 jf0 ja0 px0 py0 sx999 sy999\n'
+    self.commandStrings[States.GRAY] = 'sx0 sy0\n'
+    self.commandStrings[States.SPLUS] = 'as sf0.25 tf0 jf0 ja0 px0 py0 sx999 sy999\n'
+    self.commandStrings[States.REWARD] = 'sx0 sy0\n'
+

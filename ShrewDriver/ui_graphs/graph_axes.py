@@ -1,9 +1,10 @@
-import datetime
-
-import pyqtgraph as pg
+from __future__ import division
 import sys
-
 sys.path.append("..")
+
+import datetime
+import pyqtgraph as pg
+
 import task.state
 
 class DateAxis(pg.AxisItem):

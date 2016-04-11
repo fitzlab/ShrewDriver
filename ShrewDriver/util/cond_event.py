@@ -1,3 +1,6 @@
+from __future__ import division
+import sys
+sys.path.append("..")
 
 class CondEvent():
     # The CondEvent class defines a causal relationship that you can use to make reactive objects.

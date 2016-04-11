@@ -6,7 +6,6 @@ import imp
 import sys
 sys.path.append('..')
 
-
 class Shrew:
 
     def __init__(self, py_file_path, name):
@@ -36,6 +35,9 @@ class Shrew:
                 #disregard this class (may be imported).
                 continue
             self.configs.append(c)
+
+def load_settings(task):
+    s = task.animalName
 
 
 def get_animals(animalDir):

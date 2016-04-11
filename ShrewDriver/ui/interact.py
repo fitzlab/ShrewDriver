@@ -1,5 +1,7 @@
 from __future__ import division
 import sys
+sys.path.append("..")
+
 from PyQt4 import QtCore, QtGui
 from PyQt4 import uic
 import _winreg as winreg

@@ -1,4 +1,13 @@
-import serial, time, re, threading, copy, sys
+from __future__ import division
+import sys
+sys.path.append("..")
+
+
+import serial
+import time
+import re
+import threading
+import copy
 
 class SerialPort(object):
     # This class talks to an Arduino and reads the raw data from it, adding timestamps.
@@ -9,7 +18,8 @@ class SerialPort(object):
     
     def __init__(self, serialPortName, baudRate=57600):
         #serial port setup
-        self.serialPortName = int(serialPortName[3:])-1
+        self.serialPortName = serialPortName
+        # self.serialPortName = int(serialPortName[3:])-1  # <--- Workaround for serial port oddities in old versions of pyserial.
         self.baudRate = baudRate #All devices in lab standardize on 57600. If device isn't responding, make sure you're not set to 9600.
         print "Opening serial port [" + serialPortName + "] at " + str(self.baudRate) 
         sys.stdout.flush()

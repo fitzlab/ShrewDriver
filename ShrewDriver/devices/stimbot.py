@@ -1,3 +1,8 @@
+from __future__ import division
+import sys
+sys.path.append("..")
+
+
 from serial_port import SerialPort
 import time
 

@@ -1,4 +1,8 @@
-import os 
+from __future__ import division
+import sys
+sys.path.append("..")
+
+import os
 import pickle
 import time
 

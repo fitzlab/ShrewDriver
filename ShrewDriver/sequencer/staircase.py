@@ -1,10 +1,12 @@
 from __future__ import division
-import Sequencer
-import sys, random
-sys.path.append("../global")
-from Constants import *
+import sys
+sys.path.append("..")
 
-class SequencerStaircase(Sequencer.Sequencer):
+from sequencer.sequencer_base import Sequencer
+import random
+from constants.task_constants import *
+
+class SequencerStaircase(Sequencer):
     
     def __init__(self, trialSet):
         

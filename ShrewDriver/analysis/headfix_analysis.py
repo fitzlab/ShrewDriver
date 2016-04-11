@@ -1,15 +1,17 @@
+from __future__ import division
+import sys
+sys.path.append("..")
+
 
 # Dummy class for now -- it may do some stuff later
 
-from collections import deque, namedtuple
+from collections import deque
+from trial.headfix_trial import *
 
+class HeadfixAnalysis():
 
-class HeadfixOnlineAnalyzer():
-    
-   
-    def __init__(self, settingsFile, summaryFile):
+    def __init__(self, logFile=None, settingsFile=None, summaryFile=None):
         self.eventsToProcess = deque()
-        self.analyzer = HeadfixAnalyzer()
         
     def event(self, event):
         self.eventsToProcess.append(event)
@@ -23,20 +25,13 @@ class HeadfixOnlineAnalyzer():
         """
         while len(self.eventsToProcess) > 0:
             line = self.eventsToProcess.popleft()
-            self.analyzer.process_line(line) 
-        
-        summary = self.analyzer.get_summary()
-        
-        return summary   
-    
-class HeadfixAnalyzer():
+            self.process_line(line)
 
-    def __init__(self):
-        pass
-        
-    def get_summary(self):
+    def get_results_str(self):
         return ""
-    
+
     def process_line(self, line):
-        print ">>>",line
-    
+        print "Headfix >>>", line
+
+
+

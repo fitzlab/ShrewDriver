@@ -1,12 +1,17 @@
-import Sequencer, random
-from Constants import *
+from __future__ import division
+import sys
+sys.path.append("..")
+
+from sequencer.sequencer_base import Sequencer
+import random
+from constants.task_constants import *
 
 # interval sequencing:
 # Shrew gets a set of easy S- orientations, then a set of hard ones, and repeat.
 # This takes a few calls to set up. First, call init(), then set numEasy, numHard, and tell it 
 # what the easyOris and hardOris are. 
 
-class SequencerIntervalRetry(Sequencer.Sequencer):
+class SequencerIntervalRetry(Sequencer):
     
     def __init__(self, trialSet):
         self.trialSet = trialSet

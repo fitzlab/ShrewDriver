@@ -1,7 +1,9 @@
 from __future__ import division
+import sys
+sys.path.append("..")
+
 
 import time
-import sys
 import random
 import numpy as np
 
@@ -10,10 +12,9 @@ import pyqtgraph as pg
 
 from db.db_lick_times import *
 from graph_axes import *
-from graph_constants import *
+from constants.graph_constants import *
 from graph_curves import *
 
-sys.path.append("..")
 from task.state import State
 
 
@@ -184,7 +185,6 @@ class GraphLickTimes():
             return
         sessionData = dbLickTimes[session]
 
-        print sessionData.keys()
         if not STATE_MAX_DURATIONS in sessionData:
             print "missing", STATE_MAX_DURATIONS, "in session", session
             return
@@ -195,7 +195,6 @@ class GraphLickTimes():
         self.stateMaxDurations = sessionData[STATE_MAX_DURATIONS]
         self.make_plots()
 
-        #print sessionData[LICK_INFO]
         for lickPoint in sessionData[LICK_INFO]:
             (stateName, lickTime, trialNum) = lickPoint
             self.add_point(stateName, lickTime, trialNum)

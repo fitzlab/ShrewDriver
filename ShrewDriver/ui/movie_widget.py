@@ -1,6 +1,8 @@
+from __future__ import division
+import sys
+sys.path.append("..")
 
 import cv2
-import sys
 
 from PyQt4.QtCore import QPoint, QTimer
 from PyQt4.QtGui import QApplication, QImage, QPainter, QWidget

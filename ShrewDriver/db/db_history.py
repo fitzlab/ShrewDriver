@@ -1,10 +1,11 @@
 from __future__ import division
 import sys
-import threading
-
 sys.path.append("..")
 
-from ui_graphs.graph_constants import *
+
+import threading
+
+from constants.graph_constants import *
 from db_mixin import DbMixin
 from analysis.discrimination_analysis import *
 

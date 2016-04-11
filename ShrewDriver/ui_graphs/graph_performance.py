@@ -1,6 +1,7 @@
 from __future__ import division
-
 import sys
+sys.path.append("..")
+
 import shelve
 
 from PyQt4 import QtCore, QtGui, uic
@@ -8,7 +9,7 @@ import pyqtgraph as pg
 
 from db.db_performance import *
 from graph_axes import *
-from graph_constants import *
+from constants.graph_constants import *
 from graph_curves import *
 import random
 import time
@@ -125,7 +126,6 @@ class GraphPerformance():
         for cn in self.curves:
             self.curves[cn].update()
 
-        print 'loaded'
 
 
     def clear_curves(self):

@@ -1,13 +1,15 @@
-
+from __future__ import division
 import sys
+sys.path.append("..")
+
+
 import threading
 
 from db_mixin import DbMixin
 
-sys.path.append("..")
 from analysis.discrimination_analysis import *
-from ui_graphs.graph_constants import *
-from task.task_constants import *
+from constants.graph_constants import *
+from constants.task_constants import *
 
 class DbLickTimes(DbMixin):
 

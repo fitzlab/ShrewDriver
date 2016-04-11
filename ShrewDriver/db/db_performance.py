@@ -1,5 +1,8 @@
 from __future__ import division
 import sys
+sys.path.append("..")
+
+
 import shelve
 import threading
 
@@ -7,8 +10,7 @@ from collections import deque
 
 from db_mixin import DbMixin
 
-sys.path.append("..")
-from ui_graphs.graph_constants import *
+from constants.graph_constants import *
 
 from analysis.discrimination_analysis import *
 
