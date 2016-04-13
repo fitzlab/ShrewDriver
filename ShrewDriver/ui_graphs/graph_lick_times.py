@@ -105,10 +105,12 @@ class GraphLickTimes():
     def __init__(self, mainUI):
         self.mainUI = mainUI  # type: main_ui.MainUI
         self.gw = pg.GraphicsLayoutWidget()
-        print "Items: " + str(len(self.gw.items())) +": " +str(self.gw.items()[0])
+        self.gw.setLayout(QtGui.QGridLayout())
         self.plots = {}
         self.curveToShow = self.TYPE_HISTOGRAM
         self.stateMaxDurations = {}
+
+        self.placeholderPlot = None
 
     def set_curve_type(self, curveToShow):
         # curve type is set by UI and can be TYPE_POINTS or TYPE_HISTOGRAM.
@@ -118,10 +120,21 @@ class GraphLickTimes():
         lickPlot = LickPlot(self, stateName, maxDuration)
         self.plots[stateName] = lickPlot
 
+        #we have at least one plot in there so remove placeholder
+        if self.placeholderPlot is not None:
+            print str(self.gw.items()) + " len " + str(len(self.gw.items()))
+            self.gw.removeItem(self.placeholderPlot.plot)
+            self.placeholderPlot = None
+
+
     def clear_plots(self):
+        print "clearing"
+        #put a placeholder in. There's a bug on some systems where rendering screws up
+        #unless there's always at least one plot there.
+        self.placeholderPlot = LickPlot(self, "Placeholder", 1.0)
+
         for stateName in self.plots.keys():
             self.gw.removeItem(self.plots[stateName].plot)
-        print "Items left: " + str(len(self.gw.items())) +": " +str(self.gw.items()[0])
         self.plots = {}
 
     def make_plots(self):
