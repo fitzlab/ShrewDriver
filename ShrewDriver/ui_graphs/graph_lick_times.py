@@ -121,21 +121,22 @@ class GraphLickTimes():
         self.plots[stateName] = lickPlot
 
         #we have at least one plot in there so remove placeholder
-        if self.placeholderPlot is not None:
-            print str(self.gw.items()) + " len " + str(len(self.gw.items()))
-            self.gw.removeItem(self.placeholderPlot.plot)
-            self.placeholderPlot = None
 
 
     def clear_plots(self):
         print "clearing"
-        #put a placeholder in. There's a bug on some systems where rendering screws up
-        #unless there's always at least one plot there.
-        self.placeholderPlot = LickPlot(self, "Placeholder", 1.0)
 
         for stateName in self.plots.keys():
             self.gw.removeItem(self.plots[stateName].plot)
         self.plots = {}
+
+        items = self.gw.items()
+        for item in items:
+            try:
+                self.gw.removeItem(item)
+            except:
+                pass
+
 
     def make_plots(self):
         """Create a plot for each state."""
