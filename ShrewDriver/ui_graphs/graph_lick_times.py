@@ -120,8 +120,6 @@ class GraphLickTimes():
         lickPlot = LickPlot(self, stateName, maxDuration)
         self.plots[stateName] = lickPlot
 
-        #we have at least one plot in there so remove placeholder
-
 
     def clear_plots(self):
         print "clearing"
@@ -130,12 +128,9 @@ class GraphLickTimes():
             self.gw.removeItem(self.plots[stateName].plot)
         self.plots = {}
 
-        items = self.gw.items()
-        for item in items:
-            try:
-                self.gw.removeItem(item)
-            except:
-                pass
+        self.mainUI.lickPlotFrameLayout.removeWidget(self.gw)
+        self.gw = pg.GraphicsLayoutWidget()
+        self.mainUI.lickPlotFrameLayout.addWidget(self.gw)
 
 
     def make_plots(self):

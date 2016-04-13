@@ -61,7 +61,7 @@ class GraphUI(QtGui.QMainWindow, ShrewDriver_class):
 
         self.tabEventsLayout.addWidget(self.graphEvents.plot)
         self.tabPerformanceLayout.addWidget(self.graphPerformance.plot, 2, 0, 1, 4)
-        self.tabLickTimesLayout.addWidget(self.graphLickTimes.gw, 4, 0, 1, 1)
+        self.lickPlotFrameLayout.addWidget(self.graphLickTimes.gw)
         self.tabHistoryLayout.addWidget(self.graphHistory.plot, 2, 0, 1, 4)
 
 

@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b1ee761d-24c1-496c-aee7-bba7fda5eba1" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ui/graph_ui.ui" afterPath="$PROJECT_DIR$/ui/graph_ui.ui" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ui/graph_ui.py" afterPath="$PROJECT_DIR$/ui/graph_ui.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ui_graphs/graph_lick_times.py" afterPath="$PROJECT_DIR$/ui_graphs/graph_lick_times.py" />
     </list>
     <ignored path="ShrewDriver.iws" />
@@ -24,18 +26,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="discrimination_analysis.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/analysis/discrimination_analysis.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="295" column="17" selection-start-line="295" selection-start-column="17" selection-end-line="295" selection-end-column="17" />
-              <folding>
-                <element signature="e#0#31#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="shrew.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/shrew/shrew.py">
           <provider selected="true" editor-type-id="text-editor">
@@ -71,8 +61,18 @@
       <file leaf-file-name="graph_ui.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ui/graph_ui.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-20.068966">
-              <caret line="63" column="31" selection-start-line="63" selection-start-column="13" selection-end-line="63" selection-end-column="31" />
+            <state vertical-scroll-proportion="-16.551723">
+              <caret line="63" column="36" selection-start-line="63" selection-start-column="33" selection-end-line="63" selection-end-column="36" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RemoteGraphicsView.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/pyqtgraph/widgets/RemoteGraphicsView.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="26" column="8" selection-start-line="26" selection-start-column="8" selection-end-line="26" selection-end-column="8" />
               <folding />
             </state>
           </provider>
@@ -81,8 +81,8 @@
       <file leaf-file-name="graph_lick_times.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/ui_graphs/graph_lick_times.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.5780347">
-              <caret line="126" column="24" selection-start-line="126" selection-start-column="24" selection-end-line="126" selection-end-column="24" />
+            <state vertical-scroll-proportion="0.4552023">
+              <caret line="130" column="8" selection-start-line="130" selection-start-column="8" selection-end-line="130" selection-end-column="8" />
               <folding />
             </state>
           </provider>
@@ -138,7 +138,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/ui_graphs/graph_curves.py" />
         <option value="$PROJECT_DIR$/ui_graphs/graph_events.py" />
         <option value="$PROJECT_DIR$/ui_graphs/graph_history.py" />
         <option value="$PROJECT_DIR$/ui_graphs/graph_performance.py" />
@@ -159,7 +158,6 @@
         <option value="$PROJECT_DIR$/devices/camera_reader.py" />
         <option value="$PROJECT_DIR$/devices/serial_port.py" />
         <option value="$PROJECT_DIR$/shrew/shrew.py" />
-        <option value="$PROJECT_DIR$/ui/graph_ui.py" />
         <option value="$PROJECT_DIR$/sequencer/sequencer.py" />
         <option value="$PROJECT_DIR$/sequencer/block.py" />
         <option value="$PROJECT_DIR$/sequencer/block_retry.py" />
@@ -189,6 +187,8 @@
         <option value="$PROJECT_DIR$/analysis/discrimination_analysis.py" />
         <option value="$PROJECT_DIR$/shrew/queen.py" />
         <option value="$PROJECT_DIR$/ui_graphs/graph_lick_times.py" />
+        <option value="$PROJECT_DIR$/pyqtgraph/widgets/RemoteGraphicsView.py" />
+        <option value="$PROJECT_DIR$/ui/graph_ui.py" />
       </list>
     </option>
   </component>
@@ -309,6 +309,38 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="shrew" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ShrewDriver" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ShrewDriver" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="pyqtgraph" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ShrewDriver" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ShrewDriver" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="pyqtgraph" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="widgets" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -677,14 +709,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/ui_graphs/graph_events.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="5" column="11" selection-start-line="5" selection-start-column="11" selection-end-line="5" selection-end-column="11" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/db/db_mixin.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1044,14 +1068,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ui/graph_ui.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-20.068966">
-          <caret line="63" column="31" selection-start-line="63" selection-start-column="13" selection-end-line="63" selection-end-column="31" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/pyqtgraph/graphicsItems/GraphicsLayout.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1060,10 +1076,26 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/ui/graph_ui.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-16.551723">
+          <caret line="63" column="36" selection-start-line="63" selection-start-column="33" selection-end-line="63" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pyqtgraph/widgets/RemoteGraphicsView.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="26" column="8" selection-start-line="26" selection-start-column="8" selection-end-line="26" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/ui_graphs/graph_lick_times.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5780347">
-          <caret line="126" column="24" selection-start-line="126" selection-start-column="24" selection-end-line="126" selection-end-column="24" />
+        <state vertical-scroll-proportion="0.4552023">
+          <caret line="130" column="8" selection-start-line="130" selection-start-column="8" selection-end-line="130" selection-end-column="8" />
           <folding />
         </state>
       </provider>
