@@ -226,6 +226,7 @@ class DiscriminationAnalysis:
         self.sMinusPerformances = {sMinusOri : OrientationPerformance() for sMinusOri in self.sMinusOrientations}  # todo
 
         self.totalmL = 0
+        self.hintmL = 0
         self.mLPerHour = 0
         self.trialsPerHour = 0
         self.trainingDuration = 0
@@ -302,6 +303,7 @@ class DiscriminationAnalysis:
         #mL
         for t in self.trials:
             self.totalmL += t.totalmL
+            self.hintmL += t.hintmL
 
         if self.trainingDuration > 0:
             self.mLPerHour = self.totalmL / self.trainingDuration
@@ -317,7 +319,12 @@ class DiscriminationAnalysis:
             "====" + "\n"
             "Shrew: " + self.shrewName + "\n" + "\n"
             'Success rate: ' + str(round(self.overallSuccessRate, 2)) + '% (' + str(self.sPlusResponses+self.sMinusRejects) + '/' + str(self.nTrials) + ')' + "\n"
-            '\nTotal Reward (mL): ' + str(self.totalmL) + "\n"
+            '\nTotal Reward (mL): ' + str(self.totalmL) + "\n")
+
+        if self.hintmL > 0:
+            message += "Reward from Hints (mL): " + str(self.hintmL) + " (" + str(100*self.hintmL/self.totalmL) + "% of total)\n"
+
+        message += (
             "Run Time: " + str(trainTime) + "\n"
             "Reward Rate (mL/hour): " + str(round(self.mLPerHour, 2)) + "\n"
             "\n"

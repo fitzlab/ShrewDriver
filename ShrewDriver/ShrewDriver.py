@@ -18,6 +18,7 @@ from constants.task_constants import *
 
 from task.training import *
 from ui.live_plot import *
+from ui.interact import InteractUI
 
 #load the .ui files
 ShrewDriver_class = uic.loadUiType("ui/shrewdriver.ui")[0]
@@ -167,6 +168,7 @@ class ShrewDriver(QtGui.QMainWindow, ShrewDriver_class):
         self.devicesFile.write('syringe ' + self.syringePortName + "\n")
         self.devicesFile.write('stim ' + self.stimPortName + "\n")
         self.devicesFile.write('camera ' + str(self.cameraID) + "\n")
+        self.devicesFile.write('airpuff ' + str(self.airPuffPortName) + "\n")
         self.devicesFile.close()
         
     def loadAnimalSettings(self):
@@ -189,6 +191,9 @@ class ShrewDriver(QtGui.QMainWindow, ShrewDriver_class):
                 if toks[0].lower() == 'camera':
                     self.cameraID = int(toks[1])
                     self.setComboBox(self.cbCameraID, toks[1])
+                if toks[0].lower() == 'airpuff':
+                    self.airPuffPortName = int(toks[1])
+                    self.setComboBox(self.cbAirPuff, toks[1])
     
     def setComboBox(self, cbx, value):
         #print "found value " + str(value) + " at index " + str(index)
@@ -251,18 +256,21 @@ class ShrewDriver(QtGui.QMainWindow, ShrewDriver_class):
             self.training.stop()
             time.sleep(0.5) #wait for everything to wrap up nicely
         self.close()
-    
+
     def closeEvent(self, event):
         #happens when they click "X"
         self.quit()
         event.accept()
 
+    #-- Other --#
     def startTraining(self):
         self.training = Training(self)
         self.training.start()
 
-    def setExperimentPath(self):
-        self.experimentPath = ''
+    def show_interact_ui(self):
+        """If allowed, this will be shown when the user starts recording. Called by training.py."""
+        self.interactUI = InteractUI(task=self.training.task)
+
 
 if __name__ == '__main__':
     app = QtGui.QApplication(sys.argv)

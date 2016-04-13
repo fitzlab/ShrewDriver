@@ -82,7 +82,8 @@ class TaskDiscrimination(TaskMixin):
                 if (now - self.lastLickAt) > 0.5:
                     #In fact, it licked at least half a second ago, so it should REALLY not be licking now. Let's proceed with the trial.
                     doneWaiting = True
-            elif self.initiation == Initiation.TAP and (self.lastTapAt > self.stateStartTime or self.isTapping):
+            elif (self.initiation == Initiation.TAP or self.initiation == Initiation.TAP_ONSET) and \
+                    (self.lastTapAt > self.stateStartTime or self.isTapping):
                 doneWaiting = True
             elif self.initiation == Initiation.IR and now > self.stateEndTime:
                 doneWaiting = True
@@ -105,6 +106,10 @@ class TaskDiscrimination(TaskMixin):
                 
             #-- progression condition --#
             if now > self.stateEndTime:
+                if self.airPuffMode == AirPuff.SMINUS_OFFSET:
+                    self.airPuff.puff()
+                    self.training.logPlotAndAnalyze("puff", time.time())
+
                 self.stateDuration = self.grayDuration
                 self.changeState(States.GRAY)
                 
@@ -161,9 +166,14 @@ class TaskDiscrimination(TaskMixin):
                 
         if self.state == States.TIMEOUT:
             #-- progression condition --#
-            if now > self.stateEndTime:
-                self.stateDuration = self.initTime
-                self.changeState(States.INIT)
+            if self.initiation == Initiation.TAP_ONSET:
+                if not self.isTapping and now > self.stateEndTime:
+                    self.stateDuration = self.initTime
+                    self.changeState(States.INIT)
+            else:
+                if now > self.stateEndTime:
+                    self.stateDuration = self.initTime
+                    self.changeState(States.INIT)
     
 
     def changeState(self, newState):
@@ -174,6 +184,7 @@ class TaskDiscrimination(TaskMixin):
         self.stateStartTime = time.time()
         
         self.training.logPlotAndAnalyze("State" + str(self.state), time.time())        
+
 
         #if changed to timeout, reset trial params for the new trial
         if (newState == States.TIMEOUT):
@@ -202,9 +213,15 @@ class TaskDiscrimination(TaskMixin):
                 self.training.logPlotAndAnalyze(oriPhase, time.time())
             else:
                 self.training.stimSerial.write(str(self.state) + "\n")
-            
+
+        #let Spike2 know which state we are now in
+        self.training.send_stimcode(StateStimcodes[newState])
+
+        #update end time
         self.stateEndTime = self.stateStartTime + self.stateDuration
-        
+
+
+        #print, just in case.
         msg = 'state changed to ' + str(States.whatis(newState)) + ' duration ' + str(self.stateDuration)
         if str(States.whatis(newState)) == 'SPLUS':
             msg += ' orientation ' + str(self.currentTrial.sPlusOrientation) 
@@ -226,9 +243,15 @@ class TaskDiscrimination(TaskMixin):
         
         if self.state != States.GRAY:
             self.trialResult = Results.TASK_FAIL
+            if self.airPuffMode == AirPuff.TASK_FAIL_LICK or self.airPuffMode == AirPuff.BAD_LICK:
+                self.training.airPuff.puff()
+                self.training.logPlotAndAnalyze("puff", time.time())
         else:
             self.trialResult = Results.FALSE_ALARM
-        
+            if self.airPuffMode == AirPuff.FALSE_ALARM_LICK or self.airPuffMode == AirPuff.BAD_LICK:
+                self.training.airPuff.puff()
+                self.training.logPlotAndAnalyze("puff", time.time())
+
         self.changeState(States.TIMEOUT)
 
     def abort(self):

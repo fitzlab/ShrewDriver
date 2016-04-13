@@ -13,9 +13,11 @@ void checkSerial(){
     s = Serial.read();
   
     if (s == '0'){
+      //close valve, stopping airflow
       digitalWrite(PIN_PUFF, LOW);
     }
     else if (s == '1'){
+      //open valve, allowing airflow
       digitalWrite(PIN_PUFF, HIGH);
     }
     else if (s == 'x'){

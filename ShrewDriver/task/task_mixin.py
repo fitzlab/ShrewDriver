@@ -16,11 +16,8 @@ from sequencer.sequencer_base import Sequencer
 class TaskMixin(object):
     """Defines a set of functions used across all classes"""
 
-    def __init__(self):
-        pass
-
     def makeStuff(self):
-        #called from subclass inits
+        #called from task class inits
         
         #behavior inits
         self.state = States.TIMEOUT
@@ -33,7 +30,9 @@ class TaskMixin(object):
         self.lastTapAt = 0
         self.stateStartTime = 0
         self.stateEndTime = 0
-        
+
+        self.showInteractUI = False
+
         self.commandStrings = [''] * len(stateSet)
         
         #load and record this session's settings
@@ -99,6 +98,8 @@ class TaskMixin(object):
     
     def loadAnimalSettings(self):
         try:
+            print "Importing settings from shrew/" + self.animalName.lower() + ".py"
+            sys.stdout.flush()
             importStatement = "from shrew." + self.animalName.lower() + " import load_parameters"
             exec(importStatement)
             eval("load_parameters(self)")  # this is just an eval so the code editor won't complain about missing imports

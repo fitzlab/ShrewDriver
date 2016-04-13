@@ -24,6 +24,7 @@ class DiscriminationTrial:
         self.hint = False # type: bool, true if hint was dispensed
         self.reward = False  # type: bool, true if reward was dispensed
         self.totalmL = 0
+        self.hintmL = 0
         self.trialNum = 0
 
         #results
@@ -69,6 +70,11 @@ class DiscriminationTrial:
                 m = p.findall(line)
                 bolusSize = float(m[0] + "." + m[1])
                 self.totalmL += bolusSize
+            elif re.search('hint', line):
+                m = p.findall(line)
+                bolusSize = float(m[0] + "." + m[1])
+                self.totalmL += bolusSize
+                self.hintmL += bolusSize
 
             elif re.search('Lx', line):
                 self.isLicking = True

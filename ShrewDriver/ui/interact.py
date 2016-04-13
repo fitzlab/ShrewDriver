@@ -5,11 +5,12 @@ sys.path.append("..")
 from PyQt4 import QtCore, QtGui
 from PyQt4 import uic
 import _winreg as winreg
+from constants.task_constants import *
 
 import time
 
 #load the .ui files
-Interact_class = uic.loadUiType("../ui/interact.ui")[0]
+Interact_class = uic.loadUiType("ui/interact.ui")[0]
 
 class InteractUI(QtGui.QMainWindow, Interact_class):
 
@@ -23,39 +24,75 @@ class InteractUI(QtGui.QMainWindow, Interact_class):
 
         self.setupUi(self)
 
-        #connect button actions
-        self.btnFail.clicked.connect(self.btnFailClicked)
-        self.btnStartTrial.clicked.connect(self.btnStartTrialClicked)
-        self.btnReward.clicked.connect(self.btnRewardClicked)
+        #--- button actions ---#
+        # shrew feedback
+        self.btnGiveReward.clicked.connect(self.btn_give_reward_clicked)
+        self.btnAirPuff.clicked.connect(self.btn_air_puff_clicked)
 
-        self.btnGratingSPlus.clicked.connect(self.btnGratingSPlusClicked)
-        self.btnGratingSMinus.clicked.connect(self.btnGratingSMinusClicked)
+        # task manipulation
+        self.btnTaskFail.clicked.connect(self.btn_task_fail_clicked)
+        self.btnStartTrial.clicked.connect(self.btn_start_trial_clicked)
 
-        self.btnShowOrientation.clicked.connect(self.btnShowOrientationClicked)
+        self.btnShowNow.clicked.connect(self.btn_show_now_clicked)
+        self.btnReplaceNext.clicked.connect(self.btn_replace_next_clicked)
 
-        self.btnGrayScreen.clicked.connect(self.btnGrayScreenClicked)
-        self.btnBlack.clicked.connect(self.btnBlackClicked)
+        # screen manipulation
+        self.btnBlack.clicked.connect(self.btn_black_clicked)
+        self.btnGrayScreen.clicked.connect(self.btn_gray_screen_clicked)
 
-        #connect incoming signals
-        self.sigTrialEnd.connect(self.trialEnd)        
+        self.btnSPlusGrating.clicked.connect(self.btn_splus_grating_clicked)
+        self.btnSMinusGrating.clicked.connect(self.btn_sminus_grating_clicked)
+
+        self.btnRunStimCommand.clicked.connect(self.btn_run_stim_command_clicked)
+
 
         #setup
         self.task = task
 
         self.show()
 
-    # --- Controls --- #
-    def btnFailClicked(self):
+
+    #--- shrew feedback ---#
+    def btn_give_reward_clicked(self):
+        self.task.training.sendStimcode(STIMCODE_REWARD_GIVEN)
+        rewardAmount = float(str(self.txtRewardSize.getText()))
+        self.task.ui_dispense(rewardAmount)
+
+    def btn_air_puff_clicked(self):
+        self.task.training.sendStimcode(STIMCODE_AIR_PUFF)
+        pass
+
+    #--- task manipulation ---#
+    def btn_task_fail_clicked(self):
         self.task.ui_fail_task()
 
-    def btnStartTrialClicked(self):
+    def btn_start_trial_clicked(self):
         self.task.ui_start_trial()
 
-    def btnRewardClicked(self):
-        self.task.ui_dispense(0.1)
+    def btn_show_now_clicked(self):
+        pass
 
-    def trialEnd(self):
-        print "trial end"
+    def btn_replace_next_clicked(self):
+        pass
+
+    #--- screen manipulation ---#
+    def btn_black_clicked(self):
+        pass
+
+    def btn_gray_screen_clicked(self):
+        pass
+
+    def btn_splus_grating_clicked(self):
+        pass
+
+    def btn_sminus_grating_clicked(self):
+        pass
+
+    def btn_run_stim_command_clicked(self):
+        pass
+
+
+    #--- Old Stuff ---#
     
     # --- Screen Manipulation --- #
     def btnGrayScreenClicked(self):

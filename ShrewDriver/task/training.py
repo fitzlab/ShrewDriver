@@ -56,7 +56,10 @@ class Training():
         #start syringe pump serial
         self.syringeSerial = SerialPort(self.shrewDriver.syringePortName)
         self.syringeSerial.startReadThread()
-        
+
+        #start air puff serial, if any
+        self.airPuff = AirPuff(self.shrewDriver.airPuffPortName)
+
         #start stim serial
         if self.shrewDriver.stimPortName == "PsychoPy":
             #If we're upstairs, use PsychoPy to render stims
@@ -71,7 +74,11 @@ class Training():
             self.task = TaskHeadfix(self, shrewDriver)
         else:
             self.task = TaskDiscrimination(self, shrewDriver)
-        
+
+        #make interact window, if needed
+        if hasattr(self.task, "showInteractUI") and self.task.showInteractUI:
+            self.shrewDriver.show_interact_ui()
+
         #start file logging
         self.logFilePath = self.shrewDriver.experimentPath + self.shrewDriver.sessionFileName + "_log.txt" 
         self.logFile = open(self.logFilePath, 'w')

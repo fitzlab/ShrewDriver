@@ -16,6 +16,7 @@ def load_parameters(task):
     task.guaranteedSPlus = True #is there always an SPLUS in the trial?
     task.sequenceType = Sequences.RANDOM_RETRY
     task.initiation = Initiation.TAP
+    task.airPuffMode = AirPuff.NONE
 
     task.timeoutFail = 3
     task.timeoutAbort = 3
@@ -48,3 +49,5 @@ def load_parameters(task):
     task.commandStrings[States.GRAY] = 'sx0 sy0\n'
     task.commandStrings[States.SPLUS] = 'acgf sf0.25 tf0 jf0 ja0 px0 py0 sx999 sy999\n'
     task.commandStrings[States.REWARD] = 'sx0 sy0\n'
+
+    task.showInteractUI = True  # Enables the interact UI, used in headfixed training.

@@ -48,7 +48,6 @@ stateSet = ['TIMEOUT', 'INIT', 'DELAY', 'GRAY', 'SPLUS', 'SMINUS', 'REWARD']
 States = Enumeration("States", stateSet)
 
 
-
 '''
 Trial Actions:
     LICK - Shrew licks (onset)
@@ -85,3 +84,40 @@ Trial Initiation Modes:
 '''
 initSet = ['IR', 'LICK', 'TAP', 'TAP_ONSET']
 Initiation = Enumeration("Initiation", initSet)
+
+
+'''
+Air Puff Modes:
+    NONE - Don't use air puff
+    BAD_LICK - Puff when the shrew licks at any incorrect time (discrimination or task error)
+    TASK_FAIL_LICK - Puff for any lick during trial that's outside a discrimination response period
+    FALSE_ALARM_LICK - Puff if shrew licks for the sMinus grating
+    SMINUS_OFFSET - Puff every time the sMinus grating finishes displaying
+'''
+airPuffSet = ['NONE', 'BAD_LICK', 'TASK_FAIL_LICK', 'FALSE_ALARM_LICK', 'SMINUS_OFFSET']
+AirPuff = Enumeration("AirPuff", airPuffSet)
+
+'''
+Stimcodes are sent to Spike2 via the Measurement Computing DAQ. They are only used in imaging experiments.
+Each stimcode is just an arbitrary number.
+'''
+
+StateStimcodes = {
+    States.TIMEOUT: 0,
+    States.INIT: 1,
+    States.DELAY: 2,
+    States.GRAY: 3,
+    States.SPLUS: 4,
+    States.SMINUS: 5,
+    States.REWARD: 6
+}
+
+STIMCODE_BLACK_SCREEN = 10
+STIMCODE_GRAY_SCREEN = 11
+STIMCODE_SPLUS_SCREEN = 12
+STIMCODE_SMINUS_SCREEN = 13
+STIMCODE_GRATING_SCREEN = 14
+
+STIMCODE_REWARD_GIVEN = 20
+STIMCODE_AIR_PUFF = 21
+

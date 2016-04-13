@@ -11,6 +11,7 @@ Sends stimcodes to CED/Spike2.
 """
 
 import time
+from constants.task_constants import *
 
 class MccDaq(object):
     
@@ -65,7 +66,7 @@ class MccDaq(object):
         self.triggerBits[self.stimcodeReadBit] = 0
         self.triggerBits[self.stimBit] = 1
         self.UL.cbDOut(self.boardNum, self.UL.FIRSTPORTB, self.getTriggerValue())
-    
+
     def getTriggerValue(self):
         """
         Convert the trigger bits into a number value for output.

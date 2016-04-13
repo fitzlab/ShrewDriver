@@ -2,129 +2,249 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b1ee761d-24c1-496c-aee7-bba7fda5eba1" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/constants/__init__.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/db/server_data.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/old/old_analysis/__init__.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/shrew_graphs.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/task/task_mixin.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/testing/__init__.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/trial/discrimination_trial.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/trial/headfix_trial.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/util/collection_utils.py" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Arduino/CapSensorTest/CapSensorTest.ino" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Arduino/lcd2test/lcd2test.ino" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Arduino/readSensorsTap/readSensorsTap.ino" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Arduino/readSensorsTap/readme.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Arduino/syringePump/syringePump.ino" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Arduino/syringePump/syringePump.ino.bak" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Arduino/syringePump/unused/keypadTest/keypadTest.cpp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Arduino/syringePump/unused/keypadTest/keypadTest.cpp.bak" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Arduino/syringePump/unused/keypadTest/keypadTestV2.cpp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Arduino/syringePump/unused/keypadTest/keypadTestV2.cpp.bak" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Arduino/syringePump/unused/syringeAda/syringeAda.ino" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Arduino/syringePump/unused/syringeAda/syringeAda.ino.bak" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Arduino/syringePump/unused/syringePump/syringePump.ino" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Arduino/syringePump/unused/syringePump/syringePump.ino.bak" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Arduino/syringePump/unused/syringePumpV2/syringePumpV2.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Arduino/syringePump/unused/syringePumpV2/syringePumpV2.txt.bak" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Arduino/syringePump/unused/temp/temp/temp.ino" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Arduino/syringePump/unused/temp/temp/temp_pde/temp_pde.pde" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Arduino/syringePump/unused/this-one.cpp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../Arduino/syringePump_lcd2/syringePump_lcd2.ino" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/old/resources.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/shrew/example.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/task/old/Task.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/task/task_constants.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/testing/flashScreen.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/util/loadResults.py" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/analysis/old/Analyzer.py" afterPath="$PROJECT_DIR$/old/old_analysis/Analyzer.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/analysis/old/Analyzer_another_old.py" afterPath="$PROJECT_DIR$/old/old_analysis/Analyzer_another_old.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/analysis/old/Analyzer_old.py" afterPath="$PROJECT_DIR$/old/old_analysis/Analyzer_old.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/analysis/old/LogAnalysis.py" afterPath="$PROJECT_DIR$/old/old_analysis/LogAnalysis.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/analysis/old/__init__.py" afterPath="$PROJECT_DIR$/anesthetized/__init__.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/analysis/old/test_logs/Bernadette_2015-07-10_1_log.txt" afterPath="$PROJECT_DIR$/old/old_analysis/test_logs/Bernadette_2015-07-10_1_log.txt" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/analysis/old/test_logs/Bernadette_2015-07-10_1_settings.txt" afterPath="$PROJECT_DIR$/old/old_analysis/test_logs/Bernadette_2015-07-10_1_settings.txt" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/analysis/old/test_logs/Carmen_2015-12-04_1_log.txt" afterPath="$PROJECT_DIR$/old/old_analysis/test_logs/Carmen_2015-12-04_1_log.txt" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/analysis/old/test_logs/Carmen_2015-12-04_1_settings.txt" afterPath="$PROJECT_DIR$/old/old_analysis/test_logs/Carmen_2015-12-04_1_settings.txt" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/analysis/old/test_logs/Chico_2015-08-03_1_log.txt" afterPath="$PROJECT_DIR$/old/old_analysis/test_logs/Chico_2015-08-03_1_log.txt" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/analysis/old/test_logs/Chico_2015-08-03_1_settings.txt" afterPath="$PROJECT_DIR$/old/old_analysis/test_logs/Chico_2015-08-03_1_settings.txt" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/analysis/old/test_logs/Splinter_2015-11-12_1_log.txt" afterPath="$PROJECT_DIR$/old/old_analysis/test_logs/Splinter_2015-11-12_1_log.txt" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/analysis/old/test_logs/Splinter_2015-11-12_1_settings.txt" afterPath="$PROJECT_DIR$/old/old_analysis/test_logs/Splinter_2015-11-12_1_settings.txt" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/devices/CameraReader.py" afterPath="$PROJECT_DIR$/devices/camera_reader.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/global/Constants.py" afterPath="$PROJECT_DIR$/constants/task_constants.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/mainwindow.ui" afterPath="$PROJECT_DIR$/ui/shrewdriver.ui" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/old/LivePlot.py" afterPath="$PROJECT_DIR$/ui/live_plot.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/old/ShrewDriver.py" afterPath="$PROJECT_DIR$/ShrewDriver.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/old/Training.py" afterPath="$PROJECT_DIR$/task/training.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/resources.py" afterPath="$PROJECT_DIR$/task/resources.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/sequencer/Sequencer.py" afterPath="$PROJECT_DIR$/sequencer/sequencer_base.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/sequencer/random.py" afterPath="$PROJECT_DIR$/sequencer/random_seq.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/sequencer/sequencer_block.py" afterPath="$PROJECT_DIR$/sequencer/block.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/sequencer/sequencer_interval.py" afterPath="$PROJECT_DIR$/sequencer/interval.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/shrew/queen_anesthetized.py" afterPath="$PROJECT_DIR$/anesthetized.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/task/Task.py" afterPath="$PROJECT_DIR$/task/sd2_unused/task.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/task/old/TaskGoNoGo.py" afterPath="$PROJECT_DIR$/task/task_discrimination.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/task/old/TaskHeadfix.py" afterPath="$PROJECT_DIR$/task/task_headfix.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/task/task_anesthetized.py" afterPath="$PROJECT_DIR$/anesthetized/stim_script.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/task/task_discrim.py" afterPath="$PROJECT_DIR$/task/sd2_unused/task_discrim.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/task/task_go_nogo.py" afterPath="$PROJECT_DIR$/task/sd2_unused/task_go_nogo.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/task/task_headfix.py" afterPath="$PROJECT_DIR$/task/sd2_unused/task_headfix.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/task/task_nonmatch.py" afterPath="$PROJECT_DIR$/task/sd2_unused/task_nonmatch.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/task/task_nonmatch_jsMod.py" afterPath="$PROJECT_DIR$/task/sd2_unused/task_nonmatch_jsMod.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/trial/Trial.py" afterPath="$PROJECT_DIR$/task/Trial.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/ui/main_ui.py" afterPath="$PROJECT_DIR$/ui/graph_ui.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/ui/main_ui.ui" afterPath="$PROJECT_DIR$/ui/graph_ui.ui" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/ui_graphs/graph_constants.py" afterPath="$PROJECT_DIR$/constants/graph_constants.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/util/TermSet.py" afterPath="$PROJECT_DIR$/util/term_set.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/util/objectToString.py" afterPath="$PROJECT_DIR$/util/serialize.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/devices/air_puff.py" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/GraphicsScene/GraphicsScene.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/GraphicsScene/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/GraphicsScene/exportDialog.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/GraphicsScene/exportDialogTemplate.ui" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/GraphicsScene/exportDialogTemplate_pyqt.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/GraphicsScene/exportDialogTemplate_pyside.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/GraphicsScene/mouseEvents.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/PIL_Fix/Image.py-1.6" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/PIL_Fix/Image.py-1.7" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/PIL_Fix/README" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/PlotData.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/Point.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/Qt.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/SRTTransform.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/SRTTransform3D.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/SignalProxy.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/ThreadsafeTimer.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/Transform3D.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/Vector.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/WidgetGroup.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/canvas/Canvas.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/canvas/CanvasItem.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/canvas/CanvasManager.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/canvas/CanvasTemplate.ui" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/canvas/CanvasTemplate_pyqt.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/canvas/CanvasTemplate_pyside.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/canvas/TransformGuiTemplate.ui" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/canvas/TransformGuiTemplate_pyqt.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/canvas/TransformGuiTemplate_pyside.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/canvas/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/colormap.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/configfile.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/console/CmdInput.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/console/Console.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/console/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/console/template.ui" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/console/template_pyqt.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/console/template_pyside.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/debug.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/dockarea/Container.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/dockarea/Dock.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/dockarea/DockArea.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/dockarea/DockDrop.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/dockarea/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/dockarea/tests/test_dock.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/exceptionHandling.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/exporters/CSVExporter.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/exporters/Exporter.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/exporters/ImageExporter.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/exporters/Matplotlib.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/exporters/PrintExporter.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/exporters/SVGExporter.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/exporters/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/exporters/tests/test_svg.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/flowchart/Flowchart.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/flowchart/FlowchartCtrlTemplate.ui" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/flowchart/FlowchartCtrlTemplate_pyqt.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/flowchart/FlowchartCtrlTemplate_pyside.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/flowchart/FlowchartGraphicsView.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/flowchart/FlowchartTemplate.ui" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/flowchart/FlowchartTemplate_pyqt.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/flowchart/FlowchartTemplate_pyside.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/flowchart/Node.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/flowchart/NodeLibrary.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/flowchart/Terminal.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/flowchart/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/flowchart/eq.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/flowchart/library/Data.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/flowchart/library/Display.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/flowchart/library/Filters.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/flowchart/library/Operators.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/flowchart/library/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/flowchart/library/common.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/flowchart/library/functions.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/frozenSupport.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/functions.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/graphicsItems/ArrowItem.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/graphicsItems/AxisItem.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/graphicsItems/BarGraphItem.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/graphicsItems/ButtonItem.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/graphicsItems/CurvePoint.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/graphicsItems/ErrorBarItem.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/graphicsItems/FillBetweenItem.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/graphicsItems/GradientEditorItem.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/graphicsItems/GradientLegend.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/graphicsItems/GraphItem.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/graphicsItems/GraphicsItem.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/graphicsItems/GraphicsLayout.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/graphicsItems/GraphicsObject.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/graphicsItems/GraphicsWidget.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/graphicsItems/GraphicsWidgetAnchor.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/graphicsItems/GridItem.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/graphicsItems/HistogramLUTItem.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/graphicsItems/ImageItem.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/graphicsItems/InfiniteLine.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/graphicsItems/IsocurveItem.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/graphicsItems/ItemGroup.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/graphicsItems/LabelItem.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/graphicsItems/LegendItem.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/graphicsItems/LinearRegionItem.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/graphicsItems/MultiPlotItem.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/graphicsItems/PlotCurveItem.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/graphicsItems/PlotDataItem.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/graphicsItems/PlotItem/PlotItem.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/graphicsItems/PlotItem/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/graphicsItems/PlotItem/plotConfigTemplate.ui" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/graphicsItems/PlotItem/plotConfigTemplate_pyqt.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/graphicsItems/PlotItem/plotConfigTemplate_pyside.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/graphicsItems/ROI.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/graphicsItems/ScaleBar.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/graphicsItems/ScatterPlotItem.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/graphicsItems/TextItem.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/graphicsItems/UIGraphicsItem.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/graphicsItems/VTickGroup.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/graphicsItems/ViewBox/ViewBox.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/graphicsItems/ViewBox/ViewBoxMenu.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/graphicsItems/ViewBox/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/graphicsItems/ViewBox/axisCtrlTemplate.ui" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/graphicsItems/ViewBox/axisCtrlTemplate_pyqt.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/graphicsItems/ViewBox/axisCtrlTemplate_pyside.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/graphicsItems/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/graphicsItems/tests/ScatterPlotItem.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/graphicsItems/tests/ViewBox.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/graphicsItems/tests/test_GraphicsItem.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/graphicsWindows.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/imageview/ImageView.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/imageview/ImageViewTemplate.ui" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/imageview/ImageViewTemplate_pyqt.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/imageview/ImageViewTemplate_pyside.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/imageview/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/imageview/tests/test_imageview.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/metaarray/MetaArray.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/metaarray/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/metaarray/license.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/metaarray/readMeta.m" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/multiprocess/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/multiprocess/bootstrap.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/multiprocess/parallelizer.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/multiprocess/processes.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/multiprocess/remoteproxy.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/numpy_fix.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/opengl/GLGraphicsItem.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/opengl/GLViewWidget.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/opengl/MeshData.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/opengl/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/opengl/glInfo.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/opengl/items/GLAxisItem.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/opengl/items/GLBarGraphItem.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/opengl/items/GLBoxItem.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/opengl/items/GLGridItem.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/opengl/items/GLImageItem.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/opengl/items/GLLinePlotItem.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/opengl/items/GLMeshItem.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/opengl/items/GLScatterPlotItem.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/opengl/items/GLSurfacePlotItem.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/opengl/items/GLVolumeItem.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/opengl/items/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/opengl/shaders.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/ordereddict.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/parametertree/Parameter.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/parametertree/ParameterItem.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/parametertree/ParameterTree.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/parametertree/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/parametertree/parameterTypes.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/pgcollections.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/pixmaps/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/pixmaps/auto.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/pixmaps/compile.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/pixmaps/ctrl.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/pixmaps/default.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/pixmaps/icons.svg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/pixmaps/lock.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/pixmaps/pixmapData_2.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/pixmaps/pixmapData_3.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/ptime.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/python2_3.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/reload.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/tests/test_functions.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/tests/test_qt.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/tests/test_srttransform3d.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/units.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/util/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/util/colorama/LICENSE.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/util/colorama/README.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/util/colorama/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/util/colorama/win32.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/util/colorama/winterm.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/util/cprint.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/util/lru_cache.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/util/mutex.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/util/tests/test_lru_cache.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/widgets/BusyCursor.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/widgets/CheckTable.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/widgets/ColorButton.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/widgets/ColorMapWidget.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/widgets/ComboBox.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/widgets/DataFilterWidget.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/widgets/DataTreeWidget.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/widgets/FeedbackButton.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/widgets/FileDialog.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/widgets/GradientWidget.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/widgets/GraphicsLayoutWidget.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/widgets/GraphicsView.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/widgets/HistogramLUTWidget.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/widgets/JoystickButton.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/widgets/LayoutWidget.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/widgets/MatplotlibWidget.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/widgets/MultiPlotWidget.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/widgets/PathButton.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/widgets/PlotWidget.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/widgets/ProgressDialog.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/widgets/RawImageWidget.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/widgets/RemoteGraphicsView.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/widgets/ScatterPlotWidget.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/widgets/SpinBox.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/widgets/TableWidget.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/widgets/TreeWidget.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/widgets/ValueLabel.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/widgets/VerticalLabel.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/widgets/__init__.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pyqtgraph/widgets/tests/test_combobox.py" afterPath="" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/task/sd2_unused/task.py" afterPath="$PROJECT_DIR$/old/sd2_unused/task.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/task/sd2_unused/task_discrim.py" afterPath="$PROJECT_DIR$/old/sd2_unused/task_discrim.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/task/sd2_unused/task_go_nogo.py" afterPath="$PROJECT_DIR$/old/sd2_unused/task_go_nogo.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/task/sd2_unused/task_headfix.py" afterPath="$PROJECT_DIR$/old/sd2_unused/task_headfix.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/task/sd2_unused/task_nonmatch.py" afterPath="$PROJECT_DIR$/old/sd2_unused/task_nonmatch.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/task/sd2_unused/task_nonmatch_jsMod.py" afterPath="$PROJECT_DIR$/old/sd2_unused/task_nonmatch_jsMod.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ui/interact.ui" afterPath="$PROJECT_DIR$/ui/interact.ui" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../Arduino/AirPuff/AirPuff.ino" afterPath="$PROJECT_DIR$/../Arduino/AirPuff/AirPuff.ino" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ShrewDriver.py" afterPath="$PROJECT_DIR$/ShrewDriver.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/analysis/discrimination_analysis.py" afterPath="$PROJECT_DIR$/analysis/discrimination_analysis.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/analysis/headfix_analysis.py" afterPath="$PROJECT_DIR$/analysis/headfix_analysis.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/create_db_files.py" afterPath="$PROJECT_DIR$/db/create_db_files.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/db_events.py" afterPath="$PROJECT_DIR$/db/db_events.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/db_history.py" afterPath="$PROJECT_DIR$/db/db_history.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/db_lick_times.py" afterPath="$PROJECT_DIR$/db/db_lick_times.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/db_mixin.py" afterPath="$PROJECT_DIR$/db/db_mixin.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/db_performance.py" afterPath="$PROJECT_DIR$/db/db_performance.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/devices/ard_speed_test.py" afterPath="$PROJECT_DIR$/devices/ard_speed_test.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/devices/arduino_sensor.py" afterPath="$PROJECT_DIR$/devices/arduino_sensor.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/devices/available.py" afterPath="$PROJECT_DIR$/devices/available.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/constants/task_constants.py" afterPath="$PROJECT_DIR$/constants/task_constants.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/devices/daq.py" afterPath="$PROJECT_DIR$/devices/daq.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/devices/psycho.py" afterPath="$PROJECT_DIR$/devices/psycho.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/devices/psycho_textures.py" afterPath="$PROJECT_DIR$/devices/psycho_textures.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/devices/serial_port.py" afterPath="$PROJECT_DIR$/devices/serial_port.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/devices/stimbot.py" afterPath="$PROJECT_DIR$/devices/stimbot.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/devices/syringe_pump.py" afterPath="$PROJECT_DIR$/devices/syringe_pump.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/old/GraphPerformance.py" afterPath="$PROJECT_DIR$/old/GraphPerformance.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pyqtgraph/debug.py" afterPath="$PROJECT_DIR$/pyqtgraph/debug.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sequencer/__init__.py" afterPath="$PROJECT_DIR$/sequencer/__init__.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sequencer/block_retry.py" afterPath="$PROJECT_DIR$/sequencer/block_retry.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sequencer/interval_retry.py" afterPath="$PROJECT_DIR$/sequencer/interval_retry.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sequencer/random_retry.py" afterPath="$PROJECT_DIR$/sequencer/random_retry.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sequencer/sequential.py" afterPath="$PROJECT_DIR$/sequencer/sequential.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sequencer/staircase.py" afterPath="$PROJECT_DIR$/sequencer/staircase.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/shrew/bernadette.py" afterPath="$PROJECT_DIR$/shrew/bernadette.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/shrew/chico.py" afterPath="$PROJECT_DIR$/shrew/chico.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/shrew/clucker.py" afterPath="$PROJECT_DIR$/shrew/clucker.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/shrew/peanut.py" afterPath="$PROJECT_DIR$/shrew/peanut.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/shrew/queen.py" afterPath="$PROJECT_DIR$/shrew/queen.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/shrew/shrew.py" afterPath="$PROJECT_DIR$/shrew/shrew.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/shrew/splinter.py" afterPath="$PROJECT_DIR$/shrew/splinter.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/task/state.py" afterPath="$PROJECT_DIR$/task/state.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/shrew/carmen.py" afterPath="$PROJECT_DIR$/shrew/carmen.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/task/task_discrimination.py" afterPath="$PROJECT_DIR$/task/task_discrimination.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/task/task_mixin.py" afterPath="$PROJECT_DIR$/task/task_mixin.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/task/training.py" afterPath="$PROJECT_DIR$/task/training.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/trial/discrimination_trial.py" afterPath="$PROJECT_DIR$/trial/discrimination_trial.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ui/interact.py" afterPath="$PROJECT_DIR$/ui/interact.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ui/movie_widget.py" afterPath="$PROJECT_DIR$/ui/movie_widget.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ui_graphs/graph_axes.py" afterPath="$PROJECT_DIR$/ui_graphs/graph_axes.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ui_graphs/graph_curves.py" afterPath="$PROJECT_DIR$/ui_graphs/graph_curves.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ui_graphs/graph_events.py" afterPath="$PROJECT_DIR$/ui_graphs/graph_events.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ui_graphs/graph_history.py" afterPath="$PROJECT_DIR$/ui_graphs/graph_history.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ui_graphs/graph_lick_times.py" afterPath="$PROJECT_DIR$/ui_graphs/graph_lick_times.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ui_graphs/graph_performance.py" afterPath="$PROJECT_DIR$/ui_graphs/graph_performance.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/util/Enumeration.py" afterPath="$PROJECT_DIR$/util/Enumeration.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/util/Human.py" afterPath="$PROJECT_DIR$/util/Human.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/util/Stats.py" afterPath="$PROJECT_DIR$/util/Stats.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/util/cache_decorators.py" afterPath="$PROJECT_DIR$/util/cache_decorators.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/util/cond_event.py" afterPath="$PROJECT_DIR$/util/cond_event.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/util/event_loop.py" afterPath="$PROJECT_DIR$/util/event_loop.py" />
     </list>
     <ignored path="ShrewDriver.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -145,14 +265,32 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="discrimination_analysis.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/analysis/discrimination_analysis.py">
+      <file leaf-file-name="training.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/task/training.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-9.4827585">
-              <caret line="112" column="49" selection-start-line="112" selection-start-column="49" selection-end-line="112" selection-end-column="49" />
-              <folding>
-                <element signature="e#0#31#0" expanded="true" />
-              </folding>
+            <state vertical-scroll-proportion="-11.827586">
+              <caret line="91" column="34" selection-start-line="91" selection-start-column="34" selection-end-line="91" selection-end-column="34" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="task_mixin.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/task/task_mixin.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-8.310345">
+              <caret line="25" column="26" selection-start-line="25" selection-start-column="24" selection-end-line="25" selection-end-column="26" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="daq.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/devices/daq.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="68" column="0" selection-start-line="68" selection-start-column="0" selection-end-line="68" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -160,52 +298,8 @@
       <file leaf-file-name="task_discrimination.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/task/task_discrimination.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-14.068966">
-              <caret line="228" column="0" selection-start-line="228" selection-start-column="0" selection-end-line="228" selection-end-column="0" />
-              <folding>
-                <element signature="e#0#31#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="stats.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/util/stats.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="72" column="36" selection-start-line="72" selection-start-column="36" selection-end-line="72" selection-end-column="36" />
-              <folding>
-                <element signature="e#0#31#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="human.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/util/human.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="15" column="0" selection-start-line="15" selection-start-column="0" selection-end-line="26" selection-end-column="18" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Analyzer.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/old/old_analysis/Analyzer.py">
-          <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="-8.310345">
-              <caret line="153" column="51" selection-start-line="153" selection-start-column="47" selection-end-line="153" selection-end-column="51" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Analyzer_another_old.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/old/old_analysis/Analyzer_another_old.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-8.310345">
-              <caret line="275" column="29" selection-start-line="275" selection-start-column="29" selection-end-line="275" selection-end-column="84" />
+              <caret line="206" column="29" selection-start-line="206" selection-start-column="21" selection-end-line="206" selection-end-column="29" />
               <folding>
                 <element signature="e#0#31#0" expanded="true" />
               </folding>
@@ -213,44 +307,72 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="headfix_analysis.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/analysis/headfix_analysis.py">
+      <file leaf-file-name="shrewdriver.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/shrewdriver.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="28" column="0" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
-              <folding />
+            <state vertical-scroll-proportion="-15.620689">
+              <caret line="250" column="8" selection-start-line="250" selection-start-column="8" selection-end-line="250" selection-end-column="8" />
+              <folding>
+                <element signature="e#0#31#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="bernadette.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/shrew/bernadette.py">
+      <file leaf-file-name="task_constants.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/constants/task_constants.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="19" column="24" selection-start-line="19" selection-start-column="24" selection-end-line="19" selection-end-column="24" />
-              <folding />
+              <caret line="121" column="0" selection-start-line="121" selection-start-column="0" selection-end-line="121" selection-end-column="0" />
+              <folding>
+                <element signature="e#0#31#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="training.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/task/training.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="33" column="63" selection-start-line="33" selection-start-column="63" selection-end-line="33" selection-end-column="63" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="interact.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="interact.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ui/interact.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.067639254">
-              <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
+            <state vertical-scroll-proportion="-15.344828">
+              <caret line="59" column="0" selection-start-line="59" selection-start-column="0" selection-end-line="59" selection-end-column="0" />
               <folding>
                 <element signature="e#0#31#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="discrimination_analysis.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/analysis/discrimination_analysis.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.68703425">
+              <caret line="324" column="128" selection-start-line="324" selection-start-column="128" selection-end-line="324" selection-end-column="128" />
+              <folding>
+                <element signature="e#0#31#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="discrimination_trial.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/trial/discrimination_trial.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-4.965517">
+              <caret line="26" column="19" selection-start-line="26" selection-start-column="13" selection-end-line="26" selection-end-column="19" />
+              <folding>
+                <element signature="e#0#31#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="graph_constants.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/constants/graph_constants.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -263,10 +385,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/trial/headfix_trial.py" />
-        <option value="$PROJECT_DIR$/ui/interact.py" />
-        <option value="$PROJECT_DIR$/ui/live_plot.py" />
-        <option value="$PROJECT_DIR$/ui/movie_widget.py" />
         <option value="$PROJECT_DIR$/ui_graphs/graph_axes.py" />
         <option value="$PROJECT_DIR$/ui_graphs/graph_curves.py" />
         <option value="$PROJECT_DIR$/ui_graphs/graph_events.py" />
@@ -283,7 +401,6 @@
         <option value="$PROJECT_DIR$/util/term_set.py" />
         <option value="$PROJECT_DIR$/shrew_graphs.py" />
         <option value="$PROJECT_DIR$/db/db_events.py" />
-        <option value="$PROJECT_DIR$/devices/daq.py" />
         <option value="$PROJECT_DIR$/devices/psycho.py" />
         <option value="$PROJECT_DIR$/anesthetized/stim_script.py" />
         <option value="$PROJECT_DIR$/anesthetized.py" />
@@ -293,7 +410,6 @@
         <option value="$PROJECT_DIR$/shrew/shrew.py" />
         <option value="$PROJECT_DIR$/ui/graph_ui.py" />
         <option value="$PROJECT_DIR$/sequencer/sequencer.py" />
-        <option value="$PROJECT_DIR$/constants/task_constants.py" />
         <option value="$PROJECT_DIR$/sequencer/block.py" />
         <option value="$PROJECT_DIR$/sequencer/block_retry.py" />
         <option value="$PROJECT_DIR$/sequencer/interval.py" />
@@ -302,18 +418,24 @@
         <option value="$PROJECT_DIR$/sequencer/random_seq.py" />
         <option value="$PROJECT_DIR$/sequencer/sequential.py" />
         <option value="$PROJECT_DIR$/sequencer/staircase.py" />
-        <option value="$PROJECT_DIR$/task/task_mixin.py" />
         <option value="$PROJECT_DIR$/task/task_headfix.py" />
         <option value="$PROJECT_DIR$/sequencer/sequencer_base.py" />
         <option value="$PROJECT_DIR$/db/create_db_files.py" />
         <option value="$PROJECT_DIR$/analysis/headfix_analysis.py" />
-        <option value="$PROJECT_DIR$/shrewdriver.py" />
-        <option value="$PROJECT_DIR$/shrew/bernadette.py" />
         <option value="$PROJECT_DIR$/old/old_analysis/Analyzer_another_old.py" />
         <option value="$PROJECT_DIR$/util/stats.py" />
-        <option value="$PROJECT_DIR$/analysis/discrimination_analysis.py" />
-        <option value="$PROJECT_DIR$/task/task_discrimination.py" />
+        <option value="$PROJECT_DIR$/shrew/bernadette.py" />
+        <option value="$PROJECT_DIR$/shrew/carmen.py" />
         <option value="$PROJECT_DIR$/task/training.py" />
+        <option value="$PROJECT_DIR$/devices/air_puff.py" />
+        <option value="$PROJECT_DIR$/task/task_mixin.py" />
+        <option value="$PROJECT_DIR$/devices/daq.py" />
+        <option value="$PROJECT_DIR$/task/task_discrimination.py" />
+        <option value="$PROJECT_DIR$/shrewdriver.py" />
+        <option value="$PROJECT_DIR$/constants/task_constants.py" />
+        <option value="$PROJECT_DIR$/ui/interact.py" />
+        <option value="$PROJECT_DIR$/trial/discrimination_trial.py" />
+        <option value="$PROJECT_DIR$/analysis/discrimination_analysis.py" />
       </list>
     </option>
   </component>
@@ -380,6 +502,104 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ShrewDriver" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ShrewDriver" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="trial" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ShrewDriver" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ShrewDriver" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="task" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ShrewDriver" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ShrewDriver" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="shrew" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ShrewDriver" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ShrewDriver" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="old" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ShrewDriver" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ShrewDriver" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="devices" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ShrewDriver" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ShrewDriver" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="constants" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ShrewDriver" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ShrewDriver" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="analysis" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
       <pane id="Scope" />
@@ -398,14 +618,14 @@
       <recent name="C:\Users\theo\Documents\ShrewDriver\ShrewDriver\db" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\theo\Documents\ShrewDriver\ShrewDriver\constants" />
       <recent name="C:\Users\theo\Documents\ShrewDriver\ShrewDriver\old" />
+      <recent name="C:\Users\theo\Documents\ShrewDriver\ShrewDriver\constants" />
       <recent name="C:\Users\theo\Documents\ShrewDriver\ShrewDriver" />
       <recent name="C:\Users\theo\Documents\ShrewDriver\ShrewDriver\ui" />
       <recent name="C:\Users\theo\Documents\ShrewDriver\ShrewDriver\task" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.interact">
+  <component name="RunManager" selected="Python.shrewdriver">
     <configuration default="false" name="shrew_graphs" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -622,8 +842,8 @@
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python.interact" />
-        <item index="1" class="java.lang.String" itemvalue="Python.shrewdriver" />
+        <item index="0" class="java.lang.String" itemvalue="Python.shrewdriver" />
+        <item index="1" class="java.lang.String" itemvalue="Python.interact" />
         <item index="2" class="java.lang.String" itemvalue="Python.stats" />
         <item index="3" class="java.lang.String" itemvalue="Python.anesthetized" />
         <item index="4" class="java.lang.String" itemvalue="Python.shrew_graphs" />
@@ -652,9 +872,9 @@
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32981783" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.30201343" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.30201343" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32981783" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2502397" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2502397" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32885906" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -690,54 +910,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/util/collection_utils.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#31#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/util/cond_event.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#31#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/util/enumeration.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="7" column="7" selection-start-line="7" selection-start-column="7" selection-end-line="7" selection-end-column="7" />
-          <folding>
-            <element signature="e#0#31#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/util/event_loop.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/util/serialize.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#31#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/util/term_set.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -774,9 +946,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="32" column="30" selection-start-line="32" selection-start-column="30" selection-end-line="32" selection-end-column="30" />
-          <folding>
-            <element signature="e#0#31#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -784,16 +954,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="39" column="8" selection-start-line="39" selection-start-column="8" selection-end-line="39" selection-end-column="8" />
-          <folding>
-            <element signature="e#0#31#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/devices/daq.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="29" column="67" selection-start-line="29" selection-start-column="67" selection-end-line="29" selection-end-column="67" />
           <folding />
         </state>
       </provider>
@@ -838,16 +998,6 @@
           <caret line="39" column="14" selection-start-line="39" selection-start-column="14" selection-end-line="39" selection-end-column="14" />
           <folding>
             <element signature="e#0#31#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/trial/discrimination_trial.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#31#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1014,16 +1164,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/constants/task_constants.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.59416443">
-          <caret line="75" column="0" selection-start-line="75" selection-start-column="0" selection-end-line="75" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#31#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/db/create_db_files.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1037,26 +1177,8 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="30" column="0" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
           <folding>
-            <element signature="e#0#31#0" expanded="true" />
+            <element signature="e#0#31#0" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/shrewdriver.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-17.103449">
-          <caret line="160" column="13" selection-start-line="160" selection-start-column="13" selection-end-line="160" selection-end-column="13" />
-          <folding>
-            <element signature="e#0#31#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/task/task_mixin.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-20.62069">
-          <caret line="90" column="8" selection-start-line="90" selection-start-column="8" selection-end-line="90" selection-end-column="8" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1064,14 +1186,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="28" column="0" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/shrew/bernadette.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="19" column="24" selection-start-line="19" selection-start-column="24" selection-end-line="19" selection-end-column="24" />
           <folding />
         </state>
       </provider>
@@ -1097,7 +1211,7 @@
         <state vertical-scroll-proportion="-8.310345">
           <caret line="275" column="29" selection-start-line="275" selection-start-column="29" selection-end-line="275" selection-end-column="84" />
           <folding>
-            <element signature="e#0#31#0" expanded="true" />
+            <element signature="e#0#31#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1107,15 +1221,89 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="72" column="36" selection-start-line="72" selection-start-column="36" selection-end-line="72" selection-end-column="36" />
           <folding>
+            <element signature="e#0#31#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/.PyCharm50/system/python_stubs/884504192/__builtin__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="248" column="4" selection-start-line="248" selection-start-column="4" selection-end-line="248" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/shrew/carmen.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="17" column="36" selection-start-line="17" selection-start-column="36" selection-end-line="17" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/shrew/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/devices/air_puff.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="33" column="0" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
+          <folding>
             <element signature="e#0#31#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/analysis/discrimination_analysis.py">
+    <entry file="file://$PROJECT_DIR$/shrew/bernadette.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-9.4827585">
-          <caret line="112" column="49" selection-start-line="112" selection-start-column="49" selection-end-line="112" selection-end-column="49" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="18" column="35" selection-start-line="18" selection-start-column="35" selection-end-line="18" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/task/training.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-11.827586">
+          <caret line="91" column="34" selection-start-line="91" selection-start-column="34" selection-end-line="91" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/task/task_mixin.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-8.310345">
+          <caret line="25" column="26" selection-start-line="25" selection-start-column="24" selection-end-line="25" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/constants/graph_constants.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/devices/daq.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="68" column="0" selection-start-line="68" selection-start-column="0" selection-end-line="68" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/shrewdriver.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-15.620689">
+          <caret line="250" column="8" selection-start-line="250" selection-start-column="8" selection-end-line="250" selection-end-column="8" />
           <folding>
             <element signature="e#0#31#0" expanded="true" />
           </folding>
@@ -1124,26 +1312,48 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/task/task_discrimination.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-14.068966">
-          <caret line="228" column="0" selection-start-line="228" selection-start-column="0" selection-end-line="228" selection-end-column="0" />
+        <state vertical-scroll-proportion="-8.310345">
+          <caret line="206" column="29" selection-start-line="206" selection-start-column="21" selection-end-line="206" selection-end-column="29" />
           <folding>
             <element signature="e#0#31#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/task/training.py">
+    <entry file="file://$PROJECT_DIR$/constants/task_constants.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="33" column="63" selection-start-line="33" selection-start-column="63" selection-end-line="33" selection-end-column="63" />
-          <folding />
+          <caret line="121" column="0" selection-start-line="121" selection-start-column="0" selection-end-line="121" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/ui/interact.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.067639254">
-          <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
+        <state vertical-scroll-proportion="-15.344828">
+          <caret line="59" column="0" selection-start-line="59" selection-start-column="0" selection-end-line="59" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/trial/discrimination_trial.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-4.965517">
+          <caret line="26" column="19" selection-start-line="26" selection-start-column="13" selection-end-line="26" selection-end-column="19" />
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/analysis/discrimination_analysis.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.68703425">
+          <caret line="324" column="128" selection-start-line="324" selection-start-column="128" selection-end-line="324" selection-end-column="128" />
           <folding>
             <element signature="e#0#31#0" expanded="true" />
           </folding>
