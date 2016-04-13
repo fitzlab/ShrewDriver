@@ -1,4 +1,3 @@
-from _header import *
 
 """Contains at least one function that defines a shrew's task and devices."""
 
