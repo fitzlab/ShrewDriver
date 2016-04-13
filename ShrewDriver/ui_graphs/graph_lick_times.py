@@ -122,8 +122,6 @@ class GraphLickTimes():
 
 
     def clear_plots(self):
-        print "clearing"
-
         for stateName in self.plots.keys():
             self.gw.removeItem(self.plots[stateName].plot)
         self.plots = {}

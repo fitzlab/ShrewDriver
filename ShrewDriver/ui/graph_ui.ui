@@ -34,7 +34,7 @@
     <item row="1" column="0" colspan="7">
      <widget class="QTabWidget" name="graphTabs">
       <property name="currentIndex">
-       <number>2</number>
+       <number>3</number>
       </property>
       <widget class="QWidget" name="tabEvents">
        <attribute name="title">

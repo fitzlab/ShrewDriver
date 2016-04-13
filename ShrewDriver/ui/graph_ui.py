@@ -137,8 +137,10 @@ class GraphUI(QtGui.QMainWindow, ShrewDriver_class):
             if a.name.lower() == str(self.cmbAnimal.currentText()).lower():
                 self.selectedAnimal = a  # type: Shrew
                 self.setWindowTitle(self.selectedAnimal.name.capitalize() + " - ShrewDriver")
-
-        self.refresh_sessions()
+        try:
+            self.refresh_sessions()
+        except:
+            traceback.print_exc()
 
     def set_config(self):
         for c in self.selectedAnimal.configs:

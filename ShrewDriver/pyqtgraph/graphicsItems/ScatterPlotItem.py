@@ -133,7 +133,7 @@ class SymbolAtlas(object):
     def buildAtlas(self):
         # get rendered array for all symbols, keep track of avg/max width
         rendered = {}
-        avgWidth = 0.0
+        avgWidth = 0
         maxWidth = 0
         images = []
         for key, sourceRect in self.symbolMap.items():
@@ -143,6 +143,10 @@ class SymbolAtlas(object):
                 arr = fn.imageToArray(img, copy=False, transpose=False)
             else:
                 (y,x,h,w) = sourceRect.getRect()
+                y = int(y)
+                x = int(x)
+                h = int(h)
+                w = int(w)
                 arr = self.atlasData[x:x+w, y:y+w]
             rendered[key] = arr
             w = arr.shape[0]
@@ -181,6 +185,11 @@ class SymbolAtlas(object):
         self.atlasData = np.zeros((width, height, 4), dtype=np.ubyte)
         for key in symbols:
             y, x, h, w = self.symbolMap[key].getRect()
+            y = int(y)
+            x = int(x)
+            h = int(h)
+            w = int(w)
+
             self.atlasData[x:x+w, y:y+h] = rendered[key]
         self.atlas = None
         self.atlasValid = True
