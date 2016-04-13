@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b1ee761d-24c1-496c-aee7-bba7fda5eba1" name="Default" comment="">
-      <change type="MOVED" beforePath="$PROJECT_DIR$/_shrewdriver.py" afterPath="$PROJECT_DIR$/shrewdriver.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/shrew/queen.py" afterPath="$PROJECT_DIR$/shrew/queen.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ui_graphs/graph_lick_times.py" afterPath="$PROJECT_DIR$/ui_graphs/graph_lick_times.py" />
     </list>
     <ignored path="ShrewDriver.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -25,40 +23,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="daq.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/devices/daq.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="68" column="0" selection-start-line="68" selection-start-column="0" selection-end-line="68" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="task_discrimination.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/task/task_discrimination.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="206" column="29" selection-start-line="206" selection-start-column="21" selection-end-line="206" selection-end-column="29" />
-              <folding>
-                <element signature="e#0#31#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="task_constants.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/constants/task_constants.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="121" column="0" selection-start-line="121" selection-start-column="0" selection-end-line="121" selection-end-column="0" />
-              <folding>
-                <element signature="e#0#31#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="interact.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ui/interact.py">
           <provider selected="true" editor-type-id="text-editor">
@@ -105,12 +69,54 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="queen.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="queen.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/shrew/queen.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <caret line="28" column="24" selection-start-line="28" selection-start-column="24" selection-end-line="28" selection-end-column="24" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="graph_ui.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ui/graph_ui.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="63" column="63" selection-start-line="63" selection-start-column="63" selection-end-line="63" selection-end-column="63" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="graph_lick_times.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/ui_graphs/graph_lick_times.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.35496688">
+              <caret line="107" column="20" selection-start-line="107" selection-start-column="20" selection-end-line="107" selection-end-column="20" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="GraphicsView.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/pyqtgraph/widgets/GraphicsView.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="192" column="32" selection-start-line="192" selection-start-column="32" selection-end-line="192" selection-end-column="32" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="QGraphicsView.py" pinned="false" current-in-tab="false">
+        <entry file="file://$USER_HOME$/.PyCharm50/system/python_stubs/884504192/PyQt4/QtGui/QGraphicsView.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-6.448276">
+              <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+              <folding>
+                <element signature="e#134#171#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -127,16 +133,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="graph_constants.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/constants/graph_constants.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
     </leaf>
   </component>
   <component name="Git.Settings">
@@ -148,7 +144,6 @@
         <option value="$PROJECT_DIR$/ui_graphs/graph_curves.py" />
         <option value="$PROJECT_DIR$/ui_graphs/graph_events.py" />
         <option value="$PROJECT_DIR$/ui_graphs/graph_history.py" />
-        <option value="$PROJECT_DIR$/ui_graphs/graph_lick_times.py" />
         <option value="$PROJECT_DIR$/ui_graphs/graph_performance.py" />
         <option value="$PROJECT_DIR$/util/cache_decorators.py" />
         <option value="$PROJECT_DIR$/util/collection_utils.py" />
@@ -196,6 +191,7 @@
         <option value="$PROJECT_DIR$/trial/discrimination_trial.py" />
         <option value="$PROJECT_DIR$/analysis/discrimination_analysis.py" />
         <option value="$PROJECT_DIR$/shrew/queen.py" />
+        <option value="$PROJECT_DIR$/ui_graphs/graph_lick_times.py" />
       </list>
     </option>
   </component>
@@ -670,13 +666,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/util/term_set.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/.PyCharm50/system/python_stubs/884504192/win32clipboard.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -765,13 +754,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="52" column="6" selection-start-line="52" selection-start-column="6" selection-end-line="52" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ui/graph_ui.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3098202">
-          <caret line="96" column="45" selection-start-line="96" selection-start-column="45" selection-end-line="97" selection-end-column="45" />
         </state>
       </provider>
     </entry>
@@ -1033,7 +1015,41 @@
     <entry file="file://$PROJECT_DIR$/shrew/queen.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <caret line="28" column="24" selection-start-line="28" selection-start-column="24" selection-end-line="28" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ui/graph_ui.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="63" column="63" selection-start-line="63" selection-start-column="63" selection-end-line="63" selection-end-column="63" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/.PyCharm50/system/python_stubs/884504192/PyQt4/QtGui/QGraphicsView.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-6.448276">
+          <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+          <folding>
+            <element signature="e#134#171#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pyqtgraph/widgets/GraphicsView.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="192" column="32" selection-start-line="192" selection-start-column="32" selection-end-line="192" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ui_graphs/graph_lick_times.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.35496688">
+          <caret line="107" column="20" selection-start-line="107" selection-start-column="20" selection-end-line="107" selection-end-column="20" />
           <folding />
         </state>
       </provider>

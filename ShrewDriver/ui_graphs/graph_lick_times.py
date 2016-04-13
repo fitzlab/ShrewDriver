@@ -105,6 +105,7 @@ class GraphLickTimes():
     def __init__(self, mainUI):
         self.mainUI = mainUI  # type: main_ui.MainUI
         self.gw = pg.GraphicsLayoutWidget()
+        print "Items: " + str(len(self.gw.items())) +": " +str(self.gw.items()[0])
         self.plots = {}
         self.curveToShow = self.TYPE_HISTOGRAM
         self.stateMaxDurations = {}
@@ -120,6 +121,7 @@ class GraphLickTimes():
     def clear_plots(self):
         for stateName in self.plots.keys():
             self.gw.removeItem(self.plots[stateName].plot)
+        print "Items left: " + str(len(self.gw.items())) +": " +str(self.gw.items()[0])
         self.plots = {}
 
     def make_plots(self):
