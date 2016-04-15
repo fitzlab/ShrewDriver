@@ -8,8 +8,8 @@
 
 #include <CapacitiveSensor.h>
 
-#define PIN_LICK_SENSOR 2
-#define PIN_CAPACITIVE_GROUND_LICK 4
+#define PIN_LICK_SENSOR 4
+#define PIN_CAPACITIVE_GROUND_LICK 6
 
 #define PIN_TAP_SENSOR 8
 #define PIN_CAPACITIVE_GROUND_TAP 10
