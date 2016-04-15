@@ -4,9 +4,7 @@
     <bookmark url="file://$PROJECT_DIR$/shrew/splinter.py" line="16" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b1ee761d-24c1-496c-aee7-bba7fda5eba1" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ui/live_plot.py" afterPath="$PROJECT_DIR$/ui/live_plot.py" />
-    </list>
+    <list default="true" id="b1ee761d-24c1-496c-aee7-bba7fda5eba1" name="Default" comment="" />
     <ignored path="ShrewDriver.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -49,8 +47,8 @@
       <file leaf-file-name="live_plot.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/ui/live_plot.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.8246628">
-              <caret line="120" column="8" selection-start-line="120" selection-start-column="8" selection-end-line="120" selection-end-column="8" />
+            <state vertical-scroll-proportion="0.43159923">
+              <caret line="108" column="21" selection-start-line="108" selection-start-column="21" selection-end-line="108" selection-end-column="21" />
               <folding>
                 <element signature="e#0#31#0" expanded="true" />
               </folding>
@@ -297,7 +295,7 @@
       <recent name="C:\Users\theo\Documents\ShrewDriver\ShrewDriver\db" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.shrew_graphs">
+  <component name="RunManager" selected="Python.live_plot">
     <configuration default="false" name="shrew_graphs" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -514,11 +512,11 @@
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python.shrew_graphs" />
-        <item index="1" class="java.lang.String" itemvalue="Python.shrewdriver" />
-        <item index="2" class="java.lang.String" itemvalue="Python.test" />
-        <item index="3" class="java.lang.String" itemvalue="Python.interact" />
-        <item index="4" class="java.lang.String" itemvalue="Python.live_plot" />
+        <item index="0" class="java.lang.String" itemvalue="Python.live_plot" />
+        <item index="1" class="java.lang.String" itemvalue="Python.shrew_graphs" />
+        <item index="2" class="java.lang.String" itemvalue="Python.shrewdriver" />
+        <item index="3" class="java.lang.String" itemvalue="Python.test" />
+        <item index="4" class="java.lang.String" itemvalue="Python.interact" />
       </list>
     </recent_temporary>
   </component>
@@ -950,8 +948,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/ui/live_plot.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.8246628">
-          <caret line="120" column="8" selection-start-line="120" selection-start-column="8" selection-end-line="120" selection-end-column="8" />
+        <state vertical-scroll-proportion="0.43159923">
+          <caret line="108" column="21" selection-start-line="108" selection-start-column="21" selection-end-line="108" selection-end-column="21" />
           <folding>
             <element signature="e#0#31#0" expanded="true" />
           </folding>
