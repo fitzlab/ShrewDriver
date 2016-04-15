@@ -79,7 +79,7 @@ class DiscriminationTrial:
             elif re.search('Lx', line):
                 self.isLicking = True
                 self.actionHistory.append(Actions.LICK)
-                m = p.findall(line)
+                m = p.findall(line.split()[1])
                 self.actionTimes.append(float(m[0] + '.' + m[1]))
             elif re.search('Lo', line):
                 self.isLicking = False
@@ -89,7 +89,7 @@ class DiscriminationTrial:
 
             elif re.search('Tx', line):
                 self.actionHistory.append(Actions.TAP)
-                m = p.findall(line)
+                m = p.findall(line.split()[1])
                 self.actionTimes.append(float(m[0] + '.' + m[1]))
             elif re.search('To', line):
                 self.actionHistory.append(Actions.TAP_DONE)

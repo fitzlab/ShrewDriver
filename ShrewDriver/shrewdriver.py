@@ -11,7 +11,6 @@ import shutil
 import fileinput
 import operator
 
-
 from devices.camera_reader import *
 
 from util.enumeration import *

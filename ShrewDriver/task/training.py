@@ -107,9 +107,7 @@ class Training():
 
             t0 = time.time()
             self.livePlot.update()
-            t1 = time.time()
-            if t1-t0 > 0.05:
-                print "uhoh"
+            t1 = time.time
 
             #get results from other serial threads
             #Prevents potential serial buffer overflow bugs
