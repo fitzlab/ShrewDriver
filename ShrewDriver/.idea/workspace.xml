@@ -4,15 +4,7 @@
     <bookmark url="file://$PROJECT_DIR$/shrew/splinter.py" line="16" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b1ee761d-24c1-496c-aee7-bba7fda5eba1" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/analysis/discrimination_analysis.py" afterPath="$PROJECT_DIR$/analysis/discrimination_analysis.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/shrew/chico.py" afterPath="$PROJECT_DIR$/shrew/chico.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/shrewdriver.py" afterPath="$PROJECT_DIR$/shrewdriver.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/task/task_discrimination.py" afterPath="$PROJECT_DIR$/task/task_discrimination.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/task/training.py" afterPath="$PROJECT_DIR$/task/training.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ui/interact.py" afterPath="$PROJECT_DIR$/ui/interact.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ui/live_plot.py" afterPath="$PROJECT_DIR$/ui/live_plot.py" />
-    </list>
+    <list default="true" id="b1ee761d-24c1-496c-aee7-bba7fda5eba1" name="Default" comment="" />
     <ignored path="ShrewDriver.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -32,11 +24,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="chico.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="chico.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/shrew/chico.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="429">
-              <caret line="56" column="41" selection-start-line="56" selection-start-column="41" selection-end-line="56" selection-end-column="41" />
+            <state relative-caret-position="344">
+              <caret line="51" column="27" selection-start-line="51" selection-start-column="27" selection-end-line="51" selection-end-column="27" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="clucker.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/shrew/clucker.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="327">
+              <caret line="39" column="0" selection-start-line="39" selection-start-column="0" selection-end-line="39" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -60,28 +62,6 @@
             <state relative-caret-position="174">
               <caret line="135" column="13" selection-start-line="135" selection-start-column="13" selection-end-line="135" selection-end-column="13" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="discrimination_trial.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/trial/discrimination_trial.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="204">
-              <caret line="13" column="0" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="task_headfix.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/task/task_headfix.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
-              <caret line="46" column="66" selection-start-line="46" selection-start-column="66" selection-end-line="46" selection-end-column="66" />
-              <folding>
-                <element signature="e#0#31#0" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -293,7 +273,7 @@
       <recent name="C:\Users\theo\Documents\ShrewDriver\ShrewDriver\task" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.shrewdriver">
+  <component name="RunManager" selected="Python.shrew_graphs">
     <configuration default="false" name="shrew_graphs" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -522,8 +502,8 @@
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python.shrewdriver" />
-        <item index="1" class="java.lang.String" itemvalue="Python.shrew_graphs" />
+        <item index="0" class="java.lang.String" itemvalue="Python.shrew_graphs" />
+        <item index="1" class="java.lang.String" itemvalue="Python.shrewdriver" />
         <item index="2" class="java.lang.String" itemvalue="Python.test" />
         <item index="3" class="java.lang.String" itemvalue="Python.interact" />
         <item index="4" class="java.lang.String" itemvalue="Python.live_plot" />
@@ -803,14 +783,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/constants/task_constants.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="97" column="38" selection-start-line="97" selection-start-column="38" selection-end-line="97" selection-end-column="38" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ui/graph_ui.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -849,14 +821,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
           <caret line="10" column="41" selection-start-line="10" selection-start-column="41" selection-end-line="10" selection-end-column="41" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/shrew/clucker.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="918">
-          <caret line="56" column="30" selection-start-line="56" selection-start-column="30" selection-end-line="56" selection-end-column="30" />
           <folding />
         </state>
       </provider>
@@ -967,8 +931,24 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/shrew/chico.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="429">
-          <caret line="56" column="41" selection-start-line="56" selection-start-column="41" selection-end-line="56" selection-end-column="41" />
+        <state relative-caret-position="344">
+          <caret line="51" column="27" selection-start-line="51" selection-start-column="27" selection-end-line="51" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/constants/task_constants.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="199">
+          <caret line="84" column="38" selection-start-line="84" selection-start-column="38" selection-end-line="84" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/shrew/clucker.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="327">
+          <caret line="39" column="0" selection-start-line="39" selection-start-column="0" selection-end-line="39" selection-end-column="0" />
           <folding />
         </state>
       </provider>
