@@ -37,8 +37,11 @@ class DiscriminationAnalysis:
     """
 
     def __init__(self, logFile=None, settingsFile=None, notesFile=None):
-        self.trials = []
+        self.logFile = logFile
+        self.settingsFile = settingsFile
+        self.notesFile = notesFile
 
+        self.trials = []
         self.isLicking = False
 
         # settings / log parameters
@@ -46,7 +49,7 @@ class DiscriminationAnalysis:
         self.midSessionTime = ""
         self.dayOfWeek = ""
         self.hintsUsed = False
-        self.guaranteedSPlus = False
+        self.guaranteedSPlus = True
         self.sequenceType = ""
         self.shrewName = ""
         self.notes = "" #contents of notes file, not including automated analysis
@@ -272,6 +275,8 @@ class DiscriminationAnalysis:
             sMinusOri = t.sMinusOrientation
             if t.numSMinus == max(self.sMinusPresentations) and len(self.sMinusPresentations) > 1:
                 #it's an sMinus trial
+                if sMinusOri == -1:
+                    continue
                 if t.result == Results.CORRECT_REJECT:
                     self.sMinusPerformances[sMinusOri].numCorrect += 1
                     self.sMinusPerformances[sMinusOri].numTrials += 1
@@ -279,6 +284,8 @@ class DiscriminationAnalysis:
                     self.sMinusPerformances[sMinusOri].numTrials += 1
             else:
                 #it's an sPlus trial
+                if sPlusOri == -1:
+                    continue
                 if t.result == Results.HIT:
                     self.sPlusPerformances[sPlusOri].numCorrect += 1
                     self.sPlusPerformances[sPlusOri].numTrials += 1
@@ -322,7 +329,7 @@ class DiscriminationAnalysis:
             '\nTotal Reward (mL): ' + str(self.totalmL) + "\n")
 
         if self.hintmL > 0:
-            message += "Reward from Hints (mL): " + str(self.hintmL) + " (" + str(100*self.hintmL/self.totalmL) + "% of total)\n"
+            message += "Reward from Hints (mL): " + str(self.hintmL) + " (" + str(round(100*self.hintmL/self.totalmL)) + "% of total)\n"
 
         message += (
             "Run Time: " + str(trainTime) + "\n"
@@ -351,7 +358,7 @@ class DiscriminationAnalysis:
 
         message += "\nS+ Response Rate by Orientation" + "\n"
 
-        for sPlusOrientation in self.sPlusOrientations:
+        for sPlusOrientation in sorted(set(self.sPlusOrientations)):
             numCorrect = self.sPlusPerformances[sPlusOrientation].numCorrect
             numTrials = self.sPlusPerformances[sPlusOrientation].numTrials
 
@@ -369,7 +376,7 @@ class DiscriminationAnalysis:
             message += oriStr
 
         message += "\nS- Reject Rate by Orientation" + "\n"
-        for sMinusOrientation in self.sMinusOrientations:
+        for sMinusOrientation in sorted(set(self.sMinusOrientations)):
             numCorrect = self.sMinusPerformances[sMinusOrientation].numCorrect
             numTrials = self.sMinusPerformances[sMinusOrientation].numTrials
 

@@ -9,7 +9,6 @@ from constants.task_constants import *
 from util.enumeration import *
 from util.serialize import objectToString
 
-from shrew.shrew import load_settings
 
 from sequencer.sequencer_base import Sequencer
 
@@ -74,13 +73,13 @@ class TaskMixin(object):
             self.shrewEnteredAt = time.time()
         if evtType == 'Io':
             self.shrewPresent = False
-        if evtType == 'Tx':
+        if evtType.startswith('Tx'):
             self.isTapping = True
             self.lastTapAt = time.time()
         if evtType == 'To':
             self.isTapping = False
             self.lastTapAt = time.time()
-        if evtType == 'Lx':
+        if evtType.startswith('Lx'):
             self.isLicking = True
             self.lastLickAt = time.time()
         if evtType == 'Lo':

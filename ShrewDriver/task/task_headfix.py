@@ -44,7 +44,7 @@ class TaskHeadfix(TaskMixin):
         if self.state == States.REWARD:
             #Wait for the shrew to stop licking
             if self.lastLickAt > self.stateStartTime and self.lastLickAt != 0:
-                self.training.dispenseReward(self.rewardBolus)
+                self.training.dispenseReward(self.rewardBolus/1000)
                 self.changeState(States.TIMEOUT)
                 
     def changeState(self, newState):

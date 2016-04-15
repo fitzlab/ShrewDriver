@@ -11,6 +11,9 @@ from PyQt4.QtCore import *
 from PyQt4.QtGui import * 
 from PyQt4 import QtCore
 import numpy as np
+import copy
+
+from constants.graph_constants import *
 
 class LivePlot(QWidget):
     
@@ -19,8 +22,8 @@ class LivePlot(QWidget):
 
     def __init__(self, animalName):
         self.startTime = time.time()
-        
-        
+        self.lastUpdate = 0
+
         #--- init plot ---#
         self.axis = TimeAxis(orientation='bottom')
         self.app = pg.mkQApp()
@@ -42,13 +45,17 @@ class LivePlot(QWidget):
         #--- init plot curves ---#
         numStates = 7
         
-        self.rewardPoints = IntCurve('Reward', 5, [0,255,255], 1, self.pw)
-        self.hintPoints = IntCurve('Hint', 4, [0,255,0], 1, self.pw)
-        self.statePoints = IntCurve('State', 3, [128,128,128], numStates, self.pw)
-        self.lickPoints = IntCurve('Lick', 2, [255,0,0], 1, self.pw)
-        self.tapPoints = IntCurve('Tap', 1, [255,255,0], 1, self.pw)
-        self.irPoints = IntCurve('IR', 0, [128,0,255], 1, self.pw)
-        
+        self.rewardCurve = IntCurve(REWARD, 5, get_color(REWARD), 1, self.pw)
+        self.hintCurve = IntCurve(HINT, 4, get_color(HINT), 1, self.pw)
+        self.stateCurve = IntCurve(STATE, 3, get_color(STATE), numStates, self.pw)
+        self.lickCurve = IntCurve(LICK, 2, get_color(LICK), 4, self.pw)
+        self.tapCurve = IntCurve(TAP, 1, get_color(TAP), 4, self.pw)
+        self.airCurve = IntCurve(AIR_PUFF, 0, get_color(AIR_PUFF), 1, self.pw)
+
+        # trailing points needed to represent current state
+        self.tapState = 0;
+        self.lickState = 0;
+
         QWidget.__init__(self) 
         
         # Accept updates via signals. 
@@ -62,49 +69,75 @@ class LivePlot(QWidget):
         evtType = str(eventType) #convert from QString
         t = timestamp - self.startTime
         #print "GOT EVENT: " + evtType + " " + str(t)
-        if evtType == 'Ix':
-            self.irPoints.appendPoint(t,1)
-        if evtType == 'Io':
-            self.irPoints.appendPoint(t,0)
-        if evtType == 'Lx':
-            self.lickPoints.appendPoint(t,1)
+        if evtType.startswith('Lx'):
+            if len(evtType) > 2:
+                magnitude = int(evtType[2])
+                self.lickCurve.appendPoint(t,magnitude)
+            else:
+                self.lickCurve.appendPoint(t,4)
         if evtType == 'Lo':
-            self.lickPoints.appendPoint(t,0)
-        if evtType == 'Tx':
-            self.tapPoints.appendPoint(t,1)
+            self.lickCurve.appendPoint(t,0)
+        if evtType.startswith('Tx'):
+            if len(evtType) > 2:
+                magnitude = int(evtType[2])
+                self.tapCurve.appendPoint(t,magnitude)
+            else:
+                self.tapCurve.appendPoint(t,4)
         if evtType == 'To':
-            self.tapPoints.appendPoint(t,0)
+            self.tapCurve.appendPoint(t,0)
         if evtType.startswith('State'):
             stateNumber = int(evtType[5:])
-            self.statePoints.appendPoint(t,stateNumber)
+            self.stateCurve.appendPoint(t,stateNumber)
+        if evtType == 'Puff':
+            self.airCurve.appendPoint(t,1)
+            self.airCurve.appendPoint(t+0.001,0)
         if evtType == 'RL':
-            self.hintPoints.appendPoint(t,1)
-            self.hintPoints.appendPoint(t+0.001,0)
+            self.hintCurve.appendPoint(t,1)
+            self.hintCurve.appendPoint(t+0.001,0)
         if evtType == 'RH':
-            self.rewardPoints.appendPoint(t,1)
-            self.rewardPoints.appendPoint(t+0.001,0)
-        #ignore any other noise, e.g. "bolus" notifications
-        
+            self.rewardCurve.appendPoint(t,1)
+            self.rewardCurve.appendPoint(t+0.001,0)
+
+        #ignore any other events
+
         super(LivePlot, self).repaint()
         super(LivePlot, self).setFocus()
+
+    def update(self, t=None):
+        """Called periodically from training program.
+        Updates each curve to show current state.
+        t parameter is only used by test function below."""
+        if t is None:
+            #t is only defined for testing examples; normally it's the current time.
+            t = time.time() - self.startTime
+        if t - self.lastUpdate < 1:
+            #update every 1s at most
+            return
+
+        self.lastUpdate = t
+
+        for curve in [self.lickCurve, self.tapCurve, self.stateCurve, self.airCurve, self.rewardCurve, self.hintCurve]:
+            curve.update(t)
+        #super(LivePlot, self).repaint()
+        #super(LivePlot, self).setFocus()
         
     def addTestPoints(self):
         self.startTime = 0
-        self.addEvent("Lx", 100)
+        self.addEvent("Lx1", 100)
         self.addEvent("Lo", 130)
-        self.addEvent("Lx", 500)
+        self.addEvent("Lx2", 500)
         self.addEvent("Lo", 530)
-        self.addEvent("Lx", 800)
+        self.addEvent("Lx3", 800)
         self.addEvent("Lo", 830)
-        self.addEvent("Ix", 200)
-        self.addEvent("Io", 650)
-        self.addEvent("Ix", 1200)
-        self.addEvent("Io", 2650)
-        self.addEvent("Tx", 200)
+        self.addEvent("Puff", 200)
+        self.addEvent("Puff", 650)
+        self.addEvent("Puff", 1200)
+        self.addEvent("Puff", 2650)
+        self.addEvent("Tx2", 200)
         self.addEvent("To", 220)
-        self.addEvent("Tx", 1200)
+        self.addEvent("Tx3", 1200)
         self.addEvent("To", 1220)
-        self.addEvent("Tx", 1240)
+        self.addEvent("Tx4", 1240)
         self.addEvent("To", 1280)
         self.addEvent("State0", 0)
         self.addEvent("State1", 500)
@@ -121,21 +154,25 @@ class LivePlot(QWidget):
         self.addEvent("RH", 700)
         self.addEvent("RH", 2700)
 
+        self.update(t=5000)
+
 class IntCurve:
     def __init__(self, name, index, color, yMax, pw):
         self.name = name
-        self.yMin = index * 1.1
-        
+        self.yMin = index * 1.1  # specifies where the curve is vertically on the plot
+        self.yMax = yMax  # yMax is the highest input value.
+
         self.x = [0]
         self.xBase = [0]
         self.y = [self.yMin]
         self.yBase = [self.yMin]
-        self.yMax = yMax
+
+        self.state = 0
         
         self.yPrev = 0
         self.xPrev = 0
         
-        #init curve on plotwidget 'pw'
+        # make curve on plotwidget 'pw'
         self.sig = pw.plot(pen=color, name=self.name)
         self.sig.setData(self.x, self.y)
         self.base = pw.plot(pen=color)
@@ -144,25 +181,44 @@ class IntCurve:
         pw.addItem(fill)
         
     
-    def appendPoint(self, x, y):
-        
-        #add point to curve
-        self.x.append(x)
+    def appendPoint(self, xNew, yNew):
+        """Display the latest point associated with this curve."""
+        #add two points to make vertical line on curve (low-to-high or high-to-low)
+        self.x.append(xNew)
         self.y.append(self.yPrev/self.yMax + self.yMin)
-        self.x.append(x)
-        self.y.append(y/self.yMax + self.yMin)
+        self.x.append(xNew)
+        self.y.append(yNew/self.yMax + self.yMin)
         
-        #update base curve
-        self.xBase.append(x)
+        #update base curve as well
+        self.xBase.append(xNew)
         self.yBase.append(self.yMin)
-        
-        self.xPrev = x
-        self.yPrev = y
-        
-        #update plot curve
+
+        #save input point so we can interpret the next input
+        self.xPrev = xNew
+        self.yPrev = yNew
+
+        #update drawn lines with new data
         self.sig.setData(self.x, self.y)
-        self.base.setData(self.xBase,self.yBase)
-        
+        self.base.setData(self.xBase, self.yBase)
+
+    def update(self, t):
+        """Called periodically with no event. Just updates this curve to show current state."""
+
+        #add current state to a temporary point array
+        self.xRender = copy.copy(self.x)
+        self.xRenderBase = copy.copy(self.xBase)
+        self.yRender = copy.copy(self.y)
+        self.yRenderBase = copy.copy(self.yBase)
+
+        self.xRender.append(t)
+        self.xRenderBase.append(t)
+        self.yRender.append(self.yPrev/self.yMax + self.yMin)
+        self.yRenderBase.append(self.yMin)
+
+        #render it
+        self.sig.setData(self.xRender, self.yRender)
+        self.base.setData(self.xRenderBase, self.yRenderBase)
+
 
 def timestampToString(timestamp):
     timeStr = ''

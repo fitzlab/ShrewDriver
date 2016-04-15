@@ -51,7 +51,7 @@
       </widget>
      </item>
      <item row="0" column="1">
-      <widget class="QLineEdit" name="txtRewardAmount">
+      <widget class="QLineEdit" name="txtRewardSize">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
          <horstretch>0</horstretch>
@@ -139,11 +139,6 @@
       </widget>
      </item>
     </layout>
-    <zorder>groupBox_3</zorder>
-    <zorder>label</zorder>
-    <zorder>txtRewardAmount</zorder>
-    <zorder>btnGiveReward</zorder>
-    <zorder>btnAirPuff</zorder>
    </widget>
    <widget class="QGroupBox" name="groupBox_2">
     <property name="geometry">
@@ -169,6 +164,36 @@
      <string>Screen Manipulation</string>
     </property>
     <layout class="QGridLayout" name="gridLayout_3">
+     <item row="2" column="0" colspan="2">
+      <widget class="QLabel" name="label_4">
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>30</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
+         <height>30</height>
+        </size>
+       </property>
+       <property name="baseSize">
+        <size>
+         <width>0</width>
+         <height>40</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Stim command:</string>
+       </property>
+      </widget>
+     </item>
      <item row="0" column="1">
       <widget class="QPushButton" name="btnGrayScreen">
        <property name="minimumSize">
@@ -214,36 +239,6 @@
        </property>
        <property name="text">
         <string>S+ Grating</string>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="0" colspan="2">
-      <widget class="QLabel" name="label_4">
-       <property name="minimumSize">
-        <size>
-         <width>0</width>
-         <height>30</height>
-        </size>
-       </property>
-       <property name="maximumSize">
-        <size>
-         <width>16777215</width>
-         <height>30</height>
-        </size>
-       </property>
-       <property name="baseSize">
-        <size>
-         <width>0</width>
-         <height>40</height>
-        </size>
-       </property>
-       <property name="font">
-        <font>
-         <pointsize>12</pointsize>
-        </font>
-       </property>
-       <property name="text">
-        <string>Stim command:</string>
        </property>
       </widget>
      </item>
@@ -320,14 +315,7 @@
       </widget>
      </item>
      <item row="3" column="0" colspan="2">
-      <widget class="QComboBox" name="cbStimCommand">
-       <property name="editable">
-        <bool>true</bool>
-       </property>
-       <property name="currentText">
-        <string>sqr0 ac sx10 sy10 ja3 jf0.2</string>
-       </property>
-      </widget>
+      <widget class="QComboBox" name="cmbStimCommand"/>
      </item>
     </layout>
     <zorder>btnRunStimCommand</zorder>
@@ -335,9 +323,8 @@
     <zorder>btnSMinusGrating</zorder>
     <zorder>btnGrayScreen</zorder>
     <zorder>btnBlack</zorder>
-    <zorder>groupBox</zorder>
     <zorder>label_4</zorder>
-    <zorder>cbStimCommand</zorder>
+    <zorder>cmbStimCommand</zorder>
    </widget>
    <widget class="QGroupBox" name="groupBox_3">
     <property name="geometry">
@@ -397,6 +384,18 @@
        </property>
       </widget>
      </item>
+     <item row="1" column="0">
+      <widget class="QLabel" name="label_3">
+       <property name="font">
+        <font>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Grating Orientation:</string>
+       </property>
+      </widget>
+     </item>
      <item row="0" column="1">
       <widget class="QPushButton" name="btnTaskFail">
        <property name="minimumSize">
@@ -434,30 +433,8 @@
        </property>
       </widget>
      </item>
-     <item row="1" column="0">
-      <widget class="QLabel" name="label_3">
-       <property name="font">
-        <font>
-         <pointsize>12</pointsize>
-        </font>
-       </property>
-       <property name="text">
-        <string>Grating Orientation:</string>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="1">
-      <widget class="QComboBox" name="cbGratingOrientation">
-       <property name="editable">
-        <bool>true</bool>
-       </property>
-       <property name="currentText">
-        <string>0</string>
-       </property>
-      </widget>
-     </item>
      <item row="2" column="0">
-      <widget class="QPushButton" name="btnShowOrientation">
+      <widget class="QPushButton" name="btnShowNow">
        <property name="minimumSize">
         <size>
          <width>0</width>
@@ -481,7 +458,7 @@
       </widget>
      </item>
      <item row="2" column="1">
-      <widget class="QPushButton" name="btnReplaceOrientation">
+      <widget class="QPushButton" name="btnReplaceNext">
        <property name="minimumSize">
         <size>
          <width>0</width>
@@ -504,15 +481,16 @@
        </property>
       </widget>
      </item>
+     <item row="1" column="1">
+      <widget class="QComboBox" name="cmbGratingOrientation"/>
+     </item>
     </layout>
     <zorder>btnTaskFail</zorder>
     <zorder>btnStartTrial</zorder>
-    <zorder>btnShowOrientation</zorder>
-    <zorder>btnReplaceOrientation</zorder>
+    <zorder>btnShowNow</zorder>
+    <zorder>btnReplaceNext</zorder>
     <zorder>label_3</zorder>
-    <zorder>groupBox</zorder>
-    <zorder>cbGratingOrientation</zorder>
-    <zorder>groupBox</zorder>
+    <zorder>cmbGratingOrientation</zorder>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">

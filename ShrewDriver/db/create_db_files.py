@@ -17,6 +17,7 @@ from db_history import *
 from db_performance import *
 from db_events import *
 from db_lick_times import *
+from db_text_data import *
 
 from analysis.discrimination_analysis import DiscriminationAnalysis
 
@@ -102,6 +103,7 @@ def create_dbs():
             DbPerformance().make(analyses)
             DbLickTimes().make(analyses)
             DbEvents().make(analyses)
+            DbTextData().make(analyses)
     print("Done")
 
 
@@ -135,7 +137,8 @@ def update_dbs():
         dbs = [DbHistory().get(animalName), \
                DbPerformance().get(animalName), \
                DbLickTimes().get(animalName), \
-               DbEvents().get(animalName)]
+               DbEvents().get(animalName),
+               DbTextData().get(animalName)]
 
         sessionDirs = get_session_dirs(shrewDir)
 
@@ -152,7 +155,7 @@ def update_dbs():
         for sessionDir in sessionsToAdd:
             a = analyze_dir(sessionDir)
             if a is not None:
-                for db in [DbHistory(), DbPerformance(), DbLickTimes(), DbEvents()]:
+                for db in [DbHistory(), DbPerformance(), DbLickTimes(), DbEvents(), DbTextData()]:
                     db.add_entry(a)
     print("Done")
 

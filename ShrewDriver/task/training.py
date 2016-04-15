@@ -19,7 +19,6 @@ from sequencer.sequencer_base import *
 from task.task_discrimination import *
 from task.task_headfix import *
 
-from shrew.shrew import *
 
 from ui.live_plot import *
 from shrewdriver import *
@@ -58,7 +57,9 @@ class Training():
         self.syringeSerial.startReadThread()
 
         #start air puff serial, if any
-        self.airPuff = AirPuff(self.shrewDriver.airPuffPortName)
+        self.airPuff = None
+        if self.shrewDriver.airPuffPortName != None:
+            self.airPuff = AirPuff(self.shrewDriver.airPuffPortName)
 
         #start stim serial
         if self.shrewDriver.stimPortName == "PsychoPy":
@@ -77,7 +78,7 @@ class Training():
 
         #make interact window, if needed
         if hasattr(self.task, "showInteractUI") and self.task.showInteractUI:
-            self.shrewDriver.show_interact_ui()
+            self.shrewDriver.show_interact_ui(self.task)
 
         #start file logging
         self.logFilePath = self.shrewDriver.experimentPath + self.shrewDriver.sessionFileName + "_log.txt" 
@@ -99,10 +100,16 @@ class Training():
             updates = self.sensorSerial.getUpdates()
             for update in updates:
                 self.processUpdates(update)
-            
+
             #update state
             self.task.checkStateProgression()
-            
+
+            t0 = time.time()
+            self.livePlot.update()
+            t1 = time.time()
+            if t1-t0 > 0.05:
+                print "uhoh"
+
             #get results from other serial threads
             #Prevents potential serial buffer overflow bugs
             bunchaCrap = self.syringeSerial.getUpdates()
@@ -114,9 +121,9 @@ class Training():
         evtType = update[0]
         timestamp = float(update[1])
         self.task.sensorUpdate(evtType, timestamp)
-        
+
         self.logPlotAndAnalyze(evtType, timestamp)
-        
+
     
     def logPlotAndAnalyze(self, eventType, timestamp):
         self.livePlot.sigEvent.emit(eventType, timestamp)
@@ -136,7 +143,11 @@ class Training():
         self.logPlotAndAnalyze("RH", timestamp)
         self.logPlotAndAnalyze("bolus:" + str(rewardMillis), timestamp)
         self.syringeSerial.write(str(int(rewardMillis*1000)) + "\n")
-    
+
+    def send_stimcode(self, stimCode):
+        pass
+        #print "Not sending stimcode " + str(stimCode) + " because this isn't implemented yet."
+
     def blackScreen(self):
         #used by "stop recording" to black out screen at end of experiment
         self.stimSerial.write('as pab px0 py0 sx999 sy999\n')

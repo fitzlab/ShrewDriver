@@ -2,6 +2,8 @@ from __future__ import division
 import sys
 sys.path.append("..")
 
+import os
+
 from PyQt4 import QtCore, QtGui
 from PyQt4 import uic
 import _winreg as winreg
@@ -14,15 +16,12 @@ Interact_class = uic.loadUiType("ui/interact.ui")[0]
 
 class InteractUI(QtGui.QMainWindow, Interact_class):
 
-    #define signals that we will accept and use to update the UI
-    sigTrialEnd = QtCore.pyqtSignal()
-
-    def __init__(self, parent=None, task=None):
+    def __init__(self, parent=None):
         #make Qt window
         QtGui.QMainWindow.__init__(self, parent)
         #self.setGeometry( 500 , 1300 , 400 , 200 )
-
         self.setupUi(self)
+
 
         #--- button actions ---#
         # shrew feedback
@@ -45,21 +44,21 @@ class InteractUI(QtGui.QMainWindow, Interact_class):
 
         self.btnRunStimCommand.clicked.connect(self.btn_run_stim_command_clicked)
 
-
         #setup
-        self.task = task
-
         self.show()
+
+    def set_task(self, task):
+        self.task = task
 
 
     #--- shrew feedback ---#
     def btn_give_reward_clicked(self):
-        self.task.training.sendStimcode(STIMCODE_REWARD_GIVEN)
-        rewardAmount = float(str(self.txtRewardSize.getText()))
-        self.task.ui_dispense(rewardAmount)
+        self.task.training.send_stimcode(STIMCODE_REWARD_GIVEN)
+        rewardMicroliters = float(str(self.txtRewardSize.text()))
+        self.task.ui_dispense(rewardMicroliters)
 
     def btn_air_puff_clicked(self):
-        self.task.training.sendStimcode(STIMCODE_AIR_PUFF)
+        self.task.training.send_stimcode(STIMCODE_AIR_PUFF)
         pass
 
     #--- task manipulation ---#

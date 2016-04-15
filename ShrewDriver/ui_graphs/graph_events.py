@@ -99,7 +99,7 @@ class GraphEvents():
                 or self.mainUI.selectedSession is None:
             return
 
-        shrewName = self.mainUI.selectedAnimal.name
+        shrewName = self.mainUI.selectedAnimal
 
         dbEvents = DbEvents().get(shrewName)
         if len(dbEvents.keys()) == 0:

@@ -38,7 +38,6 @@ class DbMixin(object):
             if animalName in self._db:
                 self._db[animalName].sync()
 
-
     def make(self, analyses):
         """Go through all the provided analysis objects and make / update DB entries."""
         for a in analyses:  # type: sd1_analysis.Analysis

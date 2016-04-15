@@ -183,7 +183,7 @@ class GraphLickTimes():
                 or self.mainUI.selectedSession is None:
             return
 
-        shrewName = self.mainUI.selectedAnimal.name
+        shrewName = self.mainUI.selectedAnimal
         dbLickTimes = DbLickTimes().get(shrewName)
         if len(dbLickTimes.keys()) == 0:
             return

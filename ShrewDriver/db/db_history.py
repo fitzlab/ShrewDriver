@@ -4,7 +4,7 @@ sys.path.append("..")
 
 
 import threading
-
+import traceback
 from constants.graph_constants import *
 from db_mixin import DbMixin
 from analysis.discrimination_analysis import *
@@ -69,9 +69,10 @@ class DbHistory(DbMixin):
         entry[SESSION_START_TIME] = a.trials[0].stateTimes[0]
 
         #compute changes in settings
-        changeStr = ""
         dateStr = self.get_datestr(a)
+        changeStr = ""
         db = self.get(a.shrewName)
+        db[dateStr] = None
 
         dateStrs = sorted(db.keys())
         prevDateStr = None
@@ -79,14 +80,14 @@ class DbHistory(DbMixin):
             if dateStrs.index(dateStr)-1 >= 0:
                 prevDateStr = dateStrs[dateStrs.index(dateStr)-1]
         except ValueError:
-            pass
+            traceback.print_exc()
 
         if prevDateStr is not None:
             currentSettings = self.get_settings(a.shrewName, dateStr)
             prevSettings = self.get_settings(a.shrewName, prevDateStr)
 
             if currentSettings is not None and prevSettings is not None:
-                # check for in what settings exist (very rarely happens)
+                # check for added or removed settings (very rarely happens)
                 newKeys = set(currentSettings.keys()).difference(prevSettings.keys())
                 lostKeys = set(prevSettings.keys()).difference(currentSettings.keys())
 
@@ -104,10 +105,16 @@ class DbHistory(DbMixin):
                     else:
                         changeStr += key + " changed from " + prevSettings[key] + " to " + currentSettings[key] + "\n"
 
+        if changeStr != "":
+            #add session info at the beginning
+            changeStr = "Session " + dateStr + ":\n" + changeStr
+
         #print "str: ", changeStr
         entry[CHANGES] = changeStr
 
         # add entry to DB
         db[dateStr] = entry
         self.sync(a.shrewName)
+
+
 

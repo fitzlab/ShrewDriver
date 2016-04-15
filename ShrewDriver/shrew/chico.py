@@ -1,88 +1,72 @@
-"""Contains at least one function that defines a shrew's task and devices."""
+from __future__ import division
 
 import sys
 sys.path.append("..")
 
+from constants.task_constants import *
 
-class ChicoARC():
-    
-    def __init__(self):
-        self.name = "Chico"
-        self.ardSensorPort = "COM10"
-        self.syringePort = "COM11"
-        self.stimbotPort = "COM12"
-        self.stimDevice = None
-        self.cameraID = 5
+"""
+Fun things you can do with task parameters:
 
-        self.screenDist = 25
-        
-class ChicoUpstairs():
-    
-    def __init__(self):
-        self.name = "Chico"
-        self.ardSensorPort = "COM100"
-        self.syringePort = "COM101"
-        self.stimbotPort = None
-        self.stimDevice = Psycho(windowed=False)
-        self.cameraID = 5
+Suppose you want to change the balance of S+ and S- trials.
+By default, it's 50/50, since sMinusPresentations = [0,1].
+If you wanted it to be, say, 75% S+ trials, you can set:
+sMinusPresentations = [0, 0, 0, 1].
 
-        self.screenDist = 25
+Bear in mind that, if the sequence type is a _RETRY, you may get several copies
+of a rare trial in a row.
 
+Now, suppose you set:
+sMinusPresentations = [0,1]
+sPlusOrientations = [0, 45]
+sMinusOrientations = [100, 110, 120]
+Each trial would have a 50% chance of being an S+ or an S-.
+The S- trials could be any of [100, 110, 120], while the S+ trials could show either 0 or 45.
+"""
 
-def chico_headfix():
-    shrew = ChicoUpstairs()
-    task = TaskHeadfix(shrew)
-    
-    #params
-    params = ParamsHeadfix()
-    params.reward_mL = 0.2
-    task.params = params
-
-    #screen commands 
-    task.setUpStates()
-    task.initMode = Task.INIT_AUTO
-
-    #ready to go
-    task.start(do_ui=True, do_camera=False, do_logging=True)
-
-def chico_discrimination():
+def load_parameters(task):
     print "Using settings for Chico!"
-    self.sPlusOrientations = [135]
-    self.sMinusOrientations = [180]
-    self.sMinusPresentations = [0,1] #how many times to display the SMINUS
-    self.guaranteedSPlus = True #is there always an SPLUS in the trial?
-    self.sequenceType = Sequences.RANDOM
-    self.initiation = Initiation.TAP
 
-    self.timeoutFail = 10
-    self.timeoutAbort = 10
-    self.timeoutSuccess = 10
-    self.timeoutNoResponse = 10
-    self.timeoutCorrectReject = 10
+    task.showInteractUI = True  # Enables the interact UI, used in headfixed training.
 
-    self.initTime = 1
+    # Stim and task params
+    task.sPlusOrientations = [135]
+    task.sMinusOrientations = [180]
+    task.sMinusPresentations = [0,1] #how many times to display the SMINUS
+    task.guaranteedSPlus = True #is there always an SPLUS in the trial?
+    task.sequenceType = Sequences.RANDOM
+    task.initiation = Initiation.LICK
+    task.airPuffMode = AirPModeuff.NONE
 
-    self.variableDelayMin = 1.0
-    self.variableDelayMax = 1.75
+    # State durations
+    task.timeoutFail = 6
+    task.timeoutAbort = 6
+    task.timeoutSuccess = 6
+    task.timeoutNoResponse = 6
+    task.timeoutCorrectReject = 6  # applies only when guaranteedSPlus is false
+    task.initTime = 1
 
-    self.gratingDuration = 0.5
-    self.grayDuration = 1
-    self.rewardPeriod = self.grayDuration #needs to be no longer than gray duration!
+    task.variableDelayMin = 3.0
+    task.variableDelayMax = 3.5
 
-    self.hintChance = 0.0 #chance of sending a low reward at the start of the reward period
+    task.gratingDuration = 0.5
+    task.grayDuration = 1.5
+    task.rewardPeriod = task.grayDuration  # needs to be no longer than gray duration!
 
-    self.hintBolus = 0.03 #0.03 is a good amount; just enough that the shrew will notice it but not enough to be worth working for on its own.
-    self.rewardBolus = 0.150
-    self.rewardBolusHardTrial = 0.250
+    # Rewards / Hints
+    task.rewardBolus = 200  # Microliters
+    task.rewardBolusHardTrial = 250  # Microliters
+    task.hintBolus = 40  # Microliters
+
+    task.hintChance = 0.2  # chance of sending a low reward at the start of the reward perwn.
 
     #stimbot setup, including command strings for each state
     #note that grating states will have an extra command added later to specify orientation and phase.
-    self.screenDistanceMillis = 25
-    self.commandStrings[States.TIMEOUT] = 'ac pab px0 py0 sx12 sy12\n'
-    self.commandStrings[States.INIT] = 'ac paw px0 py0 sx12 sy12\n'
-    self.commandStrings[States.DELAY] = 'sx0 sy0\n'
-    self.commandStrings[States.SMINUS] = 'as sf0.25 tf0 jf0 ja0 px0 py0 sx999 sy999\n'
-    self.commandStrings[States.GRAY] = 'sx0 sy0\n'
-    self.commandStrings[States.SPLUS] = 'as sf0.25 tf0 jf0 ja0 px0 py0 sx999 sy999\n'
-    self.commandStrings[States.REWARD] = 'sx0 sy0\n'
-
+    task.screenDistanceMillis = 25
+    task.commandStrings[States.TIMEOUT] = 'ac pab px0 py0 sx12 sy12\n'
+    task.commandStrings[States.INIT] = 'ac paw px0 py0 sx12 sy12\n'
+    task.commandStrings[States.DELAY] = 'sx0 sy0\n'
+    task.commandStrings[States.SMINUS] = 'as sf0.25 tf0 gc0.8 jf0 ja0 px0 py0 sx999 sy999\n'
+    task.commandStrings[States.GRAY] = 'sx0 sy0\n'
+    task.commandStrings[States.SPLUS] = 'as sf0.25 tf0 gc0.8 jf0 ja0 px0 py0 sx999 sy999\n'
+    task.commandStrings[States.REWARD] = 'sx0 sy0\n'

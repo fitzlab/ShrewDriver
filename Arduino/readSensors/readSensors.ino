@@ -28,8 +28,8 @@ bool lickState = LICK_OFF;
 
 // lower thresholds to make tap / lick more sensitive. 
 //Somewhere between 100 and 1000 is typical.
-int tapThreshold = 500;
-int lickThreshold = 500;
+int tapThreshold = 100;
+int lickThreshold = 100;
 
 //Speed-accuracy tradeoff. 50 is a good compromise point.
 int numTapSamples = 50;
@@ -39,6 +39,8 @@ int numLickSamples = 50;
 CapacitiveSensor csLick = CapacitiveSensor(PIN_CAPACITIVE_GROUND_LICK,PIN_LICK_SENSOR);
 CapacitiveSensor csTap = CapacitiveSensor(PIN_CAPACITIVE_GROUND_TAP,PIN_TAP_SENSOR);
 
+int lickLevels[] = {0, lickThreshold, lickThreshold*2, lickThreshold*4, lickThreshold*8};
+int tapLevels[] = {0, tapThreshold, tapThreshold*2, tapThreshold*4, tapThreshold*8};
 
 void setup() {
   delay(200); //let arduino wake up properly
@@ -63,12 +65,20 @@ void setup() {
 
 void checkLick(){
 	long lickReading =  csLick.capacitiveSensor(numLickSamples);
-	if(lickState == LICK_OFF && lickReading > lickThreshold){
+  int lickLevel = 0;
+  for(int i = 4; i > 0; i--){
+    if(lickReading > lickLevels[i]){
+      lickLevel = i;
+      break;
+    }
+  }
+	if(lickState == LICK_OFF && lickLevel > 0){
     lickState = LICK_ON;
     digitalWrite(PIN_LICK_NOTIFY, HIGH);
-    Serial.println("Lx");
+    Serial.print("Lx");
+    Serial.println(lickLevel);
 	}
-  else if(lickState == LICK_ON && lickReading < lickThreshold){
+  else if(lickState == LICK_ON && lickLevel == 0){
     lickState = LICK_OFF;
     digitalWrite(PIN_LICK_NOTIFY, LOW);
     Serial.println("Lo");
@@ -77,12 +87,20 @@ void checkLick(){
 
 void checkTap(){
 	long tapReading =  csTap.capacitiveSensor(numTapSamples);
-	if(tapState == TAP_OFF && tapReading > tapThreshold){
+  int tapLevel = 0;
+  for(int i = 4; i > 0; i--){
+    if(tapReading > tapLevels[i]){
+      tapLevel = i;
+      break;
+    }
+  }
+	if(tapState == TAP_OFF && tapLevel > 0){
 		tapState = TAP_ON;
     digitalWrite(PIN_TAP_NOTIFY, HIGH);
-    Serial.println("Tx");
+    Serial.print("Tx");
+    Serial.println(tapLevel);
 	}
-	else if(tapState == TAP_ON && tapReading < tapThreshold){
+	else if(tapState == TAP_ON && tapLevel == 0){
 		tapState = TAP_OFF;
     digitalWrite(PIN_TAP_NOTIFY, LOW);
     Serial.println("To");

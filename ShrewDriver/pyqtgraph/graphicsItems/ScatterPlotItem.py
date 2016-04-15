@@ -166,6 +166,7 @@ class SymbolAtlas(object):
         
         self.atlasRows = []
 
+
         x = width
         y = 0
         rowheight = 0
@@ -180,7 +181,8 @@ class SymbolAtlas(object):
             self.symbolMap[key].setRect(y, x, h, w)
             x += w
             self.atlasRows[-1][2] = x
-        height = y + rowheight
+        height = int(y + rowheight)
+        width = int(width)
 
         self.atlasData = np.zeros((width, height, 4), dtype=np.ubyte)
         for key in symbols:

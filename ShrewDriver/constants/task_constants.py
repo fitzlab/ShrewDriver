@@ -95,7 +95,7 @@ Air Puff Modes:
     SMINUS_OFFSET - Puff every time the sMinus grating finishes displaying
 '''
 airPuffSet = ['NONE', 'BAD_LICK', 'TASK_FAIL_LICK', 'FALSE_ALARM_LICK', 'SMINUS_OFFSET']
-AirPuff = Enumeration("AirPuff", airPuffSet)
+AirPuffMode = Enumeration("AirPuffMode", airPuffSet)
 
 '''
 Stimcodes are sent to Spike2 via the Measurement Computing DAQ. They are only used in imaging experiments.

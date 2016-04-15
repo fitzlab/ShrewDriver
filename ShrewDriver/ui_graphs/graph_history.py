@@ -32,13 +32,14 @@ class GraphHistory():
 
     def __init__(self, mainUI):
         self.mainUI = mainUI  # type: main_ui.MainUI
+        self.displayedAnimal = self.mainUI.selectedAnimal
         self.plot = pg.PlotWidget()
 
         #--- init plot ---#
         self.vb = pg.ViewBox()
         self.axis = DateAxis(orientation='bottom')
         self.plot = pg.PlotWidget(viewBox=self.vb, axisItems={'bottom': self.axis}, enableMenu=False, title="")
-        self.legend = self.plot.plotItem.addLegend()
+        self.legend = self.plot.plotItem.addLegend(offset=(900,10))
 
         thirtyDays = 30*24*60*60
         self.plot.setXRange(time.time()-thirtyDays, time.time()) #Default range: the last 30 days
@@ -78,13 +79,18 @@ class GraphHistory():
             self.load_db()
 
     def load_db(self):
-        # pull data from database file, if available
+        """ Loads data from db and refreshes graph display """
+        if self.displayedAnimal == self.mainUI.selectedAnimal:
+            #animal didn't change, probably just the session. Don't need to do anything.
+            return
+        self.displayedAnimal = self.mainUI.selectedAnimal
+
         self.clear_curves()
 
         if self.mainUI is None or not hasattr(self.mainUI, "selectedAnimal") or self.mainUI.selectedAnimal is None:
             return
 
-        shrewName = self.mainUI.selectedAnimal.name
+        shrewName = self.mainUI.selectedAnimal
         dbHistory = DbHistory().get(shrewName)
         if len(dbHistory.keys()) == 0:
             return
@@ -145,7 +151,7 @@ class GraphHistory():
             self.hide_curve(cn)
 
         #show just the relevant ones
-        self.legend = self.plot.plotItem.addLegend()
+        self.legend = self.plot.plotItem.addLegend(offset=(900,10))
         self.legend.addItem(self.changeCurve, name=CHANGES)
 
         namesToShow = []
@@ -187,7 +193,16 @@ class GraphHistory():
         #highlight clicked point
         if len(points) > 0:
             points[0].setPen('w', width=2)
-            print points[0].data()
+            print "\n" + points[0].data()
+
+            #set to selected session
+            lines = points[0].data().split("\n")
+            for line in lines:
+                if 'Session' in line:
+                    m = re.search("\ (.*):", line)
+                    sessionStr = m.groups()[0]
+                    self.mainUI.set_combo_box(self.mainUI.cmbSession, sessionStr)
+                    break
 
 def add_test_points(gh):
     n = 20

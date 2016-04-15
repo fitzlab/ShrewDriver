@@ -100,7 +100,7 @@ class GraphPerformance():
                 or self.mainUI.selectedSession is None:
             return
 
-        shrewName = self.mainUI.selectedAnimal.name
+        shrewName = self.mainUI.selectedAnimal
 
         dbPerformance = DbPerformance().get(shrewName)
         if len(dbPerformance.keys()) == 0:

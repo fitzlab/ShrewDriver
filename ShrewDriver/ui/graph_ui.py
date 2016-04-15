@@ -17,9 +17,9 @@ from ui_graphs.graph_performance import GraphPerformance
 from ui_graphs.graph_events import GraphEvents
 from ui_graphs.graph_history import GraphHistory
 from ui_graphs.graph_lick_times import GraphLickTimes
+from ui_graphs.graph_text_data import update_text_data
 
 from devices.available import get_serial_ports, get_cameras
-from shrew.shrew import get_animals, Shrew
 from db import create_db_files
 from db.server_data import *
 from db.create_db_files import *
@@ -95,7 +95,11 @@ class GraphUI(QtGui.QMainWindow, ShrewDriver_class):
         #populate devices, graphs, shrews, etc.
         self.cameras = get_cameras()
         self.serialPorts = get_serial_ports()
-        self.animals = get_animals('./shrew')
+
+        self.animals = []
+        for f in os.listdir(DATA_DIR):
+            if os.path.isdir(DATA_DIR + os.sep + f):
+                self.animals.append(f)
         self.refresh_animals()  # results in population of session combo box and updating of graphs as well.
 
         #used by task
@@ -105,38 +109,40 @@ class GraphUI(QtGui.QMainWindow, ShrewDriver_class):
     def refresh_animals(self):
         """Fill in animals combo box, which in turn updates other stuff."""
         for a in self.animals:
-            self.cmbAnimal.addItem(a.name.capitalize())
+            self.cmbAnimal.addItem(a.capitalize())
         self.set_animal()
 
     def refresh_sessions(self):
         self.cmbSession.clear()
         try:
-            sessions = create_db_files.get_sessions_for_shrew(self.selectedAnimal.name)
+            sessions = create_db_files.get_sessions_for_shrew(self.selectedAnimal)
             for s in reversed(sessions):
                 self.cmbSession.addItem(s)
             self.cmbSession.setCurrentIndex(0)
         except Exception as e:
-            print "Can't load db for animal: ", self.selectedAnimal.name
+            print "Can't load db for animal: ", self.selectedAnimal
             print traceback.print_exc()
 
     def update_graphs(self):
         """Loads the db entries for this session and updates their graphs on the screen."""
-        print("  loading history graph...")
+        # print("  loading text data...")
+        update_text_data(self)
+        # print("  loading history graph...")
         self.graphHistory.load_db()
-        print("  loading performance graph...")
+        # print("  loading performance graph...")
         self.graphPerformance.load_db()
-        print("  loading events graph...")
+        # print("  loading events graph...")
         self.graphEvents.load_db()
-        print("  loading lick times graph...")
+        # print("  loading lick times graph...")
         self.graphLickTimes.load_db()
-        print("  Loaded.")
+        # print("  Loaded.")
 
     #--- Combo box callbacks ---#
     def set_animal(self):
         for a in self.animals:
-            if a.name.lower() == str(self.cmbAnimal.currentText()).lower():
+            if a.lower() == str(self.cmbAnimal.currentText()).lower():
                 self.selectedAnimal = a  # type: Shrew
-                self.setWindowTitle(self.selectedAnimal.name.capitalize() + " - ShrewDriver")
+                self.setWindowTitle(self.selectedAnimal.capitalize() + " - ShrewDriver")
         try:
             self.refresh_sessions()
         except:
@@ -156,7 +162,7 @@ class GraphUI(QtGui.QMainWindow, ShrewDriver_class):
         if self.selectedSession != str(self.cmbSession.currentText()) and str(self.cmbSession.currentText()) != "":
             #update graphs if session changed to something new and it's not blank
             self.selectedSession = str(self.cmbSession.currentText())
-            print "session set to ", self.selectedSession
+            # print "session set to ", self.selectedSession
             self.update_graphs()
 
     #--- Button callbacks ---#
@@ -169,14 +175,7 @@ class GraphUI(QtGui.QMainWindow, ShrewDriver_class):
         print "*** Program must restart to load new information. Exiting -- please restart to see the updated data! ***"
         sys.exit(0)
 
-    #--- Parameter saving ---#
-    def get_settings_filepath(self):
-        dataPath = "../../ShrewData/"
-        if not os.path.isdir(dataPath):
-            os.makedirs(dataPath)
-        return dataPath + self.selectedAnimal.name + "_settings.txt"
-
+    #--- Misc ---#
     def set_combo_box(self, cbx, value):
         index = cbx.findText(str(value))
         cbx.setCurrentIndex(index)
-        #print "setting " + value + " idx " + str(index)

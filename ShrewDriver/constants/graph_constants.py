@@ -24,12 +24,17 @@ TRAINING_MINUTES = "Training Time (Minutes)"
 TRIALS_PER_HOUR = "Trials (x10) / Hour"
 
 CHANGES = "Changes"
+RESULTS_STR = "Results String"
+LOG_CONTENTS = "Log Contents"
+SETTINGS_CONTENTS = "Settings Contents"
 
 LICK = "Lick"
 TAP = "Tap"
 STATE = "State"
 HINT = "Hint"
 REWARD = "Reward"
+AIR_PUFF = "Air Puff"
+
 
 SESSION_START_TIME = "Session Start Time"
 
@@ -86,6 +91,8 @@ def get_color(name):
         return 255,128,128  # peach
     elif name == TRAINING_MINUTES:
         return 0,255,0  # green
+    elif name == AIR_PUFF:
+        return 255,149,195 # kirby colored (because, air puff)
     elif name == CHANGES:
         return 255,64,0  # redsy
     else:

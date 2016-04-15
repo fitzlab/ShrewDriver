@@ -11,6 +11,7 @@ import shutil
 import fileinput
 import operator
 
+
 from devices.camera_reader import *
 
 from util.enumeration import *
@@ -192,7 +193,10 @@ class ShrewDriver(QtGui.QMainWindow, ShrewDriver_class):
                     self.cameraID = int(toks[1])
                     self.setComboBox(self.cbCameraID, toks[1])
                 if toks[0].lower() == 'airpuff':
-                    self.airPuffPortName = int(toks[1])
+                    if toks[1] == "None":
+                        self.airPuffPortName = None
+                    else:
+                        self.airPuffPortName = int(toks[1])
                     self.setComboBox(self.cbAirPuff, toks[1])
     
     def setComboBox(self, cbx, value):
@@ -267,9 +271,10 @@ class ShrewDriver(QtGui.QMainWindow, ShrewDriver_class):
         self.training = Training(self)
         self.training.start()
 
-    def show_interact_ui(self):
+    def show_interact_ui(self, task):
         """If allowed, this will be shown when the user starts recording. Called by training.py."""
-        self.interactUI = InteractUI(task=self.training.task)
+        self.interactUI = InteractUI()
+        self.interactUI.task = task
 
 
 if __name__ == '__main__':

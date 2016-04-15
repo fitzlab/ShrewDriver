@@ -106,9 +106,9 @@ class TaskDiscrimination(TaskMixin):
                 
             #-- progression condition --#
             if now > self.stateEndTime:
-                if self.airPuffMode == AirPuff.SMINUS_OFFSET:
+                if self.airPuffMode == AirPuffMode.SMINUS_OFFSET:
                     self.airPuff.puff()
-                    self.training.logPlotAndAnalyze("puff", time.time())
+                    self.training.logPlotAndAnalyze("Puff", time.time())
 
                 self.stateDuration = self.grayDuration
                 self.changeState(States.GRAY)
@@ -150,9 +150,9 @@ class TaskDiscrimination(TaskMixin):
             #-- success condition --#
             if self.lastLickAt >= self.stateStartTime:
                 if self.isHighRewardTrial:
-                    self.training.dispenseReward(self.rewardBolusHardTrial)
+                    self.training.dispenseReward(self.rewardBolusHardTrial/1000)
                 else:
-                    self.training.dispenseReward(self.rewardBolus)
+                    self.training.dispenseReward(self.rewardBolus/1000)
                 
                 self.stateDuration = self.timeoutSuccess
                 self.trialResult = Results.HIT
@@ -243,14 +243,14 @@ class TaskDiscrimination(TaskMixin):
         
         if self.state != States.GRAY:
             self.trialResult = Results.TASK_FAIL
-            if self.airPuffMode == AirPuff.TASK_FAIL_LICK or self.airPuffMode == AirPuff.BAD_LICK:
+            if self.airPuffMode == AirPuffMode.TASK_FAIL_LICK or self.airPuffMode == AirPuffMode.BAD_LICK:
                 self.training.airPuff.puff()
-                self.training.logPlotAndAnalyze("puff", time.time())
+                self.training.logPlotAndAnalyze("Puff", time.time())
         else:
             self.trialResult = Results.FALSE_ALARM
-            if self.airPuffMode == AirPuff.FALSE_ALARM_LICK or self.airPuffMode == AirPuff.BAD_LICK:
+            if self.airPuffMode == AirPuffMode.FALSE_ALARM_LICK or self.airPuffMode == AirPuffMode.BAD_LICK:
                 self.training.airPuff.puff()
-                self.training.logPlotAndAnalyze("puff", time.time())
+                self.training.logPlotAndAnalyze("Puff", time.time())
 
         self.changeState(States.TIMEOUT)
 
@@ -277,4 +277,9 @@ class TaskDiscrimination(TaskMixin):
                 self.trialResult = Results.CORRECT_REJECT
                 self.stateDuration = self.timeoutCorrectReject
                 self.changeState(States.TIMEOUT)
-    
+
+
+    #--- Interactive UI commands ---#
+    def ui_dispense(self, rewardMicroliters):
+        self.training.send_stimcode(STIMCODE_REWARD_GIVEN)
+        self.training.dispenseReward(rewardMicroliters/1000)
