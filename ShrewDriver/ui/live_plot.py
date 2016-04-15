@@ -99,9 +99,8 @@ class LivePlot(QWidget):
             self.rewardCurve.appendPoint(t+0.001,0)
 
         #ignore any other events
+        self.repaint()
 
-        super(LivePlot, self).repaint()
-        super(LivePlot, self).setFocus()
 
     def update(self, t=None):
         """Called periodically from training program.
@@ -118,8 +117,7 @@ class LivePlot(QWidget):
 
         for curve in [self.lickCurve, self.tapCurve, self.stateCurve, self.airCurve, self.rewardCurve, self.hintCurve]:
             curve.update(t)
-        super(LivePlot, self).repaint()
-        super(LivePlot, self).setFocus()
+        self.repaint()
         
     def addTestPoints(self):
         self.startTime = 0

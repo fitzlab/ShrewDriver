@@ -5,12 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b1ee761d-24c1-496c-aee7-bba7fda5eba1" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/ShrewDriver.iml" afterPath="$PROJECT_DIR$/.idea/ShrewDriver.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/shrewdriver.py" afterPath="$PROJECT_DIR$/shrewdriver.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/task/training.py" afterPath="$PROJECT_DIR$/task/training.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/trial/discrimination_trial.py" afterPath="$PROJECT_DIR$/trial/discrimination_trial.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ui/live_plot.py" afterPath="$PROJECT_DIR$/ui/live_plot.py" />
     </list>
     <ignored path="ShrewDriver.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -51,11 +46,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="live_plot.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="live_plot.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/ui/live_plot.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="20" column="4" selection-start-line="20" selection-start-column="4" selection-end-line="20" selection-end-column="4" />
+            <state vertical-scroll-proportion="0.8246628">
+              <caret line="120" column="8" selection-start-line="120" selection-start-column="8" selection-end-line="120" selection-end-column="8" />
               <folding>
                 <element signature="e#0#31#0" expanded="true" />
               </folding>
@@ -125,10 +120,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="serial_port.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="serial_port.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/devices/serial_port.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-0.09248555">
+            <state vertical-scroll-proportion="0.0">
               <caret line="38" column="17" selection-start-line="38" selection-start-column="17" selection-end-line="38" selection-end-column="17" />
               <folding />
             </state>
@@ -190,11 +185,11 @@
         <option value="$PROJECT_DIR$/analysis/discrimination_analysis.py" />
         <option value="$PROJECT_DIR$/shrew/chico.py" />
         <option value="$PROJECT_DIR$/task/task_discrimination.py" />
-        <option value="$PROJECT_DIR$/ui/live_plot.py" />
         <option value="$PROJECT_DIR$/ui/interact.py" />
         <option value="$PROJECT_DIR$/shrewdriver.py" />
         <option value="$PROJECT_DIR$/trial/discrimination_trial.py" />
         <option value="$PROJECT_DIR$/task/training.py" />
+        <option value="$PROJECT_DIR$/ui/live_plot.py" />
       </list>
     </option>
   </component>
@@ -246,6 +241,20 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="ShrewDriver" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ShrewDriver" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ShrewDriver" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ui" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -923,16 +932,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ui/live_plot.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="20" column="4" selection-start-line="20" selection-start-column="4" selection-end-line="20" selection-end-column="4" />
-          <folding>
-            <element signature="e#0#31#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/task/training.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-4.448276">
@@ -943,9 +942,19 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/devices/serial_port.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.09248555">
+        <state vertical-scroll-proportion="0.0">
           <caret line="38" column="17" selection-start-line="38" selection-start-column="17" selection-end-line="38" selection-end-column="17" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ui/live_plot.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.8246628">
+          <caret line="120" column="8" selection-start-line="120" selection-start-column="8" selection-end-line="120" selection-end-column="8" />
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
