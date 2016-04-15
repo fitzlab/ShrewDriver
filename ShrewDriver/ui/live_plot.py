@@ -118,8 +118,8 @@ class LivePlot(QWidget):
 
         for curve in [self.lickCurve, self.tapCurve, self.stateCurve, self.airCurve, self.rewardCurve, self.hintCurve]:
             curve.update(t)
-        #super(LivePlot, self).repaint()
-        #super(LivePlot, self).setFocus()
+        super(LivePlot, self).repaint()
+        super(LivePlot, self).setFocus()
         
     def addTestPoints(self):
         self.startTime = 0

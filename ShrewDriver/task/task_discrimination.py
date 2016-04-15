@@ -141,7 +141,7 @@ class TaskDiscrimination(TaskMixin):
             if now > self.stateEndTime:
                 # Possibly dispense a small reward as a hint.
                 if self.doHint:
-                    self.training.dispenseHint(self.hintBolus)
+                    self.training.dispenseHint(self.hintBolus/1000)
                 # go to reward state 
                 self.stateDuration = self.rewardPeriod
                 self.changeState(States.REWARD)
@@ -281,5 +281,8 @@ class TaskDiscrimination(TaskMixin):
 
     #--- Interactive UI commands ---#
     def ui_dispense(self, rewardMicroliters):
+        timestamp = time.time()
+        self.training.syringeSerial.write(str(int(rewardMicroliters)) + "\n")
+        self.training.logPlotAndAnalyze("user_reward:" + str(rewardMicroliters), timestamp)
+        print "User gave reward: " + str(int(rewardMicroliters))
         self.training.send_stimcode(STIMCODE_REWARD_GIVEN)
-        self.training.dispenseReward(rewardMicroliters/1000)

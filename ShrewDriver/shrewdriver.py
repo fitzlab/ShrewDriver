@@ -196,7 +196,7 @@ class ShrewDriver(QtGui.QMainWindow, ShrewDriver_class):
                     if toks[1] == "None":
                         self.airPuffPortName = None
                     else:
-                        self.airPuffPortName = int(toks[1])
+                        self.airPuffPortName = toks[1]
                     self.setComboBox(self.cbAirPuff, toks[1])
     
     def setComboBox(self, cbx, value):

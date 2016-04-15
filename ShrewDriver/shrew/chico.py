@@ -36,7 +36,7 @@ def load_parameters(task):
     task.guaranteedSPlus = True #is there always an SPLUS in the trial?
     task.sequenceType = Sequences.RANDOM
     task.initiation = Initiation.LICK
-    task.airPuffMode = AirPModeuff.NONE
+    task.airPuffMode = AirPuffMode.NONE
 
     # State durations
     task.timeoutFail = 6

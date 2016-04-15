@@ -28,8 +28,8 @@ bool lickState = LICK_OFF;
 
 // lower thresholds to make tap / lick more sensitive. 
 //Somewhere between 100 and 1000 is typical.
-int tapThreshold = 100;
-int lickThreshold = 100;
+int tapThreshold = 500;
+int lickThreshold = 500;
 
 //Speed-accuracy tradeoff. 50 is a good compromise point.
 int numTapSamples = 50;

@@ -58,8 +58,9 @@ class InteractUI(QtGui.QMainWindow, Interact_class):
         self.task.ui_dispense(rewardMicroliters)
 
     def btn_air_puff_clicked(self):
-        self.task.training.send_stimcode(STIMCODE_AIR_PUFF)
-        pass
+        if self.task.training.airPuff is not None:
+            self.task.training.airPuff.puff()
+            self.task.training.send_stimcode(STIMCODE_AIR_PUFF)
 
     #--- task manipulation ---#
     def btn_task_fail_clicked(self):

@@ -298,7 +298,7 @@ class DiscriminationAnalysis:
         self.dPrimeOverall = dPrime(self.sPlusResponseRate/100, 1-self.sMinusRejectRate/100)
 
         # Success rate
-        self.overallSuccessRate = (self.sPlusResponses + self.sMinusRejects) / self.nTrials
+        self.overallSuccessRate = 100 * (self.sPlusResponses + self.sMinusRejects) / self.nTrials
 
         #duration
         self.trainingDuration = (self.trials[-1].trialStartTime - self.trials[0].trialStartTime) / 60 / 60
