@@ -67,7 +67,7 @@ class InteractUI(QtGui.QMainWindow, Interact_class):
         self.task.ui_fail_task()
 
     def btn_start_trial_clicked(self):
-        self.task.ui_start_trial()
+        pass #self.task.ui_start_trial()
 
     def btn_show_now_clicked(self):
         pass
