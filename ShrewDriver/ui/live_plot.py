@@ -18,7 +18,8 @@ from constants.graph_constants import *
 class LivePlot(QWidget):
     
     #define signals that we will accept
-    sigEvent = QtCore.pyqtSignal(str, float) 
+    sigEvent = QtCore.pyqtSignal(str, float)
+    sigUpdate = QtCore.pyqtSignal()
 
     def __init__(self, animalName):
         self.startTime = time.time()
@@ -64,6 +65,7 @@ class LivePlot(QWidget):
         # So communication between threads must be done via signals, otherwise
         # things get weird (plot updates will be screwed up).
         self.sigEvent.connect(self.addEvent)
+        self.sigUpdate.connect(self.update)
         
     def addEvent(self, eventType, timestamp):
         evtType = str(eventType) #convert from QString
@@ -99,7 +101,7 @@ class LivePlot(QWidget):
             self.rewardCurve.appendPoint(t+0.001,0)
 
         #ignore any other events
-        self.repaint()
+        super(LivePlot, self).repaint()
 
 
     def update(self, t=None):
@@ -117,7 +119,8 @@ class LivePlot(QWidget):
 
         for curve in [self.lickCurve, self.tapCurve, self.stateCurve, self.airCurve, self.rewardCurve, self.hintCurve]:
             curve.update(t)
-        self.repaint()
+        #self.repaint()
+        super(LivePlot, self).repaint()
         
     def addTestPoints(self):
         self.startTime = 0
