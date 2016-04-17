@@ -35,8 +35,8 @@ class DbMixin(object):
 
     def sync(self, animalName):
         with self._lock:
-            if animalName in self._db:
-                self._db[animalName].sync()
+            if animalName.capitalize() in self._db:
+                self._db[animalName.capitalize()].sync()
 
     def make(self, analyses):
         """Go through all the provided analysis objects and make / update DB entries."""

@@ -104,12 +104,7 @@ class Training():
 
             #update state
             self.task.checkStateProgression()
-
-            t0 = time.time()
-            self.livePlot.update()
-            t1 = time.time()
-            if t1-t0 > 0.05:
-                print "uhoh"
+            self.livePlot.sigUpdate.emit()
 
             #get results from other serial threads
             #Prevents potential serial buffer overflow bugs
@@ -138,14 +133,12 @@ class Training():
         self.logPlotAndAnalyze("RL", timestamp)
         self.logPlotAndAnalyze("hint:" + str(rewardMillis), + timestamp)
         self.syringeSerial.write(str(int(rewardMillis*1000)) + "\n")
-        print "I just sent " + str(int(rewardMillis*1000))
     
     def dispenseReward(self, rewardMillis):
         timestamp = time.time()
         self.logPlotAndAnalyze("RH", timestamp)
         self.logPlotAndAnalyze("bolus:" + str(rewardMillis), timestamp)
         self.syringeSerial.write(str(int(rewardMillis*1000)) + "\n")
-        print "r just sent " + str(int(rewardMillis*1000))
 
     def send_stimcode(self, stimCode):
         pass

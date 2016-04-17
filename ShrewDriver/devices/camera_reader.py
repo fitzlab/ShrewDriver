@@ -19,7 +19,7 @@ class CameraReader():
         
         #set up frame acquisition, display, and disk writing
         self.cap = cv2.VideoCapture(cameraID)
-        self.frameRate = self.cap.get(cv2.cv.CV_CAP_PROP_FPS)
+        self.frameRate = 30#self.cap.get(cv2.cv.CV_CAP_PROP_FPS)
         print "Capturing at " + str(self.frameRate) + " fps."
         self.readFrame()
         rows, cols, channels = self.frame.shape

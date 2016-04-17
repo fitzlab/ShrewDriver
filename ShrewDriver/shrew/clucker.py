@@ -35,7 +35,7 @@ def load_parameters(task):
     task.sMinusPresentations = [0,1] #how many times to display the SMINUS
     task.guaranteedSPlus = True #is there always an SPLUS in the trial?
     task.sequenceType = Sequences.RANDOM_RETRY
-    task.initiation = Initiation.TAP
+    task.initiation = Initiation.LICK
     task.airPuffMode = AirPuffMode.NONE
 
     # State durations
