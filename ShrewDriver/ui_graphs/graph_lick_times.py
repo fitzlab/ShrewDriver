@@ -15,8 +15,6 @@ from graph_axes import *
 from constants.graph_constants import *
 from graph_curves import *
 
-from task.state import State
-
 
 class LickPlot():
 

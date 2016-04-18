@@ -5,7 +5,6 @@ sys.path.append("..")
 import datetime
 import pyqtgraph as pg
 
-import task.state
 
 class DateAxis(pg.AxisItem):
     def tickStrings(self, values, scale, spacing):
