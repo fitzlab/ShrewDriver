@@ -68,7 +68,7 @@ def analyze_dir(sessionDir):
         if logFile is not None and settingsFile is not None:
             print "analyzing", (logFile, settingsFile)
             a = DiscriminationAnalysis(logFile, settingsFile, None)
-            if len(a.trials) < 30:
+            if len(a.trials) < 50:
                 print "Skipped - too few trials."
                 return None
             return a

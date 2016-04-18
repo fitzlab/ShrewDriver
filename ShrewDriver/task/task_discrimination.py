@@ -109,7 +109,7 @@ class TaskDiscrimination(TaskMixin):
             #-- progression condition --#
             if now > self.stateEndTime:
                 if self.airPuffMode == AirPuffMode.SMINUS_OFFSET:
-                    self.airPuff.puff()
+                    self.training.airPuff.puff()
                     self.training.log_plot_and_analyze("Puff", time.time())
 
                 self.stateDuration = self.grayDuration
