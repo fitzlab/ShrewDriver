@@ -412,6 +412,10 @@ class DiscriminationAnalysis:
 
         for f in self.stateFailCounts:
             message += f + " " + str(self.stateFailCounts[f]) + "\n"
+
+        if self.resultCounts["NO_RESPONSE"] > 0:
+            message += 'NO_RESPONSE ' + str(self.resultCounts["NO_RESPONSE"]) + "\n"
+
         message += "\n"
         return message
 
