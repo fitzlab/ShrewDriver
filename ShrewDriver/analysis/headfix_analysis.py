@@ -2,16 +2,16 @@ from __future__ import division
 import sys
 sys.path.append("..")
 
-
-# Dummy class for now -- it may do some stuff later
-
+import re
 from collections import deque
-from trial.headfix_trial import *
 
 class HeadfixAnalysis():
 
     def __init__(self, logFile=None, settingsFile=None, summaryFile=None):
         self.eventsToProcess = deque()
+
+        self.totalmL = 0
+        self.p = re.compile('\d+')
         
     def event(self, event):
         self.eventsToProcess.append(event)
@@ -28,10 +28,14 @@ class HeadfixAnalysis():
             self.process_line(line)
 
     def get_results_str(self):
-        return ""
+        return "Total mL: " + str(self.totalmL)
 
     def process_line(self, line):
-        print "Headfix >>>", line
+        if "bolus" in line or "user_reward" in line:
+            print line
+            m = self.p.findall(line)
+            mL = float(m[0] + "." + m[1])
+            self.totalmL += mL
 
 
 

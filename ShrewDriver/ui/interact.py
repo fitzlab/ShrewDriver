@@ -67,6 +67,7 @@ class InteractUI(QtGui.QMainWindow, Interact_class):
         rewardMicroliters = str(self.txtRewardSize.text())
         self.training.syringeSerial.write(rewardMicroliters + "\n")
         self.log_and_print("User gave reward: " + rewardMicroliters)
+        self.training.log_plot_and_analyze("user_reward:" + str(int(rewardMicroliters)/1000), time.time())
         self.training.daq.send_stimcode(STIMCODE_REWARD_GIVEN)
 
     def btn_air_puff_clicked(self):

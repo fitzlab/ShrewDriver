@@ -23,9 +23,9 @@ class TaskDiscrimination(TaskMixin):
         self.animalName = self.shrewDriver.animalName
 
         self.replaceOrientation = ""
-        self.makeStuff()
+        self.make_stuff()
         
-    def prepareTrial(self):
+    def prepare_trial(self):
         #prepare to run trial
         self.sMinusDisplaysLeft = self.currentTrial.numSMinus
         self.currentTrial.totalMicroliters = 0
@@ -35,7 +35,7 @@ class TaskDiscrimination(TaskMixin):
         else:
             self.doHint = False
     
-    def makeTrialSet(self):
+    def make_trial_set(self):
         self.trialSet = []
         all_pairs = list(itertools.product(self.sPlusOrientations, self.sMinusOrientations))
         for numSMinus in self.sMinusPresentations:
@@ -65,7 +65,7 @@ class TaskDiscrimination(TaskMixin):
         self.stateDuration = self.initTime
         self.change_state(States.INIT)
     
-    def checkStateProgression(self):
+    def check_state_progression(self):
         now = time.time()
         
         if self.state == States.INIT:
@@ -196,7 +196,7 @@ class TaskDiscrimination(TaskMixin):
             
             #prepare next trial
             self.currentTrial = self.sequencer.getNextTrial(self.trialResult)
-            self.prepareTrial()
+            self.prepare_trial()
             self.trialNum += 1
         
         #update screen

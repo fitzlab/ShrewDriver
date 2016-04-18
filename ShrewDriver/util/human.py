@@ -13,7 +13,7 @@ Time strings, sorting numbers, that kinda stuff.
 '''
 
 
-def secondsToHuman(timeSeconds):
+def seconds_to_human(timeSeconds):
     #returns a human-formatted time string from a number of seconds
     timeHours = math.floor(timeSeconds/60/60)
     if timeHours >= 1:

@@ -107,7 +107,7 @@ class Training():
                 self.process_updates(update)
 
             #update state
-            self.task.checkStateProgression()
+            self.task.check_state_progression()
             self.livePlot.sigUpdate.emit()
 
             #get results from other serial threads
@@ -120,7 +120,7 @@ class Training():
     def process_updates(self, update):
         evtType = update[0]
         timestamp = float(update[1])
-        self.task.sensorUpdate(evtType, timestamp)
+        self.task.sensor_update(evtType, timestamp)
 
         self.log_plot_and_analyze(evtType, timestamp)
 
@@ -167,6 +167,8 @@ class Training():
         self.syringeSerial.close()
         self.sensorSerial.close()
         self.stimDevice.close()
+        if self.airPuff is not None:
+            self.airPuff.ser.close()
 
     def start(self):
         self.stopFlag = False
@@ -198,7 +200,3 @@ class Training():
     def stop_camera(self):
         if self.cameraReader is not None:
             self.cameraReader.stopFlag = True
-
-
-if __name__ == '__main__':
-    print "run ShrewDriver.py instead!"

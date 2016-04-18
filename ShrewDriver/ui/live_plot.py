@@ -64,41 +64,41 @@ class LivePlot(QWidget):
         # we are using two threads, and Qt wants everything in one thread. 
         # So communication between threads must be done via signals, otherwise
         # things get weird (plot updates will be screwed up).
-        self.sigEvent.connect(self.addEvent)
+        self.sigEvent.connect(self.add_event)
         self.sigUpdate.connect(self.update)
         
-    def addEvent(self, eventType, timestamp):
+    def add_event(self, eventType, timestamp):
         evtType = str(eventType) #convert from QString
         t = timestamp - self.startTime
         #print "GOT EVENT: " + evtType + " " + str(t)
         if evtType.startswith('Lx'):
             if len(evtType) > 2:
                 magnitude = int(evtType[2])
-                self.lickCurve.appendPoint(t,magnitude)
+                self.lickCurve.append_point(t, magnitude)
             else:
-                self.lickCurve.appendPoint(t,4)
+                self.lickCurve.append_point(t, 4)
         if evtType == 'Lo':
-            self.lickCurve.appendPoint(t,0)
+            self.lickCurve.append_point(t, 0)
         if evtType.startswith('Tx'):
             if len(evtType) > 2:
                 magnitude = int(evtType[2])
-                self.tapCurve.appendPoint(t,magnitude)
+                self.tapCurve.append_point(t, magnitude)
             else:
-                self.tapCurve.appendPoint(t,4)
+                self.tapCurve.append_point(t, 4)
         if evtType == 'To':
-            self.tapCurve.appendPoint(t,0)
+            self.tapCurve.append_point(t, 0)
         if evtType.startswith('State'):
             stateNumber = int(evtType[5:])
-            self.stateCurve.appendPoint(t,stateNumber)
+            self.stateCurve.append_point(t, stateNumber)
         if evtType == 'Puff':
-            self.airCurve.appendPoint(t,1)
-            self.airCurve.appendPoint(t+0.001,0)
+            self.airCurve.append_point(t, 1)
+            self.airCurve.append_point(t + 0.001, 0)
         if evtType == 'RL':
-            self.hintCurve.appendPoint(t,1)
-            self.hintCurve.appendPoint(t+0.001,0)
+            self.hintCurve.append_point(t, 1)
+            self.hintCurve.append_point(t + 0.001, 0)
         if evtType == 'RH':
-            self.rewardCurve.appendPoint(t,1)
-            self.rewardCurve.appendPoint(t+0.001,0)
+            self.rewardCurve.append_point(t, 1)
+            self.rewardCurve.append_point(t + 0.001, 0)
 
         #ignore any other events
         super(LivePlot, self).repaint()
@@ -122,38 +122,38 @@ class LivePlot(QWidget):
         #self.repaint()
         super(LivePlot, self).repaint()
         
-    def addTestPoints(self):
+    def add_test_points(self):
         self.startTime = 0
-        self.addEvent("Lx1", 100)
-        self.addEvent("Lo", 130)
-        self.addEvent("Lx2", 500)
-        self.addEvent("Lo", 530)
-        self.addEvent("Lx3", 800)
-        self.addEvent("Lo", 830)
-        self.addEvent("Puff", 200)
-        self.addEvent("Puff", 650)
-        self.addEvent("Puff", 1200)
-        self.addEvent("Puff", 2650)
-        self.addEvent("Tx2", 200)
-        self.addEvent("To", 220)
-        self.addEvent("Tx3", 1200)
-        self.addEvent("To", 1220)
-        self.addEvent("Tx4", 1240)
-        self.addEvent("To", 1280)
-        self.addEvent("State0", 0)
-        self.addEvent("State1", 500)
-        self.addEvent("State2", 1000)
-        self.addEvent("State3", 1500)
-        self.addEvent("State4", 2000)
-        self.addEvent("State5", 2500)
-        self.addEvent("State6", 3000)
-        self.addEvent("State7", 3500)
-        self.addEvent("State0", 4000)
-        self.addEvent("RL", 650)
-        self.addEvent("RL", 1650)
-        self.addEvent("RL", 3650)
-        self.addEvent("RH", 700)
-        self.addEvent("RH", 2700)
+        self.add_event("Lx1", 100)
+        self.add_event("Lo", 130)
+        self.add_event("Lx2", 500)
+        self.add_event("Lo", 530)
+        self.add_event("Lx3", 800)
+        self.add_event("Lo", 830)
+        self.add_event("Puff", 200)
+        self.add_event("Puff", 650)
+        self.add_event("Puff", 1200)
+        self.add_event("Puff", 2650)
+        self.add_event("Tx2", 200)
+        self.add_event("To", 220)
+        self.add_event("Tx3", 1200)
+        self.add_event("To", 1220)
+        self.add_event("Tx4", 1240)
+        self.add_event("To", 1280)
+        self.add_event("State0", 0)
+        self.add_event("State1", 500)
+        self.add_event("State2", 1000)
+        self.add_event("State3", 1500)
+        self.add_event("State4", 2000)
+        self.add_event("State5", 2500)
+        self.add_event("State6", 3000)
+        self.add_event("State7", 3500)
+        self.add_event("State0", 4000)
+        self.add_event("RL", 650)
+        self.add_event("RL", 1650)
+        self.add_event("RL", 3650)
+        self.add_event("RH", 700)
+        self.add_event("RH", 2700)
 
         self.update(t=5000)
 
@@ -182,7 +182,7 @@ class IntCurve:
         pw.addItem(fill)
         
     
-    def appendPoint(self, xNew, yNew):
+    def append_point(self, xNew, yNew):
         """Display the latest point associated with this curve."""
         #add two points to make vertical line on curve (low-to-high or high-to-low)
         self.x.append(xNew)
@@ -221,7 +221,7 @@ class IntCurve:
         self.base.setData(self.xRenderBase, self.yRenderBase)
 
 
-def timestampToString(timestamp):
+def timestamp_to_string(timestamp):
     timeStr = ''
     hours = int(timestamp / (60*60))
     if hours > 0:
@@ -246,12 +246,12 @@ class TimeAxis(pg.AxisItem):
     def tickStrings(self, values, scale, spacing):
         strns = []
         for x in values:
-            strns.append(timestampToString(x))
+            strns.append(timestamp_to_string(x))
         return strns
 
 if __name__ == '__main__':
     from pyqtgraph.Qt import QtGui, QtCore
     app = QtGui.QApplication(sys.argv)
     lp = LivePlot('AnimalName')
-    lp.addTestPoints()
+    lp.add_test_points()
     QtGui.QApplication.instance().exec_()

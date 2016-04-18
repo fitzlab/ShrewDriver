@@ -64,32 +64,32 @@ class ShrewDriver(QtGui.QMainWindow, ShrewDriver_class):
         self.trialHistory = []
 
         #dropdown actions
-        self.cbAnimalName.currentIndexChanged.connect(self.setAnimal)
-        self.cbSensors.currentIndexChanged.connect(self.setSensorPort)
-        self.cbSyringePump.currentIndexChanged.connect(self.setSyringePort)
-        self.cbVisualStim.currentIndexChanged.connect(self.setStimPort)
-        self.cbAirPuff.currentIndexChanged.connect(self.setAirPuffPort)
-        self.cbCameraID.currentIndexChanged.connect(self.setCameraID)
+        self.cbAnimalName.currentIndexChanged.connect(self.set_animal)
+        self.cbSensors.currentIndexChanged.connect(self.set_sensor_port)
+        self.cbSyringePump.currentIndexChanged.connect(self.set_syringe_port)
+        self.cbVisualStim.currentIndexChanged.connect(self.set_stim_port)
+        self.cbAirPuff.currentIndexChanged.connect(self.set_air_puff_port)
+        self.cbCameraID.currentIndexChanged.connect(self.set_camera_ID)
 
         #init dropdown choices
-        self.getAnimalDirs()
-        self.getAvailableSerialPorts()
-        self.getAvailableCameras()
+        self.get_animal_dirs()
+        self.get_available_serial_ports()
+        self.get_available_cameras()
         
         #menu actions
         self.actionQuit.triggered.connect(self.quit)
         
         #button actions
-        self.btnStartRecording.clicked.connect(self.startRecording)
+        self.btnStartRecording.clicked.connect(self.start_recording)
         
         #signal actions 
-        self.sigTrialEnd.connect(self.trialEnd)
+        self.sigTrialEnd.connect(self.trial_end)
 
         #populate initial
-        self.setAnimal()
+        self.set_animal()
         
     #-- Init Functions --# 
-    def getAnimalDirs(self):
+    def get_animal_dirs(self):
         self.animalDirs = glob.glob(self.baseDataPath + '*')
         for animalDir in self.animalDirs:
             if os.path.isdir(animalDir):
@@ -97,7 +97,7 @@ class ShrewDriver(QtGui.QMainWindow, ShrewDriver_class):
                 animalName = animalDir[namePos:]
                 self.cbAnimalName.addItem(animalName)
         
-    def getAvailableSerialPorts(self):
+    def get_available_serial_ports(self):
         #Uses the Win32 registry to return a iterator of serial 
         #(COM) ports existing on this computer.
         serialPath = 'HARDWARE\\DEVICEMAP\\SERIALCOMM'
@@ -123,7 +123,7 @@ class ShrewDriver(QtGui.QMainWindow, ShrewDriver_class):
             self.cbAirPuff.addItem(serialPort)
 
 
-    def getAvailableCameras(self):
+    def get_available_cameras(self):
         cameraPath = 'HARDWARE\\DEVICEMAP\\VIDEO'
         try:
             key = winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, cameraPath)
@@ -141,19 +141,19 @@ class ShrewDriver(QtGui.QMainWindow, ShrewDriver_class):
             i += 1
     
     #-- Button Actions --# 
-    def startRecording(self):
+    def start_recording(self):
         
         if not self.isRecording:
             self.isRecording = True
             self.btnStartRecording.setText("Stop Recording")
             
-            self.saveAnimalSettings()
+            self.save_animal_settings()
             
             #start a new recording session by making a dir to put the data in
-            self.makeSession()
+            self.make_session()
 
             #start camera recording, live visualization, and training program
-            self.startTraining()
+            self.start_training()
             
         else:
             self.training.stop()
@@ -161,7 +161,7 @@ class ShrewDriver(QtGui.QMainWindow, ShrewDriver_class):
             self.btnStartRecording.setEnabled(False)
             #self.btnStartRecording.setText("Start Recording")
     
-    def saveAnimalSettings(self):
+    def save_animal_settings(self):
         self.devicesPath = self.baseDataPath + self.animalName + "/devices.txt" 
         self.devicesFile = open(self.devicesPath, 'w')
         self.devicesFile.write('arduino ' + self.sensorPortName + "\n")
@@ -171,7 +171,7 @@ class ShrewDriver(QtGui.QMainWindow, ShrewDriver_class):
         self.devicesFile.write('airpuff ' + str(self.airPuffPortName) + "\n")
         self.devicesFile.close()
         
-    def loadAnimalSettings(self):
+    def load_animal_settings(self):
         self.devicesPath = self.baseDataPath + self.animalName + "/devices.txt"
         fileinput.close() # ensure no fileinput is active already
         print 'Loading settings from ' + self.devicesPath
@@ -181,29 +181,29 @@ class ShrewDriver(QtGui.QMainWindow, ShrewDriver_class):
                 toks = line.split(' ')
                 if toks[0].lower() == 'arduino':
                     self.sensorPortName = toks[1]
-                    self.setComboBox(self.cbSensors, toks[1])
+                    self.set_combo_box(self.cbSensors, toks[1])
                 if toks[0].lower() == 'syringe':
                     self.syringePortName = toks[1]
-                    self.setComboBox(self.cbSyringePump, toks[1])
+                    self.set_combo_box(self.cbSyringePump, toks[1])
                 if toks[0].lower() == 'stim':
                     self.stimPortName = toks[1]
-                    self.setComboBox(self.cbVisualStim, toks[1])
+                    self.set_combo_box(self.cbVisualStim, toks[1])
                 if toks[0].lower() == 'camera':
                     self.cameraID = int(toks[1])
-                    self.setComboBox(self.cbCameraID, toks[1])
+                    self.set_combo_box(self.cbCameraID, toks[1])
                 if toks[0].lower() == 'airpuff':
                     if toks[1] == "None":
                         self.airPuffPortName = None
                     else:
                         self.airPuffPortName = toks[1]
-                    self.setComboBox(self.cbAirPuff, toks[1])
+                    self.set_combo_box(self.cbAirPuff, toks[1])
     
-    def setComboBox(self, cbx, value):
+    def set_combo_box(self, cbx, value):
         #print "found value " + str(value) + " at index " + str(index)
         index = cbx.findText(str(value))
         cbx.setCurrentIndex(index)
     
-    def makeSession(self):
+    def make_session(self):
         #make the dirs for a new recording session
         animalPath = self.baseDataPath + self.animalName + os.sep
         datePath = animalPath + self.dateStr + os.sep
@@ -221,36 +221,35 @@ class ShrewDriver(QtGui.QMainWindow, ShrewDriver_class):
 
     
     #-- Signal Handlers --# 
-    def trialEnd(self):
-        self.updateResults()
+    def trial_end(self):
+        self.update_results()
     
-    def updateResults(self):
+    def update_results(self):
         message = self.training.analyzer.get_results_str()
-        message += "====\nTimestamp: " + str(time.time()) + "\n\n\n"
-        
+
         if message is not None:
             self.txtTrialStats.setPlainText(message)
         
     
     #-- Dropdown Actions --# 
-    def setAnimal(self):
+    def set_animal(self):
         self.animalName = str(self.cbAnimalName.currentText())
         self.setWindowTitle(self.animalName + " - ShrewDriver")
-        self.loadAnimalSettings()
+        self.load_animal_settings()
 
-    def setSensorPort(self):
+    def set_sensor_port(self):
         self.sensorPortName = str(self.cbSensors.currentText())
 
-    def setSyringePort(self):
+    def set_syringe_port(self):
         self.syringePortName = str(self.cbSyringePump.currentText())
 
-    def setStimPort(self):
+    def set_stim_port(self):
         self.stimPortName = str(self.cbVisualStim.currentText())
 
-    def setCameraID(self):
+    def set_camera_ID(self):
         self.cameraID = int(self.cbCameraID.currentText())
 
-    def setAirPuffPort(self):
+    def set_air_puff_port(self):
         self.airPuffPortName = str(self.cbAirPuff.currentText())
 
     #-- Menu Actions --#
@@ -261,12 +260,13 @@ class ShrewDriver(QtGui.QMainWindow, ShrewDriver_class):
         self.close()
 
     def closeEvent(self, event):
-        #happens when they click "X"
+        #Overrides the PyQt function of the same name, so you can't rename this.
+        #Happens when user clicks "X".
         self.quit()
         event.accept()
 
     #-- Other --#
-    def startTraining(self):
+    def start_training(self):
         self.training = Training(self)
         self.training.start()
 

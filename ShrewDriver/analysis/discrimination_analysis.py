@@ -11,7 +11,7 @@ from util.enumeration import Enumeration
 from util.cache_decorators import *
 from constants.task_constants import *
 from trial.discrimination_trial import *
-from util.human import secondsToHuman
+from util.human import seconds_to_human
 from util.stats import dPrime, criterion
 
 """
@@ -321,7 +321,7 @@ class DiscriminationAnalysis:
 
     #--- Display Functions ---#
     def str_overview(self):
-        trainTime = secondsToHuman(self.trainingDuration*60*60)
+        trainTime = seconds_to_human(self.trainingDuration * 60 * 60)
         message = (
             "====" + "\n"
             "Shrew: " + self.shrewName + "\n" + "\n"

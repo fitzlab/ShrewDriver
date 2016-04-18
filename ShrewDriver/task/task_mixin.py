@@ -15,7 +15,7 @@ from sequencer.sequencer_base import Sequencer
 class TaskMixin(object):
     """Defines a set of functions used across all classes"""
 
-    def makeStuff(self):
+    def make_stuff(self):
         #called from task class inits
         
         #behavior inits
@@ -35,31 +35,22 @@ class TaskMixin(object):
         self.commandStrings = [''] * len(stateSet)
         
         #load and record this session's settings
-        self.loadAnimalSettings()
-        self.writeSettingsFile()
+        self.load_animal_settings()
+        self.write_settings_file()
 
         #send commands to prepare stimbot
-        self.setUpCommands()
+        self.set_up_commands()
 
         #make a set of trial objects and a sequencer
-        self.makeTrialSet()
+        self.make_trial_set()
 
         #set up the first trial
         if hasattr(self, 'sequencer'):
             self.currentTrial = self.sequencer.getNextTrial(None)
-        self.prepareTrial()
+        self.prepare_trial()
         self.trialNum = 1
-        
-    def start(self):
-        pass
-    
-    def prepareTrial(self):
-        pass
-    
-    def checkStateProgression(self):
-        pass
-    
-    def setUpCommands(self):
+
+    def set_up_commands(self):
         #set up stimbot commands for later use
         self.training.stimDevice.write('screendist' + str(self.screenDistanceMillis) + '\n')
         for i in xrange(0, len(stateSet)):
@@ -67,7 +58,7 @@ class TaskMixin(object):
             saveCommand = 'save' + str(i) + ' ' + self.commandStrings[i]
             self.training.stimDevice.write(saveCommand)
     
-    def sensorUpdate(self, evtType, timestamp):
+    def sensor_update(self, evtType, timestamp):
         if evtType == 'Ix':
             self.shrewPresent = True
             self.shrewEnteredAt = time.time()
@@ -86,7 +77,7 @@ class TaskMixin(object):
             self.isLicking = False
             #self.lastLickAt = time.time()
     
-    def writeSettingsFile(self):
+    def write_settings_file(self):
         self.settingsFilePath = self.shrewDriver.experimentPath + self.shrewDriver.sessionFileName + "_settings.txt" 
         self.summaryFilePath = self.shrewDriver.experimentPath + self.shrewDriver.sessionFileName + "_summary.txt" 
         self.settingsFile = open(self.settingsFilePath, 'w')
@@ -95,7 +86,7 @@ class TaskMixin(object):
         self.settingsFile.write(thisAsString)
         self.settingsFile.close()
     
-    def loadAnimalSettings(self):
+    def load_animal_settings(self):
         try:
             print "Importing settings from shrew/" + self.animalName.lower() + ".py"
             sys.stdout.flush()
@@ -108,8 +99,3 @@ class TaskMixin(object):
             print "Check that the file exists and has a load_settings function."
             traceback.print_exc()
             raise()
-
-        
-if __name__ == '__main__':
-    print "run ShrewDriver.py instead!"
-        
