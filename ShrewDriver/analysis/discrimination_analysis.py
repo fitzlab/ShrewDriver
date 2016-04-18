@@ -275,7 +275,7 @@ class DiscriminationAnalysis:
             sMinusOri = t.sMinusOrientation
             if t.numSMinus == max(self.sMinusPresentations) and len(self.sMinusPresentations) > 1:
                 #it's an sMinus trial
-                if sMinusOri == -1:
+                if sMinusOri == -1 or sMinusOri not in self.sMinusOrientations:
                     continue
                 if t.result == Results.CORRECT_REJECT:
                     self.sMinusPerformances[sMinusOri].numCorrect += 1
@@ -284,7 +284,7 @@ class DiscriminationAnalysis:
                     self.sMinusPerformances[sMinusOri].numTrials += 1
             else:
                 #it's an sPlus trial
-                if sPlusOri == -1:
+                if sPlusOri == -1 or sPlusOri not in self.sPlusOrientations:
                     continue
                 if t.result == Results.HIT:
                     self.sPlusPerformances[sPlusOri].numCorrect += 1

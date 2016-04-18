@@ -61,11 +61,11 @@ class TaskMixin(object):
     
     def setUpCommands(self):
         #set up stimbot commands for later use
-        self.training.stimSerial.write('screendist' + str(self.screenDistanceMillis) + '\n')
+        self.training.stimDevice.write('screendist' + str(self.screenDistanceMillis) + '\n')
         for i in xrange(0, len(stateSet)):
             time.sleep(0.1) #wait a bit between long commands to make sure serial sends everything
             saveCommand = 'save' + str(i) + ' ' + self.commandStrings[i]
-            self.training.stimSerial.write(saveCommand)
+            self.training.stimDevice.write(saveCommand)
     
     def sensorUpdate(self, evtType, timestamp):
         if evtType == 'Ix':

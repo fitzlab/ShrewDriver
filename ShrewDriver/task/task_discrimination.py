@@ -21,6 +21,8 @@ class TaskDiscrimination(TaskMixin):
         self.training = training
         self.shrewDriver = shrewDriver
         self.animalName = self.shrewDriver.animalName
+
+        self.replaceOrientation = ""
         self.makeStuff()
         
     def prepareTrial(self):
@@ -61,7 +63,7 @@ class TaskDiscrimination(TaskMixin):
         
     def start(self):
         self.stateDuration = self.initTime
-        self.changeState(States.INIT)
+        self.change_state(States.INIT)
     
     def checkStateProgression(self):
         now = time.time()
@@ -90,100 +92,100 @@ class TaskDiscrimination(TaskMixin):
             
             if doneWaiting:
                 self.stateDuration = random.uniform(self.variableDelayMin, self.variableDelayMax)
-                self.changeState(States.DELAY)
+                self.change_state(States.DELAY)
         
         if self.state == States.DELAY:
             #-- fail conditions --#
-            self.checkFailOrAbort()
+            self.check_fail()
                 
             #-- progression condition --#
             if now > self.stateEndTime:
-                self.prepareGratingState()
+                self.prepare_grating_state()
             
         if self.state == States.SMINUS:
             #-- fail conditions --#
-            self.checkFailOrAbort()
+            self.check_fail()
                 
             #-- progression condition --#
             if now > self.stateEndTime:
                 if self.airPuffMode == AirPuffMode.SMINUS_OFFSET:
                     self.airPuff.puff()
-                    self.training.logPlotAndAnalyze("Puff", time.time())
+                    self.training.log_plot_and_analyze("Puff", time.time())
 
                 self.stateDuration = self.grayDuration
-                self.changeState(States.GRAY)
+                self.change_state(States.GRAY)
                 
         if self.state == States.GRAY:
             #-- fail conditions --#
-            self.checkFailOrAbort()
+            self.check_fail()
                 
             #-- progression condition --#
             if now > self.stateEndTime:
                 if self.guaranteedSPlus or self.sMinusDisplaysLeft > 0:
                     #still more gratings to do, continue on
-                    self.prepareGratingState()
+                    self.prepare_grating_state()
                 elif self.currentTrial.numSMinus < max(self.sMinusPresentations):
                     #OK, this happens when we have one SMINUS followed by an SPLUS,
                     #e.g. in Chico's task.
-                    self.prepareGratingState()
+                    self.prepare_grating_state()
                 else:
                     #there's no SPLUS in this trial,
                     #and we did all the SMINUS displays. All done!
                     self.trialResult = Results.CORRECT_REJECT
                     self.stateDuration = self.timeoutCorrectReject
-                    self.changeState(States.TIMEOUT)
+                    self.change_state(States.TIMEOUT)
             
         if self.state == States.SPLUS:
             #-- fail conditions --#
-            self.checkFailOrAbort()
+            self.check_fail()
                 
             #-- progression condition --#
             if now > self.stateEndTime:
                 # Possibly dispense a small reward as a hint.
                 if self.doHint:
-                    self.training.dispenseHint(self.hintBolus/1000)
+                    self.training.dispense_hint(self.hintBolus / 1000)
                 # go to reward state 
                 self.stateDuration = self.rewardPeriod
-                self.changeState(States.REWARD)
+                self.change_state(States.REWARD)
                 
         if self.state == States.REWARD:
             #-- success condition --#
             if self.lastLickAt >= self.stateStartTime:
                 if self.isHighRewardTrial:
-                    self.training.dispenseReward(self.rewardBolusHardTrial/1000)
+                    self.training.dispense_reward(self.rewardBolusHardTrial / 1000)
                 else:
-                    self.training.dispenseReward(self.rewardBolus/1000)
+                    self.training.dispense_reward(self.rewardBolus / 1000)
                 
                 self.stateDuration = self.timeoutSuccess
                 self.trialResult = Results.HIT
-                self.changeState(States.TIMEOUT)
+                self.change_state(States.TIMEOUT)
                 
             #-- progression condition --#
             if now > self.stateEndTime:
                 self.stateDuration = self.timeoutNoResponse
                 self.trialResult = Results.NO_RESPONSE
-                self.changeState(States.TIMEOUT)
+                self.change_state(States.TIMEOUT)
                 
         if self.state == States.TIMEOUT:
             #-- progression condition --#
             if self.initiation == Initiation.TAP_ONSET:
                 if not self.isTapping and now > self.stateEndTime:
                     self.stateDuration = self.initTime
-                    self.changeState(States.INIT)
+                    self.change_state(States.INIT)
             else:
                 if now > self.stateEndTime:
                     self.stateDuration = self.initTime
-                    self.changeState(States.INIT)
+                    self.change_state(States.INIT)
     
 
-    def changeState(self, newState):
+    def change_state(self, newState):
         #runs every time a state changes
         #be sure to update self.stateDuration BEFORE calling this
         self.oldState = self.state
         self.state = newState
         self.stateStartTime = time.time()
         
-        self.training.logPlotAndAnalyze("State" + str(self.state), time.time())        
+        self.training.log_plot_and_analyze("State" + str(self.state), time.time())
 
 
         #if changed to timeout, reset trial params for the new trial
@@ -199,23 +201,32 @@ class TaskDiscrimination(TaskMixin):
         
         #update screen
         if self.stateDuration > 0:
-            if newState == States.SPLUS:
+
+            if newState == States.SPLUS or newState == States.SMINUS:
                 #it's a grating, so call the base grating command
                 #and add the orientation and phase
+
+                ori = ""
+                if self.replaceOrientation != "":
+                    # If commanded by the UI to swap in a different ori, do so.
+                    ori = self.replaceOrientation
+                    self.replaceOrientation = ""
+                elif newState == States.SPLUS:
+                    ori = str(self.currentTrial.sMinusOrientation)
+                elif newState == States.SMINUS:
+                    ori = str(self.currentTrial.sMinusOrientation)
+
                 phase = str(round(random.random(), 2))
-                oriPhase = "sqr" + str(self.currentTrial.sPlusOrientation) + " ph" + phase
-                self.training.stimSerial.write(str(self.state) + " " + oriPhase + "\n")
-                self.training.logPlotAndAnalyze(oriPhase, time.time())
-            elif newState == States.SMINUS:
-                phase = str(round(random.random(), 2))
-                oriPhase = "sqr" + str(self.currentTrial.sMinusOrientation) + " ph" + phase
-                self.training.stimSerial.write(str(self.state) + " " + oriPhase + "\n")
-                self.training.logPlotAndAnalyze(oriPhase, time.time())
+                oriPhase = oriPhase = "sqr" + ori + " ph" + phase
+
+                self.training.stimDevice.write(str(self.state) + " " + oriPhase + "\n")
+                self.training.log_plot_and_analyze(oriPhase, time.time())
+
             else:
-                self.training.stimSerial.write(str(self.state) + "\n")
+                self.training.stimDevice.write(str(self.state) + "\n")
 
         #let Spike2 know which state we are now in
-        self.training.send_stimcode(StateStimcodes[newState])
+        self.training.daq.send_stimcode(StateStimcodes[newState])
 
         #update end time
         self.stateEndTime = self.stateStartTime + self.stateDuration
@@ -229,7 +240,7 @@ class TaskDiscrimination(TaskMixin):
             msg += ' orientation ' + str(self.currentTrial.sMinusOrientation) 
         print msg
     
-    def checkFailOrAbort(self):
+    def check_fail(self):
         # Checks if shrew licks when it shouldn't.
         # Used to check for aborts as well, but IR is no longer used, so that's out.
         # May be used in future with tap sensor.
@@ -245,26 +256,26 @@ class TaskDiscrimination(TaskMixin):
             self.trialResult = Results.TASK_FAIL
             if self.airPuffMode == AirPuffMode.TASK_FAIL_LICK or self.airPuffMode == AirPuffMode.BAD_LICK:
                 self.training.airPuff.puff()
-                self.training.logPlotAndAnalyze("Puff", time.time())
+                self.training.log_plot_and_analyze("Puff", time.time())
         else:
             self.trialResult = Results.FALSE_ALARM
             if self.airPuffMode == AirPuffMode.FALSE_ALARM_LICK or self.airPuffMode == AirPuffMode.BAD_LICK:
                 self.training.airPuff.puff()
-                self.training.logPlotAndAnalyze("Puff", time.time())
+                self.training.log_plot_and_analyze("Puff", time.time())
 
-        self.changeState(States.TIMEOUT)
+        self.change_state(States.TIMEOUT)
 
     def abort(self):
         self.stateDuration = self.timeoutAbort
         self.trialResult = Results.ABORT
-        self.changeState(States.TIMEOUT)
+        self.change_state(States.TIMEOUT)
     
-    def prepareGratingState(self): 
+    def prepare_grating_state(self):
         #goes to either SMINUS or SPLUS.
         #this has its own function because it's called from both DELAY and GRAY.
         if self.sMinusDisplaysLeft > 0:
             self.stateDuration = self.gratingDuration
-            self.changeState(States.SMINUS)
+            self.change_state(States.SMINUS)
             self.sMinusDisplaysLeft -= 1
         else:
             #finished all SMINUS displays
@@ -272,17 +283,23 @@ class TaskDiscrimination(TaskMixin):
                 max(self.sMinusPresentations) == 0:
                 #continue to SPLUS
                 self.stateDuration = self.gratingDuration
-                self.changeState(States.SPLUS)
+                self.change_state(States.SPLUS)
             else:
                 self.trialResult = Results.CORRECT_REJECT
                 self.stateDuration = self.timeoutCorrectReject
-                self.changeState(States.TIMEOUT)
+                self.change_state(States.TIMEOUT)
 
 
     #--- Interactive UI commands ---#
-    def ui_dispense(self, rewardMicroliters):
-        timestamp = time.time()
-        self.training.syringeSerial.write(str(int(rewardMicroliters)) + "\n")
-        self.training.logPlotAndAnalyze("user_reward:" + str(rewardMicroliters), timestamp)
-        print "User gave reward: " + str(int(rewardMicroliters))
-        self.training.send_stimcode(STIMCODE_REWARD_GIVEN)
+    def ui_start_trial(self):
+        if self.state == States.TIMEOUT or self.state == States.INIT:
+            self.training.log_plot_and_analyze("User started trial", time.time())
+            print "User started trial"
+            self.stateDuration = random.uniform(self.variableDelayMin, self.variableDelayMax)
+            self.change_state(States.DELAY)
+
+    def ui_fail_task(self):
+        self.training.log_plot_and_analyze("Trial failed at user's request", time.time())
+        print "Trial failed at user's request"
+        self.fail()
+

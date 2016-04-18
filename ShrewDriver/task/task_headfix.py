@@ -44,12 +44,12 @@ class TaskHeadfix(TaskMixin):
         if self.state == States.REWARD:
             #Wait for the shrew to stop licking
             if self.lastLickAt > self.stateStartTime and self.lastLickAt != 0:
-                self.training.dispenseReward(self.rewardBolus/1000)
+                self.training.dispense_reward(self.rewardBolus / 1000)
                 self.changeState(States.TIMEOUT)
                 
     def changeState(self, newState):
         #runs every time a state changes
-        #self.training.logPlotAndAnalyze("State" + str(self.state), time.time())        
+        #self.training.log_plot_and_analyze("State" + str(self.state), time.time())
         self.stateStartTime = time.time()
         self.state = newState
         
@@ -80,3 +80,24 @@ class TaskHeadfix(TaskMixin):
     def makeTrialSet(self):
         #overwrite parent
         pass
+
+
+    #--- Interactive UI commands ---#
+    def ui_start_trial(self):
+        if self.state == States.TIMEOUT or self.state == States.INIT:
+            self.training.log_plot_and_analyze("User started trial")
+            print "User started trial"
+            self.change_state(States.REWARD)
+
+    def ui_dispense(self, rewardMicroliters):
+        timestamp = time.time()
+        self.training.syringeSerial.write(str(int(rewardMicroliters)) + "\n")
+        self.training.log_plot_and_analyze("user_reward:" + str(rewardMicroliters), timestamp)
+        print "User gave reward: " + str(int(rewardMicroliters))
+        self.training.send_stimcode(STIMCODE_REWARD_GIVEN)
+
+    def ui_fail_task(self):
+        self.training.log_plot_and_analyze("Trial failed at user's request")
+        print "Trial failed at user's request"
+        self.fail()
+

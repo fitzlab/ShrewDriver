@@ -273,7 +273,7 @@ class ShrewDriver(QtGui.QMainWindow, ShrewDriver_class):
     def show_interact_ui(self, task):
         """If allowed, this will be shown when the user starts recording. Called by training.py."""
         self.interactUI = InteractUI()
-        self.interactUI.task = task
+        self.interactUI.set_task(task)
 
 
 if __name__ == '__main__':

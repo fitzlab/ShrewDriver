@@ -3,11 +3,14 @@ import sys
 sys.path.append("..")
 
 import os
+import random
 
 from PyQt4 import QtCore, QtGui
 from PyQt4 import uic
 import _winreg as winreg
 from constants.task_constants import *
+
+from task.task_discrimination import TaskDiscrimination
 
 import time
 
@@ -19,9 +22,8 @@ class InteractUI(QtGui.QMainWindow, Interact_class):
     def __init__(self, parent=None):
         #make Qt window
         QtGui.QMainWindow.__init__(self, parent)
-        #self.setGeometry( 500 , 1300 , 400 , 200 )
+        self.setGeometry( 500 , 1300 , 400 , 200 )
         self.setupUi(self)
-
 
         #--- button actions ---#
         # shrew feedback
@@ -29,7 +31,7 @@ class InteractUI(QtGui.QMainWindow, Interact_class):
         self.btnAirPuff.clicked.connect(self.btn_air_puff_clicked)
 
         # task manipulation
-        self.btnTaskFail.clicked.connect(self.btn_task_fail_clicked)
+        self.btnFailTrial.clicked.connect(self.btn_fail_trial_clicked)
         self.btnStartTrial.clicked.connect(self.btn_start_trial_clicked)
 
         self.btnShowNow.clicked.connect(self.btn_show_now_clicked)
@@ -49,93 +51,105 @@ class InteractUI(QtGui.QMainWindow, Interact_class):
 
     def set_task(self, task):
         self.task = task
+        self.training = self.task.training
+        sdGeom = self.training.shrewDriver.geometry()  # type: QtCore.QRect
+        geom = self.geometry() # type: QtCore.QRect
+        #setGeometry args are: posX, posY, sizeX, sizeY
+        self.setGeometry(sdGeom.right() + 20, sdGeom.top(), geom.width(), geom.height())
 
+
+    def log_and_print(self, s):
+        print s
+        self.training.logFile.write(s + str(time.time()))
 
     #--- shrew feedback ---#
     def btn_give_reward_clicked(self):
-        self.task.training.send_stimcode(STIMCODE_REWARD_GIVEN)
-        rewardMicroliters = float(str(self.txtRewardSize.text()))
-        self.task.ui_dispense(rewardMicroliters)
+        rewardMicroliters = str(self.txtRewardSize.text())
+        self.training.syringeSerial.write(rewardMicroliters + "\n")
+        self.log_and_print("User gave reward: " + rewardMicroliters)
+        self.training.daq.send_stimcode(STIMCODE_REWARD_GIVEN)
 
     def btn_air_puff_clicked(self):
-        if self.task.training.airPuff is not None:
-            self.task.training.airPuff.puff()
-            self.task.training.send_stimcode(STIMCODE_AIR_PUFF)
+        if self.training.airPuff is not None:
+            self.training.airPuff.puff()
+            self.log_and_print("User administered air puff")
+            self.training.daq.send_stimcode(STIMCODE_AIR_PUFF)
+        else:
+            print "No air puff device specified."
 
     #--- task manipulation ---#
-    def btn_task_fail_clicked(self):
+    def btn_start_trial_clicked(self):
+        self.task.ui_start_trial()
+
+    def btn_fail_trial_clicked(self):
         self.task.ui_fail_task()
 
-    def btn_start_trial_clicked(self):
-        pass #self.task.ui_start_trial()
+    def btn_replace_next_clicked(self):
+        if not isinstance(self.task, TaskDiscrimination):
+            #doesn't make sense on headfix task
+            return
+        newOri = str(self.txtGratingOrientation.text())
+        print "Next orientation set to " + newOri
+        self.task.replaceOrientation = newOri
 
     def btn_show_now_clicked(self):
-        pass
+        """Displays the given grating for 0.5 seconds, then gray screen"""
+        ori = str(self.txtGratingOrientation.text())
+        stimCommand = "sqr" + ori + " as sf0.25 tf0 jf3 ja0.25 px0 py0 sx999 sy999"
+        self.training.stimDevice.write(stimCommand)
+        self.log_and_print("Set screen to grating (" + ori + ")")
+        self.training.daq.send_stimcode(STIMCODE_USER_COMMAND)
+        time.sleep(0.5) #sleeping on the UI thread, such hacks *shudder*
+        self.training.stimDevice.write("sx0 sy0")
+        self.training.daq.send_stimcode(STIMCODE_GRAY_SCREEN)
 
-    def btn_replace_next_clicked(self):
-        pass
 
     #--- screen manipulation ---#
     def btn_black_clicked(self):
-        pass
+        self.training.stimDevice.write("ac pab px0 py0 sx12 sy12")
+        self.log_and_print("Set screen to black (timeout)")
+        self.training.daq.send_stimcode(STIMCODE_BLACK_SCREEN)
 
     def btn_gray_screen_clicked(self):
-        pass
+        self.training.stimDevice.write("sx0 sy0")
+        self.log_and_print("Set screen to gray")
+        self.training.daq.send_stimcode(STIMCODE_GRAY_SCREEN)
+
 
     def btn_splus_grating_clicked(self):
-        pass
+        """Displays a moving S+ grating for 0.5 seconds, then gray screen"""
+        if not isinstance(self.task, TaskDiscrimination):
+            #doesn't make sense on headfix task
+            return
+        ori = random.choice(self.task.sPlusOrientations)
+        stimCommand = "sqr" + str(ori) + " as sf0.25 tf0 jf3 ja0.25 px0 py0 sx999 sy999"
+        self.training.stimDevice.write(stimCommand)
+        self.log_and_print("Set screen to S+ grating: " + str(ori))
+        self.training.daq.send_stimcode(STIMCODE_SPLUS_SCREEN)
+        time.sleep(0.5) #sleeping on the UI thread, such hacks *shudder*
+        self.training.stimDevice.write("sx0 sy0") #back to gray screen
+        self.training.daq.send_stimcode(STIMCODE_GRAY_SCREEN)
 
     def btn_sminus_grating_clicked(self):
-        pass
+        """Displays a moving S- grating for 0.5 seconds, then gray screen"""
+        if not isinstance(self.task, TaskDiscrimination):
+            #doesn't make sense on headfix task
+            return
+        ori = random.choice(self.task.sMinusOrientations)
+        stimCommand = "sqr" + str(ori) + " as sf0.25 tf0 jf3 ja0.25 px0 py0 sx999 sy999"
+        self.training.stimDevice.write(stimCommand)
+        self.log_and_print("Set screen to S- grating: " + str(ori))
+        self.training.daq.send_stimcode(STIMCODE_SMINUS_SCREEN)
+        time.sleep(0.5) #sleeping on the UI thread, such hacks *shudder*
+        self.training.stimDevice.write("sx0 sy0") #back to gray screen
+        self.training.daq.send_stimcode(STIMCODE_GRAY_SCREEN)
 
     def btn_run_stim_command_clicked(self):
-        pass
-
-
-    #--- Old Stuff ---#
-    
-    # --- Screen Manipulation --- #
-    def btnGrayScreenClicked(self):
-        self.task.stimDevice.write("sx0 sy0")
-        self.task.daq.send_stimcode(20)
-        print "Set screen to gray"
-        self.task.mainLog.write("Set screen to gray")
-
-    def btnGratingSPlusClicked(self):
-        self.task.stimDevice.write("sqr135 as sf0.25 tf0 jf3 ja0.25 px0 py0 sx999 sy999")
-        print "Set screen to S+ grating (135)"
-        self.task.mainLog.write("Set screen to S+ grating (135)")
-        self.task.daq.send_stimcode(21)
-        time.sleep(0.5) #sleeping on the UI thread, such hacks *shudder*
-        self.task.stimDevice.write("sx0 sy0")
-        self.task.daq.send_stimcode(20)
-        
-    def btnGratingSMinusClicked(self):
-        self.task.stimDevice.write("sqr160 as sf0.25 tf0 jf3 ja0.25 px0 py0 sx999 sy999")
-        print "Set screen to S- grating (160)"
-        self.task.mainLog.write("Set screen to S- grating (160)")
-        self.task.daq.send_stimcode(22)
-        time.sleep(0.5) #sleeping on the UI thread, such hacks *shudder*
-        self.task.stimDevice.write("sx0 sy0")
-        self.task.daq.send_stimcode(20)
-
-    def btnShowOrientationClicked(self):
-        ori = float(self.txtOrientation.text())
-        gratingStr = "sqr" + str(ori)
-        self.task.stimDevice.write(gratingStr + " as sf0.25 tf0 jf3 ja0.25 px0 py0 sx999 sy999")
-        msg = "Set screen to grating (" + str(gratingStr) + ")"
-        print msg
-        self.task.mainLog.write(msg)
-        self.task.daq.send_stimcode(23)
-        time.sleep(0.5) #sleeping on the UI thread, such hacks *shudder*
-        self.task.stimDevice.write("sx0 sy0")
-        self.task.daq.send_stimcode(20)
-
-    def btnBlackClicked(self):
-        self.task.stimDevice.write("ac pab px0 py0 sx12 sy12")
-        print "Set screen to black timeout circle"
-        self.task.daq.send_stimcode(23)
-        self.task.mainLog.write("Set screen to black timeout circle")
+        """Sets current stim according to the given command"""
+        stimCommand = str(self.txtStimCommand.text())
+        self.log_and_print("Stim command: " + stimCommand)
+        self.training.stimDevice.write(stimCommand)
+        self.training.daq.send_stimcode(STIMCODE_USER_COMMAND)
 
 if __name__ == '__main__':
     app = QtGui.QApplication(sys.argv)

@@ -10,6 +10,7 @@ import random
 from devices.serial_port import SerialPort
 from devices.psycho import *
 from devices.air_puff import AirPuff
+from devices.daq import MccDaq
 
 from util.enumeration import *
 from util.serialize import *
@@ -41,12 +42,15 @@ class Training():
         self.stopFlag = False
         self.shrewDriver = shrewDriver
 
+        #start daq, if any
+        self.daq = MccDaq()
+
         #start live plotting
         self.livePlot = LivePlot(self.shrewDriver.animalName)
 
         #start camera
         self.cameraReader = None
-        self.startCamera()
+        self.start_camera()
 
         #start sensor serial
         print("sensors " + str(self.shrewDriver.sensorPortName))
@@ -66,10 +70,10 @@ class Training():
         if self.shrewDriver.stimPortName == "PsychoPy":
             #If we're upstairs, use PsychoPy to render stims
             time.sleep(5)  #lets users drag windows around.
-            self.stimSerial = Psycho(windowed=False)
+            self.stimDevice = Psycho(windowed=False)
         else:
-            self.stimSerial = SerialPort(self.shrewDriver.stimPortName)
-            self.stimSerial.startReadThread()
+            self.stimDevice = SerialPort(self.shrewDriver.stimPortName)
+            self.stimDevice.startReadThread()
         
         #set up task
         if self.shrewDriver.animalName == 'Headfix':
@@ -93,14 +97,14 @@ class Training():
         
         #turn screen on, if needed
         time.sleep(0.1) 
-        self.stimSerial.write('screenon\n')
+        self.stimDevice.write('screenon\n')
     
-    def mainLoop(self):
+    def main_loop(self):
         while not self.stopFlag:
             #check serial
             updates = self.sensorSerial.getUpdates()
             for update in updates:
-                self.processUpdates(update)
+                self.process_updates(update)
 
             #update state
             self.task.checkStateProgression()
@@ -109,76 +113,71 @@ class Training():
             #get results from other serial threads
             #Prevents potential serial buffer overflow bugs
             bunchaCrap = self.syringeSerial.getUpdates()
-            bunchaCrap = self.stimSerial.getUpdates()
+            bunchaCrap = self.stimDevice.getUpdates()
             #Don't do anything with that information because it's crap
     
     
-    def processUpdates(self, update):
+    def process_updates(self, update):
         evtType = update[0]
         timestamp = float(update[1])
         self.task.sensorUpdate(evtType, timestamp)
 
-        self.logPlotAndAnalyze(evtType, timestamp)
+        self.log_plot_and_analyze(evtType, timestamp)
 
     
-    def logPlotAndAnalyze(self, eventType, timestamp):
+    def log_plot_and_analyze(self, eventType, timestamp):
         self.livePlot.sigEvent.emit(eventType, timestamp)
         line = eventType + " " + str(timestamp) + "\n"
         self.logFile.write(line)
         self.analyzer.process_line(line)
         
     
-    def dispenseHint(self, rewardMillis):
+    def dispense_hint(self, rewardMillis):
         timestamp = time.time()
-        self.logPlotAndAnalyze("RL", timestamp)
-        self.logPlotAndAnalyze("hint:" + str(rewardMillis), + timestamp)
+        self.log_plot_and_analyze("RL", timestamp)
+        self.log_plot_and_analyze("hint:" + str(rewardMillis), + timestamp)
         self.syringeSerial.write(str(int(rewardMillis*1000)) + "\n")
     
-    def dispenseReward(self, rewardMillis):
+    def dispense_reward(self, rewardMillis):
         timestamp = time.time()
-        self.logPlotAndAnalyze("RH", timestamp)
-        self.logPlotAndAnalyze("bolus:" + str(rewardMillis), timestamp)
+        self.log_plot_and_analyze("RH", timestamp)
+        self.log_plot_and_analyze("bolus:" + str(rewardMillis), timestamp)
         self.syringeSerial.write(str(int(rewardMillis*1000)) + "\n")
 
-    def send_stimcode(self, stimCode):
-        pass
-        #print "Not sending stimcode " + str(stimCode) + " because this isn't implemented yet."
-
-    def blackScreen(self):
-        #used by "stop recording" to black out screen at end of experiment
-        self.stimSerial.write('as pab px0 py0 sx999 sy999\n')
+    def black_screen(self):
+        # used by "stop recording" to black out screen at end of experiment
+        self.stimDevice.write('as pab px0 py0 sx999 sy999\n')
         time.sleep(0.05)
-        self.stimSerial.write('screenoff\n')
+        self.stimDevice.write('screenoff\n')
     
     def stop(self):
         #end logfile
         self.logFile.close()
 
         #close camera
-        self.stopCamera()
+        self.stop_camera()
 
         #stop training thread and reset screen
         self.stopFlag = True
         time.sleep(0.01)
-        self.blackScreen()
+        self.black_screen()
         time.sleep(0.5)
         
         #stop serial thread
         self.syringeSerial.close()
         self.sensorSerial.close()
-        self.stimSerial.close()
-        
-    
+        self.stimDevice.close()
+
     def start(self):
         self.stopFlag = False
         self.task.start()
         
         #threading /  main loop stuff goes here
-        thread = threading.Thread(target=self.mainLoop)
+        thread = threading.Thread(target=self.main_loop)
         thread.daemon = True
         thread.start()
 
-    def startCamera(self):
+    def start_camera(self):
         """begin live view and recording from camera"""
 
         #get UI information from shrewdriver
@@ -196,7 +195,7 @@ class Training():
             print "Couldn't start camera."
             traceback.print_exc()
 
-    def stopCamera(self):
+    def stop_camera(self):
         if self.cameraReader is not None:
             self.cameraReader.stopFlag = True
 

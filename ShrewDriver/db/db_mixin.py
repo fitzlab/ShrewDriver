@@ -14,7 +14,8 @@ class DbMixin(object):
     def get(self, animalName):
         """
         You can think of each database as being split across several files named after the corresponding animal.
-        So, there's only one History database, but it has several db files ("Bernadette_history.db", etc.)
+        So, there's only one History database, but it has several db files ("Bernadette_history.db",
+        Chico_history.db, etc.)
 
         Generally you only want to access one animal at a time, so you call get(animalName)
         to pull in the db file you want.

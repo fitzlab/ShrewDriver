@@ -164,6 +164,30 @@
      <string>Screen Manipulation</string>
     </property>
     <layout class="QGridLayout" name="gridLayout_3">
+     <item row="0" column="0">
+      <widget class="QPushButton" name="btnBlack">
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>40</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
+         <height>40</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>12</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Black (Timeout)</string>
+       </property>
+      </widget>
+     </item>
      <item row="2" column="0" colspan="2">
       <widget class="QLabel" name="label_4">
        <property name="minimumSize">
@@ -290,32 +314,12 @@
        </property>
       </widget>
      </item>
-     <item row="0" column="0">
-      <widget class="QPushButton" name="btnBlack">
-       <property name="minimumSize">
-        <size>
-         <width>0</width>
-         <height>40</height>
-        </size>
-       </property>
-       <property name="maximumSize">
-        <size>
-         <width>16777215</width>
-         <height>40</height>
-        </size>
-       </property>
-       <property name="font">
-        <font>
-         <pointsize>12</pointsize>
-        </font>
-       </property>
+     <item row="3" column="0" colspan="2">
+      <widget class="QLineEdit" name="txtStimCommand">
        <property name="text">
-        <string>Black (Timeout)</string>
+        <string>ac sqr30 tf2 sf0.01 sx30 sy30</string>
        </property>
       </widget>
-     </item>
-     <item row="3" column="0" colspan="2">
-      <widget class="QComboBox" name="cmbStimCommand"/>
      </item>
     </layout>
     <zorder>btnRunStimCommand</zorder>
@@ -324,7 +328,7 @@
     <zorder>btnGrayScreen</zorder>
     <zorder>btnBlack</zorder>
     <zorder>label_4</zorder>
-    <zorder>cmbStimCommand</zorder>
+    <zorder>txtStimCommand</zorder>
    </widget>
    <widget class="QGroupBox" name="groupBox_3">
     <property name="geometry">
@@ -397,7 +401,7 @@
       </widget>
      </item>
      <item row="0" column="1">
-      <widget class="QPushButton" name="btnTaskFail">
+      <widget class="QPushButton" name="btnFailTrial">
        <property name="minimumSize">
         <size>
          <width>0</width>
@@ -419,7 +423,7 @@
         <bool>false</bool>
        </property>
        <property name="text">
-        <string>Task Fail</string>
+        <string>Fail Trial</string>
        </property>
        <property name="icon">
         <iconset>
@@ -482,15 +486,19 @@
       </widget>
      </item>
      <item row="1" column="1">
-      <widget class="QComboBox" name="cmbGratingOrientation"/>
+      <widget class="QLineEdit" name="txtGratingOrientation">
+       <property name="text">
+        <string>0</string>
+       </property>
+      </widget>
      </item>
     </layout>
-    <zorder>btnTaskFail</zorder>
+    <zorder>btnFailTrial</zorder>
     <zorder>btnStartTrial</zorder>
     <zorder>btnShowNow</zorder>
     <zorder>btnReplaceNext</zorder>
     <zorder>label_3</zorder>
-    <zorder>cmbGratingOrientation</zorder>
+    <zorder>txtGratingOrientation</zorder>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
