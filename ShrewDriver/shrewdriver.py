@@ -231,7 +231,7 @@ class ShrewDriver(QtGui.QMainWindow, ShrewDriver_class):
             self.txtTrialStats.setPlainText(message)
 
             summaryFile = self.training.analyzer.get_summary_path()
-            with open(self.summaryFile, 'w') as fh:
+            with open(summaryFile, 'w') as fh:
                 fh.write(message)
     
     #-- Dropdown Actions --# 
