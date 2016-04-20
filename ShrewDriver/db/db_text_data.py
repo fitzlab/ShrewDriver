@@ -52,7 +52,7 @@ def get_settings_contents(settingsFile):
 
     junk = ['<', 'training', 'isLicking', 'isTapping', 'shrewEnteredAt', 'stateStartTime', \
              'stateEndTime', 'logFilePath', 'summaryFilePath', 'settingsFilePath', 'lastLickAt',  \
-            'lastTapAt', 'state =', 'stateDuration', 'States:', 'arduinoSerial']
+            'lastTapAt', 'state =', 'stateDuration', 'States:', 'arduinoSerial', 'replaceOrientation']
     try:
         fileinput.close()
         for line in fileinput.input(settingsFile):

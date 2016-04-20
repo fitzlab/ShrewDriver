@@ -47,6 +47,9 @@ class GraphUI(QtGui.QMainWindow, ShrewDriver_class):
         self.selectedTask = None  # type: callable
         self.selectedConfig = None  # instance of a config class
 
+        self.displayedAnimal = self.selectedAnimal
+        self.displayedSession = self.selectedSession
+
         #UI sub-objects
         self.performancePlot = None
         self.historyPlot = None
@@ -125,6 +128,13 @@ class GraphUI(QtGui.QMainWindow, ShrewDriver_class):
 
     def update_graphs(self):
         """Loads the db entries for this session and updates their graphs on the screen."""
+        if self.displayedAnimal == self.selectedAnimal and self.displayedSession == self.selectedSession:
+            #Selections didn't change
+            return
+
+        self.displayedAnimal = self.selectedAnimal
+        self.displayedSession = self.selectedSession
+
         # print("  loading text data...")
         update_text_data(self)
         # print("  loading history graph...")
@@ -159,11 +169,11 @@ class GraphUI(QtGui.QMainWindow, ShrewDriver_class):
                 self.selectedTask = t
 
     def set_session(self):
-        if self.selectedSession != str(self.cmbSession.currentText()) and str(self.cmbSession.currentText()) != "":
-            #update graphs if session changed to something new and it's not blank
-            self.selectedSession = str(self.cmbSession.currentText())
-            # print "session set to ", self.selectedSession
-            self.update_graphs()
+        if str(self.cmbSession.currentText()) == "":
+            return
+        self.selectedSession = str(self.cmbSession.currentText())
+        print "session set to " + self.selectedSession
+        self.update_graphs()
 
     #--- Button callbacks ---#
     def copy_server_data(self):
