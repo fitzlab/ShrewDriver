@@ -223,13 +223,16 @@ class ShrewDriver(QtGui.QMainWindow, ShrewDriver_class):
     #-- Signal Handlers --# 
     def trial_end(self):
         self.update_results()
-    
+
     def update_results(self):
         message = self.training.analyzer.get_results_str()
 
         if message is not None:
             self.txtTrialStats.setPlainText(message)
-        
+
+            summaryFile = self.training.analyzer.get_summary_path()
+            with open(self.summaryFile, 'w') as fh:
+                fh.write(message)
     
     #-- Dropdown Actions --# 
     def set_animal(self):

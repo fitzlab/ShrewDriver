@@ -38,4 +38,5 @@ class HeadfixAnalysis():
             self.totalmL += mL
 
 
-
+    def get_summary_path(self):
+        return self.settingsFile.replace("settings", "summary")

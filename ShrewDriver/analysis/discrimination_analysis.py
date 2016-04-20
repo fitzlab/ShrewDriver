@@ -424,6 +424,9 @@ class DiscriminationAnalysis:
         return self.str_overview() + self.str_discrimination() + self.str_task_errors()
 
 
+    def get_summary_path(self):
+        return self.settingsFile.replace("settings", "summary")
+
 
 
 @CacheUnlessFilesChanged

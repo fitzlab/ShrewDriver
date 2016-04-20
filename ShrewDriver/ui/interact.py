@@ -22,7 +22,7 @@ class InteractUI(QtGui.QMainWindow, Interact_class):
     def __init__(self, parent=None):
         #make Qt window
         QtGui.QMainWindow.__init__(self, parent)
-        self.setGeometry( 500 , 1300 , 400 , 200 )
+        self.setGeometry(500, 1300, 400, 200)
         self.setupUi(self)
 
         #--- button actions ---#
