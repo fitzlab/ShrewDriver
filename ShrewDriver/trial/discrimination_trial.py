@@ -71,7 +71,8 @@ class DiscriminationTrial:
                 bolusSize = float(m[0] + "." + m[1])
                 self.totalmL += bolusSize
             elif re.search('user_reward', line):
-                m = p.findall(line)
+                linesub = line[line.find('user_reward'):]
+                m = p.findall(linesub)
                 bolusSize = float(m[0] + "." + m[1])
                 self.totalmL += bolusSize
                 self.hintmL += bolusSize
