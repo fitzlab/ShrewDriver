@@ -212,7 +212,7 @@ class TaskDiscrimination(TaskMixin):
                     ori = self.replaceOrientation
                     self.replaceOrientation = ""
                 elif newState == States.SPLUS:
-                    ori = str(self.currentTrial.sMinusOrientation)
+                    ori = str(self.currentTrial.sPlusOrientation)
                 elif newState == States.SMINUS:
                     ori = str(self.currentTrial.sMinusOrientation)
 
