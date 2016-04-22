@@ -56,7 +56,7 @@ def load_parameters(task):
     # Rewards / Hints
     task.rewardBolus = 40  #Microliters
     task.rewardBolusHardTrial = 60  #Microliters
-    task.hintBolus = 20  #Microliters
+    task.hintBolus = 10  #Microliters
 
     task.hintChance = 0.0  # chance of sending a low reward at the start of the reward period
 
