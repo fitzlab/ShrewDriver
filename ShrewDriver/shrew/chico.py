@@ -54,8 +54,8 @@ def load_parameters(task):
     task.rewardPeriod = task.grayDuration  # needs to be no longer than gray duration!
 
     # Rewards / Hints
-    task.rewardBolus = 100  # Microliters
-    task.rewardBolusHardTrial = 150  # Microliters
+    task.rewardBolus = 60  # Microliters
+    task.rewardBolusHardTrial = 90  # Microliters
     task.hintBolus = 10  # Microliters
 
     task.hintChance = 0.1  # chance of sending a low reward at the start of the reward perwn.
@@ -66,7 +66,7 @@ def load_parameters(task):
     task.commandStrings[States.TIMEOUT] = 'ac pab px0 py0 sx12 sy12\n'
     task.commandStrings[States.INIT] = 'ac paw px0 py0 sx12 sy12\n'
     task.commandStrings[States.DELAY] = 'sx0 sy0\n'
-    task.commandStrings[States.SMINUS] = 'as sf0.25 tf0 gc0.8 jf0 ja0 px0 py0 sx999 sy999\n'
+    task.commandStrings[States.SMINUS] = 'as sf0.25 tf0 gc0.75 jf2 ja.5 px0 py0 sx999 sy999\n'
     task.commandStrings[States.GRAY] = 'sx0 sy0\n'
-    task.commandStrings[States.SPLUS] = 'as sf0.25 tf0 gc0.8 jf0 ja0 px0 py0 sx999 sy999\n'
+    task.commandStrings[States.SPLUS] = 'as sf0.25 tf0 gc0.75 jf2 ja.5 px0 py0 sx999 sy999\n'
     task.commandStrings[States.REWARD] = 'sx0 sy0\n'

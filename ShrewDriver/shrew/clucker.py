@@ -40,10 +40,10 @@ def load_parameters(task):
 
     # State durations
     task.timeoutFail = 6
-    task.timeoutAbort = 6
-    task.timeoutSuccess = 6
-    task.timeoutNoResponse = 6
-    task.timeoutCorrectReject = 6  # applies only when guaranteedSPlus is false
+    task.timeoutAbort = 3
+    task.timeoutSuccess = 3
+    task.timeoutNoResponse = 3
+    task.timeoutCorrectReject = 3  # applies only when guaranteedSPlus is false
     task.initTime = 1
 
     task.variableDelayMin = 3.0
@@ -54,11 +54,11 @@ def load_parameters(task):
     task.rewardPeriod = task.grayDuration  # needs to be no longer than gray duration!
 
     # Rewards / Hints
-    task.rewardBolus = 100  # Microliters
-    task.rewardBolusHardTrial = 150  # Microliters
+    task.rewardBolus = 80  # Microliters
+    task.rewardBolusHardTrial = 100  # Microliters
     task.hintBolus = 10  # Microliters
 
-    task.hintChance = 0.25  # chance of sending a low reward at the start of the reward period
+    task.hintChance = 0.0  # chance of sending a low reward at the start of the reward period
 
     #stimbot setup, including command strings for each state
     #note that grating states will have an extra command added later to specify orientation and phase.
