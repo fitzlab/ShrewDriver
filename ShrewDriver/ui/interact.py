@@ -60,7 +60,7 @@ class InteractUI(QtGui.QMainWindow, Interact_class):
 
     def log_and_print(self, s):
         print s
-        self.training.logFile.write(s + str(time.time()) + "\n")
+        self.training.logFile.write(s + " " + str(time.time()) + "\n")
 
     #--- shrew feedback ---#
     def btn_give_reward_clicked(self):

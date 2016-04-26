@@ -54,8 +54,8 @@ def load_parameters(task):
     task.rewardPeriod = task.grayDuration  # needs to be no longer than gray duration!
 
     # Rewards / Hints
-    task.rewardBolus = 20  # Microliters
-    task.rewardBolusHardTrial = 40  # Microliters
+    task.rewardBolus = 30  # Microliters
+    task.rewardBolusHardTrial = 50  # Microliters
     task.hintBolus = 20  # Microliters
 
     task.hintChance = 0.0  # chance of sending a low reward at the start of the reward period

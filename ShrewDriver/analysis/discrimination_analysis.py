@@ -185,7 +185,6 @@ class DiscriminationAnalysis:
                 exec("self." + line)
 
 
-
     def read_log_file(self, logFile):
         """eat a log file, to absorb its knowledge"""
         fileinput.close() # Close any existing fileinput handles, just in case
@@ -233,6 +232,7 @@ class DiscriminationAnalysis:
         self.mLPerHour = 0
         self.trialsPerHour = 0
         self.trainingDuration = 0
+        self.meanTimeBetweenTrials = 0
 
         if self.nTrials == 0:
             return
@@ -307,6 +307,18 @@ class DiscriminationAnalysis:
         else:
             self.trialsPerHour = 0
 
+        #mean time between trials
+        for i in range(1, len(self.trials)):
+            #compute lost time wasted between each pair of trials
+            t = self.trials[i]  # type: DiscriminationTrial
+            s = self.trials[i-1]  # type: DiscriminationTrial
+            sEndTime = s.stateTimes[-1]
+            tStartTime = t.stateTimes[1]
+            timeBetweenTrials = (tStartTime - sEndTime)
+            self.meanTimeBetweenTrials += timeBetweenTrials
+        if len(self.trials) >= 2:
+            self.meanTimeBetweenTrials /= (len(self.trials) - 1)
+
         #mL
         for t in self.trials:
             self.totalmL += t.totalmL
@@ -316,6 +328,8 @@ class DiscriminationAnalysis:
             self.mLPerHour = self.totalmL / self.trainingDuration
         else:
             self.mLPerHour = 0
+
+
 
 
 
@@ -329,11 +343,12 @@ class DiscriminationAnalysis:
             '\nTotal Reward (mL): ' + str(self.totalmL) + "\n")
 
         if self.hintmL > 0:
-            message += "Reward from Hints (mL): " + str(self.hintmL) + " (" + str(round(100*self.hintmL/self.totalmL)) + "% of total)\n"
+            message += "Reward from Hints (mL): " + str(self.hintmL) + " (" + str(round(100*self.hintmL/self.totalmL)) + "% of total)\n\n"
 
         message += (
-            "Run Time: " + str(trainTime) + "\n"
+            "Run Time: " + trainTime + "\n"
             "Reward Rate (mL/hour): " + str(round(self.mLPerHour, 2)) + "\n"
+            "Mean Time Between Trials: " + str(round(self.meanTimeBetweenTrials, 2)) + "s\n"
             "\n"
         )
         return message
