@@ -1,13 +1,15 @@
 ShrewDriver
 ===========
 
-Automated training system for training tree shrews to discriminate visual stimuli.
+Automated training system for training tree shrews to discriminate visual stimuli. 
 
-![Training seven shrews simultaneously](https://github.com/fitzlab/ShrewDriver/blob/master/Documentation/seven_shrews.jpg)
+Using it, one experimenter can train many animals simultaneously:
 
-Core Python code is in the ShrewDriver directory. 
+![Training seven shrews](https://github.com/fitzlab/ShrewDriver/blob/master/Documentation/seven_shrews.jpg)
 
-Uses PyQt for UI.
+Core Python code is in the ShrewDriver directory. "shrewdriver.py" runs training; "shrew_graphs.py" is a tool for reviewing training results. 
+
+Uses PyQt for UI. Plotting is done using the excellent [pyqtgraph library](https://github.com/pyqtgraph/pyqtgraph)
 
 Visual stimuli for monitors using the PsychoPy library. ShrewDriver can also display to Nexus 10 tablets; code for the Nexus 10 display app is in the Stimbot directory.
 
