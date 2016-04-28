@@ -31,7 +31,7 @@ def load_parameters(task):
 
     # Stim and task params
     task.sPlusOrientations = [45]
-    task.sMinusOrientations = [70]
+    task.sMinusOrientations = [57.5]
     task.sMinusPresentations = [0,1] #how many times to display the SMINUS
     task.guaranteedSPlus = True #is there always an SPLUS in the trial?
     task.sequenceType = Sequences.RANDOM_RETRY
@@ -39,7 +39,7 @@ def load_parameters(task):
     task.airPuffMode = AirPuffMode.NONE
 
     # State durations
-    task.timeoutFail = 6
+    task.timeoutFail = 3
     task.timeoutAbort = 3
     task.timeoutSuccess = 3
     task.timeoutNoResponse = 3
@@ -54,8 +54,8 @@ def load_parameters(task):
     task.rewardPeriod = task.grayDuration  # needs to be no longer than gray duration!
 
     # Rewards / Hints
-    task.rewardBolus = 80  # Microliters
-    task.rewardBolusHardTrial = 100  # Microliters
+    task.rewardBolus = 70  # Microliters
+    task.rewardBolusHardTrial = 90  # Microliters
     task.hintBolus = 10  # Microliters
 
     task.hintChance = 0.0  # chance of sending a low reward at the start of the reward period
