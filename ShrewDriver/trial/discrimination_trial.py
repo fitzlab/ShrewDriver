@@ -121,7 +121,12 @@ class DiscriminationTrial:
                 if self.stateHistory[-1] == States.SMINUS:
                     self.numSMinus += 1
 
-                if self.stateHistory[-1] == States.TIMEOUT:
+                if len(self.stateHistory) < 3:
+                    #Usually means task was assigned a fail state by user input
+                    self.result = Results.TASK_FAIL
+                    
+
+                elif self.stateHistory[-1] == States.TIMEOUT:
                     #end of trial
                     #Figure out what the trial result was based on actions and states
                     prevState = self.stateHistory[-2]
