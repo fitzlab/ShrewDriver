@@ -252,6 +252,8 @@ class DiscriminationAnalysis:
         self.taskErrorRate = round(100* (self.taskErrors / self.nTrials), 2)
 
         for t in self.trials:  # type: DiscriminationTrial
+            if t.resultState == None:
+                continue
             if t.result == Results.TASK_FAIL:
                 if States.whatis(t.resultState) in self.stateFailCounts:
                     self.stateFailCounts[States.whatis(t.resultState)] += 1
@@ -312,6 +314,8 @@ class DiscriminationAnalysis:
             #compute lost time wasted between each pair of trials
             t = self.trials[i]  # type: DiscriminationTrial
             s = self.trials[i-1]  # type: DiscriminationTrial
+            if len(t.stateTimes) < 2 or len(s.stateTimes) < 2:
+                continue
             sEndTime = s.stateTimes[-1]
             tStartTime = t.stateTimes[1]
             timeBetweenTrials = (tStartTime - sEndTime)
