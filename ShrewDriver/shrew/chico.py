@@ -39,23 +39,23 @@ def load_parameters(task):
     task.airPuffMode = AirPuffMode.NONE
 
     # State durations
-    task.timeoutFail = 6
+    task.timeoutFail = 3
     task.timeoutAbort = 3
     task.timeoutSuccess = 3
     task.timeoutNoResponse = 3
     task.timeoutCorrectReject = 3  # applies only when guaranteedSPlus is false
     task.initTime = 1
 
-    task.variableDelayMin = 3.0
-    task.variableDelayMax = 3.5
+    task.variableDelayMin = 1
+    task.variableDelayMax = 1.5
 
     task.gratingDuration = 0.5
     task.grayDuration = 1.5
     task.rewardPeriod = task.grayDuration  # needs to be no longer than gray duration!
 
     # Rewards / Hints
-    task.rewardBolus = 60  # Microliters
-    task.rewardBolusHardTrial = 90  # Microliters
+    task.rewardBolus = 150  # Microliters
+    task.rewardBolusHardTrial = 170  # Microliters
     task.hintBolus = 30  # Microliters
 
     task.hintChance = 0.1  # chance of sending a low reward at the start of the reward perwn.
@@ -66,7 +66,7 @@ def load_parameters(task):
     task.commandStrings[States.TIMEOUT] = 'ac pab px0 py0 sx12 sy12\n'
     task.commandStrings[States.INIT] = 'ac paw px0 py0 sx12 sy12\n'
     task.commandStrings[States.DELAY] = 'sx0 sy0\n'
-    task.commandStrings[States.SMINUS] = 'as sf0.25 tf0 gc0.75 jf2 ja.5 px0 py0 sx999 sy999\n'
+    task.commandStrings[States.SMINUS] = 'as sf0.25 tf0 gc0.9 jf0 ja0 px0 py0 sx999 sy999\n'
     task.commandStrings[States.GRAY] = 'sx0 sy0\n'
-    task.commandStrings[States.SPLUS] = 'as sf0.25 tf0 gc0.75 jf2 ja.5 px0 py0 sx999 sy999\n'
+    task.commandStrings[States.SPLUS] = 'as sf0.25 tf0 gc0.9 jf0 ja0 px0 py0 sx999 sy999\n'
     task.commandStrings[States.REWARD] = 'sx0 sy0\n'
