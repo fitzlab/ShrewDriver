@@ -28,7 +28,7 @@ The S- trials could be any of [100, 110, 120], while the S+ trials could show ei
 def load_parameters(task):
     print "Using settings for Splinter!"
 
-    task.showInteractUI = False  # Enables the interact UI, used in headfixed training.
+    task.showInteractUI = True  # Enables the interact UI, used in headfixed training.
 
     # Stim and task params
     task.sPlusOrientations = [90]
@@ -55,15 +55,15 @@ def load_parameters(task):
     task.rewardPeriod = task.grayDuration  # needs to be no longer than gray duration!
 
     # Rewards / Hints
-    task.rewardBolus = 30  # Microliters
-    task.rewardBolusHardTrial = 50  # Microliters
+    task.rewardBolus = 80  # Microliters
+    task.rewardBolusHardTrial = 100  # Microliters
     task.hintBolus = 20  # Microliters
 
-    task.hintChance = 0.0  # chance of sending a low reward at the start of the reward period
+    task.hintChance = 0.2  # chance of sending a low reward at the start of the reward period
 
     #stimbot setup, including command strings for each state
     #note that grating states will have an extra command added later to specify orientation and phase.
-    task.screenDistanceMillis = 120
+    task.screenDistanceMillis = 25
     task.commandStrings[States.TIMEOUT] = 'ac pab px0 py0 sx12 sy12\n'
     task.commandStrings[States.INIT] = 'ac paw px0 py0 sx12 sy12\n'
     task.commandStrings[States.DELAY] = 'sx0 sy0\n'
