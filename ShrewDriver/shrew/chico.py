@@ -27,7 +27,7 @@ The S- trials could be any of [100, 110, 120], while the S+ trials could show ei
 def load_parameters(task):
     print "Using settings for Chico!"
 
-    task.showInteractUI = True  # Enables the interact UI, used in headfixed training.
+    task.showInteractUI = False  # Enables the interact UI, used in headfixed training.
 
     # Stim and task params
     task.sPlusOrientations = [135]
@@ -40,10 +40,10 @@ def load_parameters(task):
 
     # State durations
     task.timeoutFail = 6
-    task.timeoutAbort = 3
-    task.timeoutSuccess = 3
-    task.timeoutNoResponse = 3
-    task.timeoutCorrectReject = 3  # applies only when guaranteedSPlus is false
+    task.timeoutAbort = 6
+    task.timeoutSuccess = 6
+    task.timeoutNoResponse = 6
+    task.timeoutCorrectReject = 6  # applies only when guaranteedSPlus is false
     task.initTime = 1
 
     task.variableDelayMin = 3.0
@@ -55,14 +55,14 @@ def load_parameters(task):
 
     # Rewards / Hints
     task.rewardBolus = 60  # Microliters
-    task.rewardBolusHardTrial = 90  # Microliters
+    task.rewardBolusHardTrial = 80  # Microliters
     task.hintBolus = 30  # Microliters
 
-    task.hintChance = 0.1  # chance of sending a low reward at the start of the reward perwn.
+    task.hintChance = 0  # chance of sending a low reward at the start of the reward perwn.
 
     #stimbot setup, including command strings for each state
     #note that grating states will have an extra command added later to specify orientation and phase.
-    task.screenDistanceMillis = 25
+    task.screenDistanceMillis = 120
     task.commandStrings[States.TIMEOUT] = 'ac pab px0 py0 sx12 sy12\n'
     task.commandStrings[States.INIT] = 'ac paw px0 py0 sx12 sy12\n'
     task.commandStrings[States.DELAY] = 'sx0 sy0\n'
