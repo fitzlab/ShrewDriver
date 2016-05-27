@@ -68,8 +68,9 @@ class SerialPort(object):
         self.ser.close()
     
     def write(self, command):
-        cmd = command.rstrip() + "\n" #ensure newline
-        self.ser.write(cmd)
+        with self.threadLock:
+            cmd = command.rstrip() + "\n" #ensure newline
+            self.ser.write(cmd)
     
     def startReadThread(self):
         self.stopFlag = False
