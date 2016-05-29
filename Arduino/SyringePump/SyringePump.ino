@@ -81,7 +81,7 @@ void setup(){
   lcd.clear();
   pinMode(10, OUTPUT); //disable backlight
 
-  lcd.print("SyringePump v2.0");
+  lcd.print("SyringePump v2.1");
 
   /* Triggering setup */
   pinMode(triggerPin, INPUT);
