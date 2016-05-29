@@ -2,7 +2,6 @@
 // Accepts triggers and serial commands.
 
 #include <LiquidCrystal.h>
-#include <LCDKeypad.h>
 
 /* -- Syringe Constants -- */
 #define SYRINGE_VOLUME_ML 30.0
@@ -115,7 +114,8 @@ void loop(){
 void readSerial(){
     //pulls in characters from serial port as they arrive
     //builds serialStr and sets ready flag when newline is found
-    while (Serial.available()) {
+    //will not read during command execution
+    while (Serial.available() && ! serialStrReady) {
       char inChar = (char)Serial.read(); 
      
       if ((inChar == 'm') || (inChar == 'M')){
@@ -128,9 +128,9 @@ void readSerial(){
       if (inChar == '\n') {
         serialStrReady = true;
       } 
-                        else{
+      else{
         serialStr += inChar;
-                        }
+      }
     }
 }
 
