@@ -5,8 +5,6 @@ Automated training system for training multiple animals to discriminate visual s
 
 Using it, one experimenter can train many animals simultaneously:
 
-![Training seven shrews]
-
 Core Python code is in the ShrewDriver directory. "shrewdriver.py" runs training. 
 
 "shrew_graphs.py" is a tool for analysis and display of historical training data. Details of invididual sessions as well as overall performance history can be viewed:
