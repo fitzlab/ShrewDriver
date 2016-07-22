@@ -1,11 +1,11 @@
 ShrewDriver
 ===========
 
-Automated training system for training tree shrews to discriminate visual stimuli. 
+Automated training system for training multiple animals to discriminate visual stimuli. 
 
 Using it, one experimenter can train many animals simultaneously:
 
-![Training seven shrews](https://github.com/fitzlab/ShrewDriver/blob/master/Documentation/seven_shrews.jpg)
+![Training seven shrews]
 
 Core Python code is in the ShrewDriver directory. "shrewdriver.py" runs training. 
 
