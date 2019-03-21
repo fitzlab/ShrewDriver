@@ -1,15 +1,13 @@
 ShrewDriver
 ===========
 
-Automated training system for training multiple animals to discriminate visual stimuli. 
+Automated training system for training tree shrews to discriminate visual stimuli. 
 
-Using it, one experimenter can train many animals simultaneously:
+Using it, one experimenter can train many animals simultaneously.
 
 Core Python code is in the ShrewDriver directory. "shrewdriver.py" runs training. 
 
-"shrew_graphs.py" is a tool for analysis and display of historical training data. Details of invididual sessions as well as overall performance history can be viewed:
-
-![](https://github.com/fitzlab/ShrewDriver/blob/master/Documentation/shrew_graphs.png)
+"shrew_graphs.py" is a tool for analysis and display of historical training data. Details of invididual sessions as well as overall performance history can be viewed.
 
 PyQt is used for UI. Plotting is done using the excellent [pyqtgraph library](https://github.com/pyqtgraph/pyqtgraph).
 
